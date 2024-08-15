@@ -9,11 +9,9 @@
     <link rel="icon" href="/assets/compiled/png/logotanahdatar.png" type="image/x-icon">
     <link rel="stylesheet" href="/assets/compiled/css/application-email.css">
     <link rel="stylesheet" href="/assets/compiled/css/app.css">
-    <link rel="stylesheet" href="/assets/compiled/css/app-dark.css">
 </head>
 
 <body>
-    <script src="assets/static/js/initTheme.js"></script>
     <div class="page-heading email-application overflow-hidden">
         <section class="section content-area-wrapper">
             @include('admin.component.sidebarmenu')
@@ -30,7 +28,6 @@
         </section>
     </div>
 
-    <script src="/assets/static/js/components/dark.js"></script>
     <script src="/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/compiled/js/app.js"></script>
     <script src="https://unpkg.com/sweetalertsweetalert.min.js"></script>

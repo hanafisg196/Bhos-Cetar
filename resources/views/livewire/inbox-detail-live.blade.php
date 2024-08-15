@@ -22,7 +22,9 @@
             </div>
         </div>
     </div>
-    <section class="section" style="max-height: 650px; overflow-y: scroll; scrollbar-width: none; -ms-overflow-style: none;">
+    <section class="section" style="max-height: 650px;
+    overflow-y: scroll; scrollbar-width: none;
+     -ms-overflow-style: none;">
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -30,7 +32,8 @@
                         <div class="collapse-title media">
                             <div class="pr-1">
                                 <div class="avatar me-3">
-                                    <img src="/assets/compiled/jpg/8.jpg" alt="avtar img holder" width="30" height="30">
+                                    <img src="/assets/compiled/jpg/8.jpg" alt="avtar img holder"
+                                    width="30" height="30">
                                 </div>
                             </div>
                             <div class="media-body mt-25">

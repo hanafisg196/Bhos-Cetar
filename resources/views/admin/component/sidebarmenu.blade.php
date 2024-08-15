@@ -18,7 +18,7 @@
                                 <h6 class="text-muted mb-0">Administrator <i class="fas fa-user-shield"></i></h6>
                             </div>
                             <div style="padding-left: 50px;">
-                                <form action="/logout" method="post">
+                                <form action="{{route('logout.admin')}}" method="post">
                                     @csrf
                                 <button class="dropdown-item" type="submit">
                                 </form>
@@ -41,7 +41,7 @@
                                 </svg>
                             </div>
                             Inbox
-                            <span class="badge bg-light-primary badge-pill badge-round float-right mt-50">1</span>
+                            <span class="badge bg-light-danger badge-pill badge-round float-right mt-50"><livewire:inbox-counter-live/></span>
                         </a>
                     </div>
                     <!-- sidebar menu  end-->

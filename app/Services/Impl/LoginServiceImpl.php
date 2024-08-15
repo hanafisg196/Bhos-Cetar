@@ -3,6 +3,7 @@
 namespace App\Services\Impl;
 
 use App\Services\LoginService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -52,9 +53,11 @@ class LoginServiceImpl implements LoginService
        return $request->session()->forget('user');
     }
 
-    public function LogoutAdmin()
+    public function LogoutAdmin(Request $request): RedirectResponse
     {
       Auth::logout();
+      $request->session()->invalidate();
+      $request->session()->regenerateToken();
       return redirect()->route('login');
     }
 }

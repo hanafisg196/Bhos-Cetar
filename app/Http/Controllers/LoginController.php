@@ -32,7 +32,7 @@ class LoginController extends Controller
 
     public function LogoutAdmin(Request $request) {
 
-        $this->loginService->Logout($request);
+        $this->loginService->LogoutAdmin($request);
         return redirect()->route('login');
     }
 }

@@ -35,7 +35,6 @@ class InboxDetailLive extends Component
         );
     }
 
-
     public function showDetail($id){
        $this->data = $this->scheduleService->getDetailSchedule($id);
 
@@ -44,7 +43,6 @@ class InboxDetailLive extends Component
 
     public function render()
     {
-
         return view('livewire.inbox-detail-live');
     }
 }

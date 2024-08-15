@@ -5,8 +5,13 @@ use Illuminate\Http\Request;
 
 interface ScheduleService {
     public function createSchedule(Request $request);
-    public function getAllSchedules();
+    public function getAllSchedules($perPage);
     public function getUserId(Request $request);
     public function getSchedulesByid($id);
     public function getDetailSchedule($id);
+    public function deleteSchedule($id);
+    public function search($search,$perPage) ;
+    public function readSchedule($id);
+    public function countUsualan();
+    public function inboxCount();
 }
