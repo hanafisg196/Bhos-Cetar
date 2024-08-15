@@ -4,13 +4,13 @@
         <div class="card">
         <li class="sidebar-title">Menu</li>
         <li class="sidebar-item {{ request()->is('/') ? 'active' : '' }}">
-            <a href="{{ route('dashboard') }}" class='sidebar-link'>
+            <a wire:navigate  href="{{ route('dashboard') }}" class='sidebar-link'>
                 <i class="bi bi-house-fill"></i>
                 <span>Dashboard</span>
             </a>
         </li>
         <li class="sidebar-item {{ request()->is('schedule') ? 'active' : '' }}">
-            <a href="{{ route('schedule') }}" class='sidebar-link'>
+            <a wire:navigate href="{{ route('schedule') }}" class='sidebar-link'>
                 <i class="bi bi-sticky-fill"></i>
                 <span>Shedule</span>
             </a>

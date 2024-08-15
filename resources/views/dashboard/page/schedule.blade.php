@@ -99,7 +99,7 @@
                                         <div class="form-group">
                                             <label for="company-column">Alamat</label>
                                             <textarea class="form-control @error('alamat') is-invalid @enderror" id="exampleFormControlTextarea1" name="alamat"
-                                                value="{{ old('alamat') }}" rows="3"></textarea>
+                                                rows="3">{{ old('alamat') }}</textarea>
                                             @error('alamat')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -111,7 +111,7 @@
                                         <div class="form-group">
                                             <label for="company-column">Kronologi</label>
                                             <textarea class="form-control @error('kronologi') is-invalid @enderror" id="exampleFormControlTextarea1"
-                                                value="{{ old('kronologi') }}" name="kronologi" rows="3"></textarea>
+                                              name="kronologi" rows="3">{{ old('kronologi') }}</textarea>
                                             @error('kronologi')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -148,30 +148,39 @@
         </div>
     </section>
     <script>
-        document.getElementById('send').addEventListener('click', function() {
-            document.getElementById('send').style.display = 'none';
-            document.getElementById('loading').style.display = 'inline-block';
+        document.addEventListener('livewire:navigated', () => {
+            var inputForm = document.getElementById('inputForm');
+            var sendButton = document.getElementById('send');
+            var loading = document.getElementById('loading');
+
+            inputForm.addEventListener('submit', function() {
+                sendButton.style.display = 'none';
+                loading.style.display = 'block';
+            });
+
         });
     </script>
 @endsection
 @section('script')
     <script>
-        FilePond.registerPlugin(
-            FilePondPluginImagePreview,
-            FilePondPluginImageExifOrientation,
-            FilePondPluginFileValidateSize,
-            FilePondPluginFileValidateType,
-        );
-        const inputElement = document.querySelector('input[type="file"]');
-        const pond = FilePond.create(inputElement, {
-            allowMultiple: true,
-            server: {
-                process: '{{ route('upload') }}',
-                revert: '/delete',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        document.addEventListener('livewire:navigated', () => {
+            FilePond.registerPlugin(
+                FilePondPluginImagePreview,
+                FilePondPluginImageExifOrientation,
+                FilePondPluginFileValidateSize,
+                FilePondPluginFileValidateType,
+            );
+            const inputElement = document.querySelector('input[type="file"]');
+            const pond = FilePond.create(inputElement, {
+                allowMultiple: true,
+                server: {
+                    process: '{{ route('upload') }}',
+                    revert: '/delete',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
                 }
-            }
-        });
+            });
+        })
     </script>
 @endsection

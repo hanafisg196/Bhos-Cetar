@@ -26,8 +26,8 @@ return $setence;
                         <h4>List Schedule</h4>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover table-lg">
+                        <div class="table-responsive"  style="overflow-y: scroll; max-height: 400px; overflow-x: hidden">
+                            <table class="table table-hover table-lg" >
                                 <thead>
                                     <tr>
                                         <th>Status</th>
