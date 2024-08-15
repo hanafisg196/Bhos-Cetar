@@ -56,7 +56,7 @@
                         @else
                         <li class="media">
                         @endif
-                            <a href="/schedule/detail/{{ $item->id }}"
+                            <a href="/inbox/detail/{{ $item->id }}"
                                  class="d-flex align-items-center text-decoration-none text-dark w-100">
 
                                 <div class="pr-50">

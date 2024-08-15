@@ -59,7 +59,7 @@
                             @else
                             <img src="/assets/compiled/png/img.png" height="30">
                             @endif
-                            <small class="text-muted ms-1 attchement-text">{{ sliceStr($item->file ) }}</small>
+                            <small class="text-muted ms-1 attchement-text">{{ $this->sliceStr($item->file ) }}</small>
                             <button wire:click="download('{{ $item->file }}')" class="btn icon btn-primary">
                                 <i class="bi bi-download"></i>
                             </button>

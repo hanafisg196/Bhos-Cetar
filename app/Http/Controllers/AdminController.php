@@ -19,10 +19,8 @@ class AdminController extends Controller
         return view('admin.page.inbox')->with('data', $data);
     }
 
-    public function scheduleDetail($id){
-
-        $data = $this->scheduleService->getDetailSchedule($id);
-        return view('admin.page.schedule-detail')->with('data', $data);
+    public function inboxDetail($id){
+        return view('admin.page.inbox-detail', ['id' => $id]);
     }
 
 }

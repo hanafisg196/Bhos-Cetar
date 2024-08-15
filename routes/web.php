@@ -23,7 +23,6 @@ Route::middleware(Authenticate::class)->group(function () {
 
 Route::middleware(AuthenticateAdmin::class)->group(function () {
     Route::get('/admin', [AdminController::class, 'getSchedules'])->name('admin.dashboard');
-    Route::get('/schedule/detail/{id}', [AdminController::class, 'scheduleDetail']);
-    Route::get('/download/{file}', [AdminController::class, 'download'])->name('download.file');
+    Route::get('/inbox/detail/{id}', [AdminController::class, 'inboxDetail']);
     Route::post('/logout/admin', [LoginController::class, 'LogoutAdmin'])->name('logout.admin');
 });
