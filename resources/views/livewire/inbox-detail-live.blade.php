@@ -32,7 +32,7 @@
                         <div class="collapse-title media">
                             <div class="pr-1">
                                 <div class="avatar me-3">
-                                    <img src="/assets/compiled/jpg/8.jpg" alt="avtar img holder"
+                                    <img src="/assets/compiled/png/user.png" alt="avtar img holder"
                                     width="30" height="30">
                                 </div>
                             </div>
@@ -42,8 +42,8 @@
                                 <small class="text-muted d-block">to Bhos Ce-Tar System</small>
                             </div>
                         </div>
-                        <p class="text-bold-500">Nip : {{ $data->nama }}</p>
-                        <p class="text-bold-500">Nama : {{ $data->nip }}</p>
+                        <p class="text-bold-500">Nip : {{ $data->nip }}</p>
+                        <p class="text-bold-500">Nama : {{ $data->nama }}</p>
                         <p class="text-bold-500">Email : {{ $data->email }}</p>
                         <p class="text-bold-500">Whatsapp : {{ $data->wa }}</p>
                         <p class="text-bold-500">Alamat : {{ $data->alamat }}</p>

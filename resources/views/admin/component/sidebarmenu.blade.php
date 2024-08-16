@@ -20,7 +20,7 @@
                             <div style="padding-left: 50px;">
                                 <form action="{{route('logout.admin')}}" method="post">
                                     @csrf
-                                <button class="dropdown-item" type="submit">
+                                <button  class="dropdown-item" type="submit">
                                 </form>
                                 <i class="me-50" data-feather="power"></i> </a>
                             </div>
