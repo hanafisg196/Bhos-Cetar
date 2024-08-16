@@ -14,4 +14,5 @@ interface ScheduleService {
     public function readSchedule($id);
     public function countUsualan();
     public function inboxCount();
+    public function updateStatSchdeule($id, $stat);
 }

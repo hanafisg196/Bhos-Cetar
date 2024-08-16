@@ -113,4 +113,10 @@ class ScheduleServiceImpl implements ScheduleService {
 
     }
 
+    public function updateStatSchdeule($id, $stat){
+       return Schedule::where('id', $id)->update([
+            'status' =>  $stat
+        ]);
+    }
+
 }

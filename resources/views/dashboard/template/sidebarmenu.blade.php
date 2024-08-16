@@ -12,7 +12,7 @@
         <li class="sidebar-item {{ request()->is('schedule') ? 'active' : '' }}">
             <a wire:navigate href="{{ route('schedule') }}" class='sidebar-link'>
                 <i class="bi bi-sticky-fill"></i>
-                <span>Shedule</span>
+                <span>Bantuan Hukum</span>
             </a>
         </li>
 

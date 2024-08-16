@@ -11,7 +11,7 @@
                     <div class="card-body py-4 px-4">
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xl">
-                                <img src="/assets/compiled/png/1.png" alt="Face 1">
+                                <img src="/assets/compiled/png/user.png" alt="Face 1">
                             </div>
                             <div class="ms-3 name">
                                 <h5 class="font-bold">Admin</h5>

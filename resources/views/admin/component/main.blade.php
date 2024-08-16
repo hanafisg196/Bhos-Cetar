@@ -30,7 +30,7 @@
 
     <script src="/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/compiled/js/app.js"></script>
-    <script src="https://unpkg.com/sweetalertsweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/static/js/pages/dashboard.js"></script>
 
     <script>

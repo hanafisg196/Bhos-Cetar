@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Services\ScheduleService;
 use Livewire\Component;
-
+use Livewire\Attributes\On;
 class InboxDetailLive extends Component
 {
 
@@ -20,6 +20,14 @@ class InboxDetailLive extends Component
     public $id;
     public $data;
     public $string;
+    public $pesan="";
+
+
+    #[On('showDetail')]
+    public function render()
+    {
+        return view('livewire.inbox-detail-live');
+    }
 
     public function mount($id) {
         $this->showDetail($this->id= $id);
@@ -35,14 +43,48 @@ class InboxDetailLive extends Component
         );
     }
 
+
+
     public function showDetail($id){
        $this->data = $this->scheduleService->getDetailSchedule($id);
-
     }
 
 
-    public function render()
-    {
-        return view('livewire.inbox-detail-live');
-    }
+    #[On('update')]
+        public function updateStatus($id, $stat)
+        {
+            $this->scheduleService->updateStatSchdeule($id, $stat);
+        }
+
+
+        public function proses($id)
+        {
+            $this->js(<<<JS
+                const { value: status } = await Swal.fire({
+                    title: "Update Status",
+                    input: "select",
+                    inputOptions: {
+                        1: "Diproses",
+                        2: "Ditolak"
+                    },
+                    inputPlaceholder: "Pilih status",
+                    showCancelButton: true,
+                    confirmButtonText: "Update",
+                    cancelButtonText: "Batal",
+                });
+
+                if (status) {
+                        Livewire.dispatchSelf('update', $id, status)
+                }
+
+            JS);
+        }
+
+
+
+
+
+
+
+
 }
