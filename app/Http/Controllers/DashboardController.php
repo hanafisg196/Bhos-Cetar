@@ -14,6 +14,7 @@ class DashboardController extends Controller
     }
     public function index(Request $request)
     {
+
         $id = $this->scheduleService->getUserId($request);
         $data =  $this->scheduleService->getSchedulesByid($id);
 

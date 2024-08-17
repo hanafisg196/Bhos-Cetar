@@ -9,6 +9,7 @@
     <link rel="icon" href="/assets/compiled/png/logotanahdatar.png" type="image/x-icon">
     <link rel="stylesheet" href="/assets/compiled/css/application-email.css">
     <link rel="stylesheet" href="/assets/compiled/css/app.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 
 <body>
@@ -32,6 +33,7 @@
     <script src="/assets/compiled/js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/static/js/pages/dashboard.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
     <script>
         document.querySelector('.sidebar-toggle').addEventListener('click', () => {

@@ -6,6 +6,7 @@ use App\Models\Schedule;
 use App\Models\Temporary;
 use App\Services\ScheduleService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -83,7 +84,7 @@ class ScheduleServiceImpl implements ScheduleService {
 
     public function getDetailSchedule($id)
     {
-       return  Schedule::with('dokumens')->find($id);
+        return  Schedule::with('dokumens')->find($id);
     }
 
     public function search($search, $perPage) {
@@ -113,9 +114,10 @@ class ScheduleServiceImpl implements ScheduleService {
 
     }
 
-    public function updateStatSchdeule($id, $stat){
+    public function updateStatSchdeule($id, $stat, $message){
        return Schedule::where('id', $id)->update([
-            'status' =>  $stat
+            'status' =>  $stat,
+            'message' => $message
         ]);
     }
 

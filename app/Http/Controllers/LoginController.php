@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\LoginService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -13,8 +13,16 @@ class LoginController extends Controller
     {
         $this->loginService = $loginService;
     }
-    public function index()
+    public function index(Request $request)
     {
+        if($request->session()->has('user') !=null)
+        {
+            return redirect()->route('dashboard');
+        }
+        if(Auth::user() !=null)
+        {
+            return redirect()->route('admin.dashboard');
+        }
         return view('dashboard.page.login');
     }
 

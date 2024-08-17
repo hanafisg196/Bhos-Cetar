@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\ScheduleService;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,6 +12,7 @@ class ListInboxLive extends Component
     use WithPagination;
     public $string = "";
     public $perPage = 7;
+
     public $search = "";
 
     protected ScheduleService $scheduleService;
@@ -53,5 +55,7 @@ class ListInboxLive extends Component
             'data'=> $data
         ]);
     }
+
+
 
 }

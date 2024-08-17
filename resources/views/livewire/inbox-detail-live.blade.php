@@ -4,17 +4,15 @@
         <div class="email-app-list">
             <div class="email-action">
 
-                <div
-                    class="action-right d-flex flex-grow-1 align-items-center justify-content-around">
+                <div class="action-right d-flex flex-grow-1 align-items-center justify-content-around">
                     <div class="sidebar-toggle d-block d-lg-none">
                         <button class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-list fs-5" ></i>
+                            <i class="bi bi-list fs-5"></i>
                         </button>
                     </div>
 
                     <div class="email-fixed-search flex-grow-1">
                         <div class="form-group position-relative  mb-0 has-icon-left">
-
                         </div>
                     </div>
 
@@ -22,7 +20,8 @@
             </div>
         </div>
     </div>
-    <section class="section" style="max-height: 650px;
+    <section class="section"
+        style="max-height: 650px;
     overflow-y: scroll; scrollbar-width: none;
      -ms-overflow-style: none;">
         <div class="card">
@@ -32,8 +31,8 @@
                         <div class="collapse-title media">
                             <div class="pr-1">
                                 <div class="avatar me-3">
-                                    <img src="/assets/compiled/png/user.png" alt="avtar img holder"
-                                    width="30" height="30">
+                                    <img src="/assets/compiled/png/user.png" alt="avtar img holder" width="30"
+                                        height="30">
                                 </div>
                             </div>
                             <div class="media-body mt-25">
@@ -47,61 +46,87 @@
                         <p class="text-bold-500">Email : {{ $data->email }}</p>
                         <p class="text-bold-500">Whatsapp : {{ $data->wa }}</p>
                         <p class="text-bold-500">Alamat : {{ $data->alamat }}</p>
-                        <p class="text-bold-500">Kronologi</p>
+                        <p class="text-bold-500">Kronologi :</p>
                         <p>
                             {{ $data->kronologi }}
                         </p>
 
                     </div>
-                    <label class="sidebar-label">Lampiran</label>
+                    <label class="sidebar-label" style="margin-left: 10px;">Lampiran</label>
                     @foreach ($data['dokumens'] as $item)
-                    <ul class="list-unstyled mb-2">
-                        <li class="cursor-pointer pb-25">
-                            @if (str_contains($item->file ,'pdf'))
-                            <img src="/assets/compiled/png/pdf.png" height="32">
-                            @else
-                            <img src="/assets/compiled/png/img.png" height="30">
-                            @endif
-                            <small class="text-muted ms-1 attchement-text">{{ $this->sliceStr($item->file ) }}</small>
-                            <button wire:click="download('{{ $item->file }}')" class="btn icon btn-primary">
-                                <i class="bi bi-download"></i>
-                            </button>
-                        </li>
-                    </ul>
+                        <ul class="list-unstyled mb-2">
+                            <li class="cursor-pointer pb-25" style="margin-left: 10px;">
+                                @if (str_contains($item->file, 'pdf'))
+                                    <img src="/assets/compiled/png/pdf.png" height="32">
+                                @else
+                                    <img src="/assets/compiled/png/img.png" height="30">
+                                @endif
+                                <small
+                                    class="text-muted ms-1 attchement-text">{{ $this->sliceStr($item->file) }}</small>
+                                <button wire:click="download('{{ $item->file }}')" class="btn icon btn-primary">
+                                    <i class="bi bi-download"></i>
+                                </button>
+                            </li>
+                        </ul>
                     @endforeach
-                    <h5 class="text-center">Update Status</h5>
                     <div class="d-flex justify-content-center">
                         <div>
-                            <button wire:click="proses('{{ $item->id }}')"
-                                class="btn btn-success">Diproses</button>
-
+                            <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
+                                data-bs-target="#default">
+                                Update Status
+                            </button>
                         </div>
                     </div>
-                    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button>
+                    <!--Basic Modal -->
+                    <div wire:ignore.self class="modal fade text-left" id="default" tabindex="-1" role="dialog"
+                        aria-labelledby="myModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="myModalLabel1">Update Status</h5>
+                                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </div>
+                                <form>
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="col-md-6 col-12">
+                                            <fieldset class="form-group">
+                                                <select wire:model="status" class="form-select" id="basicSelect">
+                                                    <option selected>Pilih Status</option>
+                                                    <option value="Diproses">Diproses</option>
+                                                    <option value="Ditolak">Ditolak</option>
+                                                </select>
+                                            </fieldset>
+                                            <div>@error('status') {{ $message }} @enderror</div>
+                                        </div>
+                                        <div class="col-md-6 col-12">
+                                            <div class="form-group">
+                                                <label for="company-column">Pesan</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                 name="message" rows="3" wire:model="pesan"
+                                                 ></textarea>
+                                                 <div>@error('pesan') {{ $message }} @enderror</div>
+                                            </div>
+                                        </div>
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button  type="button" class="btn" data-bs-dismiss="modal">
+                                            <i class="bx bx-x d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block">Close</span>
+                                        </button>
+                                        <button wire:click="updateStatus('{{ $item->id }}')" type="button" class="btn btn-primary ms-1" >
+                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block">Accept</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="sidebar-item {{ request()->is('schedule') ? 'active' : '' }}">
+        <li class="sidebar-item {{ request()->is('bantuan') ? 'active' : '' }}">
             <a wire:navigate href="{{ route('schedule') }}" class='sidebar-link'>
                 <i class="bi bi-sticky-fill"></i>
                 <span>Bantuan Hukum</span>
