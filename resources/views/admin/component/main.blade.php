@@ -9,6 +9,7 @@
     <link rel="icon" href="/assets/compiled/png/logotanahdatar.png" type="image/x-icon">
     <link rel="stylesheet" href="/assets/compiled/css/application-email.css">
     <link rel="stylesheet" href="/assets/compiled/css/app.css">
+    <link rel="stylesheet" href="/assets/compiled/css/iconly.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 

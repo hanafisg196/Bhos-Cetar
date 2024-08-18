@@ -44,20 +44,6 @@
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="first-name-column">Nip</label>
-                                            <input type="text" id="first-name-column"
-                                                class="form-control @error('nip') is-invalid @enderror"
-                                                value="{{ old('nip') }}" placeholder="Nomor Nip" name="nip">
-                                            @error('nip')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-12">
-                                        <div class="form-group">
                                             <label for="last-name-column">Nama</label>
                                             <input type="text" id="last-name-column"
                                                 class="form-control @error('nama') is-invalid @enderror"

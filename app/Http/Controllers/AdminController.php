@@ -2,25 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\ScheduleService;
-use Illuminate\Http\Request;
+
+use App\Services\AdminService;
+
+
 
 class AdminController extends Controller
 {
-    protected ScheduleService $scheduleService;
-    public function __construct(ScheduleService $scheduleService)
+    protected AdminService $adminService;
+    public function __construct(AdminService $adminService)
     {
-        $this->scheduleService = $scheduleService;
+        $this->adminService = $adminService;
     }
 
-    public function getSchedules()
+
+    public function index()
     {
+       $tahun =  $this->adminService->countReportYear();
+       $bulan =  $this->adminService->countReportMonth();
+       $minggu =  $this->adminService->countReportWeek();
 
-        return view('admin.page.inbox');
-    }
 
-    public function inboxDetail($id){
-        return view('admin.page.inbox-detail', ['id' => $id]);
+        return view('admin.page.dashboard')->with([
+            'tahun' => $tahun,
+            'bulan' => $bulan,
+           'minggu' => $minggu,
+        ]);
     }
 
 }

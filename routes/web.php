@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UploadFileController;
@@ -22,7 +23,8 @@ Route::middleware(Authenticate::class)->group(function () {
 });
 
 Route::middleware(AuthenticateAdmin::class)->group(function () {
-    Route::get('/admin', [AdminController::class, 'getSchedules'])->name('admin.dashboard');
-    Route::get('/inbox/detail/{id}', [AdminController::class, 'inboxDetail'])->name('detail.inbox');
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/inbox', [InboxController::class, 'getSchedules'])->name('admin.inbox');
+    Route::get('/inbox/detail/{id}', [InboxController::class, 'inboxDetail'])->name('detail.inbox');
     Route::post('/logout/admin', [LoginController::class, 'LogoutAdmin'])->name('logout.admin');
 });

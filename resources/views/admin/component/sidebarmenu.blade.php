@@ -32,7 +32,18 @@
                     <!-- sidebar menu  -->
                     <div class="list-group list-group-messages">
                         <a wire:navigate href="{{ url('/admin') }}"
-                            class="list-group-item pt-0 {{ request()->is('admin') ? 'active' : '' }}"
+                        class="list-group-item pt-0 {{ request()->is('admin') ? 'active' : '' }}"
+                        id="inbox-menu">
+                        <div class="fonticon-wrap d-inline me-3">
+                            <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
+                                <use
+                                    xlink:href="{{ asset('assets/static/images/bootstrap-icons.svg#house') }}" />
+                            </svg>
+                        </div>
+                        Dashboard
+                    </a>
+                        <a wire:navigate href="{{ url('/inbox') }}"
+                            class="list-group-item pt-0 {{ request()->is('inbox') ? 'active' : '' }}"
                             id="inbox-menu">
                             <div class="fonticon-wrap d-inline me-3">
                                 <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">

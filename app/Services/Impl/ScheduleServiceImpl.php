@@ -33,6 +33,7 @@ class ScheduleServiceImpl implements ScheduleService {
 
             $sessionId = Session::getId();
             $user_id = $this->getUserId($request);
+
             $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
 
             $validated = $request->validate([
@@ -46,7 +47,7 @@ class ScheduleServiceImpl implements ScheduleService {
             ]);
 
             $schedule = Schedule::create([
-                'nip' => $validated['nip'],
+                'nip' => $user_id,
                 'nama' => $validated['nama'],
                 'alamat' => $validated['alamat'],
                 'email' => $validated['email'],
