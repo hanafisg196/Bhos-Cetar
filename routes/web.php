@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'doLogin'])->name('doLogin');
 
-Route::middleware(Authenticate::class)->group(function () {
+Route::middleware('user')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/bantuan', [ScheduleController::class, 'index'])->name('schedule');
     Route::post('/bantuan/form', [ScheduleController::class, 'store'])->name('schedule.store');
@@ -23,7 +23,7 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::post('/logout', [LoginController::class, 'doLogout'])->name('logout.dashboard');
 });
 
-Route::middleware(AuthenticateAdmin::class)->group(function () {
+Route::middleware('admin')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/inbox/list', [InboxController::class, 'getSchedules'])->name('admin.inbox');
     Route::get('/inbox/detail/{id}', [InboxController::class, 'inboxDetail'])->name('detail.inbox');
