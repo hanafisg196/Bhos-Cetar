@@ -29,35 +29,53 @@
                 </div>
 
                 <div class="sidebar-menu-list ps">
-                    <!-- sidebar menu  -->
+                    <!-- sidebar menu -->
                     <div class="list-group list-group-messages">
+                        <!-- Dashboard Menu -->
                         <a wire:navigate href="{{ url('/admin') }}"
-                        class="list-group-item pt-0 {{ request()->is('admin') ? 'active' : '' }}"
-                        id="inbox-menu">
-                        <div class="fonticon-wrap d-inline me-3">
-                            <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                <use
-                                    xlink:href="{{ asset('assets/static/images/bootstrap-icons.svg#house') }}" />
-                            </svg>
-                        </div>
-                        Dashboard
-                    </a>
-                        <a wire:navigate href="{{ url('/inbox') }}"
-                            class="list-group-item pt-0 {{ request()->is('inbox') ? 'active' : '' }}"
-                            id="inbox-menu">
+                           class="list-group-item pt-0 {{ request()->is('admin') ? 'active' : '' }}"
+                           id="dashboard-menu">
                             <div class="fonticon-wrap d-inline me-3">
                                 <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                    <use
-                                        xlink:href="{{ asset('assets/static/images/bootstrap-icons.svg#envelope') }}" />
+                                    <use xlink:href="{{ asset('/assets/static/images/bootstrap-icons.svg#house-fill') }}" />
                                 </svg>
                             </div>
-                            Inbox
-                            <span class="badge bg-light-danger badge-pill badge-round float-right mt-50"><livewire:inbox-counter-live/></span>
+                            Dashboard
                         </a>
+                        <!-- Menus -->
+                        <a href="#" class="list-group-item pt-0 {{ request()->is('inbox*') ? 'active' : '' }}" id="menus-dropdown" data-bs-toggle="collapse" data-bs-target="#menus-submenu" aria-expanded="false" aria-controls="menus-submenu">
+                            <div class="fonticon-wrap d-inline me-3">
+                                <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
+                                    <use xlink:href="{{ asset('/assets/static/images/bootstrap-icons.svg#grid-fill') }}" />
+                                </svg>
+                            </div>
+                            Bhos-Cetar
+                            <i class="bi bi-chevron-down float-right mt-50"></i>
+                        </a>
+                        <!-- Sub-menus -->
+                        <div class="collapse" id="menus-submenu">
+                            <a wire:navigate href="{{ route('admin.inbox') }}" class="list-group-item ps-5 pt-0 {{ request()->is('inbox/list') ? 'active' : '' }}">
+                                <div class="fonticon-wrap d-inline me-1">
+                                    <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
+                                        <use xlink:href="{{ asset('/assets/static/images/bootstrap-icons.svg#envelope') }}" />
+                                    </svg>
+                                </div>
+                                Kontak Masuk
+                                <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">
+                                    <livewire:inbox-counter-live/>
+                                </span>
+                            </a>
+                            <a wire:navigate href="{{ url('#') }}" class="list-group-item ps-5 pt-0 {{ request()->is('submenu2') ? 'active' : '' }}">
+                                Sub Menu 2
+                            </a>
+                            <a wire:navigate href="{{ url('#') }}" class="list-group-item ps-5 pt-0 {{ request()->is('submenu3') ? 'active' : '' }}">
+                                Sub Menu 3
+                            </a>
+                        </div>
                     </div>
-                    <!-- sidebar menu  end-->
-
+                    <!-- sidebar menu end-->
                 </div>
+
             </div>
         </div>
 

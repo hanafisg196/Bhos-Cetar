@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\ScheduleService;
 use Illuminate\Http\Request;
 
+
 class ScheduleController extends Controller
 {
     protected ScheduleService $scheduleService;
@@ -12,7 +13,9 @@ class ScheduleController extends Controller
     {
         $this->scheduleService = $scheduleService;
     }
+
     public function index(){
+
         return view('dashboard.page.schedule');
     }
 
@@ -20,5 +23,11 @@ class ScheduleController extends Controller
        $this->scheduleService->createSchedule($request);
        return redirect()->back()->with('success', 'Schedule created successfully');
     }
+
+    public function downloadFile($file){
+       return $this->scheduleService->download($file);
+    }
+
+
 
 }

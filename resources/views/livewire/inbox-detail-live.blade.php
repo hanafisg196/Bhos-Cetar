@@ -73,7 +73,7 @@
                         <div>
                             <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
                                 data-bs-target="#default">
-                                Update Status
+                                Ubah Status
                             </button>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                         <div class="modal-dialog modal-dialog-scrollable" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="myModalLabel1">Update Status</h5>
+                                    <h5 class="modal-title" id="myModalLabel1">Ubah Status</h5>
                                     <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
                                         aria-label="Close">
                                         <i data-feather="x"></i>
@@ -116,11 +116,11 @@
                                     <div class="modal-footer">
                                         <button  type="button" class="btn" data-bs-dismiss="modal">
                                             <i class="bx bx-x d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Close</span>
+                                            <span class="d-none d-sm-block">Tutup</span>
                                         </button>
                                         <button wire:click="updateStatus('{{ $item->id }}')" type="button" class="btn btn-primary ms-1" >
                                             <i class="bx bx-check d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Accept</span>
+                                            <span class="d-none d-sm-block">Simpan</span>
                                         </button>
                                     </div>
                                 </form>

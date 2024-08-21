@@ -64,7 +64,7 @@ class InboxDetailLive extends Component
         $this->validate();
         $this->scheduleService->updateStatSchdeule($id, $this->status, $this->pesan);
         session()->flash('status', 'Data berhasil di update.');
-        $this->redirect('/admin');
+        $this->redirect('/inbox/list');
     }
 
 

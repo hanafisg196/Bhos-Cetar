@@ -1,7 +1,6 @@
 @extends('dashboard.template.main')
 @section('content')
     @php
-
         function stringReplace($string)
         {
             $words = explode(' ', $string);
@@ -9,6 +8,10 @@
             $replace = '....';
             $setence = count($words) > $limit ? implode(' ', array_slice($words, 0, $limit)) . $replace : $string;
             return $setence;
+        }
+
+        function strCut($string){
+            return substr($string, 6);
         }
     @endphp
     <div class="page-content">
@@ -23,7 +26,8 @@
             <div class="col-12 col-xl-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4>List Schedule</h4>
+                        <h4>List Bantuan</h4>
+                        <p> {{$data->links()}}</p>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive" style="overflow-y: scroll; max-height: 400px; overflow-x: hidden">
@@ -34,9 +38,10 @@
                                         <th>Nama</th>
                                         <th>Kronologi</th>
                                         <th>Action</th>
+
                                     </tr>
                                 </thead>
-                                @foreach ($data as $item)
+                                @foreach ($data as $key['dokumens'] =>  $item)
                                     <tbody>
                                         <tr>
                                             <td class="col-3">
@@ -75,12 +80,20 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p><strong>{{ $item->nama }}</strong></p>
-                                                    <p><strong>{{ $item->email }}</strong></p>
-                                                    <p><strong>{{ $item->wa }}</strong></p>
-                                                    <p><strong>{{ $item->alamat }}</strong></p>
-                                                    <p><strong>{{ $item->kronologi }}</strong></p>
-                                                    <p><strong>{{ $item->dokument }}</strong></p>
+                                                    <p><strong>Nama : </strong>{{ $item->nama }}</p>
+                                                    <p><strong>Email :  </strong>{{ $item->email }}</p>
+                                                    <p><strong>WA : </strong>{{ $item->wa }}</p>
+                                                    <p><strong>Alamat : </strong>{{ $item->alamat }}</p>
+                                                    <p><strong>Kronologi : </strong>{{ $item->kronologi }}</p>
+
+                                                    @foreach ($item['dokumens'] as $value)
+                                                    <p><strong>Dokument : </strong>{{ strCut($value->file) }}
+                                                        <a style="size: 15px; margin-left: 10px;" href="{{route('schedule.download', ['file' => strCut($value->file)])}}"  >
+                                                            <i class="bi bi-arrow-down-square-fill"></i>
+                                                        </a>
+                                                    </p>
+
+                                                    @endforeach
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-light-secondary"
@@ -93,11 +106,14 @@
                                         </div>
                                     </div>
                                 @endforeach
+
                             </table>
+
                         </div>
                     </div>
                 </div>
             </div>
+
         </section>
     </div>
 @endsection

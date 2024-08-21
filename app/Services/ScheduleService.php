@@ -15,4 +15,5 @@ interface ScheduleService {
     public function countUsualan();
     public function inboxCount();
     public function updateStatSchdeule($id, $stat,$message);
+    public function download($file);
 }

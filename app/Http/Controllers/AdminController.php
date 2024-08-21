@@ -15,7 +15,6 @@ class AdminController extends Controller
         $this->adminService = $adminService;
     }
 
-
     public function index()
     {
        $tahun =  $this->adminService->countReportYear();
@@ -26,7 +25,7 @@ class AdminController extends Controller
         return view('admin.page.dashboard')->with([
             'tahun' => $tahun,
             'bulan' => $bulan,
-           'minggu' => $minggu,
+            'minggu' => $minggu,
         ]);
     }
 

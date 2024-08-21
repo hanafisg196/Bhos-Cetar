@@ -18,13 +18,14 @@ Route::middleware(Authenticate::class)->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/bantuan', [ScheduleController::class, 'index'])->name('schedule');
     Route::post('/bantuan/form', [ScheduleController::class, 'store'])->name('schedule.store');
+    Route::get('/bantuan/download/{file}', [ScheduleController::class, 'downloadFile'])->name('schedule.download');
     Route::post('/upload', [UploadFileController::class, 'upload'])->name('upload');
     Route::post('/logout', [LoginController::class, 'doLogout'])->name('logout.dashboard');
 });
 
 Route::middleware(AuthenticateAdmin::class)->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/inbox', [InboxController::class, 'getSchedules'])->name('admin.inbox');
+    Route::get('/inbox/list', [InboxController::class, 'getSchedules'])->name('admin.inbox');
     Route::get('/inbox/detail/{id}', [InboxController::class, 'inboxDetail'])->name('detail.inbox');
     Route::post('/logout/admin', [LoginController::class, 'LogoutAdmin'])->name('logout.admin');
 });

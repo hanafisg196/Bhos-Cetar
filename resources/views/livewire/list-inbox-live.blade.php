@@ -32,7 +32,7 @@
                         <div class="email-fixed-search flex-grow-1">
                             <div class="form-group position-relative  mb-0 has-icon-left">
                                 <input wire:model.live.debounce.500ms="search" type="text" class="form-control"
-                                    placeholder="Search report..">
+                                    placeholder="Cari Laporan..">
                                 <div class="form-control-icon">
                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                         <use xlink:href="/assets/static/images/bootstrap-icons.svg#search" />
@@ -57,7 +57,7 @@
 
                                 <div class="pr-50">
                                     <div class="avatar">
-                                        <img src="assets/compiled/png/mail.png" alt="avatar img holder">
+                                        <img src="/assets/compiled/png/mail.png" alt="avatar img holder">
                                     </div>
                                 </div>
                                 <div class="media-body">
@@ -101,7 +101,7 @@
                                             class="btn btn-icon action-icon" data-toggle="tooltip">
                                             <span class="fonticon-wrap">
                                                 <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                                    <use xlink:href="assets/static/images/bootstrap-icons.svg#trash" />
+                                                    <use xlink:href="/assets/static/images/bootstrap-icons.svg#trash" />
                                                 </svg>
                                             </span>
                                         </button>
@@ -122,7 +122,6 @@
     </div>
 </div>
   @if (session()->has('status'))
-
         <script>
               document.addEventListener('livewire:navigated', () => {
             Toastify({
