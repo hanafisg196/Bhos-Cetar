@@ -123,7 +123,7 @@
                                             Loading...
                                         </button>
                                         <button style="display: block" id="send" type="submit"
-                                            class="btn btn-primary me-1 mb-1">Submit</button>
+                                            class="btn btn-primary me-1 mb-1">Kirim</button>
                                     </div>
                                 </div>
                             </form>

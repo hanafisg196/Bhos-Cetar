@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('user_id');
             $table->tinyInteger('read')->default(0);
             $table->string('status')->default('Usulan');
-            $table->string('message')->default('Tidak Ada Pesan');
+            $table->string('message')->default('-');
             $table->timestamps();
         });
     }

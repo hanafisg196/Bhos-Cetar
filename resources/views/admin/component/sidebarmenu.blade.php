@@ -32,7 +32,7 @@
                     <!-- sidebar menu -->
                     <div class="list-group list-group-messages">
                         <!-- Dashboard Menu -->
-                        <a wire:navigate href="{{ url('/admin') }}"
+                        <a  href="{{ url('/admin') }}"
                            class="list-group-item pt-0 {{ request()->is('admin') ? 'active' : '' }}"
                            id="dashboard-menu">
                             <div class="fonticon-wrap d-inline me-3">
@@ -54,7 +54,7 @@
                         </a>
                         <!-- Sub-menus -->
                         <div class="collapse" id="menus-submenu">
-                            <a wire:navigate href="{{ route('admin.inbox') }}" class="list-group-item ps-5 pt-0 {{ request()->is('inbox/list') ? 'active' : '' }}">
+                            <a  href="{{ route('admin.inbox') }}" class="list-group-item ps-5 pt-0 {{ request()->is('inbox/list') ? 'active' : '' }}">
                                 <div class="fonticon-wrap d-inline me-1">
                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                         <use xlink:href="{{ asset('/assets/static/images/bootstrap-icons.svg#envelope') }}" />
@@ -65,10 +65,10 @@
                                     <livewire:inbox-counter-live/>
                                 </span>
                             </a>
-                            <a wire:navigate href="{{ url('#') }}" class="list-group-item ps-5 pt-0 {{ request()->is('submenu2') ? 'active' : '' }}">
+                            <a  href="{{ url('#') }}" class="list-group-item ps-5 pt-0 {{ request()->is('submenu2') ? 'active' : '' }}">
                                 Sub Menu 2
                             </a>
-                            <a wire:navigate href="{{ url('#') }}" class="list-group-item ps-5 pt-0 {{ request()->is('submenu3') ? 'active' : '' }}">
+                            <a  href="{{ url('#') }}" class="list-group-item ps-5 pt-0 {{ request()->is('submenu3') ? 'active' : '' }}">
                                 Sub Menu 3
                             </a>
                         </div>

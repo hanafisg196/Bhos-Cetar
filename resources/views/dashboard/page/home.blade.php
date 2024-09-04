@@ -36,8 +36,8 @@
                                     <tr>
                                         <th>Status</th>
                                         <th>Nama</th>
-                                        <th>Kronologi</th>
-                                        <th>Action</th>
+                                        <th>Pesan</th>
+                                        <th>Aksi</th>
 
                                     </tr>
                                 </thead>
@@ -54,7 +54,7 @@
                                                 <p class="mb-0">{{ $item->nama }}</p>
                                             </td>
                                             <td class="col-auto">
-                                                <p class="mb-0">{{ stringReplace($item->kronologi) }}</p>
+                                                <p class="mb-0">{{$item->message}}</p>
                                             </td>
                                             <td class="col-auto">
                                                 <a class="btn icon btn-primary" data-bs-toggle="modal"
@@ -99,7 +99,7 @@
                                                     <button type="button" class="btn btn-light-secondary"
                                                         data-bs-dismiss="modal">
                                                         <i class="bx bx-x d-block d-sm-none"></i>
-                                                        <span class="d-none d-sm-block">Close</span>
+                                                        <span class="d-none d-sm-block">Tutup</span>
                                                     </button>
                                                 </div>
                                             </div>

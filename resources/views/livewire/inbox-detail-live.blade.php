@@ -1,4 +1,7 @@
 <div>
+    @php
+        $statusOptions = ['Diproses', 'Ditolak'];
+    @endphp
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     <div class="email-app-list-wrapper">
         <div class="email-app-list">
@@ -10,7 +13,9 @@
                             <i class="bi bi-list fs-5"></i>
                         </button>
                     </div>
-
+                    <a href="javascript:history.back()" class="btn btn-primary">
+                        <i class="bi bi-arrow-left"></i> Kembali
+                      </a>
                     <div class="email-fixed-search flex-grow-1">
                         <div class="form-group position-relative  mb-0 has-icon-left">
                         </div>
@@ -95,30 +100,40 @@
                                         <div class="col-md-6 col-12">
                                             <fieldset class="form-group">
                                                 <select wire:model="status" class="form-select" id="basicSelect">
-                                                    <option selected>Pilih Status</option>
-                                                    <option value="Diproses">Diproses</option>
-                                                    <option value="Ditolak">Ditolak</option>
+                                                    @if ($data->status !== 'Usulan')
+                                                        <option value="{{ $data->status }}" selected>{{ $data->status }}</option>
+                                                    @endif
+                                                    @foreach ($statusOptions as $option)
+                                                        <option value="{{ $option }}">{{ $option }}</option>
+                                                    @endforeach
                                                 </select>
                                             </fieldset>
-                                            <div>@error('status') {{ $message }} @enderror</div>
+                                            <div>
+                                                @error('status')
+                                                    {{ $message }}
+                                                @enderror
+                                            </div>
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="company-column">Pesan</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1"
-                                                 name="message" rows="3" wire:model="pesan"
-                                                 ></textarea>
-                                                 <div>@error('pesan') {{ $message }} @enderror</div>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="3" wire:model="pesan"></textarea>
+                                                <div>
+                                                    @error('pesan')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
 
                                     </div>
                                     <div class="modal-footer">
-                                        <button  type="button" class="btn" data-bs-dismiss="modal">
+                                        <button type="button" class="btn" data-bs-dismiss="modal">
                                             <i class="bx bx-x d-block d-sm-none"></i>
                                             <span class="d-none d-sm-block">Tutup</span>
                                         </button>
-                                        <button wire:click="updateStatus('{{ $item->id }}')" type="button" class="btn btn-primary ms-1" >
+                                        <button wire:click="updateStatus('{{ $item->id }}')" type="button"
+                                            class="btn btn-primary ms-1">
                                             <i class="bx bx-check d-block d-sm-none"></i>
                                             <span class="d-none d-sm-block">Simpan</span>
                                         </button>
