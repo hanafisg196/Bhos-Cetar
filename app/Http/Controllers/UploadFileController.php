@@ -10,9 +10,7 @@ class UploadFileController extends Controller
 {
    public function upload(Request $request)
    {
-
         $sessionId = Session::getId();
-
         if($request->hasFile('file')){
             $file = $request->file('file');
             $fileName = uniqid() . '.' . $file->getClientOriginalExtension();

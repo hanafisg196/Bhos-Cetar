@@ -1,6 +1,6 @@
 @section('script')
     <script>
-        // document.addEventListener('livewire:navigated', () => {
+        document.addEventListener('livewire:navigated', () => {
             FilePond.registerPlugin(
                 FilePondPluginImagePreview,
                 FilePondPluginImageExifOrientation,
@@ -18,6 +18,6 @@
                     }
                 }
             });
-        // })
+        })
     </script>
 @endsection

@@ -21,7 +21,7 @@ class ScheduleController extends Controller
 
     public function store(Request $request){
        $this->scheduleService->createSchedule($request);
-       return redirect()->back()->with('success', 'Schedule created successfully');
+       return redirect()->back()->with('success', 'Laporan Bantuan Berhasil Ditambahkan');
     }
 
     public function downloadFile($file){

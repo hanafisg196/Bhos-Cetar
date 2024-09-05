@@ -25,19 +25,24 @@
                                         <div class="form-group">
                                             <label for="last-name-column">KKP</label>
                                             <ul class="list-unstyled mb-0">
+
                                                 <li class="d-inline-block me-2 mb-1">
                                                     @foreach ($kkp as $item)
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" name="kkp_id"
-                                                                id="flexRadioDefault1" value="{{ $item->id }}">
-                                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                                id="flexRadioDefault{{ $item->id }}"
+                                                                value="{{ $item->id }}">
+                                                            <label class="form-check-label"
+                                                                for="flexRadioDefault{{ $item->id }}">
                                                                 {{ $item->name }}
                                                             </label>
                                                         </div>
                                                     @endforeach
                                                 </li>
+
                                             </ul>
                                         </div>
+
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-end">
@@ -57,16 +62,7 @@
                 </div>
             </div>
         </div>
-        @if (session()->has('success'))
-            <script>
-                Swal.fire({
-                    title: "Good job!",
-                    text: "You clicked the button!",
-                    icon: "success"
-                });
-            </script>
-        @endif
-
     </section>
+    @include('dashboard.component.sweet-toast')
     @include('dashboard.component.button-loading')
 @endsection

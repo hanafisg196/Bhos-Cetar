@@ -10,6 +10,10 @@ class ReportHamServiceImpl implements ReportHamService {
     public function getKkp() {
       return  Kkp::latest()->get();
     }
+
+    public function getRanhamByUser($id) {
+        return Ranham::where("user_id", $id)->latest()->paginate(3);
+    }
     public function getUserId(Request $request)
     {
         $user = $request->session()->get('user');

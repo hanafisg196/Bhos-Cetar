@@ -9,7 +9,6 @@
     <link rel="icon" href="/dist/assets/compiled/jpg/logotanahdatar.png" type="image/x-icon">
     <link rel="stylesheet" href="/dist/assets/compiled/css/app.css">
     <link rel="stylesheet" href="/dist/assets/compiled/css/iconly.css">
-    <link rel="stylesheet" href="/dist/assets/extensions/choices.js/public/assets/styles/choices.css">
     <link rel="stylesheet" href="/dist/assets/extensions/sweetalert2-11.12.4/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"/>
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
@@ -51,8 +50,8 @@
     <script src="/assets/extensions/sweetalert2-11.12.4/dist/sweetalert2.all.min.js"></script>
     <script src="/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/compiled/js/app.js"></script>
-    <script src="/assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
     <script src="/assets/static/js/pages/form-element-select.js"></script>
+    @include('dashboard.component.sweet-toast')
     @yield('script')
     @livewireScripts
 </body>

@@ -1,34 +1,5 @@
 @extends('dashboard.template.main')
 @section('content')
-    <style>
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1055;
-            width: auto;
-        }
-    </style>
-    @if (session()->has('success'))
-        <div class="toast-container">
-            <div class="card-body">
-                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <svg class="bd-placeholder-img rounded me-2" width="20" height="20"
-                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice"
-                            focusable="false">
-                            <rect width="100%" height="100%" fill="#007aff"></rect>
-                        </svg>
-                        <strong class="me-auto">Notifikasi</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        {{ session('success') }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    @endif
     <section id="multiple-column-form">
         <div class="row match-height">
             <div class="col-12">
@@ -83,7 +54,7 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="company-column">Alamat</label>
+                                            <label for="alamat">Alamat</label>
                                             <textarea class="form-control @error('alamat') is-invalid @enderror" id="exampleFormControlTextarea1" name="alamat"
                                                 rows="3">{{ old('alamat') }}</textarea>
                                             @error('alamat')
@@ -105,7 +76,6 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="email-id-column">Dokumen</label>

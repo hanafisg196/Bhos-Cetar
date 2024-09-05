@@ -20,6 +20,6 @@ class ReportHamController extends Controller
     }
     public function createRanham(Request $request) {
         $this->reportHamService->saveRanham($request);
-        return redirect()->back()->with("success","konsz");
+        return redirect()->back()->with("success","Dokument Ham Berhasil Ditambahkan");
     }
 }

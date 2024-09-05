@@ -20,8 +20,6 @@ class AdminController extends Controller
        $tahun =  $this->adminService->countReportYear();
        $bulan =  $this->adminService->countReportMonth();
        $minggu =  $this->adminService->countReportWeek();
-
-
         return view('admin.page.dashboard')->with([
             'tahun' => $tahun,
             'bulan' => $bulan,
