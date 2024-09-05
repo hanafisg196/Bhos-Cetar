@@ -27,23 +27,22 @@ class LoginServiceImpl implements LoginService
 
         ]);
 
-        $credent = $request->only('username', 'password');
         $credentials = $response->json();
 
-        if ($credentials['error'] == false) {
+        if ($credentials['error'] === false) {
             $request->session()->put('user', $credentials['data']);
             return redirect()->route('dashboard');
         } else {
             $credent = $request->only('username', 'password');
             if (Auth::attempt($credent)) {
                 if (Auth::user()->role == 1) {
-                    return redirect()->route('admin.dashboard');
+                     redirect()->route('admin.dashboard');
                 } else {
                     return back()->with('error', $response->json('pesan'));
                 }
             } else {
 
-                return back()->with('error', $response->json('pesan'));
+                  return back()->with('error', $response->json('pesan'));
             }
         }
     }

@@ -18,6 +18,10 @@ class ProfileCard extends Component
 
     }
 
+    // public function eraseArray($name){
+    //   return explode(" ", $name)[0];
+    // }
+
     public function render(Request $request)
     {
         $data = $this->profileService->getCardName($request);

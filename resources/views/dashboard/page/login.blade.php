@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - BHOS Ce-Tar</title>
-    <link rel="shortcut icon" href="/assets/compiled/png/logotanahdatar.png" type="image/x-icon">
-    <link rel="stylesheet" href="/assets/compiled/css/app.css">
-    <link rel="stylesheet" href="/assets/compiled/css/app-dark.css">
-    <link rel="stylesheet" href="/assets/compiled/css/auth.css">
+    <link rel="shortcut icon" href="/dist/assets/compiled/png/logotanahdatar.png" type="image/x-icon">
+    <link rel="stylesheet" href="/dist/assets/compiled/css/app.css">
+    <link rel="stylesheet" href="/dist/assets/compiled/css/app-dark.css">
+    <link rel="stylesheet" href="/dist/assets/compiled/css/auth.css">
 </head>
 
 <body>
-    <script src="/assets/static/js/initTheme.js"></script>
+    <script src="/dist/assets/static/js/initTheme.js"></script>
     <div id="auth">
         <div class="row h-100">
             <div class="col-lg-5 col-12">

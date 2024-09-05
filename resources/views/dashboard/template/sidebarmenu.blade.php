@@ -1,6 +1,6 @@
 <div class="sidebar-menu" style="margin-top: -30px">
     <ul class="menu">
-        @livewire('profile-card')
+
         <div class="card">
         <li class="sidebar-title">Menu</li>
         <li class="sidebar-item {{ request()->is('/') ? 'active' : '' }}">
@@ -10,13 +10,13 @@
             </a>
         </li>
         <li  class="sidebar-item {{ request()->is('bantuan') ? 'active' : '' }}">
-            <a wire:navigate   href="{{ route('schedule') }}" class='sidebar-link'>
+            <a    href="{{ route('schedule') }}" class='sidebar-link'>
                 <i class="bi bi-sticky-fill"></i>
                 <span>Bantuan Hukum</span>
             </a>
         </li>
         <li class="sidebar-item {{ request()->is('laporan-ham') ? 'active' : '' }}">
-            <a wire:navigate href="{{route('ranham.home')}}" class='sidebar-link'>
+            <a  href="{{route('ranham.home')}}" class='sidebar-link'>
                 <i class="bi bi-file-earmark-arrow-up-fill"></i>
                 <span>Laporan Ham</span>
             </a>
