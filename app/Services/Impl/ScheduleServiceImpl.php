@@ -55,7 +55,6 @@ class ScheduleServiceImpl implements ScheduleService
             $schedule_id = $schedule->id;
 
             $this->copyFilesFromTmp($temporaryFiles, $schedule_id);
-
     }
 
     public function getAllSchedules($perPage)

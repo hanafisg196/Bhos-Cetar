@@ -35,7 +35,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/assets/static/js/pages/dashboard.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
     <script>
         document.querySelector('.sidebar-toggle').addEventListener('click', () => {
             document.querySelector('.email-app-sidebar').classList.toggle('show')

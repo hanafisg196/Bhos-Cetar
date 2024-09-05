@@ -85,14 +85,14 @@
                                                     <p><strong>WA : </strong>{{ $item->wa }}</p>
                                                     <p><strong>Alamat : </strong>{{ $item->alamat }}</p>
                                                     <p><strong>Kronologi : </strong>{{ $item->kronologi }}</p>
-
+                                                    <p><strong>Dokument  </strong></p>
                                                     @foreach ($item['dokumens'] as $value)
-                                                    <p><strong>Dokument : </strong>{{ strCut($value->file) }}
+                                                    <p>
+                                                        {{ strCut($value->file) }}
                                                         <a style="size: 15px; margin-left: 10px;" href="{{route('schedule.download', ['file' => strCut($value->file)])}}"  >
                                                             <i class="bi bi-arrow-down-square-fill"></i>
                                                         </a>
                                                     </p>
-
                                                     @endforeach
                                                 </div>
                                                 <div class="modal-footer">

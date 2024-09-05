@@ -133,40 +133,8 @@
             </div>
         </div>
     </section>
-    <script>
-        document.addEventListener('livewire:navigated', () => {
-            var inputForm = document.getElementById('inputForm');
-            var sendButton = document.getElementById('send');
-            var loading = document.getElementById('loading');
-
-            inputForm.addEventListener('submit', function() {
-                sendButton.style.display = 'none';
-                loading.style.display = 'block';
-            });
-
-        });
-    </script>
+   @include('dashboard.component.button-loading')
 @endsection
 @section('script')
-    <script>
-        document.addEventListener('livewire:navigated', () => {
-            FilePond.registerPlugin(
-                FilePondPluginImagePreview,
-                FilePondPluginImageExifOrientation,
-                FilePondPluginFileValidateSize,
-                FilePondPluginFileValidateType,
-            );
-            const inputElement = document.querySelector('input[type="file"]');
-            const pond = FilePond.create(inputElement, {
-                allowMultiple: true,
-                server: {
-                    process: '{{ route('upload') }}',
-                    revert: '/delete',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                }
-            });
-        })
-    </script>
+@include('dashboard.component.filepond')
 @endsection
