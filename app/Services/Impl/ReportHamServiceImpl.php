@@ -7,6 +7,11 @@ use App\Services\ReportHamService;
 use Illuminate\Http\Request;
 
 class ReportHamServiceImpl implements ReportHamService {
+    public function generateCode(){
+        $prefix = 'LAH';
+        $randomNumber = mt_rand(10000, 99999);
+        return $prefix . $randomNumber;
+    }
     public function getKkp() {
       return  Kkp::latest()->get();
     }
@@ -30,7 +35,8 @@ class ReportHamServiceImpl implements ReportHamService {
         Ranham::create([
             "link"=> $validated["link"],
             "kkp_id"=> $validated["kkp_id"],
-            "user_id"=> $user
+            "user_id"=> $user,
+            "code"=> $this->generateCode()
         ]);
 
     }

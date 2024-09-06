@@ -11,7 +11,7 @@
                     <div class="card-body py-4 px-4">
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xl">
-                                <img src="/assets/compiled/png/user.png" alt="Face 1">
+                                <img src="/dist/assets/compiled/png/user.png" alt="Face 1">
                             </div>
                             <div class="ms-3 name">
                                 <h5 class="font-bold">Admin</h5>
@@ -37,7 +37,7 @@
                            id="dashboard-menu">
                             <div class="fonticon-wrap d-inline me-3">
                                 <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                    <use xlink:href="{{ asset('/assets/static/images/bootstrap-icons.svg#house-fill') }}" />
+                                    <use xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#house-fill') }}" />
                                 </svg>
                             </div>
                             Dashboard
@@ -46,7 +46,7 @@
                         <a href="#" class="list-group-item pt-0 {{ request()->is('inbox*') ? 'active' : '' }}" id="menus-dropdown" data-bs-toggle="collapse" data-bs-target="#menus-submenu" aria-expanded="false" aria-controls="menus-submenu">
                             <div class="fonticon-wrap d-inline me-3">
                                 <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                    <use xlink:href="{{ asset('/assets/static/images/bootstrap-icons.svg#grid-fill') }}" />
+                                    <use xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#grid-fill') }}" />
                                 </svg>
                             </div>
                             Bhos-Cetar
@@ -57,7 +57,7 @@
                             <a  href="{{ route('admin.inbox') }}" class="list-group-item ps-5 pt-0 {{ request()->is('inbox/list') ? 'active' : '' }}">
                                 <div class="fonticon-wrap d-inline me-1">
                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                        <use xlink:href="{{ asset('/assets/static/images/bootstrap-icons.svg#envelope') }}" />
+                                        <use xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#envelope') }}" />
                                     </svg>
                                 </div>
                                 Kontak Masuk

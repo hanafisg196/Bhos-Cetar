@@ -29,9 +29,7 @@ class ScheduleServiceImpl implements ScheduleService
     {
         $sessionId = Session::getId();
         $user_id = $this->getUserId($request);
-
         $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
-
         $validated = $request->validate([
             'nama' => 'required|string|max:120',
             'alamat' => 'required|string|max:150',
@@ -39,7 +37,6 @@ class ScheduleServiceImpl implements ScheduleService
             'kronologi' => 'required|string',
             'wa' => 'required|numeric|min:13',
         ]);
-
             $schedule = Schedule::create([
                 'nip' => $user_id,
                 'nama' => $validated['nama'],
@@ -48,11 +45,18 @@ class ScheduleServiceImpl implements ScheduleService
                 'kronologi' => $validated['kronologi'],
                 'wa' => $validated['wa'],
                 'user_id' => $user_id,
+                'code' => $this->generateCode()
             ]);
 
             $schedule_id = $schedule->id;
 
             $this->copyFilesFromTmp($temporaryFiles, $schedule_id);
+    }
+
+    public function generateCode(){
+        $prefix = 'LBH';
+        $randomNumber = mt_rand(10000, 99999);
+        return $prefix . $randomNumber;
     }
 
     public function getAllSchedules($perPage)

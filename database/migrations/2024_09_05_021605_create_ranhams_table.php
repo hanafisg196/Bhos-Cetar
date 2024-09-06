@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('ranhams', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
             $table->string('link');
             $table->string('user_id');
             $table->unsignedBigInteger('kkp_id');
             $table->timestamps();
-
             $table->foreign('kkp_id')->references('id')->on('kkps');
         });
     }

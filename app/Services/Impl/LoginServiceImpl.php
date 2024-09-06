@@ -36,7 +36,7 @@ class LoginServiceImpl implements LoginService
             $credent = $request->only('username', 'password');
             if (Auth::attempt($credent)) {
                 if (Auth::user()->role == 1) {
-                     redirect()->route('admin.dashboard');
+                    return redirect()->route('admin.dashboard');
                 } else {
                     return back()->with('error', $response->json('pesan'));
                 }

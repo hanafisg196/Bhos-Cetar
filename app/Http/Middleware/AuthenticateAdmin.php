@@ -21,7 +21,7 @@ class AuthenticateAdmin
             return $next($request);
         }
         else {
-            return  abort(404);
+              abort(404);
         }
 
     }

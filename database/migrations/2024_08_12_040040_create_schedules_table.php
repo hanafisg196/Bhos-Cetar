@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
             $table->string('nip');
             $table->string('nama');
             $table->string('alamat');
