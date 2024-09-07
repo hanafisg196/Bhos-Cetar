@@ -69,9 +69,8 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                    @endforeach
-                                    <!-- Disabled Backdrop Modal -->
-                                    <div class="modal fade text-left" id="modal-{{ $item->id }}" tabindex="-1"
+                                     <!-- Disabled Backdrop Modal -->
+                                     <div class="modal fade text-left" id="modal-{{ $item->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="myModalLabel-{{ $item->id }}"
                                         data-bs-backdrop="false" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
@@ -111,6 +110,8 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
+
                                 </table>
                             </div>
                         </div>

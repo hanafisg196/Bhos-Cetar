@@ -19,6 +19,9 @@ class ReportHamServiceImpl implements ReportHamService {
     public function getRanhamByUser($id) {
         return Ranham::where("user_id", $id)->latest()->paginate(3);
     }
+    public function getRanhamAll($perPage) {
+        return Ranham::latest()->paginate($perPage);
+    }
     public function getUserId(Request $request)
     {
         $user = $request->session()->get('user');

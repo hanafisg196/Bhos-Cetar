@@ -2,6 +2,7 @@
 namespace App\Services\Impl;
 
 use App\Models\Document;
+use App\Models\Notification;
 use App\Models\Schedule;
 use App\Models\Temporary;
 use App\Services\ScheduleService;
@@ -91,8 +92,8 @@ class ScheduleServiceImpl implements ScheduleService
 
     public function search($search, $perPage)
     {
-        $data = Schedule::where('nama', 'like', '%' . $search . '%')->paginate($perPage);
-        return $data;
+       return Schedule::where('nama', 'like', '%' . $search . '%')->paginate($perPage);
+
     }
     public function deleteSchedule($id)
     {
@@ -118,10 +119,19 @@ class ScheduleServiceImpl implements ScheduleService
 
     public function updateStatSchdeule($id, $stat, $message)
     {
-        return Schedule::where('id', $id)->update([
+       $update = Schedule::where('id', $id)->update([
             'status' => $stat,
             'message' => $message,
         ]);
+
+        if($update) {
+
+            $schedule = Schedule::find($id);
+            Notification::updateOrCreate([
+                "user_id" => $schedule->user_id,
+                "lbh_id" =>  $id,
+            ]);
+        }
     }
     public function download($file)
     {

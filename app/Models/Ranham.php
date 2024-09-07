@@ -15,4 +15,9 @@ class Ranham extends Model
     {
         return $this->belongsTo(Kkp::class, 'kkp_id', 'id');
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'lah_id', 'id');
+    }
 }

@@ -1,0 +1,30 @@
+<div>
+    {{-- Stop trying to control. --}}
+    <li class="nav-item dropdown me-3">
+        <a class="nav-link active dropdown-toggle text-gray-600" href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+            <i class='bi bi-bell bi-sub fs-4'></i>
+            <span class="badge badge-notification bg-danger">{{$this->countNotif}}</span>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end notification-dropdown" aria-labelledby="dropdownMenuButton">
+            <li class="dropdown-header">
+                <h6>Notifikasi</h6>
+            </li>
+            <li class="dropdown-item notification-item" style="margin-top: -10px;">
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="toast-header">
+                        <i class="bi bi-bell-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
+                        <strong class="me-auto">DC098909</strong>
+                        <small>11 menit lalu</small>
+                    </div>
+                    <div class="toast-body">
+                       <p>Laporan dengan kode DC098909 Ditolak. <strong>Lihat</strong></p>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <p class="text-center py-2 mb-0"><a href="#">See all notification</a></p>
+            </li>
+        </ul>
+    </li>
+</div>

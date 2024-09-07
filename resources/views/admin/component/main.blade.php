@@ -16,8 +16,9 @@
     <div class="page-heading email-application overflow-hidden">
         <section class="section content-area-wrapper">
             @include('admin.component.sidebarmenu')
-            <div class="content-right">
-                <div class="content-overlay"></div>
+            <div class="content-right" style="background: white;">
+                <div class="content-overlay">
+                </div>
                 <div class="content-wrapper">
                     <div class="content-header row">
                     </div>

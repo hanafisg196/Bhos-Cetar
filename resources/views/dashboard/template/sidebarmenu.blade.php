@@ -18,7 +18,7 @@
         <li class="sidebar-item {{ request()->is('laporan-ham') ? 'active' : '' }}">
             <a  href="{{route('ranham.home')}}" class='sidebar-link'>
                 <i class="bi bi-file-earmark-arrow-up-fill"></i>
-                <span>Laporan Ham</span>
+                <span>Laporan Aksi Ham</span>
             </a>
         </li>
 

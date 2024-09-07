@@ -1,4 +1,4 @@
-<div class="sidebar-left">
+<div class="sidebar-left" style="background: white;">
     <div class="sidebar">
         <div class="sidebar-content email-app-sidebar d-flex">
             <!-- sidebar close icon -->

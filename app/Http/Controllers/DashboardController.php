@@ -26,7 +26,7 @@ class DashboardController extends Controller
         $ranham =  $this->reportHamService->getRanhamByUser($id);
         return view('dashboard.page.home')->with([
             'bantuan' => $bantuan,
-            'ranham' => $ranham,
+            'ranham' => $ranham
         ]);
     }
 

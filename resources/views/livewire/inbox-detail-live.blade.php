@@ -36,7 +36,7 @@
                         <div class="collapse-title media">
                             <div class="pr-1">
                                 <div class="avatar me-3">
-                                    <img src="/assets/compiled/png/user.png" alt="avtar img holder" width="30"
+                                    <img src="/dist/assets/compiled/png/user.png" alt="avtar img holder" width="30"
                                         height="30">
                                 </div>
                             </div>
@@ -57,14 +57,16 @@
                         </p>
 
                     </div>
-                    <label class="sidebar-label" style="margin-left: 10px;">Lampiran</label>
+                        <h7 class="sidebar-label" style="margin-left: 10px;">
+                            Lampiran
+                        </h7>
                     @foreach ($data['dokumens'] as $item)
                         <ul class="list-unstyled mb-2">
                             <li class="cursor-pointer pb-25" style="margin-left: 10px;">
                                 @if (str_contains($item->file, 'pdf'))
-                                    <img src="/assets/compiled/png/pdf.png" height="32">
+                                    <img src="/dist/assets/compiled/png/pdf.png" height="32" alt="">
                                 @else
-                                    <img src="/assets/compiled/png/img.png" height="30">
+                                    <img src="/dist/assets/compiled/png/image.png" height="30" alt="">
                                 @endif
                                 <small
                                     class="text-muted ms-1 attchement-text">{{ $this->sliceStr($item->file) }}</small>

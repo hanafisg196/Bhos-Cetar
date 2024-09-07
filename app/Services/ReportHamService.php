@@ -9,5 +9,6 @@ interface ReportHamService {
     public function getKkp();
     public function saveRanham(Request $request);
     public function getRanhamByUser($id);
+    public function getRanhamAll($perPage);
 
 }

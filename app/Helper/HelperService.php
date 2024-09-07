@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\Crypt;
+
 if (!function_exists('trimString')) {
     function trimString($string) {
         $words = explode(' ', $string);
@@ -8,5 +11,13 @@ if (!function_exists('trimString')) {
         return $string;
     }
 }
+
+if (!function_exists('encrypt')) {
+    function trimString($value) {
+      return Crypt::encrypt($value);
+
+    }
+}
+
 
 
