@@ -16,7 +16,10 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('link');
             $table->string('user_id');
+            $table->tinyInteger('read')->default(0);
             $table->unsignedBigInteger('kkp_id');
+            $table->string('status')->default('Usulan');
+            $table->string('message')->default('-');
             $table->timestamps();
             $table->foreign('kkp_id')->references('id')->on('kkps');
         });

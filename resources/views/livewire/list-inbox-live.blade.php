@@ -37,7 +37,7 @@
                 </div>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="table-tab" data-bs-toggle="tab" href="#tableContent" role="tab" aria-controls="tableContent" aria-selected="true">Bantuan Hukum</a>
+                        <a class="nav-link active" id="table-tab" data-bs-toggle="tab" href="#tableContent" role="tab" aria-controls="tableContent" aria-selected="true">Laporan Bantuan Hukum</a>
                     </li>
 
                     <li class="nav-item" role="presentation">
@@ -48,7 +48,7 @@
                     <div class="tab-pane fade show active" id="tableContent" role="tabpanel" aria-labelledby="table-tab">
                      <div class="email-user-list list-group ps ps--active-y">
                         <ul class="users-list-wrapper media-list">
-                            @foreach ($data as $item)
+                            @foreach ($lbh as $item)
                                 @if ($item->read == 1)
                                     <li class="media mail-read">
                                     @else
@@ -112,7 +112,7 @@
                                 </div>
                                 </li>
                             @endforeach
-                            @if ($data->hasMorePages())
+                            @if ($lbh->hasMorePages())
                                 <div class="d-flex justify-content-center mt-2">
                                     <button wire:click="loadMore" class="btn btn-primary rounded-pill">Load More</button>
                                 </div>
@@ -121,10 +121,80 @@
                     </div>
                     </div>
                     <div class="tab-pane fade" id="otherContent" role="tabpanel" aria-labelledby="other-tab">
-                        <h1>test</h1>
+                        <div class="email-user-list list-group ps ps--active-y">
+                            <ul class="users-list-wrapper media-list">
+                                @foreach ($lah as $item)
+                                    @if ($item->read == 1)
+                                        <li class="media mail-read">
+                                        @else
+                                        <li class="media">
+                                    @endif
+                                    <a href="/inbox/detail/{{encrypt($item->id) }}" wire:click="readInbox('{{ $item->id }}')"
+                                        class="d-flex align-items-center text-decoration-none text-dark w-100">
+
+                                        <div class="pr-50">
+                                            <div class="avatar">
+                                                <img src="/dist/assets/compiled/png/folder.png" alt="avatar img holder">
+                                            </div>
+                                        </div>
+                                        <div class="media-body">
+                                            <div class="user-details">
+                                                <div class="mail-items">
+                                                    <span class="list-group-item-text text-truncate">{{ $item->file }}</span>
+                                                    @if ($item->status == 'Ditolak')
+                                                        <span class="list-group-item-text text-truncate"
+                                                            style="color: red">{{ $item->status }}</span>
+                                                    @elseif ($item->status == 'Diproses')
+                                                        <span class="list-group-item-text text-truncate"
+                                                            style="color: green">{{ $item->status }}</span>
+                                                    @else
+                                                        <span class="list-group-item-text text-truncate"
+                                                            style="color: burlywood">{{ $item->status }}</span>
+                                                    @endif
+
+                                                </div>
+                                                <div class="mail-meta-item">
+                                                    <span class="float-right">
+                                                        <span class="mail-date">{{ $item->created_at->format('H:i') }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="mail-message">
+                                                <p class="list-group-item-text truncate mb-0">
+                                                    {{ trimString($item->kronologi) }}
+                                                </p>
+                                                <div class="mail-meta-item">
+                                                    <span class="float-right">
+                                                        <span class="bullet bullet-success bullet-sm"></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="user-action" style="margin-left: 10px;">
+                                        <div class="checkbox-con me-3">
+                                            <div class="checkbox checkbox-shadow checkbox-sm">
+                                                <button type="button" wire:click ="delete('{{ $item->id }}')"
+                                                    class="btn btn-icon action-icon" data-toggle="tooltip">
+                                                    <span class="fonticon-wrap">
+                                                        <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
+                                                            <use xlink:href="/dist/assets/static/images/bootstrap-icons.svg#trash" />
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </li>
+                                @endforeach
+                                @if ($lah->hasMorePages())
+                                    <div class="d-flex justify-content-center mt-2">
+                                        <button wire:click="loadMore" class="btn btn-primary rounded-pill">Load More</button>
+                                    </div>
+                                @endif
+                            </ul>
+                        </div>
                     </div>
-
-
             </div>
         </div>
     </div>

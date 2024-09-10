@@ -10,17 +10,20 @@
                 <h6>Notifikasi</h6>
             </li>
             <li class="dropdown-item notification-item" style="margin-top: -10px;">
+                @foreach ($data as $item)
                 <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-header">
                         <i class="bi bi-bell-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
-                        <strong class="me-auto">DC098909</strong>
+                        <strong class="me-auto">{{$item['schedules']->code}}</strong>
                         <small>11 menit lalu</small>
                     </div>
                     <div class="toast-body">
-                       <p>Laporan dengan kode DC098909 Ditolak. <strong>Lihat</strong></p>
+                       <p>Laporan dengan kode {{$item['schedules']->code}} {{$item['schedules']->status}}. <strong>Lihat</strong></p>
                     </div>
                 </div>
+                @endforeach
             </li>
+
 
             <li>
                 <p class="text-center py-2 mb-0"><a href="#">See all notification</a></p>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\ReportHamService;
 use App\Services\ScheduleService;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -16,12 +17,15 @@ class ListInboxLive extends Component
     public $search = "";
 
     protected ScheduleService $scheduleService;
+    protected ReportHamService $reportHamService;
 
     public function boot(
-        ScheduleService $scheduleService
+        ScheduleService $scheduleService,
+        ReportHamService $reportHamService
     )
     {
         $this->scheduleService = $scheduleService;
+        $this->reportHamService = $reportHamService;
     }
 
     public function mount()
@@ -47,12 +51,20 @@ class ListInboxLive extends Component
     public function render()
     {
         if(strlen($this->search) >= 1){
-            $data = $this->scheduleService->search($this->search, $this->perPage);
+            $lbh = $this->scheduleService->search($this->search, $this->perPage);
         } else{
-            $data = $this->scheduleService->getAllSchedules($this->perPage);
+            $lbh = $this->scheduleService->getAllSchedules($this->perPage);
         }
+
+        if(strlen($this->search) >= 1){
+            $lah = $this->reportHamService->search($this->search, $this->perPage);
+        } else{
+            $lah = $this->reportHamService->getRanhamAll($this->perPage);
+        }
+
         return view('livewire.list-inbox-live')->with([
-            'data'=> $data
+            'lbh'=> $lbh,
+            'lah'=> $lah
         ]);
     }
 

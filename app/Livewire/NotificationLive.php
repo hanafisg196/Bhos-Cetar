@@ -11,6 +11,7 @@ class NotificationLive extends Component
 
 
     public $countNotif = 0;
+    public $data;
     protected NotificationService $notificationService;
 
     public function boot(NotificationService $notificationService)
@@ -18,6 +19,7 @@ class NotificationLive extends Component
         $this->notificationService = $notificationService;
     }
     public function mount(Request $request){
+      $this->data = $this->notificationService->getNotify($request);
       $this->countNotif = $this->notificationService->count($request);
     }
 

@@ -12,7 +12,8 @@ class NotificationServiceImpl implements NotificationService {
     public function getNotify(Request $request) {
         $user = $request->session()->get('user');
         $user_id = $user['pegawai']['nip'];
-        return Notification::where('user_id', $user_id)->orderBy('created_at', Carbon::now())->limit(5);
+
+        return Notification::where('user_id', $user_id)->with('schedules', 'ranhams')->get();
     }
 
     public function count(Request $request){
