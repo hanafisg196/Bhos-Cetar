@@ -1,5 +1,5 @@
 <div>
-
+{{timeMachine()}}
     {{-- In work, do what you enjoy. --}}
     <style>
         .email-user-list {
@@ -54,7 +54,7 @@
                                     @else
                                     <li class="media">
                                 @endif
-                                <a href="/inbox/detail/{{encrypt($item->id) }}" wire:click="readInbox('{{ $item->id }}')"
+                                <a href="{{route('detail.bantuan.hukum',encrypt($item->id))}}" wire:click="readInboxLbh('{{ $item->id }}')"
                                     class="d-flex align-items-center text-decoration-none text-dark w-100">
 
                                     <div class="pr-50">
@@ -80,7 +80,7 @@
                                             </div>
                                             <div class="mail-meta-item">
                                                 <span class="float-right">
-                                                    <span class="mail-date">{{ $item->created_at->format('H:i') }}</span>
+                                                    <span class="mail-date">{{ $item->created_at->diffForHumans() }}</span>
                                                 </span>
                                             </div>
                                         </div>
@@ -129,7 +129,7 @@
                                         @else
                                         <li class="media">
                                     @endif
-                                    <a href="/inbox/detail/{{encrypt($item->id) }}" wire:click="readInbox('{{ $item->id }}')"
+                                    <a href="{{route('detail.aksi.ham',encrypt($item->id))}}" wire:click="readInboxLah('{{ $item->id }}')"
                                         class="d-flex align-items-center text-decoration-none text-dark w-100">
 
                                         <div class="pr-50">
@@ -140,7 +140,7 @@
                                         <div class="media-body">
                                             <div class="user-details">
                                                 <div class="mail-items">
-                                                    <span class="list-group-item-text text-truncate">{{ $item->file }}</span>
+                                                    <span class="list-group-item-text text-truncate">{{ $item->name }}</span>
                                                     @if ($item->status == 'Ditolak')
                                                         <span class="list-group-item-text text-truncate"
                                                             style="color: red">{{ $item->status }}</span>
@@ -155,13 +155,13 @@
                                                 </div>
                                                 <div class="mail-meta-item">
                                                     <span class="float-right">
-                                                        <span class="mail-date">{{ $item->created_at->format('H:i') }}</span>
+                                                        <span class="mail-date">{{ $item->created_at->diffForHumans()}}</span>
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="mail-message">
                                                 <p class="list-group-item-text truncate mb-0">
-                                                    {{ trimString($item->kronologi) }}
+                                                    {{ trimString($item->link) }}
                                                 </p>
                                                 <div class="mail-meta-item">
                                                     <span class="float-right">

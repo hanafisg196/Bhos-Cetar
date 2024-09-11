@@ -9,11 +9,13 @@ use Illuminate\Http\Request;
 class NotificationServiceImpl implements NotificationService {
 
 
+
     public function getNotify(Request $request) {
+        $today =  Carbon::now();
         $user = $request->session()->get('user');
         $user_id = $user['pegawai']['nip'];
-
-        return Notification::where('user_id', $user_id)->with('schedules', 'ranhams')->get();
+        return Notification::where('user_id', $user_id)->with('schedules', 'ranhams')
+        ->whereDate('created_at', $today)->orderBy('created_at', 'desc')->get();
     }
 
     public function count(Request $request){
@@ -21,5 +23,7 @@ class NotificationServiceImpl implements NotificationService {
         $user_id = $user['pegawai']['nip'];
         return Notification::where('user_id', $user_id)->where('notif_read', 0)->count();
     }
+
+
 }
 

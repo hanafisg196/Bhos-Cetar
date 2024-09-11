@@ -42,7 +42,20 @@
                             </div>
                             Dashboard
                         </a>
-                        <!-- Menus -->
+                        <a  href="{{ route('admin.inbox') }}"
+                           class="list-group-item pt-0 {{ request()->is('inbox/list') ? 'active' : '' }}"
+                           id="dashboard-menu">
+                            <div class="fonticon-wrap d-inline me-3">
+                                <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
+                                    <use xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#envelope') }}" />
+                                </svg>
+                            </div>
+                            Inbox
+                            <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">
+                                <livewire:inbox-counter-live/>
+                            </span>
+                        </a>
+                        {{-- <!-- Menus -->
                         <a href="#" class="list-group-item pt-0 {{ request()->is('inbox*') ? 'active' : '' }}" id="menus-dropdown" data-bs-toggle="collapse" data-bs-target="#menus-submenu" aria-expanded="false" aria-controls="menus-submenu">
                             <div class="fonticon-wrap d-inline me-3">
                                 <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
@@ -71,7 +84,8 @@
                             <a  href="{{ url('#') }}" class="list-group-item ps-5 pt-0 {{ request()->is('submenu3') ? 'active' : '' }}">
                                 Sub Menu 3
                             </a>
-                        </div>
+                        </div> --}}
+
                     </div>
                     <!-- sidebar menu end-->
                 </div>

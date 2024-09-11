@@ -36,8 +36,11 @@ class ListInboxLive extends Component
         $this->scheduleService->deleteSchedule($id);
     }
 
-    public function readInbox($id){
-        $this->scheduleService->readSchedule($id);
+    public function readInboxLbh($id){
+        $this->scheduleService->readStatus($id);
+    }
+    public function readInboxLah($id){
+        $this->reportHamService->readStatus($id);
     }
 
     public function loadMore(){

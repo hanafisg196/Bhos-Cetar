@@ -77,7 +77,7 @@ class ScheduleServiceImpl implements ScheduleService
         return Schedule::latest()->where('user_id', $id)->with('dokumens')->paginate(4);
     }
 
-    public function readSchedule($id)
+    public function readStatus($id)
     {
         $data = Schedule::where('id', $id);
         $data->update([
@@ -125,7 +125,6 @@ class ScheduleServiceImpl implements ScheduleService
         ]);
 
         if($update) {
-
             $schedule = Schedule::find($id);
             Notification::updateOrCreate([
                 "user_id" => $schedule->user_id,

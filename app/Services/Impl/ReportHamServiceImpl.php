@@ -2,6 +2,7 @@
 namespace App\Services\Impl;
 
 use App\Models\Kkp;
+use App\Models\Notification;
 use App\Models\Ranham;
 use App\Services\ReportHamService;
 use Illuminate\Http\Request;
@@ -24,28 +25,51 @@ class ReportHamServiceImpl implements ReportHamService {
     }
     public function getUserId(Request $request)
     {
-        $user = $request->session()->get('user');
-        $user_id = $user['pegawai']['nip'];
-        return $user_id;
+      return $request->session()->get('user');
     }
     public function  saveRanham( Request $request ) {
         $user = $this->getUserId($request);
         $validated = $request->validate([
             "link"=> "required|active_url",
             "kkp_id"=> "required"
-
         ]);
         Ranham::create([
             "link"=> $validated["link"],
             "kkp_id"=> $validated["kkp_id"],
-            "user_id"=> $user,
+            "user_id"=> $user['pegawai']['nip'],
+            "name"=>$user['pegawai']['nama'],
             "code"=> $this->generateCode()
         ]);
 
+    }
+    public function updateStatRanham($id, $stat, $message)
+    {
+       $update = Ranham::where('id', $id)->update([
+            'status' => $stat,
+            'message' => $message,
+        ]);
+
+        if($update) {
+            $schedule = Ranham::find($id);
+            Notification::updateOrCreate([
+                "user_id" => $schedule->user_id,
+                "lah_id" =>  $id,
+            ]);
+        }
+    }
+    public function getRanhamByid($id){
+        return Ranham::find($id);
     }
     public function search($search, $perPage)
     {
        return Ranham::where('nama', 'like', '%' . $search . '%')->paginate($perPage);
 
+    }
+    public function readStatus($id)
+    {
+        $data = Ranham::where('id', $id);
+        $data->update([
+            'read' => 1,
+        ]);
     }
 }

@@ -11,7 +11,7 @@ interface ScheduleService {
     public function getDetailSchedule($id);
     public function deleteSchedule($id);
     public function search($search,$perPage) ;
-    public function readSchedule($id);
+    public function readStatus($id);
     public function countUsualan();
     public function inboxCount();
     public function updateStatSchdeule($id, $stat,$message);

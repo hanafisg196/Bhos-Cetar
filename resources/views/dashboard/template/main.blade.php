@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Portal Tanah Datar</title>
+    <title>Dashboard - Bhos-Cetar</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="icon" href="/dist/assets/compiled/jpg/logotanahdatar.png" type="image/x-icon">
     <link rel="stylesheet" href="/dist/assets/compiled/css/app.css">
@@ -28,7 +28,7 @@
                             <div class="logo">
                                 <img src="/dist/assets/compiled/jpg/logotanahdatar.png"
                                     style="width: 50; height: 50px;" alt="Logo">
-                                <span style="font-size: 20px;">KamiPeduli</span>
+                                <span style="font-size: 20px;">Bhos-Cetar</span>
                             </div>
                             <div class="sidebar-toggler x">
                                 <a href="#" class="sidebar-hide d-xl-none d-block"><i

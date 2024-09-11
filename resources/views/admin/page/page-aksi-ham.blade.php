@@ -1,4 +1,4 @@
 @extends('admin.component.main')
 @section('content')
-@livewire('inbox-detail-live', ['id' => $id])
+@livewire('detail-aksi-ham', ['id' => $id])
 @endsection

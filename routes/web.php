@@ -6,6 +6,7 @@ use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportHamController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\UpdateBantuanHukumController;
 use App\Http\Controllers\UploadFileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +23,13 @@ Route::middleware('user')->group(function () {
     Route::get('/laporan-ham', [ReportHamController::class,'index'])->name("ranham.home");
     Route::post('/laporan/create', [ReportHamController::class,'createRanham'])->name("ranham.create");
     Route::post('/logout', [LoginController::class, 'doLogout'])->name('logout.dashboard');
+    Route::get('/update/bantuan-hukum/detail/{id}', [UpdateBantuanHukumController::class, 'getDataById'])->name('show.bantuan.hukum');
 });
+
 Route::middleware('admin')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/inbox/list', [InboxController::class, 'getSchedules'])->name('admin.inbox');
-    Route::get('/inbox/detail/{id}', [InboxController::class, 'inboxDetail'])->name('detail.inbox');
+    Route::get('/inbox/detail/bantuan-hukum/{id}', [InboxController::class, 'detailBantuanHukum'])->name('detail.bantuan.hukum');
+    Route::get('/inbox/detail/aksi-ham/{id}', [InboxController::class, 'detailAksiHam'])->name('detail.aksi.ham');
     Route::post('/logout/admin', [LoginController::class, 'LogoutAdmin'])->name('logout.admin');
 });

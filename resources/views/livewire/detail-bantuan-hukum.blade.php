@@ -15,7 +15,7 @@
                     </div>
                     <a href="javascript:history.back()" class="btn btn-primary">
                         <i class="bi bi-arrow-left"></i> Kembali
-                      </a>
+                    </a>
                     <div class="email-fixed-search flex-grow-1">
                         <div class="form-group position-relative  mb-0 has-icon-left">
                         </div>
@@ -57,9 +57,9 @@
                         </p>
 
                     </div>
-                        <h7 class="sidebar-label" style="margin-left: 10px;">
-                            Lampiran
-                        </h7>
+                    <h7 class="sidebar-label" style="margin-left: 10px;">
+                        Lampiran
+                    </h7>
                     @foreach ($data['dokumens'] as $item)
                         <ul class="list-unstyled mb-2">
                             <li class="cursor-pointer pb-25" style="margin-left: 10px;">
@@ -103,10 +103,12 @@
                                             <fieldset class="form-group">
                                                 <select wire:model="status" class="form-select" id="basicSelect">
                                                     @if ($data->status !== 'Usulan')
-                                                        <option value="{{ $data->status }}" selected>{{ $data->status }}</option>
+                                                        <option value="{{ $data->status }}" selected>
+                                                            {{ $data->status }}</option>
                                                     @endif
                                                     @foreach ($statusOptions as $option)
-                                                        <option value="{{ $option }}">{{ $option }}</option>
+                                                        <option value="{{ $option }}">{{ $option }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </fieldset>
@@ -148,5 +150,4 @@
             </div>
         </div>
     </section>
-
 </div>

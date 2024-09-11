@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 
 if (!function_exists('trimString')) {
@@ -13,9 +14,15 @@ if (!function_exists('trimString')) {
 }
 
 if (!function_exists('encrypt')) {
-    function trimString($value) {
+    function encrypt($value) {
       return Crypt::encrypt($value);
 
+    }
+}
+
+if (!function_exists(function: 'timeMachine')) {
+    function timeMachine() {
+     return Carbon::setLocale('id');
     }
 }
 

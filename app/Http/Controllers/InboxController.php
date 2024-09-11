@@ -19,7 +19,10 @@ class InboxController extends Controller
         return view('admin.page.inbox');
     }
 
-    public function inboxDetail($id){
-        return view('admin.page.inbox-detail', ['id' => $id]);
+    public function detailBantuanHukum($id){
+        return view('admin.page.page-bantuan-hukum', ['id' => $id]);
+    }
+    public function detailAksiHam($id){
+        return view('admin.page.page-aksi-ham', ['id' => $id]);
     }
 }

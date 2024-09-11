@@ -30,5 +30,10 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function test(){
+        $user = session()->get('user');
+        return json_encode($user, JSON_PRETTY_PRINT);
+    }
+
 
 }
