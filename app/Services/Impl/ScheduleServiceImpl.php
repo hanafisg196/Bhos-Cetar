@@ -54,6 +54,30 @@ class ScheduleServiceImpl implements ScheduleService
             $this->copyFilesFromTmp($temporaryFiles, $schedule_id);
     }
 
+    public function updateSchedule(Request $request, $id){
+        $sessionId = Session::getId();
+        $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
+        $validated = $request->validate([
+            'nama' => 'required|string|max:120',
+            'alamat' => 'required|string|max:150',
+            'email' => 'required|email|max:120',
+            'kronologi' => 'required|string',
+            'wa' => 'required|numeric|min:13',
+        ]);
+        $schedule = Schedule::find($id);
+        $schedule->update([
+            'nama' => $validated['nama'],
+            'alamat' => $validated['alamat'],
+            'email' => $validated['email'],
+            'kronologi' => $validated['kronologi'],
+            'wa' => $validated['wa'],
+            'status'=>  "Revisi"
+        ]);
+        $schedule_id = $schedule->id;
+        $this->copyFilesFromTmp($temporaryFiles, $schedule_id);
+
+    }
+
     public function generateCode(){
         $prefix = 'LBH';
         $randomNumber = mt_rand(10000, 99999);
@@ -107,6 +131,13 @@ class ScheduleServiceImpl implements ScheduleService
         $schedule->delete();
     }
 
+    public function deleteDocument($id){
+        $documents = Document::find($id);
+        Storage::delete($documents->file);
+        $documents->delete();
+    }
+
+
     public function inboxCount()
     {
         return Schedule::where('read', 0)->count();
@@ -119,7 +150,7 @@ class ScheduleServiceImpl implements ScheduleService
 
     public function updateStatSchdeule($id, $stat, $message)
     {
-       $update = Schedule::where('id', $id)->update([
+        $update = Schedule::where('id', $id)->update([
             'status' => $stat,
             'message' => $message,
         ]);

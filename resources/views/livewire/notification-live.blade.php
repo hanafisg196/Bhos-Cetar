@@ -13,8 +13,12 @@
             <li class="dropdown-item notification-item" style="margin-top: -10px;">
                 @foreach ($data as $item)
                 @if ($item['schedules'])
-                <a href="{{route('show.bantuan.hukum', encrypt($item['schedules']->id))}}">
-                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                <a href="{{route('show.bantuan.hukum', encrypt($item['schedules']->id))}}" wire:click="readNotif({{$item->id}})">
+                    @if ($item->notif_read == 1)
+                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="background: rgb(157, 118, 118);">
+                     @else
+                     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    @endif
                     <div class="toast-header">
                         <i class="bi bi-bell-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
                         <strong class="me-auto">{{$item['schedules']->code}}</strong>
@@ -23,7 +27,7 @@
                     <div class="toast-body">
                        <p>Laporan dengan kode {{$item['schedules']->code}} {{$item['schedules']->status}}. <strong>Lihat</strong></p>
                     </div>
-                </div>
+                 </div>
                 </a>
                 @else
                 <a href="https://laravel.com/docs/11.x/queries#basic-where-clauses">

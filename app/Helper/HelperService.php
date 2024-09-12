@@ -27,4 +27,11 @@ if (!function_exists(function: 'timeMachine')) {
 }
 
 
+if (!function_exists(function: 'strCut')) {
+    function strCut($string){
+        return substr($string, 6);
+    }
+}
+
+
 

@@ -13,6 +13,17 @@ class UpdateBantuanHukumController extends Controller
     public function __construct(ScheduleService $scheduleService){
         $this->scheduleService = $scheduleService;
     }
+
+    public function deleteDokumen($id){
+        $id = Crypt::decrypt($id);
+        $this->scheduleService->deleteDocument($id);
+        return redirect()->back();
+    }
+    public function update(Request $request,$id){
+        $id = Crypt::decrypt($id);
+        $this->scheduleService->updateSchedule($request,$id);
+        return redirect()->route("dashboard")->with("success","Data berhasil di perbarui, dan akan di review kembali");
+    }
     public function getDataById($id){
          $id = Crypt::decrypt($id);
          $data = $this->scheduleService->getDetailSchedule($id);

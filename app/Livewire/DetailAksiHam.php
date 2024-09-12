@@ -45,7 +45,7 @@ class DetailAksiHam extends Component
         $this->data = $this->reportHamService->getRanhamByid($id);
     }
 
-    public function updateStatus($id)
+    public function updateStat($id)
     {
         $this->validate();
         $this->reportHamService->updateStatRanham($id, $this->status, $this->pesan);

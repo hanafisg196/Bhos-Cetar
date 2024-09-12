@@ -23,6 +23,9 @@ class NotificationLive extends Component
       $this->countNotif = $this->notificationService->count($request);
     }
 
+    public function readNotif($id){
+        $this->notificationService->updateNotifStat($id);
+    }
 
     public function render()
     {

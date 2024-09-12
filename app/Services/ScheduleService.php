@@ -5,11 +5,13 @@ use Illuminate\Http\Request;
 
 interface ScheduleService {
     public function createSchedule(Request $request);
+    public function updateSchedule(Request $request, $id);
     public function getAllSchedules($perPage);
     public function getUserId(Request $request);
     public function getSchedulesByid($id);
     public function getDetailSchedule($id);
     public function deleteSchedule($id);
+    public function deleteDocument($id);
     public function search($search,$perPage) ;
     public function readStatus($id);
     public function countUsualan();

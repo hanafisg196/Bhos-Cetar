@@ -1,19 +1,5 @@
 @extends('dashboard.template.main')
 @section('content')
-    @php
-        function stringReplace($string)
-        {
-            $words = explode(' ', $string);
-            $limit = 6;
-            $replace = '....';
-            $setence = count($words) > $limit ? implode(' ', array_slice($words, 0, $limit)) . $replace : $string;
-            return $setence;
-        }
-
-        function strCut($string){
-            return substr($string, 6);
-        }
-    @endphp
 <div class="page-content">
     <section class="row" style="margin-top: -25px;">
         <div class="col-12 col-lg-9">
@@ -122,6 +108,7 @@
                                         <tr>
                                             <th>Kode</th>
                                             <th>Link</th>
+                                            <th>Lihat</th>
                                         </tr>
                                     </thead>
                                     @foreach ($ranham as $val)
@@ -133,12 +120,11 @@
                                             <td class="col-auto">
                                                 <p class="mb-0">{{$val->link}}</p>
                                             </td>
-                                            {{-- <td class="col-auto">
-                                                <a class="btn icon btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#modal-{{ $item->id }}">
+                                            <td class="col-auto">
+                                                <a  href="{{$val->link}}" class="btn icon btn-primary">
                                                     <i class="bi bi-eye"></i>
                                                 </a>
-                                            </td> --}}
+                                            </td>
                                         </tr>
                                     </tbody>
                                     @endforeach

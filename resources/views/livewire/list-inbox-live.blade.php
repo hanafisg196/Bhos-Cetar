@@ -69,7 +69,7 @@
                                                 @if ($item->status == 'Ditolak')
                                                     <span class="list-group-item-text text-truncate"
                                                         style="color: red">{{ $item->status }}</span>
-                                                @elseif ($item->status == 'Diproses')
+                                                @elseif ($item->status == 'Disetujui')
                                                     <span class="list-group-item-text text-truncate"
                                                         style="color: green">{{ $item->status }}</span>
                                                 @else
@@ -141,10 +141,10 @@
                                             <div class="user-details">
                                                 <div class="mail-items">
                                                     <span class="list-group-item-text text-truncate">{{ $item->name }}</span>
-                                                    @if ($item->status == 'Ditolak')
+                                                    @if ($item->status === 'Ditolak')
                                                         <span class="list-group-item-text text-truncate"
                                                             style="color: red">{{ $item->status }}</span>
-                                                    @elseif ($item->status == 'Diproses')
+                                                    @elseif ($item->status === 'Disetujui')
                                                         <span class="list-group-item-text text-truncate"
                                                             style="color: green">{{ $item->status }}</span>
                                                     @else

@@ -24,6 +24,8 @@ Route::middleware('user')->group(function () {
     Route::post('/laporan/create', [ReportHamController::class,'createRanham'])->name("ranham.create");
     Route::post('/logout', [LoginController::class, 'doLogout'])->name('logout.dashboard');
     Route::get('/update/bantuan-hukum/detail/{id}', [UpdateBantuanHukumController::class, 'getDataById'])->name('show.bantuan.hukum');
+    Route::post('/detail/bantuan-hukum/delete/file/{id}', [UpdateBantuanHukumController::class, 'deleteDokumen'])->name('delete.dokumen.bantuan.hukum');
+    Route::post('/detail/bantuan-hukum/update/{id}', [UpdateBantuanHukumController::class, 'update'])->name('update.bantuan.hukum');
 });
 
 Route::middleware('admin')->group(function () {

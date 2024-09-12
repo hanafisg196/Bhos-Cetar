@@ -1,6 +1,6 @@
 <div>
     @php
-        $statusOptions = ['Diproses', 'Ditolak'];
+        $statusOptions = ['Disetujui', 'Ditolak'];
     @endphp
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     <div class="email-app-list-wrapper">
@@ -136,7 +136,7 @@
                                             <i class="bx bx-x d-block d-sm-none"></i>
                                             <span class="d-none d-sm-block">Tutup</span>
                                         </button>
-                                        <button wire:click="updateStatus('{{ $item->id }}')" type="button"
+                                        <button wire:click="updateStatus('{{ $data->id }}')" type="button"
                                             class="btn btn-primary ms-1">
                                             <i class="bx bx-check d-block d-sm-none"></i>
                                             <span class="d-none d-sm-block">Simpan</span>

@@ -62,9 +62,11 @@ class ReportHamServiceImpl implements ReportHamService {
     }
     public function search($search, $perPage)
     {
-       return Ranham::where('nama', 'like', '%' . $search . '%')->paginate($perPage);
+       return Ranham::where('nama', 'like', '%' . $search . '%')
+       ->paginate($perPage);
 
     }
+
     public function readStatus($id)
     {
         $data = Ranham::where('id', $id);
