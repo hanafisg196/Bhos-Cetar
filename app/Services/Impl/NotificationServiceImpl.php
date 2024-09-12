@@ -11,19 +11,18 @@ class NotificationServiceImpl implements NotificationService {
 
 
     public function getNotify(Request $request) {
-        $today =  Carbon::now();
+
         $user = $request->session()->get('user');
         $user_id = $user['pegawai']['nip'];
         return Notification::where('user_id', $user_id)
-        ->with('schedules', 'ranhams')
         ->whereHas('schedules', function ($query) {
             $query->whereIn('status', ['Ditolak', 'Disetujui']);
         })
-        ->whereHas('schedules', function ($query) {
+        ->orWhereHas('ranhams', function ($query) {
             $query->whereIn('status', ['Ditolak', 'Disetujui']);
         })
-        ->whereDate('created_at', $today)
-        ->orderBy('created_at', 'desc')->get();
+        ->get();
+
     }
 
      public function updateNotifStat($id){

@@ -15,7 +15,7 @@
                 @if ($item['schedules'])
                 <a href="{{route('show.bantuan.hukum', encrypt($item['schedules']->id))}}" wire:click="readNotif({{$item->id}})">
                     @if ($item->notif_read == 1)
-                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="background: rgb(157, 118, 118);">
+                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="background: rgb(226, 224, 224);">
                      @else
                      <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                     @endif
@@ -31,7 +31,11 @@
                 </a>
                 @else
                 <a href="https://laravel.com/docs/11.x/queries#basic-where-clauses">
-                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    @if ($item->notif_read == 1)
+                    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="background: rgb(226, 224, 224);">
+                     @else
+                     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                    @endif
                     <div class="toast-header">
                         <i class="bi bi-bell-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
                         <strong class="me-auto">{{$item['ranhams']->code}}</strong>

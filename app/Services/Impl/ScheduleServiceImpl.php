@@ -160,6 +160,7 @@ class ScheduleServiceImpl implements ScheduleService
             Notification::updateOrCreate([
                 "user_id" => $schedule->user_id,
                 "lbh_id" =>  $id,
+                "notif_read" => 0
             ]);
         }
     }

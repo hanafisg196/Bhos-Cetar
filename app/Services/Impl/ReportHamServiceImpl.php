@@ -54,6 +54,7 @@ class ReportHamServiceImpl implements ReportHamService {
             Notification::updateOrCreate([
                 "user_id" => $schedule->user_id,
                 "lah_id" =>  $id,
+                "notif_read" => 0
             ]);
         }
     }
