@@ -20,6 +20,11 @@
                             <form class="form" action="{{ route('update.aksi.ham', encrypt($data->id)) }}"
                                 method="post" id="inputForm" enctype="multipart/form-data">
                                 @csrf
+                                @if ($data->status === 'Disetujui')
+                                <fieldset disabled>
+                                 @else
+                                 <fieldset>
+                                @endif
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
@@ -74,6 +79,7 @@
                                             class="btn btn-primary me-1 mb-1">Kirim</button>
                                     </div>
                                 </div>
+                               </fieldset>
                             </form>
                         </div>
                     </div>

@@ -61,20 +61,29 @@
                         Lampiran
                     </h7>
                     @foreach ($data['dokumens'] as $item)
-                        <ul class="list-unstyled mb-1">
-                            <li class="cursor-pointer pb-25" style="margin-left: 10px;">
-                                @if (str_contains($item->file, 'pdf'))
-                                    <img src="/dist/assets/compiled/png/pdf.png" height="33" alt="">
-                                @else
-                                    <img src="/dist/assets/compiled/png/image.png" height="30" alt="">
-                                @endif
-                                <small
-                                    class="text-muted ms-1 attchement-text">{{ $this->sliceStr($item->file) }}</small>
-                                <button wire:click="download('{{ $item->file }}')" class="btn icon btn-primary btn-sm">
-                                    <i class="bi bi-download"></i>
-                                </button>
-                            </li>
-                        </ul>
+                    <ul class="list-unstyled mb-1">
+                        <li class="cursor-pointer pb-25" style="margin-left: 10px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <!-- Bagian Gambar -->
+                                <div style="display: flex; align-items: center;">
+                                    @if (str_contains($item->file, 'pdf'))
+                                        <img src="/dist/assets/compiled/png/pdf.png" height="25" alt="">
+                                    @else
+                                        <img src="/dist/assets/compiled/png/image.png" height="25" alt="">
+                                    @endif
+                                    <!-- Bagian Teks -->
+                                    <small class="text-muted attachment-text" style="margin-left: 10px;">
+                                        {{ strCut($item->file) }}
+                                    </small>
+                                </div>
+                                <div style="margin-inline-end: 60%">
+                                    <button wire:click="download('{{ $item->file }}')" class="btn icon btn-primary btn-sm">
+                                        <i class="bi bi-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                     @endforeach
                     <div class="d-flex justify-content-center">
                         <div>

@@ -8,8 +8,6 @@ use Livewire\Component;
 
 class NotificationLive extends Component
 {
-
-
     public $countNotif = 0;
     public $data;
     protected NotificationService $notificationService;
@@ -19,21 +17,18 @@ class NotificationLive extends Component
         $this->notificationService = $notificationService;
     }
 
-    public function placeholder()
+    // public function placeholder()
+    // {
+    //   return view('placeholder.icon-notif');
+    // }
+    public function mount(Request $request)
     {
-        return <<<'HTML'
-        <div>
-
-
-        </div>
-        HTML;
-    }
-    public function mount(Request $request){
-      $this->data = $this->notificationService->getNotify($request);
-      $this->countNotif = $this->notificationService->count($request);
+        $this->data = $this->notificationService->getNotify($request);
+        $this->countNotif = $this->notificationService->count($request);
     }
 
-    public function readNotif($id){
+    public function readNotif($id)
+    {
         $this->notificationService->updateNotifStat($id);
     }
 

@@ -99,7 +99,8 @@ class ScheduleServiceImpl implements ScheduleService
 
     public function getSchedulesByid($id)
     {
-        return Schedule::latest()->where('user_id', $id)->with('dokumens')->paginate(4);
+        return Schedule::latest()->where('user_id', $id)->with('dokumens')
+        ->paginate(5, ['*'], 'bantuan-hukum-page');
     }
 
     public function readStatus($id)
