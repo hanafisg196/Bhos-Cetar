@@ -20,29 +20,29 @@
                      <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                     @endif
                     <div class="toast-header">
-                        <i class="bi bi-bell-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
+                        <i class="bi bi-envelope-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
                         <strong class="me-auto">{{$item['schedules']->code}}</strong>
                         <small>{{$item->created_at->diffForHumans();}}</small>
                     </div>
                     <div class="toast-body">
-                       <p>Laporan dengan kode {{$item['schedules']->code}} {{$item['schedules']->status}}. <strong>Lihat</strong></p>
+                       <p>Laporan dengan kode {{$item['schedules']->code}} <strong style="color:{{ $item['schedules']->status == 'Disetujui' ? 'green' : 'red' }} ">{{$item['schedules']->status}}</strong>. <strong>Lihat</strong></p>
                     </div>
                  </div>
                 </a>
                 @else
-                <a href="https://laravel.com/docs/11.x/queries#basic-where-clauses">
+                <a href="{{route('show.aksi.ham', encrypt($item['ranhams']->id))}}" wire:click="readNotif({{$item->id}})">
                     @if ($item->notif_read == 1)
                     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="background: rgb(226, 224, 224);">
                      @else
                      <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                     @endif
                     <div class="toast-header">
-                        <i class="bi bi-bell-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
+                        <i class="bi bi-folder-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
                         <strong class="me-auto">{{$item['ranhams']->code}}</strong>
                         <small>{{$item->created_at->diffForHumans();}}</small>
                     </div>
                     <div class="toast-body">
-                       <p>Laporan dengan kode {{$item['ranhams']->code}} {{$item['ranhams']->status}}. <strong>Lihat</strong></p>
+                       <p>Laporan dengan kode {{$item['ranhams']->code}} <strong style="color:{{ $item['ranhams']->status == 'Disetujui' ? 'green' : 'red' }} ">{{$item['ranhams']->status}}</strong>. <strong>Lihat</strong></p>
                     </div>
                 </div>
                 </a>

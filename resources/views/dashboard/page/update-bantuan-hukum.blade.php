@@ -20,6 +20,11 @@
                             <form class="form" action="{{ route('update.bantuan.hukum', encrypt($data->id)) }}"
                                 method="post" id="inputForm" enctype="multipart/form-data">
                                 @csrf
+                                @if ($data->status === "Disetujui")
+                                <fieldset disabled>
+                                @else
+                                <fieldset>
+                                @endif
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
@@ -72,11 +77,11 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-md-6 col-12" style="margin-top: -43px;">
                                         <div class="form-group">
                                             <label for="company-column">Kronologi</label>
                                             <textarea class="form-control @error('kronologi') is-invalid @enderror" id="exampleFormControlTextarea1"
-                                                name="kronologi" rows="3">{{ $data->kronologi }}</textarea>
+                                                name="kronologi" rows="7">{{ $data->kronologi }}</textarea>
                                             @error('kronologi')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -106,9 +111,9 @@
                                                         <a style="font-size:20px; margin-left: 10px;" href="{{ route('schedule.download', ['file' => strCut($item->file)]) }}">
                                                             <i class="bi bi-arrow-down-square-fill"></i>
                                                         </a>
-                                                        <a style="font-size: 20px; margin-left: 10px;" href="javascript:void(0);" onclick="confirmDelete('{{ encrypt($item->id) }}')">
+                                                        <button style="font-size:20px; margin-left: 10px; background: none; border: none; cursor: pointer;" onclick="confirmDelete('{{ encrypt($item->id) }}')">
                                                             <i class="bi bi-x-square-fill"></i>
-                                                        </a>
+                                                        </button>
                                                         <form id="deleteForm" action="{{ route('delete.dokumen.bantuan.hukum', encrypt($item->id)) }}" method="POST" style="display: none;">
                                                             @csrf
                                                         </form>
@@ -136,6 +141,7 @@
                                             class="btn btn-primary me-1 mb-1">Perbarui</button>
                                     </div>
                                 </div>
+                            </fieldset>
                             </form>
                         </div>
                     </div>

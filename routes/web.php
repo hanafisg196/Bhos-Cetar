@@ -6,6 +6,7 @@ use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportHamController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\UpdateAksiHamController;
 use App\Http\Controllers\UpdateBantuanHukumController;
 use App\Http\Controllers\UploadFileController;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,8 @@ Route::middleware('user')->group(function () {
     Route::get('/update/bantuan-hukum/detail/{id}', [UpdateBantuanHukumController::class, 'getDataById'])->name('show.bantuan.hukum');
     Route::post('/detail/bantuan-hukum/delete/file/{id}', [UpdateBantuanHukumController::class, 'deleteDokumen'])->name('delete.dokumen.bantuan.hukum');
     Route::post('/detail/bantuan-hukum/update/{id}', [UpdateBantuanHukumController::class, 'update'])->name('update.bantuan.hukum');
+    Route::get('/update/aksi-hukum/detail/{id}', [UpdateAksiHamController::class, 'getRanham'])->name('show.aksi.ham');
+    Route::post('/detail/aksi-hukum/update/{id}', [UpdateAksiHamController::class, 'update'])->name('update.aksi.ham');
 });
 
 Route::middleware('admin')->group(function () {

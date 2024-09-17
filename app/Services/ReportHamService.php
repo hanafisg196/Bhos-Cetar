@@ -14,5 +14,6 @@ interface ReportHamService {
     public function getRanhamByid($id);
     public function updateStatRanham($id, $stat, $message);
     public function readStatus($id);
+    public function updateRanham(Request $request, $id);
 
 }

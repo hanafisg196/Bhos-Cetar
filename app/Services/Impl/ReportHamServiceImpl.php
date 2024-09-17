@@ -20,6 +20,7 @@ class ReportHamServiceImpl implements ReportHamService {
     public function getRanhamByUser($id) {
         return Ranham::where("user_id", $id)->latest()->paginate(3);
     }
+
     public function getRanhamAll($perPage) {
         return Ranham::latest()->paginate($perPage);
     }
@@ -57,6 +58,18 @@ class ReportHamServiceImpl implements ReportHamService {
                 "notif_read" => 0
             ]);
         }
+    }
+    public function updateRanham(Request $request, $id){
+        $ranham = Ranham::find($id);
+        $validated = $request->validate([
+            "link"=> "required|active_url",
+            "kkp_id"=> "required"
+        ]);
+        $ranham->update([
+            "link"=> $validated["link"],
+            "kkp_id"=> $validated["kkp_id"],
+            "status"=> "Revisi"
+        ]);
     }
     public function getRanhamByid($id){
         return Ranham::find($id);

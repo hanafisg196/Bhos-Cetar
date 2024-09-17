@@ -6,6 +6,7 @@ use App\Models\Notification;
 use App\Models\Schedule;
 use App\Models\Temporary;
 use App\Services\ScheduleService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -157,11 +158,23 @@ class ScheduleServiceImpl implements ScheduleService
 
         if($update) {
             $schedule = Schedule::find($id);
-            Notification::updateOrCreate([
-                "user_id" => $schedule->user_id,
-                "lbh_id" =>  $id,
-                "notif_read" => 0
-            ]);
+            $notif = Notification::where('lbh_id', $id)->first();
+            if(!$notif){
+               $notif = Notification::create([
+                    "user_id" => $schedule->user_id,
+                    "lbh_id" =>  $id,
+                    "created_at" => Carbon::now(),
+                    "notif_read" => 0
+                ]);
+            } else{
+                $notif->update([
+                    "user_id" => $schedule->user_id,
+                    "lbh_id" =>  $id,
+                    "created_at" => Carbon::now(),
+                    "notif_read" => 0
+                ]);
+            }
+
         }
     }
     public function download($file)

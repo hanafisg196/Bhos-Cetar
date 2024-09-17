@@ -12,6 +12,7 @@
                             <form class="form" action="{{ route('schedule.store') }}" method="post" id="inputForm"
                                 enctype="multipart/form-data">
                                 @csrf
+
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
@@ -64,11 +65,11 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-12">
+                                    <div class="col-md-6 col-12" style="margin-top: -48px;">
                                         <div class="form-group">
                                             <label for="company-column">Kronologi</label>
                                             <textarea class="form-control @error('kronologi') is-invalid @enderror" id="exampleFormControlTextarea1"
-                                              name="kronologi" rows="3">{{ old('kronologi') }}</textarea>
+                                              name="kronologi" rows="5">{{ old('kronologi') }}</textarea>
                                             @error('kronologi')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

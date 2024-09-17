@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\ReportHamService;
 use App\Services\ScheduleService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,8 +32,9 @@ class DashboardController extends Controller
     }
 
     public function test(){
-        $user = session()->get('user');
-        return json_encode($user, JSON_PRETTY_PRINT);
+        Carbon::setLocale('ID');
+        $today = Carbon::now();
+        return json_encode($today);
     }
 
 

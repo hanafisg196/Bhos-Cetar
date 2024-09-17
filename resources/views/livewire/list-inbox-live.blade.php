@@ -67,13 +67,16 @@
                                             <div class="mail-items">
                                                 <span class="list-group-item-text text-truncate">{{ $item->email }}</span>
                                                 @if ($item->status == 'Ditolak')
-                                                    <span class="list-group-item-text text-truncate"
+                                                <span class="list-group-item-text text-truncate"
                                                         style="color: red">{{ $item->status }}</span>
                                                 @elseif ($item->status == 'Disetujui')
-                                                    <span class="list-group-item-text text-truncate"
+                                                <span class="list-group-item-text text-truncate"
                                                         style="color: green">{{ $item->status }}</span>
+                                                @elseif ($item->status == 'Revisi')
+                                                <span class="list-group-item-text text-truncate"
+                                                        style="color: #007aff">{{ $item->status }}</span>
                                                 @else
-                                                    <span class="list-group-item-text text-truncate"
+                                                <span class="list-group-item-text text-truncate"
                                                         style="color: burlywood">{{ $item->status }}</span>
                                                 @endif
 

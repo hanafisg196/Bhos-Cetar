@@ -107,6 +107,7 @@
                                     <thead>
                                         <tr>
                                             <th>Kode</th>
+                                            <th>Status</th>
                                             <th>Link</th>
                                             <th>Lihat</th>
                                         </tr>
@@ -116,6 +117,9 @@
                                         <tr>
                                             <td class="col-auto">
                                                 <p class="mb-0">{{$val->code}}</p>
+                                            </td>
+                                            <td class="col-auto">
+                                                <p class="mb-0">{{$val->status}}</p>
                                             </td>
                                             <td class="col-auto">
                                                 <p class="mb-0">{{$val->link}}</p>

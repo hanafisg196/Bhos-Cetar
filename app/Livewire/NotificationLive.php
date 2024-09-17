@@ -18,6 +18,16 @@ class NotificationLive extends Component
     {
         $this->notificationService = $notificationService;
     }
+
+    public function placeholder()
+    {
+        return <<<'HTML'
+        <div>
+
+
+        </div>
+        HTML;
+    }
     public function mount(Request $request){
       $this->data = $this->notificationService->getNotify($request);
       $this->countNotif = $this->notificationService->count($request);

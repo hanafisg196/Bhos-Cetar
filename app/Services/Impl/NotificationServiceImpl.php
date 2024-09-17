@@ -20,8 +20,7 @@ class NotificationServiceImpl implements NotificationService {
         })
         ->orWhereHas('ranhams', function ($query) {
             $query->whereIn('status', ['Ditolak', 'Disetujui']);
-        })
-        ->get();
+        })->latest()->get();
 
     }
 
