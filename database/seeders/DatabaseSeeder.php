@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CategoryRanhamn;
 use App\Models\Kkp;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -51,6 +52,19 @@ class DatabaseSeeder extends Seeder
         ]);
         Kkp::create([
             'name'=> 'Hak Atas Kependudukan',
+        ]);
+
+        CategoryRanhamn::create([
+            'nama' => "B-04"
+        ]);
+        CategoryRanhamn::create([
+            'nama' => "B-08"
+        ]);
+        CategoryRanhamn::create([
+            'nama' => "B-012"
+        ]);
+        CategoryRanhamn::create([
+            'nama' => "Uknown"
         ]);
 
 

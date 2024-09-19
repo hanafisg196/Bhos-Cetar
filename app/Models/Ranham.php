@@ -15,6 +15,10 @@ class Ranham extends Model
     {
         return $this->belongsTo(Kkp::class, 'kkp_id', 'id');
     }
+    public function category_ranhams()
+    {
+        return $this->belongsTo(CategoryRanhamn::class, 'catran_id', 'id');
+    }
 
     public function notifications()
     {

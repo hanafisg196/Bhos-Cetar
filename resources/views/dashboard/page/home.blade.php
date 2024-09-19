@@ -132,7 +132,7 @@
                                     <tbody>
                                         <tr style="padding: 0;">
                                             <td class="col-auto" style="padding: 5px;">
-                                                <p class="mb-0" style="margin: 0;">{{$item->created_at->diffForHumans()}}</p>
+                                                <p class="mb-0" style="margin: 0;">{{$val->created_at->diffForHumans()}}</p>
                                             </td>
                                             <td class="col-auto" style="padding: 5px;">
                                                 <p class="mb-0" style="margin: 0;">{{$val->code}}</p>

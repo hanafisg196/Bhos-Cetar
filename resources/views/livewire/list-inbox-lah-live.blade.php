@@ -30,7 +30,17 @@
                             </div>
                         </div>
                         <!-- pagination and page countß -->
-                        {{-- <span class="d-none d-sm-block">Usulan - {{ $this->counterSchedule() }}</span> --}}
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <label class="input-group-text" for="inputGroupSelect01">Kategori</label>
+                                <select class="form-select" id="inputGroupSelect01">
+                                    <option selected>Pilih...</option>
+                                    <option value="1">B-04</option>
+                                    <option value="2">B-O8</option>
+                                    <option value="3">B-012</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="email-user-list list-group ps ps--active-y">

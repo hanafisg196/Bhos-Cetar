@@ -27,7 +27,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="sidebar-menu-list ps">
                     <!-- sidebar menu -->
                     <div class="list-group list-group-messages">
