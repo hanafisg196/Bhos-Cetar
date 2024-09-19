@@ -111,9 +111,9 @@
                                                         <a style="font-size:20px; margin-left: 10px;" href="{{ route('schedule.download', ['file' => strCut($item->file)]) }}">
                                                             <i class="bi bi-arrow-down-square-fill"></i>
                                                         </a>
-                                                        <button style="font-size:20px; margin-left: 10px; background: none; border: none; cursor: pointer;" onclick="confirmDelete('{{ encrypt($item->id) }}')">
+                                                        <a style="font-size:20px; margin-left: 10px; background: none; border: none; cursor: pointer;" onclick="confirmDelete('{{ encrypt($item->id) }}')">
                                                             <i class="bi bi-x-square-fill"></i>
-                                                        </button>
+                                                        </a>
                                                         <form id="deleteForm" action="{{ route('delete.dokumen.bantuan.hukum', encrypt($item->id)) }}" method="POST" style="display: none;">
                                                             @csrf
                                                         </form>

@@ -17,6 +17,7 @@ Route::post('/login', [LoginController::class, 'doLogin'])->name('doLogin');
 
 Route::middleware('user')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::get('/', [DashboardController::class, 'test'])->name('dashboard');
     Route::get('/bantuan', [ScheduleController::class, 'index'])->name('schedule');
     Route::post('/bantuan/form', [ScheduleController::class, 'store'])->name('schedule.store');
     Route::get('/bantuan/download/{file}', [ScheduleController::class, 'downloadFile'])->name('schedule.download');
@@ -33,7 +34,8 @@ Route::middleware('user')->group(function () {
 
 Route::middleware('admin')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/inbox/list', [InboxController::class, 'getSchedules'])->name('admin.inbox');
+    Route::get('/inbox/list/bantuan-hukum', [InboxController::class, 'getListLbh'])->name('admin.list.lbh');
+    Route::get('/list/inbox/aksi-ham', [InboxController::class, 'getListLah'])->name('admin.list.lah');
     Route::get('/inbox/detail/bantuan-hukum/{id}', [InboxController::class, 'detailBantuanHukum'])->name('detail.bantuan.hukum');
     Route::get('/inbox/detail/aksi-ham/{id}', [InboxController::class, 'detailAksiHam'])->name('detail.aksi.ham');
     Route::post('/logout/admin', [LoginController::class, 'LogoutAdmin'])->name('logout.admin');

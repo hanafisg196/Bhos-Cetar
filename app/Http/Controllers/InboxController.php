@@ -13,10 +13,13 @@ class InboxController extends Controller
         $this->scheduleService = $scheduleService;
     }
 
-    public function getSchedules()
+    public function getListLbh()
     {
-
-        return view('admin.page.inbox');
+        return view('admin.page.list-inbox-lbh');
+    }
+    public function getListLah()
+    {
+        return view('admin.page.list-inbox-lah');
     }
 
     public function detailBantuanHukum($id){

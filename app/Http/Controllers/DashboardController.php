@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Services\ReportHamService;
 use App\Services\ScheduleService;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+
 
 class DashboardController extends Controller
 {
@@ -23,18 +23,29 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $id = $this->scheduleService->getUserId($request);
-        $bantuan =  $this->scheduleService->getSchedulesByid($id);
-        $ranham =  $this->reportHamService->getRanhamByUser($id);
+        $bantuan =  $this->scheduleService->getSchedulesByUser($request);
+        $ranham =  $this->reportHamService->getRanhamByUser($request);
         return view('dashboard.page.home')->with([
             'bantuan' => $bantuan,
             'ranham' => $ranham
         ]);
     }
 
-    public function test(){
-        Carbon::setLocale('ID');
-        $today = Carbon::now();
-        return json_encode($today);
+    public function test(Request $request) {
+        $user = $request->session()->get('user');
+        $user_id = $user['pegawai']['nip'];
+
+        $kons = Notification::where('user_id', $user_id)
+            ->where(function ($query) {
+                $query->whereHas('schedules', function ($query) {
+                    $query->whereIn('status', ['Ditolak', 'Disetujui']);
+                })
+                ->orWhereHas('ranhams', function ($query) {
+                    $query->whereIn('status', ['Ditolak', 'Disetujui']);
+                });
+            })->get();
+
+            return json_encode($kons);
     }
 
 

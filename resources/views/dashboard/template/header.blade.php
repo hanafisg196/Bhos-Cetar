@@ -14,33 +14,26 @@
                 </ul>
                 <div class="dropdown">
                     <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="user-menu d-flex">
-                            <div class="user-name text-end me-3">
-                                <livewire:profile-card lazy/>
-                            </div>
-                            <div class="user-img d-flex align-items-center">
-                                <div class="avatar avatar-md">
-                                    <img src="/dist/assets/compiled/jpg/1.jpg" alt="">
-                                </div>
-                            </div>
-                        </div>
+                        <livewire:profile-card/>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
                         style="min-width: 11rem;">
                         <li>
                             <livewire:profile-dropdown-name/>
                         </li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-person me-2"></i> My
-                                Profile</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-gear me-2"></i>
-                                Settings</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-wallet me-2"></i>
-                                Wallet</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#"><i class="icon-mid bi bi-box-arrow-left me-2"></i>
-                                Logout</a></li>
+                        <li>
+                            <form action="{{ route('logout.dashboard') }}" method="post">
+                                @csrf
+                                <button class="dropdown-item" type="submit">
+                                    <i class="icon-mid bi bi-box-arrow-left me-2"></i>
+                                        Logout
+                                </button>
+                            </form>
+
+                         </li>
                     </ul>
                 </div>
             </div>

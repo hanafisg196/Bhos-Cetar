@@ -17,10 +17,7 @@ class ProfileCard extends Component
         $this->profileService = $profileService;
 
     }
-    public function placeholder()
-    {
-      return view('placeholder.profile-card');
-    }
+
     public function render(Request $request)
     {
         $data = $this->profileService->getCardName($request);

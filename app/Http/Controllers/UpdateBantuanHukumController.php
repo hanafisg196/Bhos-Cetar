@@ -17,6 +17,7 @@ class UpdateBantuanHukumController extends Controller
     public function deleteDokumen($id){
         $id = Crypt::decrypt($id);
         $this->scheduleService->deleteDocument($id);
+        session()->flash('success', 'Dokumen berhasil dihapus!');
         return redirect()->back();
     }
     public function update(Request $request,$id){

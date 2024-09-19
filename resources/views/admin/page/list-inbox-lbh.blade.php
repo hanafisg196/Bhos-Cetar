@@ -1,6 +1,6 @@
 @extends('admin.component.main')
 @section('content')
-<livewire:list-inbox-live/>
+<livewire:list-inbox-lbh-live/>
 @endsection
 
 

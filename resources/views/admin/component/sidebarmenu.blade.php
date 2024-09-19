@@ -18,9 +18,9 @@
                                 <h6 class="text-muted mb-0">Administrator <i class="fas fa-user-shield"></i></h6>
                             </div>
                             <div style="padding-left: 50px;">
-                                <form action="{{route('logout.admin')}}" method="post">
+                                <form action="{{ route('logout.admin') }}" method="post">
                                     @csrf
-                                <button  class="dropdown-item" type="submit">
+                                    <button class="dropdown-item" type="submit">
                                 </form>
                                 <i class="me-50" data-feather="power"></i> </a>
                             </div>
@@ -32,59 +32,81 @@
                     <!-- sidebar menu -->
                     <div class="list-group list-group-messages">
                         <!-- Dashboard Menu -->
-                        <a  href="{{ url('/admin') }}"
-                           class="list-group-item pt-0 {{ request()->is('admin') ? 'active' : '' }}"
-                           id="dashboard-menu">
+                        <a href="{{ url('/admin') }}"
+                            class="list-group-item pt-0 {{ request()->is('admin') ? 'active' : '' }}"
+                            id="dashboard-menu">
                             <div class="fonticon-wrap d-inline me-3">
                                 <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                    <use xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#house-fill') }}" />
+                                    <use
+                                        xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#house-fill') }}" />
                                 </svg>
                             </div>
                             Dashboard
                         </a>
-                        <a  href="{{ route('admin.inbox') }}"
-                           class="list-group-item pt-0 {{ request()->is('inbox/list') ? 'active' : '' }}"
-                           id="dashboard-menu">
+                        <!-- Menus -->
+                        <a href="#" class="list-group-item pt-0 {{ request()->is('inbox*') ? 'active' : '' }}"
+                            id="menus-dropdown" data-bs-toggle="collapse" data-bs-target="#menus-submenu"
+                            aria-expanded="false" aria-controls="menus-submenu">
                             <div class="fonticon-wrap d-inline me-3">
                                 <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                    <use xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#envelope') }}" />
-                                </svg>
-                            </div>
-                            Inbox
-                            <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">
-                                <livewire:inbox-counter-live/>
-                            </span>
-                        </a>
-                        {{-- <!-- Menus -->
-                        <a href="#" class="list-group-item pt-0 {{ request()->is('inbox*') ? 'active' : '' }}" id="menus-dropdown" data-bs-toggle="collapse" data-bs-target="#menus-submenu" aria-expanded="false" aria-controls="menus-submenu">
-                            <div class="fonticon-wrap d-inline me-3">
-                                <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                    <use xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#grid-fill') }}" />
+                                    <use
+                                        xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#grid-fill') }}" />
                                 </svg>
                             </div>
                             Bhos-Cetar
+                            <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">
+                                <livewire:report-count />
+                            </span>
                             <i class="bi bi-chevron-down float-right mt-50"></i>
                         </a>
                         <!-- Sub-menus -->
                         <div class="collapse" id="menus-submenu">
-                            <a  href="{{ route('admin.inbox') }}" class="list-group-item ps-5 pt-0 {{ request()->is('inbox/list') ? 'active' : '' }}">
+                            <a href="{{ route('admin.list.lbh') }}"
+                                class="list-group-item ps-5 pt-0 {{ request()->is('inbox/list/bantuan-hukum') ? 'active' : '' }}">
                                 <div class="fonticon-wrap d-inline me-1">
                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                        <use xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#envelope') }}" />
+                                        <use
+                                            xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#envelope') }}" />
                                     </svg>
                                 </div>
-                                Kontak Masuk
+                                Bantuan Hukum
                                 <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">
-                                    <livewire:inbox-counter-live/>
+                                    <livewire:lbh-count />
                                 </span>
                             </a>
-                            <a  href="{{ url('#') }}" class="list-group-item ps-5 pt-0 {{ request()->is('submenu2') ? 'active' : '' }}">
-                                Sub Menu 2
+
+                        </div>
+
+                        <a href="#" class="list-group-item pt-0 {{ request()->is('list*') ? 'active' : '' }}"
+                            id="menus-dropdown" data-bs-toggle="collapse" data-bs-target="#menus-submenu2"
+                            aria-expanded="false" aria-controls="menus-submenu">
+                            <div class="fonticon-wrap d-inline me-3">
+                                <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
+                                    <use
+                                        xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#file-earmark-pdf-fill') }}" />
+                                </svg>
+                            </div>
+                            Kami Peduli
+                            <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">
+                                0
+                            </span>
+                            <i class="bi bi-chevron-down float-right mt-50"></i>
+                        </a>
+                        <div class="collapse" id="menus-submenu2">
+                            <a href="{{ route('admin.list.lah') }}"
+                                class="list-group-item ps-5 pt-0 {{ request()->is('list/inbox/aksi-ham') ? 'active' : '' }}">
+                                <div class="fonticon-wrap d-inline me-1">
+                                    <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
+                                        <use
+                                            xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#archive') }}" />
+                                    </svg>
+                                </div>
+                                Laporan Aksi Ham
+                                <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">
+                                    <livewire:lah-count />
+                                </span>
                             </a>
-                            <a  href="{{ url('#') }}" class="list-group-item ps-5 pt-0 {{ request()->is('submenu3') ? 'active' : '' }}">
-                                Sub Menu 3
-                            </a>
-                        </div> --}}
+                        </div>
 
                     </div>
                     <!-- sidebar menu end-->

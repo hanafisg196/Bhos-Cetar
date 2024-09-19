@@ -65,7 +65,7 @@ class DetailBantuanHukum extends Component
         $this->validate();
         $this->scheduleService->updateStatSchdeule($id, $this->status, $this->pesan);
         session()->flash('status', 'Data berhasil di update.');
-        $this->redirect('/inbox/list');
+        $this->redirect(route('admin.list.lbh'));
     }
 
 

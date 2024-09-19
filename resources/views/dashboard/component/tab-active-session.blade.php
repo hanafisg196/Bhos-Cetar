@@ -13,6 +13,5 @@
             tabInstance.show();
         }
     });
-    </script>
-
+</script>
 

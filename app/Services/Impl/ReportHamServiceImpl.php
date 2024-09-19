@@ -5,9 +5,19 @@ use App\Models\Kkp;
 use App\Models\Notification;
 use App\Models\Ranham;
 use App\Services\ReportHamService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReportHamServiceImpl implements ReportHamService {
+    public function getUserId(Request $request)
+    {
+        $user = $request->session()->get('user');
+        // $user_id = $user['pegawai']['nip'];
+        return $user;
+    }
+    public function getRanhamByid($id){
+        return Ranham::find($id);
+    }
     public function generateCode(){
         $prefix = 'LAH';
         $randomNumber = mt_rand(10000, 99999);
@@ -17,17 +27,17 @@ class ReportHamServiceImpl implements ReportHamService {
       return  Kkp::latest()->get();
     }
 
-    public function getRanhamByUser($id) {
-        return Ranham::where("user_id", $id)->latest()->paginate(5, ['*'], 'aksi-ham-page');
+    public function getRanhamByUser(Request $request) {
+        $user = $this->getUserId($request);
+        return Ranham::where("user_id", $user['pegawai']['nip'])
+        ->latest('updated_at')
+        ->paginate(5, ['*'], 'aksi-ham-page');
     }
 
     public function getRanhamAll($perPage) {
-        return Ranham::latest()->paginate($perPage);
+        return Ranham::latest('updated_at')->paginate($perPage);
     }
-    public function getUserId(Request $request)
-    {
-      return $request->session()->get('user');
-    }
+
     public function  saveRanham( Request $request ) {
         $user = $this->getUserId($request);
         $validated = $request->validate([
@@ -51,12 +61,24 @@ class ReportHamServiceImpl implements ReportHamService {
         ]);
 
         if($update) {
-            $schedule = Ranham::find($id);
-            Notification::updateOrCreate([
-                "user_id" => $schedule->user_id,
-                "lah_id" =>  $id,
-                "notif_read" => 0
-            ]);
+            $ranham = Ranham::find($id);
+            $notif = Notification::where('lah_id', $id)->first();
+            if(!$notif){
+                $notif = Notification::create([
+                    "user_id" => $ranham->user_id,
+                    "lah_id" =>  $id,
+                    "created_at" => Carbon::now(),
+                    "notif_read" => 0
+                ]);
+            }else{
+                $notif->update([
+                    "user_id" => $ranham->user_id,
+                    "lah_id" =>  $id,
+                    "created_at" => Carbon::now(),
+                    "notif_read" => 0
+                ]);
+            }
+
         }
     }
     public function updateRanham(Request $request, $id){
@@ -71,13 +93,20 @@ class ReportHamServiceImpl implements ReportHamService {
             "status"=> "Revisi"
         ]);
     }
-    public function getRanhamByid($id){
-        return Ranham::find($id);
-    }
+
     public function search($search, $perPage)
     {
-       return Ranham::where('nama', 'like', '%' . $search . '%')
+       return Ranham::where('name', 'like', '%' . $search . '%')
        ->paginate($perPage);
+
+    }
+
+    public function searchByUser(Request $request, $search)
+    {
+       $user = $this->getUserId($request);
+       return Ranham::where('name', 'like', '%' . $search . '%')
+                ->where('user_id', $user)
+                ->latest()->paginate(5);
 
     }
 
@@ -88,4 +117,12 @@ class ReportHamServiceImpl implements ReportHamService {
             'read' => 1,
         ]);
     }
+
+    public function inboxCount()
+    {
+        return Ranham::where('read', 0)->count();
+    }
+
+
+
 }

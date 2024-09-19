@@ -23,13 +23,5 @@
         </li>
 
     </ul>
-    <div style="padding-left:44px;">
-        <form action="{{ route('logout.dashboard') }}" method="post">
-            @csrf
-            <button class="dropdown-item" type="submit">
-                <i class="me-50" data-feather="log-out"></i>
-                <span>Logout</span>
-        </form>
 
-    </div>
 </div>

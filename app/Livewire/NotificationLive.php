@@ -17,10 +17,10 @@ class NotificationLive extends Component
         $this->notificationService = $notificationService;
     }
 
-    // public function placeholder()
-    // {
-    //   return view('placeholder.icon-notif');
-    // }
+    public function placeholder()
+    {
+      return view('placeholder.icon-notif');
+    }
     public function mount(Request $request)
     {
         $this->data = $this->notificationService->getNotify($request);

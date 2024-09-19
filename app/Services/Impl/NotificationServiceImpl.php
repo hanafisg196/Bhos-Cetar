@@ -8,13 +8,16 @@ use Illuminate\Http\Request;
 
 class NotificationServiceImpl implements NotificationService {
 
-
-
-    public function getNotify(Request $request) {
-
+    public function getUserId(Request $request)
+    {
         $user = $request->session()->get('user');
         $user_id = $user['pegawai']['nip'];
-        return Notification::where('user_id', $user_id)
+        return $user_id;
+    }
+
+    public function getNotify(Request $request) {
+        $user = $this->getUserId($request);
+        return Notification::where('user_id', $user)
         ->whereHas('schedules', function ($query) {
             $query->whereIn('status', ['Ditolak', 'Disetujui']);
         })

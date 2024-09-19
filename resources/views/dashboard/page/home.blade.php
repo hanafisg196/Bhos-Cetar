@@ -1,5 +1,6 @@
 @extends('dashboard.template.main')
 @section('content')
+{{timeMachine()}}
 <div class="page-content">
     <section class="row" style="margin-top: -25px;">
         <div class="col-12 col-lg-9">
@@ -7,7 +8,7 @@
                 <h3>Selamat Datang</h3>
             </div>
         </div>
-        <div class="col-12 col-xl-8">
+        <div class="col-12 col-xl-10">
             <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -21,25 +22,35 @@
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="tableContent" role="tabpanel" aria-labelledby="table-tab">
-
+                            {{-- <div class="col-md-6 mt-3">
+                                <div class="input-group mb-2">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <i class="bi bi-search" style="margin-bottom: 8px;"></i>
+                                    </span>
+                                    <input type="text" class="form-control" placeholder="Pencarian"
+                                        aria-label="Pencarian" aria-describedby="button-addon2">
+                                    <button class="btn btn-outline-secondary" type="button"
+                                        id="button-addon2">Cari</button>
+                                </div>
+                            </div> --}}
                             <div class="table-responsive" style="overflow-y: scroll; max-height: 400px; overflow-x: hidden">
                                 <table class="table table-hover table-lg">
                                     <thead>
                                         <tr>
+                                            <th>Waktu</th>
                                             <th>Status</th>
-                                            <th>Kode</th>
+                                            <th>Code</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     @foreach ($bantuan as $key['dokumens'] =>  $item)
-                                    <tbody>
-                                        @if(!$bantuan->isEmpty())
-
-                                        @endif
+                                   <tbody>
                                         <tr style="margin-bottom: 0; padding-bottom: 0;">
+                                            <td class="col-auto" style="padding: 5px 0;">
+                                                <p class="mb-0" style="margin-bottom: 0;">{{$item->created_at->diffForHumans()}}</p>
+                                            </td>
                                             <td class="col-3" style="padding: 5px 0;">
                                                 <div class="d-flex align-items-center">
-                                                    <hr style="border: none; border-left: 5px solid #435ebe; height: 30px; margin: 0;">
                                                     <p class="font-bold ms-3 mb-0" style="margin-bottom: 0;
                                                     color: {{$item->status === 'Disetujui' ? 'green' :
                                                      ($item->status === 'Ditolak' ? 'red':
@@ -58,7 +69,6 @@
                                             </td>
                                         </tr>
                                     </tbody>
-
                                      <!-- Disabled Backdrop Modal -->
                                      <div class="modal fade text-left" id="modal-{{ $item->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="myModalLabel-{{ $item->id }}"
@@ -90,8 +100,6 @@
                                                         @endforeach
                                                     </p>
                                                     </p>
-
-
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-light-secondary"
@@ -109,11 +117,11 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="otherContent" role="tabpanel" aria-labelledby="other-tab">
-
                             <div class="table-responsive" style="overflow-y: scroll; max-height: 400px; overflow-x: hidden">
                                 <table class="table table-hover table-lg">
                                     <thead>
                                         <tr>
+                                            <th>Waktu</th>
                                             <th>Kode</th>
                                             <th>Status</th>
                                             <th>Link</th>
@@ -123,6 +131,9 @@
                                     @foreach ($ranham as $val)
                                     <tbody>
                                         <tr style="padding: 0;">
+                                            <td class="col-auto" style="padding: 5px;">
+                                                <p class="mb-0" style="margin: 0;">{{$item->created_at->diffForHumans()}}</p>
+                                            </td>
                                             <td class="col-auto" style="padding: 5px;">
                                                 <p class="mb-0" style="margin: 0;">{{$val->code}}</p>
                                             </td>

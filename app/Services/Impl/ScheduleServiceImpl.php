@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 class ScheduleServiceImpl implements ScheduleService
 {
+
+    public function getUserId(Request $request)
+    {
+        $user = $request->session()->get('user');
+        $user_id = $user['pegawai']['nip'];
+        return $user_id;
+    }
     public function copyFilesFromTmp($tmpFile, $idFile)
     {
         foreach ($tmpFile as $tmp) {
@@ -72,7 +79,8 @@ class ScheduleServiceImpl implements ScheduleService
             'email' => $validated['email'],
             'kronologi' => $validated['kronologi'],
             'wa' => $validated['wa'],
-            'status'=>  "Revisi"
+            'status'=>  "Revisi",
+            'read' => 0
         ]);
         $schedule_id = $schedule->id;
         $this->copyFilesFromTmp($temporaryFiles, $schedule_id);
@@ -87,19 +95,15 @@ class ScheduleServiceImpl implements ScheduleService
 
     public function getAllSchedules($perPage)
     {
-        return Schedule::latest()->paginate($perPage);
+        return Schedule::latest('updated_at')->paginate($perPage);
     }
 
-    public function getUserId(Request $request)
-    {
-        $user = $request->session()->get('user');
-        $user_id = $user['pegawai']['nip'];
-        return $user_id;
-    }
 
-    public function getSchedulesByid($id)
+
+    public function getSchedulesByUser(Request $request)
     {
-        return Schedule::latest()->where('user_id', $id)->with('dokumens')
+        $user = $this->getUserId($request);
+        return Schedule::latest('updated_at')->where('user_id', $user)->with('dokumens')
         ->paginate(5, ['*'], 'bantuan-hukum-page');
     }
 
@@ -145,7 +149,7 @@ class ScheduleServiceImpl implements ScheduleService
         return Schedule::where('read', 0)->count();
     }
 
-    public function countUsualan()
+    public function countUsulan()
     {
         return Schedule::where('status', 'Usulan')->count();
     }
@@ -155,6 +159,7 @@ class ScheduleServiceImpl implements ScheduleService
         $update = Schedule::where('id', $id)->update([
             'status' => $stat,
             'message' => $message,
+
         ]);
 
         if($update) {
