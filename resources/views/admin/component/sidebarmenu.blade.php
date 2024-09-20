@@ -54,7 +54,7 @@
                             </div>
                             Bhos-Cetar
                             <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">
-                                <livewire:report-count />
+                                <livewire:lbh-count />
                             </span>
                             <i class="bi bi-chevron-down float-right mt-50"></i>
                         </a>
@@ -87,7 +87,7 @@
                             </div>
                             Kami Peduli
                             <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">
-                                0
+                                <livewire:lah-count />
                             </span>
                             <i class="bi bi-chevron-down float-right mt-50"></i>
                         </a>

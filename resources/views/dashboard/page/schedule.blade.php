@@ -67,7 +67,7 @@
                                     </div>
                                     <div class="col-md-6 col-12" style="margin-top: -48px;">
                                         <div class="form-group">
-                                            <label for="company-column">Kronologi</label>
+                                            <label for="kronologi">Kronologi</label>
                                             <textarea class="form-control @error('kronologi') is-invalid @enderror" id="exampleFormControlTextarea1"
                                               name="kronologi" rows="5">{{ old('kronologi') }}</textarea>
                                             @error('kronologi')

@@ -1,6 +1,7 @@
 <?php
 namespace App\Services\Impl;
 
+use App\Models\CategoryRanhamn;
 use App\Models\Kkp;
 use App\Models\Notification;
 use App\Models\Ranham;
@@ -18,7 +19,7 @@ class ReportHamServiceImpl implements ReportHamService
         $april = Carbon::createFromDate(null, 4, 30);
 
         $juli = Carbon::createFromDate(null, 7, 1);
-        $agustus = Carbon::createFromDate(null, 8, 31);
+        $agustus = Carbon::createFromDate(null, 9, 31);
 
         $november = Carbon::createFromDate(null, 11, 1);
         $december = Carbon::createFromDate(null, 12, 31);
@@ -73,12 +74,12 @@ class ReportHamServiceImpl implements ReportHamService
     {
         $user = $this->getUserId($request);
         $validated = $request->validate([
-            'link' => 'required|active_url',
-            'kkp_id' => 'required',
+            'link' => 'required|url',
+            'kkp' => 'required',
         ]);
         Ranham::create([
             'link' => $validated['link'],
-            'kkp_id' => $validated['kkp_id'],
+            'kkp_id' => $validated['kkp'],
             'user_id' => $user['pegawai']['nip'],
             'name' => $user['pegawai']['nama'],
             'code' => $this->generateCode(),
@@ -151,5 +152,13 @@ class ReportHamServiceImpl implements ReportHamService
     public function inboxCount()
     {
         return Ranham::where('read', 0)->count();
+    }
+
+    public function lisCatRan(){
+       return CategoryRanhamn::get();
+    }
+
+    public function getDataByCatRan($catRan,$perPage){
+        return Ranham::where('catran_id', $catRan)->latest('updated_at')->paginate($perPage);
     }
 }

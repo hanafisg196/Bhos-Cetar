@@ -21,6 +21,7 @@ class LbhCount extends Component
     {
         $this->data = $this->adminService->countInboxLbh();
     }
+
     public function render()
     {
         return view('livewire.lbh-count');

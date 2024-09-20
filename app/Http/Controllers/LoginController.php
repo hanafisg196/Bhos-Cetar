@@ -19,7 +19,7 @@ class LoginController extends Controller
         {
             return redirect()->route('dashboard');
         }
-        if(Auth::user() !=null)
+        else if(Auth::user() !=null)
         {
             return redirect()->route('admin.dashboard');
         }

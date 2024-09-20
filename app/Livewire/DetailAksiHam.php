@@ -29,6 +29,7 @@ class DetailAksiHam extends Component
 
 
     #[On('showDetail')]
+
     public function render()
     {
         return view('livewire.detail-aksi-ham');
@@ -50,7 +51,7 @@ class DetailAksiHam extends Component
         $this->validate();
         $this->reportHamService->updateStatRanham($id, $this->status, $this->pesan);
         session()->flash('status', 'Data berhasil di update.');
-        $this->redirect('/inbox/list');
+        $this->redirect(route('admin.list.lah'));
     }
 
 

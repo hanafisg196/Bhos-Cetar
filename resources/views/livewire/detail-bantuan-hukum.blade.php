@@ -13,7 +13,7 @@
                             <i class="bi bi-list fs-5"></i>
                         </button>
                     </div>
-                    <a href="javascript:history.back()" class="btn btn-primary">
+                    <a href="{{url('/inbox/list/bantuan-hukum')}}" class="btn btn-primary">
                         <i class="bi bi-arrow-left"></i> Kembali
                     </a>
                     <div class="email-fixed-search flex-grow-1">
@@ -129,8 +129,8 @@
                                         </div>
                                         <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label for="company-column">Pesan</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="3" wire:model="pesan"></textarea>
+                                                <label for="message">Pesan</label>
+                                                <textarea class="form-control" id="message" name="message" rows="3" wire:model="pesan"></textarea>
                                                 <div>
                                                     @error('pesan')
                                                         {{ $message }}

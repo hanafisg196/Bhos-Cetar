@@ -18,8 +18,13 @@
                                             <label for="last-name-column">Link</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text"><i class="bi bi-link-45deg"></i></span>
-                                                <input type="text" class="form-control" name="link" id="link"
-                                                    aria-label="Dollar amount (with dot and two decimal places)">
+                                                <input type="text" class="form-control @error('link') is-invalid @enderror" name="link" id="link"
+                                                    aria-label="Dollar amount (with dot and two decimal places)" value="{{old('link')}}">
+                                                    @error('link')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -29,22 +34,21 @@
                                                 <li class="d-inline-block me-2 mb-1">
                                                     @foreach ($kkp as $item)
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio" name="kkp_id"
+                                                            <input class="form-check-input @error('kkp') is-invalid @enderror" type="radio" name="kkp"
                                                                 id="flexRadioDefault{{ $item->id }}"
-                                                                value="{{ $item->id }}">
-                                                            <label class="form-check-label"
-                                                                for="flexRadioDefault{{ $item->id }}">
+                                                                value="{{ $item->id }}" {{ old('kkp') == $item->id ? 'checked' : '' }}>
+                                                            <label class="form-check-label" for="flexRadioDefault{{ $item->id }}">
                                                                 {{ $item->name }}
                                                             </label>
                                                         </div>
                                                     @endforeach
+                                                    @error('kkp')
+                                                    <p style="color: red; font-size: 0.9rem;">{{$message}}</p>
+                                                     @enderror
                                                 </li>
-
                                             </ul>
                                         </div>
-
                                     </div>
-
                                     <div class="col-12 d-flex justify-content-end">
                                         <button style="display: none" id="loading" class="btn btn-primary" type="button"
                                             disabled>

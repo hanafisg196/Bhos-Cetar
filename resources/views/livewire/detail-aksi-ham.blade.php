@@ -13,7 +13,7 @@
                             <i class="bi bi-list fs-5"></i>
                         </button>
                     </div>
-                    <a href="javascript:history.back()" class="btn btn-primary">
+                    <a href="{{url('/list/inbox/aksi-ham')}}" class="btn btn-primary">
                         <i class="bi bi-arrow-left"></i> Kembali
                       </a>
                     <div class="email-fixed-search flex-grow-1">
@@ -79,10 +79,9 @@
                                     <div class="modal-body">
                                         <div class="col-md-6 col-12">
                                             <fieldset class="form-group">
+                                              <p>Status saat ini - {{$data->status}}</p>
                                                 <select wire:model="status" class="form-select" id="basicSelect">
-                                                    @if ($data->status !== 'Usulan')
-                                                        <option value="{{ $data->status }}" selected>{{ $data->status }}</option>
-                                                    @endif
+                                                    <option selected>Pilih...</option>
                                                     @foreach ($statusOptions as $option)
                                                         <option value="{{ $option }}">{{ $option }}</option>
                                                     @endforeach

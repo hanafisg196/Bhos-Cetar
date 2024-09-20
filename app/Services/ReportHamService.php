@@ -17,5 +17,7 @@ interface ReportHamService {
     public function updateRanham(Request $request, $id);
     public function searchByUser(Request $request, $search);
     public function inboxCount();
+    public function getDataByCatRan($catRan,$perPage);
+    public function lisCatRan();
 
 }
