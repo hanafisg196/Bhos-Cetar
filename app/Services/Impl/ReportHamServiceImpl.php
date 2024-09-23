@@ -19,7 +19,7 @@ class ReportHamServiceImpl implements ReportHamService
         $april = Carbon::createFromDate(null, 4, 30);
 
         $juli = Carbon::createFromDate(null, 7, 1);
-        $agustus = Carbon::createFromDate(null, 9, 31);
+        $agustus = Carbon::createFromDate(null, 8, 31);
 
         $november = Carbon::createFromDate(null, 11, 1);
         $december = Carbon::createFromDate(null, 12, 31);
@@ -31,7 +31,7 @@ class ReportHamServiceImpl implements ReportHamService
         } elseif ($now->between($november, $december)) {
             $val = 3;
         } else {
-            $val = 4;
+            $val = null;
         }
 
         return $val;

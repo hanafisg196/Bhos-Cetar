@@ -63,9 +63,7 @@ class DatabaseSeeder extends Seeder
         CategoryRanhamn::create([
             'nama' => "B-012"
         ]);
-        CategoryRanhamn::create([
-            'nama' => "Uknown"
-        ]);
+
 
 
     }

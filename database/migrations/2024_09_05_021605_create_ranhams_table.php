@@ -21,10 +21,10 @@ return new class extends Migration
             $table->unsignedBigInteger('kkp_id');
             $table->string('status')->default('Usulan');
             $table->string('message')->default('-');
-            $table->unsignedBigInteger('catran_id');
+            $table->unsignedBigInteger('catran_id')->nullable();
             $table->timestamps();
             $table->foreign('kkp_id')->references('id')->on('kkps');
-            $table->foreign('catran_id')->on('category_ranhamns')->references('id');
+            $table->foreign('catran_id')->on('category_ranhamns')->references('id')->onDelete('set null');
         });
     }
 
