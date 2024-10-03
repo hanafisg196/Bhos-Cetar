@@ -38,9 +38,9 @@ class ReportHamServiceImpl implements ReportHamService
     }
     public function getUserId(Request $request)
     {
-        $user = $request->session()->get('user');
-        // $user_id = $user['pegawai']['nip'];
-        return $user;
+        return $request->session()->get('user');
+
+
     }
     public function getRanhamByid($id)
     {
@@ -97,7 +97,7 @@ class ReportHamServiceImpl implements ReportHamService
             $ranham = Ranham::find($id);
             $notif = Notification::where('lah_id', $id)->first();
             if (!$notif) {
-                $notif = Notification::create([
+                 Notification::create([
                     'user_id' => $ranham->user_id,
                     'lah_id' => $id,
                     'created_at' => Carbon::now(),
@@ -143,10 +143,14 @@ class ReportHamServiceImpl implements ReportHamService
 
     public function readStatus($id)
     {
-        $data = Ranham::where('id', $id);
-        $data->update([
-            'read' => 1,
-        ]);
+        $data = Ranham::find($id);
+        if($data->read == 0){
+            $data->update([
+                'read' => 1,
+            ]);
+        }
+
+
     }
 
     public function inboxCount()

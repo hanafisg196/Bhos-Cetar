@@ -106,7 +106,16 @@
                                 </span>
                             </a>
                         </div>
-
+                        <a href="{{route('admin.dashboard.user.manager')}}" class="list-group-item pt-0 {{request()->is('admin/user/manager') ? 'active' : ''}}"
+                        id="dashboard-menu">
+                            <div class="fonticon-wrap d-inline me-3">
+                                <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
+                                    <use
+                                        xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#house-fill') }}" />
+                                </svg>
+                            </div>
+                            Hola
+                         </a>
                     </div>
                     <!-- sidebar menu end-->
                 </div>

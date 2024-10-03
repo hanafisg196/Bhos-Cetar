@@ -30,12 +30,13 @@ class ListInboxLahLive extends Component
 
     }
 
-    #[On('readInboxLah')]
+
     public function render()
     {
         if(strlen($this->searchLah) >= 1){
              $lah = $this->reportHamService->search($this->searchLah, $this->perPage);
-        }else if($this->selectedCat && $this->selectedCat !== 'Pilih...'){
+        }
+        elseif($this->selectedCat && $this->selectedCat !== 'Pilih...'){
 
             $lah = $this->reportHamService->getDataByCatRan($this->selectedCat,$this->perPage);
             $this->searchLah = '';
