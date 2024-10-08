@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\CategoryRanhamn;
 use App\Models\Kkp;
 use App\Models\Role;
+use App\Models\Rule;
+use App\Models\RuleType;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -65,11 +67,14 @@ class DatabaseSeeder extends Seeder
             'nama' => "B-012"
         ]);
 
+        RuleType::create([
+            'nama'=> 'KABAG',
+        ]);
 
-        Role::create([
+        Rule::create([
             'nama'=> 'Abdul Haris',
             'nip'=>'199101052015031001',
-            'role' => 'KABAG'
+            'rule_id' => 1
         ]);
 
     }

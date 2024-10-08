@@ -18,8 +18,8 @@
                             <div class="card">
                                 <div class="card-header d-flex justify-content-between align-items-center">
                                     <h4 class="card-title">List User</h4>
-                                    <a href="#" class="btn btn-primary btn-md" style="margin-left: 10px;">
-                                        <i class="bi bi-plus-lg"></i>&nbsp;Tambah User
+                                    <a href="{{route('admin.dashboard.rule.form')}}" class="btn btn-primary btn-md" style="margin-left: 10px;">
+                                        <i class="bi bi-plus-lg"></i>&nbsp;Tambah Anggota
                                     </a>
                                 </div>
                                 <div class="card-content">
@@ -39,7 +39,7 @@
                                                 <tr>
                                                     <td class="text-bold-500">{{$item->nama}}</td>
                                                     <td>{{$item->nip}}</td>
-                                                    <td class="text-bold-500">{{$item->role}}</td>
+                                                    <td class="text-bold-500">{{$item->ruleType->nama}}</td>
                                                     <td>Edit</td>
                                                 </tr>
                                                 @endforeach

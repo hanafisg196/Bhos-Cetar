@@ -3,6 +3,7 @@
 namespace App\Services\Impl;
 
 use App\Models\Role;
+use App\Models\Rule;
 use App\Services\LoginService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,17 +24,16 @@ class LoginServiceImpl implements LoginService
     private function isUserValid($user) {
         return $user && isset($user['jabatan']['nip']);
     }
-
-    private function getUserRole($nip) {
-        return Role::where('nip', $nip)->first();
+    private function getUserRule($nip) {
+        return Rule::where('nip', $nip)->with('ruleType')->first();
     }
 
-    private function setUserRoleInSession($request, $role) {
-        $request->session()->put('user_role', $role);
+    private function setUserRuleInSession($request, $rule) {
+        $request->session()->put('user_role', $rule);
     }
 
-    private function redirectUserBasedOnRole($role) {
-        if ($role === 'KABAG') {
+    private function redirectUserBasedOnRule($rule) {
+        if ($rule === 'KABAG') {
             return redirect()->route('admin.dashboard');
         }
         return redirect()->route('dashboard');
@@ -59,11 +59,11 @@ class LoginServiceImpl implements LoginService
             $user = $this->getUserFromSession($request);
 
             if ($this->isUserValid($user)) {
-                $role = $this->getUserRole($user['jabatan']['nip']);
+                $rule = $this->getUserRule($user['jabatan']['nip']);
 
-                if ($role) {
-                    $this->setUserRoleInSession($request, $role->role);
-                    return $this->redirectUserBasedOnRole(session('user_role'));
+                if ($rule) {
+                    $this->setUserRuleInSession($request, $rule->ruleType->nama);
+                    return $this->redirectUserBasedOnRule(session('user_role'));
                 } else {
                     return back()->with('error', 'Role tidak ditemukan.');
                 }

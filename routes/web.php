@@ -42,5 +42,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/inbox/detail/aksi-ham/{id}', [InboxController::class, 'detailAksiHam'])->name('detail.aksi.ham');
     Route::post('/logout/admin', [LoginController::class, 'LogoutAdmin'])->name('logout.admin');
     Route::get( '/admin/user/manager', [UserManagementController::class, 'index'])->name('admin.dashboard.user.manager');
+    Route::get( '/admin/user/rule', [UserManagementController::class, 'formAddRole'])->name('admin.dashboard.rule.form');
 
 });

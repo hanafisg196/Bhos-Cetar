@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Notification;
 use App\Models\Role;
+use App\Models\Rule;
 use App\Services\ReportHamService;
 use App\Services\ScheduleService;
 use Illuminate\Http\Request;
@@ -32,10 +33,11 @@ class DashboardController extends Controller
 
     public function test()
     {
-        $data = session('user_role');
-        // $nip = $data['jabatan']['nip'];
-        // $role = Role::where('nip', $nip )->first();
-        // $keyVerifyed =  $role->role;
-        dd($data);
+        $nip = '199101052015031001';
+        $test = Rule::where('nip', $nip)->with('ruleType')->first();
+
+        return json_encode($test);
+        // $data = session('user_role');
+
     }
 }
