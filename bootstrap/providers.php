@@ -7,5 +7,6 @@ return [
     App\Providers\NotificationServiceProvider::class,
     App\Providers\ProfileServiceProvider::class,
     App\Providers\ReportHamServicesProvider::class,
+    App\Providers\RoleServiceProvider::class,
     App\Providers\ScheduleProvider::class,
 ];

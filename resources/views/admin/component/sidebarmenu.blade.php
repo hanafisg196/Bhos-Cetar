@@ -114,7 +114,7 @@
                                         xlink:href="{{ asset('/dist/assets/static/images/bootstrap-icons.svg#house-fill') }}" />
                                 </svg>
                             </div>
-                            Hola
+                            User Manager
                          </a>
                     </div>
                     <!-- sidebar menu end-->

@@ -21,6 +21,15 @@
                 <span>Laporan Aksi Ham</span>
             </a>
         </li>
+        @if (session('user_role') === 'KABAG')
+            <li class="sidebar-item {{ request()->is('test') ? 'active' : '' }}">
+                <a href="{{ route('test') }}" class='sidebar-link'>
+                    <i class="bi bi-file-earmark-arrow-up-fill"></i>
+                    <span>Test</span>
+                </a>
+            </li>
+        @endif
+
 
     </ul>
 

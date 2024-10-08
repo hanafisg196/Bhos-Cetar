@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Role;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Log;
 
 if (!function_exists('trimString')) {
     function trimString($string) {
@@ -32,6 +34,13 @@ if (!function_exists(function: 'strCut')) {
         return substr($string, 6);
     }
 }
+
+
+
+
+
+
+
 
 
 

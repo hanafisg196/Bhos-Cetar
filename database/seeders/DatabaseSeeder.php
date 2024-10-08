@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\CategoryRanhamn;
 use App\Models\Kkp;
+use App\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -65,6 +66,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        Role::create([
+            'nama'=> 'Abdul Haris',
+            'nip'=>'199101052015031001',
+            'role' => 'KABAG'
+        ]);
 
     }
 }

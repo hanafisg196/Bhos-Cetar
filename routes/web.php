@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EverifycationController;
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportHamController;
@@ -18,7 +19,7 @@ Route::post('/login', [LoginController::class, 'doLogin'])->name('doLogin');
 
 Route::middleware('user')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    // Route::get('/', [DashboardController::class, 'test'])->name('dashboard');
+    Route::get('/test', [EverifycationController::class, 'index'])->name('test')->middleware('admin');
     Route::get('/bantuan', [ScheduleController::class, 'index'])->name('schedule');
     Route::post('/bantuan/form', [ScheduleController::class, 'store'])->name('schedule.store');
     Route::get('/bantuan/download/{file}', [ScheduleController::class, 'downloadFile'])->name('schedule.download');
@@ -41,4 +42,5 @@ Route::middleware('admin')->group(function () {
     Route::get('/inbox/detail/aksi-ham/{id}', [InboxController::class, 'detailAksiHam'])->name('detail.aksi.ham');
     Route::post('/logout/admin', [LoginController::class, 'LogoutAdmin'])->name('logout.admin');
     Route::get( '/admin/user/manager', [UserManagementController::class, 'index'])->name('admin.dashboard.user.manager');
+
 });

@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\RoleService;
 use Illuminate\Http\Request;
 
 class UserManagementController extends Controller
 {
-    public function index(){
+    private RoleService $roleService;
 
-        return view('admin.page.user-management');
+    public function __construct(RoleService $roleService) {
+        $this->roleService = $roleService;
+    }
+    public function index(){
+        $data = $this->roleService->getRole();
+        return view('admin.page.user-management')->with('data', $data);
     }
 
 }
