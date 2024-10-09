@@ -70,7 +70,15 @@ class DatabaseSeeder extends Seeder
         RuleType::create([
             'nama'=> 'KABAG',
         ]);
-
+        RuleType::create([
+            'nama'=> 'SEKRETARIS',
+        ]);
+        RuleType::create([
+            'nama'=> 'VERIFIKATOR',
+        ]);
+        RuleType::create([
+            'nama'=> 'BIDANG',
+        ]);
         Rule::create([
             'nama'=> 'Abdul Haris',
             'nip'=>'199101052015031001',

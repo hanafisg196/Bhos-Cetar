@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Rule extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
+    protected $guarded = ['id'];
 
     public function ruleType()
     {

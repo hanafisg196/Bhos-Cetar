@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rule;
 use App\Services\RoleService;
 use Illuminate\Http\Request;
 
@@ -20,7 +19,18 @@ class UserManagementController extends Controller
         return view('admin.page.user-management')->with('data', $data);
     }
     public function formAddRole(){
-        return view('admin.page.user-role');
+        $rule = $this->roleService->getRuleType();
+        $employee = $this->roleService->getEmployee();
+        $data  = $employee['data'];
+        return view('admin.page.user-role')->with([
+            'data' => $data,
+            'rule' => $rule
+        ]);
+    }
+
+    public function createEmployeeRule(Request $request){
+       $this->roleService->setRuleEmployee($request);
+       return back()->with('success', 'Form submitted successfully!');
     }
 
 }
