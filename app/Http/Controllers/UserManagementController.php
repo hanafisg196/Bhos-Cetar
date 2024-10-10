@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\RoleService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class UserManagementController extends Controller
 {
@@ -15,8 +16,11 @@ class UserManagementController extends Controller
     public function index(){
 
         $data = $this->roleService->getRole();
-
-        return view('admin.page.user-management')->with('data', $data);
+        $rule = $this->roleService->getRuleType();
+        return view('admin.page.user-management')->with([
+         'data' => $data,
+         'rule' => $rule
+        ]);
     }
     public function formAddRole(){
         $rule = $this->roleService->getRuleType();
@@ -31,6 +35,12 @@ class UserManagementController extends Controller
     public function createEmployeeRule(Request $request){
        $this->roleService->setRuleEmployee($request);
        return back()->with('success', 'Form submitted successfully!');
+    }
+
+    public function updateEmployeeRule(Request $request, $id){
+      $id = Crypt::decrypt($id);
+      $this->roleService->updateRuleEmployee($request, $id);
+      return back()->with('success', 'Form submitted successfully!');
     }
 
 }

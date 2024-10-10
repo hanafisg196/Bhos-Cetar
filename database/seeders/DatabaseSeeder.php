@@ -82,7 +82,8 @@ class DatabaseSeeder extends Seeder
         Rule::create([
             'nama'=> 'Abdul Haris',
             'nip'=>'199101052015031001',
-            'rule_id' => 1
+            'rule_id' => 1,
+            'id_opd' => 9
         ]);
 
     }

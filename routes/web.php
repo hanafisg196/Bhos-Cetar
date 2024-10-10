@@ -7,6 +7,7 @@ use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportHamController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\UpdateAksiHamController;
 use App\Http\Controllers\UpdateBantuanHukumController;
 use App\Http\Controllers\UploadFileController;
@@ -44,5 +45,6 @@ Route::middleware('admin')->group(function () {
     Route::get( '/admin/user/manager', [UserManagementController::class, 'index'])->name('admin.dashboard.user.manager');
     Route::get( '/admin/user/rule', [UserManagementController::class, 'formAddRole'])->name('admin.dashboard.rule.form');
     Route::post( '/admin/user/rule/create', [UserManagementController::class, 'createEmployeeRule'])->name('admin.dashboard.rule.create');
+    Route::post( '/admin/user/rule/update/{id}', [UserManagementController::class, 'updateEmployeeRule'])->name('admin.dashboard.rule.update');
 
 });

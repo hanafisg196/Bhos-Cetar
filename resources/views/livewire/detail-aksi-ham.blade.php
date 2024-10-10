@@ -2,28 +2,10 @@
     @php
         $statusOptions = ['Disetujui', 'Ditolak'];
     @endphp
-    {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
-    <div class="email-app-list-wrapper">
-        <div class="email-app-list">
-            <div class="email-action">
-
-                <div class="action-right d-flex flex-grow-1 align-items-center justify-content-around">
-                    <div class="sidebar-toggle d-block d-lg-none">
-                        <button class="btn btn-sm btn-outline-primary">
-                            <i class="bi bi-list fs-5"></i>
-                        </button>
-                    </div>
-                    <a href="{{url('/list/inbox/aksi-ham')}}" class="btn btn-primary">
-                        <i class="bi bi-arrow-left"></i> Kembali
-                      </a>
-                    <div class="email-fixed-search flex-grow-1">
-                        <div class="form-group position-relative  mb-0 has-icon-left">
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+    <div  style="margin-top: -30px; margin-bottom: 30px;">
+       <a href="{{url('/list/inbox/aksi-ham')}}" class="btn btn-primary">
+         <i class="bi bi-arrow-left"></i> Kembali
+     </a>
     </div>
     <section class="section"
         style="max-height: 650px;

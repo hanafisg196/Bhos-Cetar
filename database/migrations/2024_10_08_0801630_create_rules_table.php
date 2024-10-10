@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('nip');
+            $table->string('id_opd');
             $table->unsignedBigInteger('rule_id');
             $table->timestamps();
             $table->foreign('rule_id')->on('rule_types')->references('id');

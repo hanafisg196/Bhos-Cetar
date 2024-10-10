@@ -42,8 +42,19 @@ class RoleServiceImpl implements RoleService
             'nama' => 'required',
             'nip' => 'required',
             'rule_id' => 'required',
+            'id_opd' => 'required'
         ]);
         Rule::create($validated);
+
+    }
+    public function updateRuleEmployee(Request $request,$id){
+      $employee = Rule::find($id);
+      $validated = $request->validate([
+         'rule' => 'required',
+      ]);
+      $employee->update([
+         'rule_id' => $validated['rule']
+      ]);
 
     }
 }

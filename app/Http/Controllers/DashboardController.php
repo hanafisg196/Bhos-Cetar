@@ -31,13 +31,4 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function test()
-    {
-        $nip = '199101052015031001';
-        $test = Rule::where('nip', $nip)->with('ruleType')->first();
-
-        return json_encode($test);
-        // $data = session('user_role');
-
-    }
 }

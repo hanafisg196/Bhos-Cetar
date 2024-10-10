@@ -1,66 +1,108 @@
-@extends('admin.component.main')
+@extends('admin.template.main')
 @section('content')
-    <div class="app-content-overlay"></div>
-    <div class="email-app-area">
-        <div class="email-app-list-wrapper">
-            <div class="email-app-list">
-                <div class="email-action">
-
-                    <div class="action-right d-flex flex-grow-1 align-items-center justify-content-around">
-                        <div class="sidebar-toggle d-block d-lg-none">
-                            <button class="btn btn-sm btn-outline-primary">
-                                <i class="bi bi-list fs-5"></i>
-                            </button>
-                        </div>
-
-                        <div class="email-fixed-search flex-grow-1">
-                            <div class="form-group position-relative  mb-0 has-icon-left">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <section class="section">
-                    <div class="row" id="table-hover-row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h4 class="card-title">List User</h4>
-                                    <a href="{{ route('admin.dashboard.rule.form') }}" class="btn btn-primary btn-md"
-                                        style="margin-left: 10px;">
-                                        <i class="bi bi-plus-lg"></i>&nbsp;Tambah Anggota
-                                    </a>
-                                </div>
-                                <div class="card-content">
-                                    <!-- table hover -->
-                                    <div class="table-responsive">
-                                        <table class="table table-hover mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nama</th>
-                                                    <th>Nip</th>
-                                                    <th>Role</th>
-                                                    <th>Aksi</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($data as $item)
-                                                    <tr>
-                                                        <td class="text-bold-500">{{ $item->nama }}</td>
-                                                        <td>{{ $item->nip }}</td>
-                                                        <td class="text-bold-500">{{ $item->ruleType->nama }}</td>
-                                                        <td>Edit</td>
-                                                    </tr>
-                                                @endforeach
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+@if ($errors->any())
+<div class="d-flex justify-content-center">
+    <div class="alert alert-danger alert-dismissible show fade col-12 col-md-10">
+        <p> Gagal Menambahkan Rule</p>
+        @foreach ($errors->all() as $error)
+            <div class="invalid-feedback d-block" style="color: white;">
+                {{ $error }}
             </div>
-        </div>
+        @endforeach
+        <button type="button" class="btn-close" style="color: white" data-bs-dismiss="alert"
+            aria-label="Close"></button>
     </div>
+</div>
+@endif
+<section class="section mt-10">
+<div class="row justify-content-center">
+  <div class="col-12 col-md-10">
+      <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+              <h4 class="card-title">Manajemen Anggota</h4>
+              <a href="{{ route('admin.dashboard.rule.form') }}" class="btn btn-primary btn-md">
+                  <i class="bi bi-plus-lg"></i>&nbsp;Tambah Anggota
+              </a>
+          </div>
+          <div class="card-content">
+              <div class="table-responsive"  style="padding: 20px;">
+                  <table class="table table-hover mb-0">
+                      <thead>
+                          <tr>
+                              <th>Nama</th>
+                              <th>NIP</th>
+                              <th>Rule</th>
+                              <th>Aksi</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach ($data as $item)
+                              <tr>
+                                  <td class="text-bold-500">{{ $item->nama }}</td>
+                                  <td>{{ $item->nip }}</td>
+                                  <td class="text-bold-500">{{ $item->ruleType->nama }}</td>
+                                  <td>
+                                      <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                      data-bs-target="#modal-{{$item->id}}">Edit</button>
+                                      <button class="btn btn-sm btn-danger" onclick="confirmDelete()">Delete</button>
+                                  </td>
+                              </tr>
+                              <div class="modal fade text-left" id="modal-{{$item->id}}"
+                               tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true"
+                               name="lol">
+                               <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h5 class="modal-title" id="myModalLabel1">Edit</h5>
+                                           <button type="button" class="close rounded-pill"
+                                               data-bs-dismiss="modal" aria-label="Close">
+                                               <i data-feather="x"></i>
+                                           </button>
+                                       </div>
+                                    <form class="form"action="{{route('admin.dashboard.rule.update', encrypt($item->id))}}"
+                                      method="post" id="inputForm">
+                                           @csrf
+                                       <div class="modal-body">
+                                        <p>{{$item->nama}}</p>
+                                          <select name="rule" class="form-select" id="basicSelect">
+                                             @foreach ($rule as $value)
+                                                 <option value="{{ $value->id }}">
+                                                     {{ $value->nama }}
+                                                 </option>
+                                             @endforeach
+                                         </select>
+                                        </div>
+                                           <div class="modal-footer">
+                                               <div class="col-12 d-flex justify-content-end">
+                                                   <button type="button" class="btn"
+                                                       data-bs-dismiss="modal">
+                                                       <i class="bx bx-x d-block d-sm-none"></i>
+                                                       <span class="d-none d-sm-block">Tutup</span>
+                                                   </button>
+                                                   <button style="display: none" id="loading"
+                                                       class="btn btn-primary" type="button" disabled>
+                                                       <span class="spinner-border spinner-border-sm"
+                                                           role="status" aria-hidden="true"></span>
+                                                       Loading...
+                                                   </button>
+                                                   <button style="display: block" id="send"
+                                                       type="submit" class="btn btn-primary">Ubah</button>
+                                               </div>
+                                           </div>
+                                       </form>
+                                   </div>
+                               </div>
+                        </div>
+                          @endforeach
+                      </tbody>
+                  </table>
+              </div>
+              {{-- <div class="mt-3 d-flex justify-content-center">
+                  {{ $data->links() }} <!-- Pagination -->
+              </div> --}}
+          </div>
+      </div>
+  </div>
+</div>
+</section>
 @endsection

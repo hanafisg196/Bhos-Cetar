@@ -17,8 +17,8 @@ class ScheduleServiceImpl implements ScheduleService
     public function getUserId(Request $request)
     {
         $user = $request->session()->get('user');
-        $user_id = $user['pegawai']['nip'];
-        return $user_id;
+        return $user['pegawai']['nip'];
+
     }
     public function copyFilesFromTmp($tmpFile, $idFile)
     {
@@ -166,7 +166,7 @@ class ScheduleServiceImpl implements ScheduleService
             $schedule = Schedule::find($id);
             $notif = Notification::where('lbh_id', $id)->first();
             if(!$notif){
-               $notif = Notification::create([
+               Notification::create([
                     "user_id" => $schedule->user_id,
                     "lbh_id" =>  $id,
                     "created_at" => Carbon::now(),

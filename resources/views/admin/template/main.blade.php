@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Bhos-Cetar</title>
+    <title>Dashboard - Admin Bhos-Cetar</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="icon" href="/dist/assets/compiled/jpg/logotanahdatar.png" type="image/x-icon">
     <link rel="stylesheet" href="/dist/assets/compiled/css/app.css">
@@ -20,7 +20,7 @@
     <div id="app">
         <div id="main" class='layout-navbar navbar-fixed'>
             <header>
-               @include('dashboard.template.header')
+               @include('admin.template.header')
             </header>
             <div id="sidebar">
                 <div class="sidebar-wrapper active">
@@ -29,7 +29,7 @@
                             <div class="logo">
                                 <img src="/dist/assets/compiled/jpg/logotanahdatar.png"
                                     style="width: 50; height: 50px;" alt="Logo">
-                                <span style="font-size: 20px;">Bhos-Cetar</span>
+                                <span style="font-size: 20px;">Admin Bhos-Cetar</span>
                             </div>
                             <div class="sidebar-toggler x">
                                 <a href="#" class="sidebar-hide d-xl-none d-block"><i
@@ -37,12 +37,11 @@
                             </div>
                         </div>
                     </div>
-                @include('dashboard.template.sidebarmenu')
+                @include('admin.template.sidebarmenu')
             </div>
         </div>
         <div id="main-content">
             @yield('content')
-            @include('dashboard.template.footer')
             <livewire:clear-temporary />
         </div>
 
