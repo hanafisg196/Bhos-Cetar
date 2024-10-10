@@ -10,7 +10,6 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title"></h4>
                         <p><strong>Kode - </strong>{{ $data->code }}</p>
                         <p><strong>Status - </strong>{{ $data->status }}</p>
                         <p><strong>Pesan - </strong>{{ $data->message }}</p>

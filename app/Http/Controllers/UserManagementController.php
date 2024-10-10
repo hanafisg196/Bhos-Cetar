@@ -34,13 +34,19 @@ class UserManagementController extends Controller
 
     public function createEmployeeRule(Request $request){
        $this->roleService->setRuleEmployee($request);
-       return back()->with('success', 'Form submitted successfully!');
+       return back()->with('success', 'Data Berhasil Disimpan!');
     }
 
     public function updateEmployeeRule(Request $request, $id){
       $id = Crypt::decrypt($id);
       $this->roleService->updateRuleEmployee($request, $id);
-      return back()->with('success', 'Form submitted successfully!');
+      return back()->with('success', 'Data Berhasil Diubah');
+    }
+
+    public function deleteEmployeeRule($id){
+      $id = Crypt::decrypt($id);
+      $this->roleService->deleteRuleEmployee($id);
+      return back()->with('success', 'Data Berhasil Dihapus');
     }
 
 }

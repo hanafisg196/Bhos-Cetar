@@ -10,4 +10,5 @@ interface RoleService{
     public function getRuleType();
     public function setRuleEmployee(Request $request);
     public function updateRuleEmployee(Request $request,$id);
+    public function deleteRuleEmployee($id);
 }

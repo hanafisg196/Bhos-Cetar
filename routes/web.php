@@ -2,12 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\EverifycationController;
+use App\Http\Controllers\EcorrectionController;
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ReportHamController;
 use App\Http\Controllers\ScheduleController;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\UpdateAksiHamController;
 use App\Http\Controllers\UpdateBantuanHukumController;
 use App\Http\Controllers\UploadFileController;
@@ -20,7 +19,7 @@ Route::post('/login', [LoginController::class, 'doLogin'])->name('doLogin');
 
 Route::middleware('user')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/test', [EverifycationController::class, 'index'])->name('test')->middleware('admin');
+    Route::get('/ecorrection', [EcorrectionController::class, 'index'])->name('ecorrection')->middleware('admin');
     Route::get('/bantuan', [ScheduleController::class, 'index'])->name('schedule');
     Route::post('/bantuan/form', [ScheduleController::class, 'store'])->name('schedule.store');
     Route::get('/bantuan/download/{file}', [ScheduleController::class, 'downloadFile'])->name('schedule.download');
@@ -46,5 +45,6 @@ Route::middleware('admin')->group(function () {
     Route::get( '/admin/user/rule', [UserManagementController::class, 'formAddRole'])->name('admin.dashboard.rule.form');
     Route::post( '/admin/user/rule/create', [UserManagementController::class, 'createEmployeeRule'])->name('admin.dashboard.rule.create');
     Route::post( '/admin/user/rule/update/{id}', [UserManagementController::class, 'updateEmployeeRule'])->name('admin.dashboard.rule.update');
+    Route::post( '/admin/user/rule/delete/{id}', [UserManagementController::class, 'deleteEmployeeRule'])->name('admin.dashboard.rule.delete');
 
 });

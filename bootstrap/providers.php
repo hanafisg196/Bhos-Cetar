@@ -3,6 +3,7 @@
 return [
     App\Providers\AdminServiceProvider::class,
     App\Providers\AppServiceProvider::class,
+    App\Providers\EcorrectionServiceProvider::class,
     App\Providers\LoginServiceProvider::class,
     App\Providers\NotificationServiceProvider::class,
     App\Providers\ProfileServiceProvider::class,

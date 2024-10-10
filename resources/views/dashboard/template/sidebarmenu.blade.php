@@ -9,23 +9,23 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li  class="sidebar-item {{ request()->is('bantuan') ? 'active' : '' }}">
-            <a    href="{{ route('schedule') }}" class='sidebar-link'>
-                <i class="bi bi-sticky-fill"></i>
+        <li class="sidebar-item {{ request()->is('bantuan') ? 'active' : '' }}">
+            <a href="{{ route('schedule') }}" class='sidebar-link'>
+               <i class="bi bi-bank2"></i>
                 <span>Bantuan Hukum</span>
             </a>
         </li>
         <li class="sidebar-item {{ request()->is('laporan-ham') ? 'active' : '' }}">
             <a  href="{{route('ranham.home')}}" class='sidebar-link'>
-                <i class="bi bi-file-earmark-arrow-up-fill"></i>
+               <i class="bi bi-calendar2-check-fill"></i>
                 <span>Laporan Aksi Ham</span>
             </a>
         </li>
-        @if (session('user_role') === 'KABAG')
-            <li class="sidebar-item {{ request()->is('test') ? 'active' : '' }}">
-                <a href="{{ route('test') }}" class='sidebar-link'>
-                    <i class="bi bi-file-earmark-arrow-up-fill"></i>
-                    <span>Test</span>
+        @if (session('user_role') === 'ADMIN')
+            <li class="sidebar-item {{ request()->is('ecorrection') ? 'active' : '' }}">
+                <a href="{{ route('ecorrection') }}" class='sidebar-link'>
+                  <i class="bi bi-clipboard-check-fill"></i>
+                    <span>E-Corection</span>
                 </a>
             </li>
         @endif

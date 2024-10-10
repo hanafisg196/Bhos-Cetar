@@ -1,7 +1,6 @@
 <?php
 namespace App\Services\Impl;
 
-use App\Models\Role;
 use App\Models\Rule;
 use App\Models\RuleType;
 use App\Services\RoleService;
@@ -56,5 +55,10 @@ class RoleServiceImpl implements RoleService
          'rule_id' => $validated['rule']
       ]);
 
+    }
+
+    public function deleteRuleEmployee($id){
+      $employee = Rule::find($id);
+      $employee->delete();
     }
 }

@@ -33,7 +33,7 @@ class LoginServiceImpl implements LoginService
     }
 
     private function redirectUserBasedOnRule($rule) {
-        if ($rule === 'KABAG') {
+        if ($rule === 'ADMIN') {
             return redirect()->route('admin.dashboard');
         }
         return redirect()->route('dashboard');

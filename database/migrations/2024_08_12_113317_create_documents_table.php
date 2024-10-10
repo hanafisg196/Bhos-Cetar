@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('schedule_id');
+            $table->unsignedBigInteger('schedule_id')->nullable();
+            $table->unsignedBigInteger('ecorrection_id')->nullable();
             $table->string('file', 200);
             $table->timestamps();
-            $table->foreign('schedule_id')->on('schedules')->references('id');
+            $table->foreign('schedule_id')->on('schedules')->references('id')->onDelete('set null');
+            $table->foreign('ecorrection_id')->on('ecorrections')->references('id')->onDelete('set null');
         });
     }
 

@@ -20,7 +20,7 @@ class ScheduleServiceImpl implements ScheduleService
         return $user['pegawai']['nip'];
 
     }
-    public function copyFilesFromTmp($tmpFile, $idFile)
+    private function copyFilesFromTmp($tmpFile, $idFile)
     {
         foreach ($tmpFile as $tmp) {
             $sourcePath = $tmp->file;

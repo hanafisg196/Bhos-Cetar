@@ -24,67 +24,70 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'username' => 'test@example.com',
             'password' => 'rahasia',
-            'role'=>1
+            'role' => 1,
         ]);
 
         Kkp::create([
-            'name'=> 'Hak Atas Informasi',
+            'name' => 'Hak Atas Informasi',
         ]);
         Kkp::create([
-            'name'=> 'Hak Atas Pemerintahan',
+            'name' => 'Hak Atas Pemerintahan',
         ]);
         Kkp::create([
-            'name'=> 'Hak Atas Bantuan Hukum',
-        ]); Kkp::create([
-            'name'=> 'Hak Atas Keberagaman dan Pluralisme',
+            'name' => 'Hak Atas Bantuan Hukum',
         ]);
         Kkp::create([
-            'name'=> 'Hak Atas Kesehatan',
+            'name' => 'Hak Atas Keberagaman dan Pluralisme',
         ]);
         Kkp::create([
-            'name'=> 'Hak Atas Pendidikan',
+            'name' => 'Hak Atas Kesehatan',
         ]);
         Kkp::create([
-            'name'=> 'Hak Atas Perempuan',
+            'name' => 'Hak Atas Pendidikan',
         ]);
         Kkp::create([
-            'name'=> 'Hak Atas Pekerjaan',
+            'name' => 'Hak Atas Perempuan',
         ]);
         Kkp::create([
-            'name'=> 'Hak Atas Perumahan dan Lingkungan',
+            'name' => 'Hak Atas Pekerjaan',
         ]);
         Kkp::create([
-            'name'=> 'Hak Atas Kependudukan',
+            'name' => 'Hak Atas Perumahan dan Lingkungan',
+        ]);
+        Kkp::create([
+            'name' => 'Hak Atas Kependudukan',
         ]);
 
         CategoryRanhamn::create([
-            'nama' => "B-04"
+            'nama' => 'B-04',
         ]);
         CategoryRanhamn::create([
-            'nama' => "B-08"
+            'nama' => 'B-08',
         ]);
         CategoryRanhamn::create([
-            'nama' => "B-012"
+            'nama' => 'B-012',
         ]);
 
         RuleType::create([
-            'nama'=> 'KABAG',
+            'nama' => 'ADMIN',
         ]);
         RuleType::create([
-            'nama'=> 'SEKRETARIS',
+            'nama' => 'KABAG HUKUM',
         ]);
         RuleType::create([
-            'nama'=> 'VERIFIKATOR',
+            'nama' => 'SEKRETARIS',
         ]);
         RuleType::create([
-            'nama'=> 'BIDANG',
+            'nama' => 'VERIFIKATOR',
+        ]);
+        RuleType::create([
+            'nama' => 'BIDANG',
         ]);
         Rule::create([
-            'nama'=> 'Abdul Haris',
-            'nip'=>'199101052015031001',
+            'nama' => 'Abdul Haris',
+            'nip' => '199101052015031001',
             'rule_id' => 1,
-            'id_opd' => 9
+            'id_opd' => 9,
         ]);
-
     }
 }

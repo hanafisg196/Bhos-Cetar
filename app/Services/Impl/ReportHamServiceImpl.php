@@ -40,7 +40,6 @@ class ReportHamServiceImpl implements ReportHamService
     {
         return $request->session()->get('user');
 
-
     }
     public function getRanhamByid($id)
     {

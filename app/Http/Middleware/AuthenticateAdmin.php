@@ -17,9 +17,13 @@ class AuthenticateAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
+      $typeRule = [
+        "ADMIN",
+        "KABAG HUKUM"
+      ];
 
         $role = $request->session()->get('user_role');
-        if($role === "KABAG")
+        if(in_array($role, $typeRule))
         {
             return $next($request);
         }
