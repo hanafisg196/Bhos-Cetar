@@ -5,7 +5,6 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Services\ReportHamService;
 use Livewire\WithPagination;
-use Livewire\Attributes\On;
 
 class ListInboxLahLive extends Component
 {

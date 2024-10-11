@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
-interface EcorrectionService{
+use Illuminate\Http\Request;
 
+interface EcorrectionService {
+   public function createData(Request $request);
+   public function getListEcorrection();
 }

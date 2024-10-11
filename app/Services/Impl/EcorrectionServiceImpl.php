@@ -27,7 +27,7 @@ class EcorrectionServiceImpl implements EcorrectionService {
             $destinationPath = 'files/' . basename($sourcePath);
             Storage::copy($sourcePath, $destinationPath);
             Document::create([
-                'schedule_id' => $idFile,
+                'ecorrection_id' => $idFile,
                 'file' => $destinationPath,
             ]);
             Storage::delete($sourcePath);
@@ -44,6 +44,7 @@ class EcorrectionServiceImpl implements EcorrectionService {
       ]);
       $ecorrection  = Ecorrection::create([
          'title' => $validate['judul'],
+         'user_id' => $user['pegawai']['nip'],
          'nip' => $user['pegawai']['nip'],
          'nama' => $user['pegawai']['nama'],
          'code' => $this->generateCode(),
@@ -51,5 +52,8 @@ class EcorrectionServiceImpl implements EcorrectionService {
       $ecorrection_id = $ecorrection->id;
       $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
 
+   }
+   public function getListEcorrection(){
+      return Ecorrection::with('dokumens')->latest()->paginate(10);
    }
 }

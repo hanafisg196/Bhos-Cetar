@@ -12,11 +12,10 @@ class EcorrectionServiceProvider extends ServiceProvider implements DeferrablePr
     /**
      * Register services.
      */
-    public array $sigleton = [
-
+    public array $singletons = [
       EcorrectionService::class => EcorrectionServiceImpl::class
+   ];
 
-    ];
     public function provides(): array{
       return [
           EcorrectionService::class

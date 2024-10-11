@@ -15,4 +15,8 @@ class Document extends Model
     {
         return $this->belongsTo(Schedule::class, 'schedule_id', 'id');
     }
+    public function ecorrections()
+    {
+        return $this->belongsTo(Ecorrection::class, 'ecorrection_id', 'id');
+    }
 }

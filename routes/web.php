@@ -13,19 +13,23 @@ use App\Http\Controllers\UploadFileController;
 use App\Http\Controllers\UserManagementController;
 use Illuminate\Support\Facades\Route;
 
-
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'doLogin'])->name('doLogin');
 
 Route::middleware('user')->group(function () {
+    Route::get('/ecorrection', [EcorrectionController::class, 'index'])
+        ->name('ecorrection')
+        ->middleware('admin');
+    Route::post('/ecorrection/create', [EcorrectionController::class, 'createEcor'])
+        ->name('ecorrection.create')
+        ->middleware('admin');
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/ecorrection', [EcorrectionController::class, 'index'])->name('ecorrection')->middleware('admin');
     Route::get('/bantuan', [ScheduleController::class, 'index'])->name('schedule');
     Route::post('/bantuan/form', [ScheduleController::class, 'store'])->name('schedule.store');
     Route::get('/bantuan/download/{file}', [ScheduleController::class, 'downloadFile'])->name('schedule.download');
     Route::post('/upload', [UploadFileController::class, 'upload'])->name('upload');
-    Route::get('/laporan-ham', [ReportHamController::class,'index'])->name("ranham.home");
-    Route::post('/laporan/create', [ReportHamController::class,'createRanham'])->name("ranham.create");
+    Route::get('/laporan-ham', [ReportHamController::class, 'index'])->name('ranham.home');
+    Route::post('/laporan/create', [ReportHamController::class, 'createRanham'])->name('ranham.create');
     Route::post('/logout', [LoginController::class, 'doLogout'])->name('logout.dashboard');
     Route::get('/update/bantuan-hukum/detail/{id}', [UpdateBantuanHukumController::class, 'getDataById'])->name('show.bantuan.hukum');
     Route::post('/detail/bantuan-hukum/delete/file/{id}', [UpdateBantuanHukumController::class, 'deleteDokumen'])->name('delete.dokumen.bantuan.hukum');
@@ -41,10 +45,10 @@ Route::middleware('admin')->group(function () {
     Route::get('/inbox/detail/bantuan-hukum/{id}', [InboxController::class, 'detailBantuanHukum'])->name('detail.bantuan.hukum');
     Route::get('/inbox/detail/aksi-ham/{id}', [InboxController::class, 'detailAksiHam'])->name('detail.aksi.ham');
     Route::post('/logout/admin', [LoginController::class, 'LogoutAdmin'])->name('logout.admin');
-    Route::get( '/admin/user/manager', [UserManagementController::class, 'index'])->name('admin.dashboard.user.manager');
-    Route::get( '/admin/user/rule', [UserManagementController::class, 'formAddRole'])->name('admin.dashboard.rule.form');
-    Route::post( '/admin/user/rule/create', [UserManagementController::class, 'createEmployeeRule'])->name('admin.dashboard.rule.create');
-    Route::post( '/admin/user/rule/update/{id}', [UserManagementController::class, 'updateEmployeeRule'])->name('admin.dashboard.rule.update');
-    Route::post( '/admin/user/rule/delete/{id}', [UserManagementController::class, 'deleteEmployeeRule'])->name('admin.dashboard.rule.delete');
-
+    Route::get('/admin/user/manager', [UserManagementController::class, 'index'])->name('admin.dashboard.user.manager');
+    Route::get('/admin/user/rule', [UserManagementController::class, 'formAddRole'])->name('admin.dashboard.rule.form');
+    Route::post('/admin/user/rule/create', [UserManagementController::class, 'createEmployeeRule'])->name('admin.dashboard.rule.create');
+    Route::post('/admin/user/rule/update/{id}', [UserManagementController::class, 'updateEmployeeRule'])->name('admin.dashboard.rule.update');
+    Route::post('/admin/user/rule/delete/{id}', [UserManagementController::class, 'deleteEmployeeRule'])->name('admin.dashboard.rule.delete');
+    Route::get('/ecorrection/list/inbox', [EcorrectionController::class, 'inbox'])->name('admin.list.ecorrection');
 });

@@ -13,15 +13,18 @@
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="table-tab" data-bs-toggle="tab" href="#tableContent" role="tab" aria-controls="tableContent" aria-selected="true">Laporan Bantuan Hukum</a>
+                            <a class="nav-link active" id="table-lbh" data-bs-toggle="tab" href="#tableLbh " role="tab" aria-controls="tableLbh" aria-selected="true">Laporan Bantuan Hukum</a>
                         </li>
 
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="other-tab" data-bs-toggle="tab" href="#otherContent" role="tab" aria-controls="otherContent" aria-selected="false">Laporan Aksi Ham</a>
-                        </li>
+                           <a class="nav-link" id="table-lah" data-bs-toggle="tab" href="#tableLah" role="tab" aria-controls="tableLah" aria-selected="false">Laporan Aksi Ham</a>
+                       </li>
+
+
+
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="tableContent" role="tabpanel" aria-labelledby="table-tab">
+                        <div class="tab-pane fade show active" id="tableLbh" role="tabpanel" aria-labelledby="table-tab">
                             {{-- <div class="col-md-6 mt-3">
                                 <div class="input-group mb-2">
                                     <span class="input-group-text" id="basic-addon1">
@@ -116,7 +119,7 @@
                                 {{$bantuan->links()}}
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="otherContent" role="tabpanel" aria-labelledby="other-tab">
+                        <div class="tab-pane fade" id="tableLah" role="tabpanel" aria-labelledby="tableLah">
                             <div class="table-responsive" style="overflow-y: scroll; max-height: 400px; overflow-x: hidden">
                                 <table class="table table-hover table-lg">
                                     <thead>
