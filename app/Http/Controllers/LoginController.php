@@ -19,28 +19,18 @@ class LoginController extends Controller
         {
             return redirect()->route('dashboard');
         }
-        else if(Auth::user() !=null)
-        {
-            return redirect()->route('admin.dashboard');
-        }
+
         return view('dashboard.page.login');
     }
 
     public function doLogin(Request $request) {
-
-        return  $this->loginService->Login($request);
-
+        return  $this->loginService->login($request);
     }
 
     public function doLogout(Request $request) {
-
-        $this->loginService->Logout($request);
+        $this->loginService->logout($request);
         return redirect()->route('login');
     }
 
-    public function LogoutAdmin(Request $request) {
 
-        $this->loginService->LogoutAdmin($request);
-        return redirect()->route('login');
-    }
 }

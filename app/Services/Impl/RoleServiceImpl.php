@@ -13,6 +13,9 @@ class RoleServiceImpl implements RoleService
     {
         return Rule::latest()->paginate(10);
     }
+    private function getUserRole($request){
+     return  $request->session()->get('user_role');
+    }
 
     public function getEmployee()
     {
@@ -60,5 +63,32 @@ class RoleServiceImpl implements RoleService
     public function deleteRuleEmployee($id){
       $employee = Rule::find($id);
       $employee->delete();
+    }
+
+    public function kamiPeduliUploader( $request){
+      $role = $this->getUserRole($request);
+
+      $typeRule = [
+         "SEKRETARIS",
+       ];
+       return in_array($role, $typeRule);
+    }
+
+    public function ecorrectionUploader( $request){
+      $role = $this->getUserRole($request);
+      $typeRule = [
+         "KEPALA BIDANG",
+       ];
+       return in_array($role, $typeRule);
+    }
+
+    public function ecorrectionAdmin( $request){
+      $role = $this->getUserRole($request);
+      $typeRule = [
+         "ADMIN",
+         "KABAG HUKUM",
+         "VERIFIKATOR 2",
+       ];
+       return in_array($role, $typeRule);
     }
 }

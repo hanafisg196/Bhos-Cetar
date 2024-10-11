@@ -4,7 +4,7 @@ namespace App\Services;
 use Illuminate\Http\Request;
 
 interface LoginService {
-    public function Login(Request $request);
-    public function Logout(Request $request);
-    public function LogoutAdmin(Request $request);
+    public function login(Request $request);
+    public function logout(Request $request);
+
 }

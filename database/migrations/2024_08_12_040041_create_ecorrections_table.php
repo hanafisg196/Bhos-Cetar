@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('nip');
             $table->string('nama');
             $table->string('title');
+            $table->string('status')->default('Usulan');
+            $table->tinyInteger('read')->default(0);
             $table->timestamps();
         });
     }

@@ -9,26 +9,13 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="sidebar-item {{ request()->is('bantuan') ? 'active' : '' }}" title="Laporan Bantuan Hukum">
+        <li class="sidebar-item {{ request()->is('laporan-bantuan-hukum') ? 'active' : '' }}" title="Laporan Bantuan Hukum">
             <a href="{{ route('schedule') }}" class='sidebar-link'>
                <i class="bi bi-bank2"></i>
                 <span>Bantuan Hukum</span>
             </a>
         </li>
-        <li class="sidebar-item {{ request()->is('laporan-ham') ? 'active' : '' }}" title="Laporan Aksi Ham">
-            <a  href="{{route('ranham.home')}}" class='sidebar-link'>
-               <i class="bi bi-card-checklist"></i>
-                <span>Kami Peduli</span>
-            </a>
-        </li>
-        @if (session('user_role') === 'ADMIN')
-            <li class="sidebar-item {{ request()->is('ecorrection') ? 'active' : '' }}">
-                <a href="{{ route('ecorrection') }}" class='sidebar-link'>
-                  <i class="bi bi-clipboard-check-fill"></i>
-                    <span>E-Corection</span>
-                </a>
-            </li>
-        @endif
-    </ul>
+        <livewire:rule-managament-live/>
 
+    </ul>
 </div>

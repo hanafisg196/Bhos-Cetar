@@ -38,7 +38,7 @@ class LoginServiceImpl implements LoginService
         }
         return redirect()->route('dashboard');
     }
-    public function Login(Request $request)
+    public function login(Request $request)
     {
         $username = $request->input('username');
         $password = $request->input('password');
@@ -73,16 +73,13 @@ class LoginServiceImpl implements LoginService
         }
     }
 
-    public function Logout(Request $request)
+    public function logout(Request $request)
     {
-        return $request->session()->forget('user');
-    }
-
-    public function LogoutAdmin(Request $request): RedirectResponse
-    {
-        Auth::logout();
+        $request->session()->forget('user');
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('login');
     }
+
+
 }

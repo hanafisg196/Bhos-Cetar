@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthenticateAdmin
+class AuthKamiPeduliUploader
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,7 @@ class AuthenticateAdmin
     public function handle(Request $request, Closure $next): Response
     {
       $typeRule = [
-         "ADMIN",
-         "KABAG HUKUM",
-         "VERIFIKATOR 2",
-         "VERIFIKATOR 1"
+         "SEKRETARIS"
        ];
          $role = $request->session()->get('user_role');
          if(in_array($role, $typeRule))

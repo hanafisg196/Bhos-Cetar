@@ -49,6 +49,7 @@
                     <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
                         <h6 class="text-white font-semibold">Minggu ini</h6>
                         <h6 class="text-white font-extrabold mb-0">{{ $minggu }}</h6>
+
                     </div>
                 </div>
             </div>

@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Services\AdminService;
-
-
 
 class AdminController extends Controller
 {
@@ -17,14 +14,13 @@ class AdminController extends Controller
 
     public function index()
     {
-       $tahun =  $this->adminService->countReportYear();
-       $bulan =  $this->adminService->countReportMonth();
-       $minggu =  $this->adminService->countReportWeek();
+        $tahun = $this->adminService->countReportYear();
+        $bulan = $this->adminService->countReportMonth();
+        $minggu = $this->adminService->countReportWeek();
         return view('admin.page.dashboard')->with([
             'tahun' => $tahun,
             'bulan' => $bulan,
             'minggu' => $minggu,
         ]);
     }
-
 }

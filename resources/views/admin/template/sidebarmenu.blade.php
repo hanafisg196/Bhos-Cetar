@@ -49,7 +49,7 @@
            </li>
            <li class="sidebar-item has-sub {{ request()->is('ecorrection*') ? 'active' : '' }}">
             <a href="#" class='sidebar-link'>
-               <i class="bi bi-book-fill"></i>
+               <i class="bi bi-calendar2-check-fill"></i>
                 <span>Ecorrection</span>
                 <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 43px; color: black;">
                   <livewire:lah-count />

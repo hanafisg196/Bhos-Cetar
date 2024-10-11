@@ -78,8 +78,11 @@ class DatabaseSeeder extends Seeder
             'nama' => 'SEKRETARIS',
         ]);
         RuleType::create([
-            'nama' => 'VERIFIKATOR',
+            'nama' => 'VERIFIKATOR 1',
         ]);
+        RuleType::create([
+         'nama' => 'VERIFIKATOR 2',
+     ]);
         RuleType::create([
             'nama' => 'BIDANG',
         ]);
