@@ -8,6 +8,7 @@ use App\Models\Ranham;
 use App\Services\ReportHamService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportHamServiceImpl implements ReportHamService
 {
@@ -36,9 +37,9 @@ class ReportHamServiceImpl implements ReportHamService
 
         return $val;
     }
-    public function getUserId(Request $request)
+    public function getUserId()
     {
-        return $request->session()->get('user');
+      return Auth::user();
 
     }
     public function getRanhamByid($id)
@@ -58,8 +59,8 @@ class ReportHamServiceImpl implements ReportHamService
 
     public function getRanhamByUser(Request $request)
     {
-        $user = $this->getUserId($request);
-        return Ranham::where('user_id', $user['pegawai']['nip'])
+        $user = $this->getUserId();
+        return Ranham::where('user_id', $user->id)
             ->latest('updated_at')
             ->paginate(5, ['*'], 'aksi-ham-page');
     }
@@ -71,7 +72,7 @@ class ReportHamServiceImpl implements ReportHamService
 
     public function saveRanham(Request $request)
     {
-        $user = $this->getUserId($request);
+        $user = $this->getUserId();
         $validated = $request->validate([
             'link' => 'required|url',
             'kkp' => 'required',
@@ -79,8 +80,8 @@ class ReportHamServiceImpl implements ReportHamService
         Ranham::create([
             'link' => $validated['link'],
             'kkp_id' => $validated['kkp'],
-            'user_id' => $user['pegawai']['nip'],
-            'name' => $user['pegawai']['nama'],
+            'user_id' => $user->id,
+            'name' => $user->name,
             'code' => $this->generateCode(),
             'catran_id' => $this->getCatRanId(),
         ]);
@@ -133,9 +134,9 @@ class ReportHamServiceImpl implements ReportHamService
 
     public function searchByUser(Request $request, $search)
     {
-        $user = $this->getUserId($request);
+        $user = $this->getUserId();
         return Ranham::where('name', 'like', '%' . $search . '%')
-            ->where('user_id', $user)
+            ->where('user_id', $user->id)
             ->latest()
             ->paginate(5);
     }

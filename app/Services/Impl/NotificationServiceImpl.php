@@ -3,20 +3,18 @@ namespace App\Services\Impl;
 
 use App\Models\Notification;
 use App\Services\NotificationService;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NotificationServiceImpl implements NotificationService {
 
-    public function getUserId(Request $request)
+    public function getUserId()
     {
-        $user = $request->session()->get('user');
-        $user_id = $user['pegawai']['nip'];
-        return $user_id;
+        return Auth::user()->id;
     }
 
     public function getNotify(Request $request) {
-        $user = $this->getUserId($request);
+        $user = $this->getUserId();
         return Notification::where('user_id', $user)
         ->whereHas('schedules', function ($query) {
             $query->whereIn('status', ['Ditolak', 'Disetujui']);
@@ -35,9 +33,8 @@ class NotificationServiceImpl implements NotificationService {
      }
 
     public function count(Request $request){
-        $user = $request->session()->get('user');
-        $user_id = $user['pegawai']['nip'];
-        return Notification::where('user_id', $user_id)->where('notif_read', 0)->count();
+        $user = $this->getUserId();
+        return Notification::where('user_id', $user->id)->where('notif_read', 0)->count();
     }
 
 

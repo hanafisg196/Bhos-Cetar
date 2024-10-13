@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('lbh_id')->nullable();
             $table->unsignedBigInteger('lah_id')->nullable();
             $table->tinyInteger('notif_read')->default(0);
@@ -21,6 +21,7 @@ return new class extends Migration
 
         $table->foreign('lbh_id')->references('id')->on('schedules')->onDelete('set null');
         $table->foreign('lah_id')->references('id')->on('ranhams')->onDelete('set null');
+        $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

@@ -7,7 +7,7 @@ interface ScheduleService {
     public function createSchedule(Request $request);
     public function updateSchedule(Request $request, $id);
     public function getAllSchedules($perPage);
-    public function getUserId(Request $request);
+    public function getUserId();
     public function getSchedulesByUser(Request $request);
     public function getDetailSchedule($id);
     public function deleteSchedule($id);

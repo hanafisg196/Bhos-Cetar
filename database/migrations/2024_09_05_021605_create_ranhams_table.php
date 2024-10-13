@@ -15,14 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->string('link');
-            $table->string('user_id');
             $table->string('name');
             $table->tinyInteger('read')->default(0);
             $table->unsignedBigInteger('kkp_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('status')->default('Usulan');
             $table->string('message')->default('-');
             $table->unsignedBigInteger('catran_id')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('kkp_id')->references('id')->on('kkps');
             $table->foreign('catran_id')->on('category_ranhamns')->references('id')->onDelete('set null');
         });

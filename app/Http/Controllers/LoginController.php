@@ -15,10 +15,10 @@ class LoginController extends Controller
     }
     public function index(Request $request)
     {
-        if($request->session()->has('user') !=null)
-        {
-            return redirect()->route('dashboard');
-        }
+      //   if($request->session()->has('user') !=null)
+      //   {
+      //       return redirect()->route('dashboard');
+      //   }
 
         return view('dashboard.page.login');
     }

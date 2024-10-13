@@ -27,17 +27,17 @@ Route::middleware('user')->group(function () {
     Route::get('/laporan-bantuan-hukum/download/{file}', [ScheduleController::class, 'downloadFile'])->name('schedule.download');
     Route::post('/upload', [UploadFileController::class, 'upload'])->name('upload');
 
-    Route::middleware('kamiPeduliUploader')->group(function () {
+   //  Route::middleware('kamiPeduliUploader')->group(function () {
         Route::get('/laporan-aksi-ham', [ReportHamController::class, 'index'])->name('ranham.home');
         Route::post('/laporan-aksi-ham/create', [ReportHamController::class, 'createRanham'])->name('ranham.create');
         Route::get('/laporan-aksi-ham/detail/{id}', [UpdateAksiHamController::class, 'getRanham'])->name('show.aksi.ham');
         Route::post('/laporan-aksi-ham/update/{id}', [UpdateAksiHamController::class, 'update'])->name('update.aksi.ham');
-    });
+   //  });
 
-    Route::middleware('ecorrectionUploader')->group(function () {
+   //  Route::middleware('ecorrectionUploader')->group(function () {
         Route::get('/ecorrection', [EcorrectionController::class, 'index'])->name('ecorrection');
         Route::post('/ecorrection/create', [EcorrectionController::class, 'createEcor'])->name('ecorrection.create');
-    });
+   //  });
     Route::middleware('admin')->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
         Route::get('/inbox/list/bantuan-hukum', [InboxController::class, 'getListLbh'])->name('admin.list.lbh');

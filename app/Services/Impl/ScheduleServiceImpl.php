@@ -8,17 +8,16 @@ use App\Models\Temporary;
 use App\Services\ScheduleService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class ScheduleServiceImpl implements ScheduleService
 {
 
-    public function getUserId(Request $request)
+    public function getUserId()
     {
-        $user = $request->session()->get('user');
-        return $user['pegawai']['nip'];
-
+       return  Auth::user();
     }
     private function copyFilesFromTmp($tmpFile, $idFile)
     {
@@ -37,7 +36,7 @@ class ScheduleServiceImpl implements ScheduleService
     public function createSchedule(Request $request)
     {
         $sessionId = Session::getId();
-        $user_id = $this->getUserId($request);
+        $user = $this->getUserId();
         $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
         $validated = $request->validate([
             'nama' => 'required|string|max:120',
@@ -47,13 +46,13 @@ class ScheduleServiceImpl implements ScheduleService
             'wa' => 'required|numeric|min:13',
         ]);
             $schedule = Schedule::create([
-                'nip' => $user_id,
+                'nip' => $user->username,
                 'nama' => $validated['nama'],
                 'alamat' => $validated['alamat'],
                 'email' => $validated['email'],
                 'kronologi' => $validated['kronologi'],
                 'wa' => $validated['wa'],
-                'user_id' => $user_id,
+                'user_id' => $user->id,
                 'code' => $this->generateCode()
             ]);
 
@@ -102,8 +101,8 @@ class ScheduleServiceImpl implements ScheduleService
 
     public function getSchedulesByUser(Request $request)
     {
-        $user = $this->getUserId($request);
-        return Schedule::latest('updated_at')->where('user_id', $user)->with('dokumens')
+        $user = $this->getUserId();
+        return Schedule::latest('updated_at')->where('user_id', $user->id)->with('documents')
         ->paginate(5, ['*'], 'bantuan-hukum-page');
     }
 
@@ -117,7 +116,7 @@ class ScheduleServiceImpl implements ScheduleService
 
     public function getDetailSchedule($id)
     {
-        return Schedule::with('dokumens')->find($id);
+        return Schedule::with('documents')->find($id);
     }
 
     public function search($search, $perPage)

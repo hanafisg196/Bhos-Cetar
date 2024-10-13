@@ -20,11 +20,12 @@ return new class extends Migration
             $table->string('email');
             $table->string('wa');
             $table->text('kronologi');
-            $table->string('user_id');
+            $table->unsignedBigInteger('user_id');
             $table->tinyInteger('read')->default(0);
             $table->string('status')->default('Usulan');
             $table->string('message')->default('-');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

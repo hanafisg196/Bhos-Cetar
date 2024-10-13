@@ -2,42 +2,15 @@
 
 namespace App\Services\Impl;
 
-use App\Models\Role;
-use App\Models\Rule;
+use App\Models\User;
 use App\Services\LoginService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
 
 class LoginServiceImpl implements LoginService
 {
-
-    private function setUserSession($request, $data) {
-        $request->session()->put('user', $data);
-    }
-
-    private function getUserFromSession($request) {
-        return $request->session()->get('user');
-    }
-
-    private function isUserValid($user) {
-        return $user && isset($user['jabatan']['nip']);
-    }
-    private function getUserRule($nip) {
-        return Rule::where('nip', $nip)->with('ruleType')->first();
-    }
-
-    private function setUserRuleInSession($request, $rule) {
-        $request->session()->put('user_role', $rule);
-    }
-
-    private function redirectUserBasedOnRule($rule) {
-        if ($rule === 'ADMIN') {
-            return redirect()->route('admin.dashboard');
-        }
-        return redirect()->route('dashboard');
-    }
     public function login(Request $request)
     {
         $username = $request->input('username');
@@ -55,19 +28,26 @@ class LoginServiceImpl implements LoginService
 
         $credentials = $response->json();
         if ($credentials['error'] === false) {
-            $this->setUserSession($request, $credentials['data']);
-            $user = $this->getUserFromSession($request);
+            $data = $credentials['data'];
+            $user = User::where('username', $data['jabatan']['nip'])->first();
 
-            if ($this->isUserValid($user)) {
-                $rule = $this->getUserRule($user['jabatan']['nip']);
-
-                if ($rule) {
-                    $this->setUserRuleInSession($request, $rule->ruleType->nama);
-                    return $this->redirectUserBasedOnRule(session('user_role'));
-                } else {
-                    return back()->with('error', 'Role tidak ditemukan.');
-                }
+            if (!$user) {
+                User::create([
+                    'username' => $data['jabatan']['nip'],
+                    'name' => $data['jabatan']['nama_pegawai'],
+                    'token' => Str::uuid(),
+                ]);
+            } else {
+                $user->update([
+                    'username' => $data['jabatan']['nip'],
+                    'name' => $data['jabatan']['nama_pegawai'],
+                    'token' => Str::uuid(),
+                ]);
             }
+
+            Auth::login($user);
+
+            return redirect()->route('dashboard');
         } else {
             return back()->with('error', $response->json('pesan'));
         }
@@ -80,6 +60,4 @@ class LoginServiceImpl implements LoginService
         $request->session()->regenerateToken();
         return redirect()->route('login');
     }
-
-
 }

@@ -11,7 +11,12 @@ class Schedule extends Model
     protected $primaryKey = 'id';
     protected $guarded = ['id'];
 
-    public function dokumens()
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function documents()
     {
         return $this->hasMany(Document::class, 'schedule_id', 'id');
     }

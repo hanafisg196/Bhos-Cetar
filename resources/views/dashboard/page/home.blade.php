@@ -46,7 +46,7 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    @foreach ($bantuan as $key['dokumens'] =>  $item)
+                                    @foreach ($bantuan as $key['documents'] =>  $item)
                                    <tbody>
                                         <tr style="margin-bottom: 0; padding-bottom: 0;">
                                             <td class="col-auto" style="padding: 5px 0;">
@@ -94,7 +94,7 @@
                                                     <p><strong>Alamat : </strong>{{ $item->alamat }}</p>
                                                     <p><strong>Kronologi : </strong>{{ $item->kronologi }}</p>
                                                     <p style="margin-bottom: -2px;"><strong>Dokument :
-                                                    @foreach ($item['dokumens'] as $value)
+                                                    @foreach ($item['documents'] as $value)
                                                     <p style="margin: 0px;">
                                                      </strong>{{ strCut($value->file) }}
                                                         <a style="size: 15px; margin-left: 10px;" href="{{route('schedule.download', ['file' => strCut($value->file)])}}"  >

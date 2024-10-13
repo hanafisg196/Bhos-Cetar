@@ -11,6 +11,11 @@ class Ranham extends Model
     protected $primaryKey = 'id';
     protected $guarded = ['id'];
 
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
     public function kkps()
     {
         return $this->belongsTo(Kkp::class, 'kkp_id', 'id');

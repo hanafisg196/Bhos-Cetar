@@ -13,4 +13,5 @@ interface RoleService{
     public function deleteRuleEmployee($id);
     public function kamiPeduliUploader(Request $request);
     public function ecorrectionUploader(Request $request);
+    public function ecorrectionAdmin( $request);
 }

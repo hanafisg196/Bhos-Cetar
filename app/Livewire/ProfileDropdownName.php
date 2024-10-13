@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Services\ProfileService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ProfileDropdownName extends Component
@@ -17,10 +18,9 @@ class ProfileDropdownName extends Component
         $this->profileService = $profileService;
 
     }
-    public function render(Request $request)
+    public function render()
     {
-        $data = $this->profileService->getCardName($request);
-        $fullName = $data["pegawai"]['nama'];
+        $fullName = Auth::user()->name;
         $firstName = explode(' ', $fullName)[0];
         return view('livewire.profile-dropdown-name')->with('firstName', $firstName);
     }

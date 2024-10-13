@@ -7,13 +7,14 @@ use App\Models\Ecorrection;
 use App\Models\Temporary;
 use App\Services\EcorrectionService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class EcorrectionServiceImpl implements EcorrectionService {
 
-   private function getUser(Request $request){
-       return $request->session()->get('user');
+   private function getUser(){
+       return Auth::user();
    }
    private function generateCode(){
       $prefix = 'ECOR';
@@ -37,16 +38,16 @@ class EcorrectionServiceImpl implements EcorrectionService {
 
    public function createData(Request $request){
       $sessionId = Session::getId();
-      $user = $this->getUser($request);
+      $user = $this->getUser();
       $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
       $validate = $request->validate([
          'judul' => 'required|string|max:120',
       ]);
       $ecorrection  = Ecorrection::create([
          'title' => $validate['judul'],
-         'user_id' => $user['pegawai']['nip'],
-         'nip' => $user['pegawai']['nip'],
-         'nama' => $user['pegawai']['nama'],
+         'user_id' => $user->id,
+         'nip' => $user->username,
+         'nama' => $user->name,
          'code' => $this->generateCode(),
       ]);
       $ecorrection_id = $ecorrection->id;
