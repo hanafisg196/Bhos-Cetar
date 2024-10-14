@@ -18,16 +18,12 @@ class AuthEcorrectionUploader
      */
     public function handle(Request $request, Closure $next): Response
     {
-      $userId = Auth::user()->id;
-      $user = User::find($userId);
-      $rule = ['KABID'];
-      $hasRole = $user->rules()->whereIn('nama', $rule);
-         if($hasRole)
-         {
-             return $next($request);
-         }
-         else {
-               abort(404);
-         }
+      $accesRule = ['KABID'];
+      $userHasAccess = Auth::user()->rules->pluck('nama')->intersect($accesRule)->isNotEmpty();
+      if ($userHasAccess) {
+          return $next($request);
+      } else {
+          abort(404);
+      }
     }
 }

@@ -12,7 +12,8 @@ return new class extends Migration {
     {
         Schema::create('rule_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('nip');
+            $table->foreign('nip')->references('nip')->on('users')->onDelete('cascade');
             $table->foreignId('rule_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

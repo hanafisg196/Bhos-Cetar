@@ -17,16 +17,12 @@ class AuthKamiPeduliUploader
      */
     public function handle(Request $request, Closure $next): Response
     {
-      $userId = Auth::user()->id;
-      $user = User::find($userId);
-      $rule = ['SEKRETARIS'];
-      $hasRule = $user->rules()->whereIn('nama', $rule);
-         if($hasRule)
-         {
-             return $next($request);
-         }
-         else {
-               abort(404);
-         }
+      $accesRule = ['SEKRETARIS'];
+      $userHasAccess = Auth::user()->rules->pluck('nama')->intersect($accesRule)->isNotEmpty();
+        if ($userHasAccess) {
+            return $next($request);
+        } else {
+            abort(404);
+        }
     }
 }

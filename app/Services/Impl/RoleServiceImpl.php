@@ -15,7 +15,7 @@ class RoleServiceImpl implements RoleService
         return Rule::latest()->paginate(10);
     }
     private function getUserRole($rule){
-     return  Auth::user()->rules->contains('nama',$rule);
+     return  Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
 
     }
 
@@ -69,19 +69,16 @@ class RoleServiceImpl implements RoleService
 
     public function kamiPeduliUploader( ){
         $accesRule = ['SEKRETARIS'];
-        $userRule = $this->getUserRole($accesRule);
-        return in_array($userRule, $accesRule);
+        return $this->getUserRole($accesRule);
     }
 
     public function ecorrectionUploader( ){
       $accesRule = ['KABID'];
-      $userRule=  $this->getUserRole($accesRule);
-      return in_array($userRule, $accesRule);
+      return $this->getUserRole($accesRule);
     }
 
     public function ecorrectionAdmin( ){
       $accesRule = ['ADMIN', 'KABAG', 'VERIFIKATOR 2'];
-      $userRule =  $this->getUserRole($accesRule);
-      return in_array($userRule, $accesRule);
+      return $this->getUserRole($accesRule);
     }
 }

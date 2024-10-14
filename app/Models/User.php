@@ -19,6 +19,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'username',
+        'nip',
+        'jabatan',
         'token'
     ];
 
@@ -64,6 +66,6 @@ class User extends Authenticatable
     }
     public function rules()
     {
-      return $this->belongsToMany(Rule::class)->withTimestamps();
+      return $this->belongsToMany(Rule::class, 'rule_user', 'nip', 'rule_id', 'nip', 'id');
     }
 }

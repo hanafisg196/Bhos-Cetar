@@ -36,13 +36,17 @@ class LoginServiceImpl implements LoginService
                 $user = User::create([
                     'username' => $data['jabatan']['nip'],
                     'name' => $data['jabatan']['nama_pegawai'],
+                    'nip' => $data['jabatan']['nip'],
+                    'jabatan' => $data['jabatan']['nama'],
                     'token' => $token
                 ]);
             } else {
                 $user->update([
-                    'username' => $data['jabatan']['nip'],
-                    'name' => $data['jabatan']['nama_pegawai'],
-                    'token' => $token
+                  'username' => $data['jabatan']['nip'],
+                  'name' => $data['jabatan']['nama_pegawai'],
+                  'nip' => $data['jabatan']['nip'],
+                  'jabatan' => $data['jabatan']['nama'],
+                  'token' => $token
                 ]);
             }
             Auth::login($user);

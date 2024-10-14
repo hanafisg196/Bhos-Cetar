@@ -13,6 +13,6 @@ class Rule extends Model
 
     public function users()
     {
-      return $this->belongsToMany(User::class)->withTimestamps();
+      return $this->belongsToMany(Rule::class, 'rule_user', 'nip', 'rule_id', 'nip', 'id');
     }
 }

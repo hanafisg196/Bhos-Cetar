@@ -17,11 +17,10 @@ class AuthEcorrectionAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $userId = Auth::user()->id;
-        $user = User::find($userId);
-        $rule = ['ADMIN', 'KABAG', 'VERIFIKATOR 2'];
-        $hasRole = $user->rules()->whereIn('nama', $rule);
-        if ($hasRole) {
+
+        $accesRule = ['ADMIN', 'KABAG', 'VERIFIKATOR 2'];
+        $userHasAccess = Auth::user()->rules->pluck('nama')->intersect($accesRule)->isNotEmpty();
+        if ($userHasAccess) {
             return $next($request);
         } else {
             abort(404);
