@@ -68,17 +68,20 @@ class RoleServiceImpl implements RoleService
     }
 
     public function kamiPeduliUploader( ){
-        $rule = ['SEKRETARIS'];
-       return  $this->getUserRole($rule);
+        $accesRule = ['SEKRETARIS'];
+        $userRule = $this->getUserRole($accesRule);
+        return in_array($userRule, $accesRule);
     }
 
     public function ecorrectionUploader( ){
-      $rule = ['KABID'];
-      return  $this->getUserRole($rule);
+      $accesRule = ['KABID'];
+      $userRule=  $this->getUserRole($accesRule);
+      return in_array($userRule, $accesRule);
     }
 
     public function ecorrectionAdmin( ){
-      $rule = ['ADMIN', 'KABAG', 'VERIFIKATOR 2'];
-      return  $this->getUserRole($rule);
+      $accesRule = ['ADMIN', 'KABAG', 'VERIFIKATOR 2'];
+      $userRule =  $this->getUserRole($accesRule);
+      return in_array($userRule, $accesRule);
     }
 }

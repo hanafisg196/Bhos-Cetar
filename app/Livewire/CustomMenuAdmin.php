@@ -13,14 +13,14 @@ class CustomMenuAdmin extends Component
    {
        $this->roleService = $roleService;
    }
-   public function mount(Request $request)
+   public function mount()
    {
-       $this->checkAdmin($request);
+       $this->checkAdmin();
    }
 
-   public function checkAdmin($request)
+   public function checkAdmin()
    {
-       $this->checkAccess = $this->roleService->ecorrectionAdmin($request);
+       $this->checkAccess = $this->roleService->ecorrectionAdmin();
 
    }
     public function render()

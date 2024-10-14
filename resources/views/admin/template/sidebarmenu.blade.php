@@ -48,7 +48,6 @@
                </ul>
            </li>
            <livewire:custom-menu-admin/>
-
          </li>
       </div>
     </ul>
