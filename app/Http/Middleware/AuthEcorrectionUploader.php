@@ -2,8 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Rule;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthEcorrectionUploader
@@ -15,11 +18,11 @@ class AuthEcorrectionUploader
      */
     public function handle(Request $request, Closure $next): Response
     {
-      $typeRule = [
-         "KEPALA BIDANG"
-       ];
-         $role = $request->session()->get('user_role');
-         if(in_array($role, $typeRule))
+      $userId = Auth::user()->id;
+      $user = User::find($userId);
+      $rule = ['KABID'];
+      $hasRole = $user->rules()->whereIn('nama', $rule);
+         if($hasRole)
          {
              return $next($request);
          }

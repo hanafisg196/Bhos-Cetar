@@ -20,12 +20,12 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-      //   User::factory()->create([
-      //       'name' => 'Test User',
-      //       'username' => 'email@example.com',
-      //       'password' => 'rahasia',
-      //       'role' => 1,
-      //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test User',
+        //       'username' => 'email@example.com',
+        //       'password' => 'rahasia',
+        //       'role' => 1,
+        //   ]);
 
         Kkp::create([
             'name' => 'Hak Atas Informasi',
@@ -68,29 +68,25 @@ class DatabaseSeeder extends Seeder
             'nama' => 'B-012',
         ]);
 
-   //      RuleType::create([
-   //          'nama' => 'ADMIN',
-   //      ]);
-   //      RuleType::create([
-   //          'nama' => 'KABAG HUKUM',
-   //      ]);
-   //      RuleType::create([
-   //          'nama' => 'SEKRETARIS',
-   //      ]);
-   //      RuleType::create([
-   //          'nama' => 'VERIFIKATOR 1',
-   //      ]);
-   //      RuleType::create([
-   //       'nama' => 'VERIFIKATOR 2',
-   //   ]);
-   //      RuleType::create([
-   //          'nama' => 'BIDANG',
-   //      ]);
-   //      Rule::create([
-   //          'nama' => 'Abdul Haris',
-   //          'nip' => '199101052015031001',
-   //          'rule_id' => 4,
-   //          'id_opd' => 9,
-   //      ]);
+        Rule::create([
+            'nama' => 'ADMIN',
+        ]);
+        Rule::create([
+            'nama' => 'KABAG',
+        ]);
+        Rule::create([
+            'nama' => 'SEKRETARIS',
+        ]);
+        Rule::create([
+            'nama' => 'KABID',
+        ]);
+        Rule::create([
+            'nama' => 'VERIFIKATOR 1',
+        ]);
+        Rule::create([
+            'nama' => 'VERIFIKATOR 2',
+        ]);
+
+
     }
 }

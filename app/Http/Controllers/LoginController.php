@@ -15,10 +15,10 @@ class LoginController extends Controller
     }
     public function index(Request $request)
     {
-      //   if($request->session()->has('user') !=null)
-      //   {
-      //       return redirect()->route('dashboard');
-      //   }
+        if(Auth::user() !=null)
+        {
+            return redirect()->route('dashboard');
+        }
 
         return view('dashboard.page.login');
     }
@@ -27,8 +27,8 @@ class LoginController extends Controller
         return  $this->loginService->login($request);
     }
 
-    public function doLogout(Request $request) {
-        $this->loginService->logout($request);
+    public function doLogout() {
+        $this->loginService->logout();
         return redirect()->route('login');
     }
 

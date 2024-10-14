@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticateAdmin
@@ -15,14 +17,11 @@ class AuthenticateAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-      $typeRule = [
-         "ADMIN",
-         "KABAG HUKUM",
-         "VERIFIKATOR 2",
-         "VERIFIKATOR 1"
-       ];
-         $role = $request->session()->get('user_role');
-         if(in_array($role, $typeRule))
+      $userId = Auth::user()->id;
+      $user = User::find($userId);
+      $rule = ['ADMIN', 'KABAG', 'VERIFIKATOR 1', 'VERIFIKATOR 2'];
+      $hasAnyRole = $user->rules()->whereIn('nama', $rule);
+         if($hasAnyRole)
          {
              return $next($request);
          }

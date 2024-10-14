@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationServiceImpl implements NotificationService {
 
-    public function getUserId()
+    private function getUser()
     {
-        return Auth::user()->id;
+        return Auth::user();
     }
 
     public function getNotify(Request $request) {
-        $user = $this->getUserId();
-        return Notification::where('user_id', $user)
+        $user = $this->getUser();
+        return Notification::where('user_id', $user->id)
         ->whereHas('schedules', function ($query) {
             $query->whereIn('status', ['Ditolak', 'Disetujui']);
         })
@@ -32,8 +32,8 @@ class NotificationServiceImpl implements NotificationService {
         ]);
      }
 
-    public function count(Request $request){
-        $user = $this->getUserId();
+    public function count(){
+        $user = $this->getUser();
         return Notification::where('user_id', $user->id)->where('notif_read', 0)->count();
     }
 

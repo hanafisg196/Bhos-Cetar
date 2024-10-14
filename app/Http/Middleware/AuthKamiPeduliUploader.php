@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthKamiPeduliUploader
@@ -15,11 +17,11 @@ class AuthKamiPeduliUploader
      */
     public function handle(Request $request, Closure $next): Response
     {
-      $typeRule = [
-         "SEKRETARIS"
-       ];
-         $role = $request->session()->get('user_role');
-         if(in_array($role, $typeRule))
+      $userId = Auth::user()->id;
+      $user = User::find($userId);
+      $rule = ['SEKRETARIS'];
+      $hasRule = $user->rules()->whereIn('nama', $rule);
+         if($hasRule)
          {
              return $next($request);
          }

@@ -5,6 +5,7 @@ use App\Models\Rule;
 use App\Models\RuleType;
 use App\Services\RoleService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class RoleServiceImpl implements RoleService
@@ -13,8 +14,9 @@ class RoleServiceImpl implements RoleService
     {
         return Rule::latest()->paginate(10);
     }
-    private function getUserRole($request){
-     return  $request->session()->get('user_role');
+    private function getUserRole($rule){
+     return  Auth::user()->rules->contains('nama',$rule);
+
     }
 
     public function getEmployee()
@@ -35,7 +37,7 @@ class RoleServiceImpl implements RoleService
     }
     public function getRuleType()
     {
-        return RuleType::latest()->get();
+        return Rule::latest()->get();
     }
 
     public function setRuleEmployee(Request $request)
@@ -65,30 +67,18 @@ class RoleServiceImpl implements RoleService
       $employee->delete();
     }
 
-    public function kamiPeduliUploader( $request){
-      $role = $this->getUserRole($request);
-
-      $typeRule = [
-         "SEKRETARIS",
-       ];
-       return in_array($role, $typeRule);
+    public function kamiPeduliUploader( ){
+        $rule = ['SEKRETARIS'];
+       return  $this->getUserRole($rule);
     }
 
-    public function ecorrectionUploader( $request){
-      $role = $this->getUserRole($request);
-      $typeRule = [
-         "KEPALA BIDANG",
-       ];
-       return in_array($role, $typeRule);
+    public function ecorrectionUploader( ){
+      $rule = ['KABID'];
+      return  $this->getUserRole($rule);
     }
 
-    public function ecorrectionAdmin( $request){
-      $role = $this->getUserRole($request);
-      $typeRule = [
-         "ADMIN",
-         "KABAG HUKUM",
-         "VERIFIKATOR 2",
-       ];
-       return in_array($role, $typeRule);
+    public function ecorrectionAdmin( ){
+      $rule = ['ADMIN', 'KABAG', 'VERIFIKATOR 2'];
+      return  $this->getUserRole($rule);
     }
 }

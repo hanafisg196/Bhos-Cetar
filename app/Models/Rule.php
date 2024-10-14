@@ -11,8 +11,8 @@ class Rule extends Model
     protected $primaryKey = 'id';
     protected $guarded = ['id'];
 
-    public function ruleType()
+    public function users()
     {
-        return $this->belongsTo(RuleType::class, 'rule_id', 'id');
+      return $this->belongsToMany(User::class)->withTimestamps();
     }
 }

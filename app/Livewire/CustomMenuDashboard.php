@@ -15,16 +15,16 @@ class CustomMenuDashboard extends Component
    {
        $this->roleService = $roleService;
    }
-   public function mount(Request $request)
+   public function mount()
    {
-       $this->checkUploader($request);
+       $this->checkUploader();
    }
 
-   public function checkUploader($request)
+   public function checkUploader()
    {
-       $this->checkUploaderOne = $this->roleService->kamiPeduliUploader($request);
+       $this->checkUploaderOne = $this->roleService->kamiPeduliUploader();
        if (!$this->checkUploaderOne) {
-           $this->checkUploaderTwo = $this->roleService->ecorrectionUploader($request);
+           $this->checkUploaderTwo = $this->roleService->ecorrectionUploader();
        }
    }
     public function render()

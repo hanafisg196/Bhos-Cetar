@@ -8,6 +8,7 @@ use App\Models\Rule;
 use App\Services\ReportHamService;
 use App\Services\ScheduleService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class DashboardController extends Controller
@@ -29,6 +30,8 @@ class DashboardController extends Controller
             'ranham' => $ranham,
             'role' => $role
         ]);
+
+
     }
 
 }

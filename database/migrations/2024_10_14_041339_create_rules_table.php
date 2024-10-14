@@ -14,11 +14,7 @@ return new class extends Migration
         Schema::create('rules', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('nip');
-            $table->string('id_opd');
-            $table->unsignedBigInteger('rule_id');
             $table->timestamps();
-            $table->foreign('rule_id')->on('rule_types')->references('id');
         });
     }
 

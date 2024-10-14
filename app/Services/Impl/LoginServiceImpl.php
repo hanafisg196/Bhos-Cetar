@@ -13,8 +13,10 @@ class LoginServiceImpl implements LoginService
 {
     public function login(Request $request)
     {
+
         $username = $request->input('username');
         $password = $request->input('password');
+        $token = Str::uuid();
 
         $response = Http::asMultipart()
             ->withHeaders([
@@ -30,34 +32,34 @@ class LoginServiceImpl implements LoginService
         if ($credentials['error'] === false) {
             $data = $credentials['data'];
             $user = User::where('username', $data['jabatan']['nip'])->first();
-
             if (!$user) {
-                User::create([
+                $user = User::create([
                     'username' => $data['jabatan']['nip'],
                     'name' => $data['jabatan']['nama_pegawai'],
-                    'token' => Str::uuid(),
+                    'token' => $token
                 ]);
             } else {
                 $user->update([
                     'username' => $data['jabatan']['nip'],
                     'name' => $data['jabatan']['nama_pegawai'],
-                    'token' => Str::uuid(),
+                    'token' => $token
                 ]);
             }
-
             Auth::login($user);
-
-            return redirect()->route('dashboard');
+            $hasRule = $user->rules->contains('nama', 'ADMIN');
+            if ($hasRule) {
+                return redirect()->route('admin.dashboard');
+            } else {
+                return redirect()->route('dashboard');
+            }
         } else {
             return back()->with('error', $response->json('pesan'));
         }
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        $request->session()->forget('user');
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        Auth::logout();
         return redirect()->route('login');
     }
 }
