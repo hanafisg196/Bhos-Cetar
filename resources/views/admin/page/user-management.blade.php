@@ -38,19 +38,24 @@
                                 <tbody>
                                     @foreach ($data as $item)
                                         <tr>
-                                            <td class="text-bold-500">{{ $item->nama }}</td>
+                                            <td class="text-bold-500">{{ $item->name }}</td>
                                             <td>{{ $item->nip }}</td>
-                                            <td class="text-bold-500">{{ $item->ruleType->nama }}</td>
+                                            @foreach ($item['rules'] as $value)
+                                                <td class="text-bold-500">{{ $value->nama }}</td>
+                                            @endforeach
                                             <td>
-                                             <div class="d-flex gap-2">
-                                                 <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">Edit</button>
+                                                <div class="d-flex gap-2">
+                                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                                        data-bs-target="#modal-{{ $item->id }}">Edit</button>
 
-                                                 <form action="{{ route('admin.dashboard.rule.delete', encrypt($item->id)) }}" method="POST" class="d-inline">
-                                                     @csrf
-                                                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                                 </form>
-                                             </div>
-                                         </td>
+                                                    <form
+                                                        action="{{ route('admin.dashboard.rule.delete', encrypt($item->id)) }}"
+                                                        method="POST" class="d-inline">
+                                                        @csrf
+                                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </td>
 
                                         </tr>
                                         <div class="modal fade text-left" id="modal-{{ $item->id }}" tabindex="-1"
@@ -65,8 +70,7 @@
                                                             <i data-feather="x"></i>
                                                         </button>
                                                     </div>
-                                                    <form
-                                                        class="form"action="{{ route('admin.dashboard.rule.update', encrypt($item->id)) }}"
+                                                    <form class="form"action="{{ route('admin.dashboard.rule.update', encrypt($item->id)) }}"
                                                         method="post" id="inputForm">
                                                         @csrf
                                                         <div class="modal-body">

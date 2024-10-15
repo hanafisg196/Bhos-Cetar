@@ -3,6 +3,7 @@ namespace App\Services\Impl;
 
 use App\Models\Rule;
 use App\Models\RuleType;
+use App\Models\User;
 use App\Services\RoleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,13 +11,13 @@ use Illuminate\Support\Facades\Http;
 
 class RoleServiceImpl implements RoleService
 {
-    public function getRole()
+    public function getEmployeeHasAccess()
     {
-        return Rule::latest()->paginate(10);
+        return User::withWhereHas('rules')->latest()->paginate(5);
     }
-    private function getUserRole($rule){
-     return  Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
-
+    private function getUserRole($rule)
+    {
+        return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
     }
 
     public function getEmployee()
@@ -43,42 +44,47 @@ class RoleServiceImpl implements RoleService
     public function setRuleEmployee(Request $request)
     {
         $validated = $request->validate([
-            'nama' => 'required',
             'nip' => 'required',
             'rule_id' => 'required',
-            'id_opd' => 'required'
         ]);
-        Rule::create($validated);
-
+        $user = User::where('nip', $validated['nip'])->first();
+        if ($user) {
+            $user->rules()->attach($validated['rule_id']);
+        }
+        return back()->with('success', 'Rule berhasil ditambahkan ke user.');
     }
-    public function updateRuleEmployee(Request $request,$id){
-      $employee = Rule::find($id);
-      $validated = $request->validate([
-         'rule' => 'required',
-      ]);
-      $employee->update([
-         'rule_id' => $validated['rule']
-      ]);
-
-    }
-
-    public function deleteRuleEmployee($id){
-      $employee = Rule::find($id);
-      $employee->delete();
+    public function updateRuleEmployee(Request $request, $id)
+    {
+        $employee = Rule::find($id);
+        $validated = $request->validate([
+            'rule' => 'required',
+        ]);
+        $employee->update([
+            'rule_id' => $validated['rule'],
+        ]);
     }
 
-    public function kamiPeduliUploader( ){
+    public function deleteRuleEmployee($id)
+    {
+        $employee = Rule::find($id);
+        $employee->delete();
+    }
+
+    public function kamiPeduliUploader()
+    {
         $accesRule = ['SEKRETARIS'];
         return $this->getUserRole($accesRule);
     }
 
-    public function ecorrectionUploader( ){
-      $accesRule = ['KABID'];
-      return $this->getUserRole($accesRule);
+    public function ecorrectionUploader()
+    {
+        $accesRule = ['KABID'];
+        return $this->getUserRole($accesRule);
     }
 
-    public function ecorrectionAdmin( ){
-      $accesRule = ['ADMIN', 'KABAG', 'VERIFIKATOR 2'];
-      return $this->getUserRole($accesRule);
+    public function ecorrectionAdmin()
+    {
+        $accesRule = ['ADMIN', 'KABAG', 'VERIFIKATOR 2'];
+        return $this->getUserRole($accesRule);
     }
 }

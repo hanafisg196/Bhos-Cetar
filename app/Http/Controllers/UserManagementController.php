@@ -15,7 +15,7 @@ class UserManagementController extends Controller
     }
     public function index(){
 
-        $data = $this->roleService->getRole();
+        $data = $this->roleService->getEmployeeHasAccess();
         $rule = $this->roleService->getRuleType();
         return view('admin.page.user-management')->with([
          'data' => $data,
