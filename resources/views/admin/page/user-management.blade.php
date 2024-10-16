@@ -14,8 +14,7 @@
             </div>
         </div>
     @endif
-    <section class="section mt-10">
-      <livewire:opd-option/>
+   <section class="section mt-10">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
                 <div class="card">
@@ -115,6 +114,8 @@
                 </div>
             </div>
         </div>
+
+
     </section>
 
 @endsection

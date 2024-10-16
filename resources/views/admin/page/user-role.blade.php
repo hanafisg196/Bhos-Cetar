@@ -22,7 +22,7 @@
                <div class="col-md-8 mb-4">
                   <h6>Pilih OPD</h6>
                   <div class="form-group">
-                     <select class="choices form-select">
+                     <select class="choices form-select"  id="opdSelect" onchange="filterEmployees()">
                         @foreach ($opd as $item)
                         <option value="{{$item->kode_jabatan}}">{{$item->nama}}</option>
                         @endforeach
@@ -30,7 +30,6 @@
                   </div>
               </div>
             </div>
-
             <div class="card-body">
                 @foreach ($data['pegawai'] as $item)
                     <div class="accordion accordion-flush" id="accordion-{{$item['id_opd_jabatan'] }}">
@@ -127,5 +126,6 @@
     </div>
 </div>
 </section>
+@include('dashboard.component.select-option')
 @include('dashboard.component.button-loading')
 @endsection

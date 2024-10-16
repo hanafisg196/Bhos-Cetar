@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/dist/assets/extensions/sweetalert2-11.12.4/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"/>
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     @livewireStyles
 </head>
 
@@ -53,15 +54,18 @@
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="/dist/assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
     <script src="/dist/assets/extensions/sweetalert2-11.12.4/dist/sweetalert2.all.min.js"></script>
     <script src="/dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/dist/assets/compiled/js/app.js"></script>
     <script src="/dist/assets/static/js/pages/form-element-select.js"></script>
+
     @include('dashboard.component.sweet-toast')
     @include('dashboard.component.sweet-toast-error')
     @yield('script')
     @livewireScripts
+
 </body>
 
 </html>

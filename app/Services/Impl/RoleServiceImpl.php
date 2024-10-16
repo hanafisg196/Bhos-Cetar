@@ -117,6 +117,6 @@ class RoleServiceImpl implements RoleService
     }
 
     public function getOpdEmployee(){
-      return OpdList::latest()->get();
+      return OpdList::all();
     }
 }
