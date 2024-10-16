@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 
 interface RoleService{
     public function getEmployeeHasAccess();
-    public function getEmployee();
     public function getRuleType();
     public function setRuleEmployee(Request $request);
     public function updateRuleEmployee(Request $request,$id);
@@ -14,4 +13,6 @@ interface RoleService{
     public function kamiPeduliUploader();
     public function ecorrectionUploader();
     public function ecorrectionAdmin();
+    public function getEmployee($code);
+    public function getOpdEmployee();
 }

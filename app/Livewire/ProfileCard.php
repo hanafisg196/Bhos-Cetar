@@ -18,9 +18,9 @@ class ProfileCard extends Component
 
     }
 
-    public function render(Request $request)
+    public function render()
     {
-        $data = $this->profileService->getCardName($request);
+        $data = $this->profileService->getCardName();
         return view('livewire.profile-card')->with('data', $data);
     }
 }

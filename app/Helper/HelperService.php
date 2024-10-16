@@ -15,6 +15,16 @@ if (!function_exists('trimString')) {
     }
 }
 
+if (!function_exists('trimName')) {
+   function trimName($string) {
+       $words = explode(' ', $string);
+       $limit = 2;
+       $replace = '....';
+       $string = count($words) > $limit ? implode(' ', array_slice($words, 0, $limit)) . $replace : $string;
+       return $string;
+   }
+}
+
 if (!function_exists('encrypt')) {
     function encrypt($value) {
       return Crypt::encrypt($value);

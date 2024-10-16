@@ -44,7 +44,7 @@
                     <h7 class="sidebar-label" style="margin-left: 10px;">
                         Lampiran
                     </h7>
-                    @foreach ($data['dokumens'] as $item)
+                    @foreach ($data['documents'] as $item)
                         <ul class="list-unstyled mb-1">
                             <li class="cursor-pointer pb-25" style="margin-left: 10px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center;">

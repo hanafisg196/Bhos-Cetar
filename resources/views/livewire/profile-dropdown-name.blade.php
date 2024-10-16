@@ -1,4 +1,4 @@
 <div>
     {{-- The Master doesn't talk, he acts. --}}
-    <h6 class="dropdown-header">Hallo, Namamu!</h6>
+    <h6 class="dropdown-header">Hallo, {{$firstName}}!</h6>
 </div>

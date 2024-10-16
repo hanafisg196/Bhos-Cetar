@@ -58,6 +58,7 @@
     <script src="/dist/assets/compiled/js/app.js"></script>
     <script src="/dist/assets/static/js/pages/form-element-select.js"></script>
     @include('dashboard.component.sweet-toast')
+    @include('dashboard.component.sweet-toast-error')
     @yield('script')
     @livewireScripts
 </body>

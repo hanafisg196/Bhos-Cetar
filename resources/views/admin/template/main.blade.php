@@ -7,6 +7,7 @@
     <title>Dashboard - Admin Bhos-Cetar</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="icon" href="/dist/assets/compiled/jpg/logotanahdatar.png" type="image/x-icon">
+    <link rel="stylesheet" href="/dist/assets/extensions/choices.js/public/assets/styles/choices.css">
     <link rel="stylesheet" href="/dist/assets/compiled/css/app.css">
     <link rel="stylesheet" href="/dist/assets/compiled/css/application-email.css">
     <link rel="stylesheet" href="/dist/assets/compiled/css/iconly.css">
@@ -52,11 +53,13 @@
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
     <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
     <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script src="/dist/assets/extensions/choices.js/public/assets/scripts/choices.js"></script>
     <script src="/dist/assets/extensions/sweetalert2-11.12.4/dist/sweetalert2.all.min.js"></script>
     <script src="/dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/dist/assets/compiled/js/app.js"></script>
     <script src="/dist/assets/static/js/pages/form-element-select.js"></script>
     @include('dashboard.component.sweet-toast')
+    @include('dashboard.component.sweet-toast-error')
     @yield('script')
     @livewireScripts
 </body>

@@ -19,15 +19,18 @@
     <div class="col-12 col-md-10">
         <div class="card d-flex justify-content-center">
             <div class="card-header">
-                <form action="">
-                    <div class="form-group position-relative has-icon-right  col-6">
-                        <input type="text" class="form-control" placeholder="Masukan Kode Jabatan">
-                        <div class="form-control-icon">
-                            <i class="bi bi-search"></i>
-                        </div>
-                    </div>
-                </form>
+               <div class="col-md-8 mb-4">
+                  <h6>Pilih OPD</h6>
+                  <div class="form-group">
+                     <select class="choices form-select">
+                        @foreach ($opd as $item)
+                        <option value="{{$item->kode_jabatan}}">{{$item->nama}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+              </div>
             </div>
+
             <div class="card-body">
                 @foreach ($data['pegawai'] as $item)
                     <div class="accordion accordion-flush" id="accordion-{{$item['id_opd_jabatan'] }}">
@@ -75,13 +78,17 @@
                                     id="inputForm">
                                     @csrf
                                     <div class="modal-body">
+                                       <input type="text"class="form-control" name="username"
+                                            value="{{ $item['nip'] }}" hidden>
+                                        <label for="nama">Nama</label>
                                         <label for="nip">NIP</label>
                                         <input type="text"class="form-control" name="nip"
                                             value="{{ $item['nip'] }}" readonly>
-                                        <input type="text"class="form-control" name="id_opd"
-                                            value="{{ $item['id_opd'] }}" hidden>
+                                        <label for="nip">JABATAN</label>
+                                        <input type="text"class="form-control" name="jabatan"
+                                            value="{{ $item['nama_jabatan'] }}" readonly>
                                         <label for="nama">Nama</label>
-                                        <input type="text" class="form-control" name="nama"
+                                        <input type="text" class="form-control" name="name"
                                             value="{{ $item['nama_pegawai'] }}" readonly>
                                         <label for="nip">Rule</label>
                                         <select name="rule_id" class="form-select" id="basicSelect">

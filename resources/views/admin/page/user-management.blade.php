@@ -15,6 +15,7 @@
         </div>
     @endif
     <section class="section mt-10">
+      <livewire:opd-option/>
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
                 <div class="card">
@@ -40,9 +41,7 @@
                                         <tr>
                                             <td class="text-bold-500">{{ $item->name }}</td>
                                             <td>{{ $item->nip }}</td>
-                                            @foreach ($item['rules'] as $value)
-                                                <td class="text-bold-500">{{ $value->nama }}</td>
-                                            @endforeach
+                                            <td class="text-bold-500">{{ $item['rules'][0]['nama'] }}</td>
                                             <td>
                                                 <div class="d-flex gap-2">
                                                     <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
@@ -74,21 +73,16 @@
                                                         method="post" id="inputForm">
                                                         @csrf
                                                         <div class="modal-body">
-                                                            <p>{{ $item->nama }}</p>
-                                                            <select name="rule" class="form-select" id="basicSelect">
-                                                                @foreach ($rule as $value)
-                                                                    @if (old('rule', $item['rule_id']) == $value->id)
-                                                                    <option value="{{ $value->id }}" selected>
+                                                         <p>{{ $item->nama }}</p>
+                                                         <select name="rule" class="form-select" id="basicSelect">
+                                                             @foreach ($rule as $value)
+                                                                 <option value="{{ $value->id }}"
+                                                                     {{ old('rule', $item['rules'][0]['id']) == $value->id ? 'selected' : '' }}>
                                                                      {{ $value->nama }}
                                                                  </option>
-                                                                    @else
-                                                                        <option value="{{ $value->id }}">
-                                                                            {{ $value->nama }}
-                                                                        </option>
-                                                                    @endif
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
+                                                             @endforeach
+                                                         </select>
+                                                     </div>
                                                         <div class="modal-footer">
                                                             <div class="col-12 d-flex justify-content-end">
                                                                 <button type="button" class="btn"
@@ -122,4 +116,5 @@
             </div>
         </div>
     </section>
+
 @endsection

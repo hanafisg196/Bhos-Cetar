@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <label for="email-id-column">Dokumen</label>
-                                        @foreach ($data['dokumens'] as $item)
+                                        @foreach ($data['documents'] as $item)
                                         <ul class="list-unstyled mb-2">
                                             <li class="cursor-pointer pb-25" style="margin-left: 10px;">
                                                 <div style="display: flex; justify-content: space-between; align-items: center;">
