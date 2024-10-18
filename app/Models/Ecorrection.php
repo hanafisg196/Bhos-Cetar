@@ -14,9 +14,13 @@ class Ecorrection extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
-    public function dokumens()
+    public function documents()
     {
         return $this->hasMany(Document::class, 'ecorrection_id', 'id');
+    }
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'ecor_id', 'id');
     }
 
 

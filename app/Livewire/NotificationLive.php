@@ -24,7 +24,7 @@ class NotificationLive extends Component
     public function mount(Request $request)
     {
         $this->data = $this->notificationService->getNotify($request);
-        $this->countNotif = $this->notificationService->count($request);
+        $this->countNotif = $this->notificationService->count();
     }
 
     public function readNotif($id)

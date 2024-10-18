@@ -16,11 +16,13 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('lbh_id')->nullable();
             $table->unsignedBigInteger('lah_id')->nullable();
+            $table->unsignedBigInteger('ecor_id')->nullable();
             $table->tinyInteger('notif_read')->default(0);
             $table->timestamps();
 
         $table->foreign('lbh_id')->references('id')->on('schedules')->onDelete('set null');
         $table->foreign('lah_id')->references('id')->on('ranhams')->onDelete('set null');
+        $table->foreign('ecor_id')->references('id')->on('ecorrections')->onDelete('set null');
         $table->foreign('user_id')->references('id')->on('users');
         });
     }

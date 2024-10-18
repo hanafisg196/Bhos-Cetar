@@ -29,7 +29,7 @@
                     </div>
                  </div>
                 </a>
-                @else
+                @elseif ($item['ranhams'])
                 <a href="{{route('show.aksi.ham', encrypt($item['ranhams']->id))}}" wire:click="readNotif({{$item->id}})">
                     @if ($item->notif_read == 1)
                     <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="background: rgb(226, 224, 224);">
@@ -46,8 +46,25 @@
                     </div>
                 </div>
                 </a>
+                @else
+                <a href="{{route('show.ecorrection', encrypt($item['ecorrections']->id))}}" wire:click="readNotif({{$item->id}})">
+                  @if ($item->notif_read == 1)
+                  <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" style="background: rgb(226, 224, 224);">
+                   @else
+                   <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                  @endif
+                  <div class="toast-header">
+                      <i class="bi bi-calendar-check-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
+                      <strong class="me-auto">{{$item['ecorrections']->code}}</strong>
+                      <small>{{$item->created_at->diffForHumans();}}</small>
+                  </div>
+                  <div class="toast-body">
+                     <p>Laporan dengan kode {{$item['ecorrections']->code}} <strong style="color:{{ $item['ecorrections']->status == 'Disetujui' ? 'green' : 'red' }} ">{{$item['ecorrections']->status}}</strong>. <strong>Lihat</strong></p>
+                  </div>
+              </div>
+              </a>
                 @endif
-                @endforeach
+            @endforeach
             </li>
             <li>
                 <p class="text-center py-2 mb-0"><a href="#">Semua</a></p>

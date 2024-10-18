@@ -24,7 +24,10 @@
                   <div class="form-group">
                      <select class="choices form-select"  id="opdSelect" onchange="filterEmployees()">
                         @foreach ($opd as $item)
-                        <option value="{{$item->kode_jabatan}}">{{$item->nama}}</option>
+                        <option value="{{ $item->kode_jabatan }}"
+                           {{ request('code') == $item->kode_jabatan ? 'selected' : '' }}>
+                           {{ $item->nama }}
+                       </option>
                         @endforeach
                     </select>
                   </div>

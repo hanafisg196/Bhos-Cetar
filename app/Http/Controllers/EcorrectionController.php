@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\EcorrectionService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 
 class EcorrectionController extends Controller
 {
@@ -25,5 +26,13 @@ class EcorrectionController extends Controller
     public function createEcor(Request $request){
          $this->ecorrectionService->createData($request);
          return redirect()->back()->with('success', 'Laporan Ecorrection Berhasil Dikirim');
+    }
+    public function getEcorrection($id){
+     $id = Crypt::decrypt($id);
+     $data = $this->ecorrectionService->getEcorrectionById($id);
+
+      return view('dashboard.page.update-ecorrection')->with([
+         'data' => $data
+      ]);
     }
 }

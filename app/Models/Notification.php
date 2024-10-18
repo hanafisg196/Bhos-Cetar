@@ -20,4 +20,9 @@ class Notification extends Model
     {
         return $this->belongsTo(Ranham::class, 'lah_id', 'id');
     }
+
+    public function ecorrections()
+    {
+        return $this->belongsTo(Ecorrection::class, 'ecor_id', 'id');
+    }
 }

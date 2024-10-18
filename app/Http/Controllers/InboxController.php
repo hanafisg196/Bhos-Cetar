@@ -28,4 +28,9 @@ class InboxController extends Controller
     public function detailAksiHam($id){
         return view('admin.page.page-aksi-ham', ['id' => $id]);
     }
+
+    public function detailEcorrection($id){
+      return view('admin.page.page-ecorrection', ['id' => $id]);
+
+    }
 }

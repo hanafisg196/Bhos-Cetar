@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('status')->default('Usulan');
             $table->tinyInteger('read')->default(0);
+            $table->string('message')->default('-');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

@@ -28,11 +28,15 @@
                                   </div>
                                   <div class="email-user-list list-group ps ps--active-y">
                                       <ul class="users-list-wrapper media-list">
-                                       @if ($data->isNotEmpty())
+                                     @if ($data->isNotEmpty())
                                        @foreach ($data as $item)
-                                       <li class="media">
-                                          <a href="#" class="d-flex align-items-center
-                                          text-decoration-none text-dark w-100">
+                                       @if ($item->read == 1)
+                                          <li class="media mail-read">
+                                            @else
+                                          <li class="media">
+                                           @endif
+                                     <a href="{{route('admin.detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
+                                          text-decoration-none text-dark w-100" wire:click="readInbox({{$item->id}})">
                                              <div class="pr-50">
                                                  <div class="avatar">
                                                      <img src="/dist/assets/compiled/png/document.png" alt="avatar img holder">

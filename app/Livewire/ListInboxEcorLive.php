@@ -14,6 +14,10 @@ class ListInboxEcorLive extends Component
    public function boot(EcorrectionService $ecorrectionService){
      $this->ecorrectionService = $ecorrectionService;
    }
+
+   public function readInbox($id){
+      $this->ecorrectionService->readStatus($id);
+   }
    public function render()
    {
      $data = $this->ecorrectionService->getListEcorrection();
