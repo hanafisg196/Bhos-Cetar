@@ -28,39 +28,57 @@
                                                aria-label="Dollar amount (with dot and two decimal places)"
                                                value="{{ $data->title }}">
                                        </div>
+                                       <label for="last-name-column">Dokumen</label>
+                                          <div class="input-group mb-3">
+                                          @foreach ($data['documents'] as $item)
+                                                 <div class="d-flex align-items-center mb-2">
+                                                     @if (str_contains($item->file, 'pdf'))
+                                                         <img src="/dist/assets/compiled/png/pdf.png" height="35" alt="PDF Icon" class="me-2">
+                                                     @else
+                                                         <img src="/dist/assets/compiled/png/image.png" height="35" alt="" class="me-2">
+                                                     @endif
+                                                     <p class="mb-0">{{ strCut($item->file) }}</p>
+                                                     <a class="btn icon btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">
+                                                         <i class="bi bi-eye-fill"></i>
+                                                     </a>
+                                                 </div>
+                                           @endforeach
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="email-id-column">Upload</label>
+                                          <input type="file" class="filepond" name="file" id="file" multiple
+                                              data-allow-reorder="true" data-max-file-size="2MB" data-max-files="5"
+                                              accept="image/png, image/jpeg, application/pdf">
+                                      </div>
+                                    </div>
+                                    <div class="modal fade" id="modal-{{ $item->id }}" tabindex="-1" role="dialog"
+                                       aria-labelledby="exampleModalScrollableTitle-{{$item->id}}" aria-hidden="true">
+                                       <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                           <div class="modal-content">
+                                               <div class="modal-header">
+                                                   <h5 class="modal-title" id="exampleModalScrollableTitle">Scrolling long
+                                                       Content</h5>
+                                                   <button type="button" class="close" data-bs-dismiss="modal"
+                                                       aria-label="Close">
+                                                       <i data-feather="x"></i>
+                                                   </button>
+                                               </div>
+                                               <div class="modal-body">
+                                                  <div class="d-flex justify-content-center mt-3">
+                                                     <iframe src="{{asset('storage/'. $item->file)}}" style="width:718px; height:700px;"
+                                                     title="doc" name="contents"></iframe>
+                                                    </div>
+                                               </div>
+                                               <div class="modal-footer">
+                                                   <button type="button" class="btn btn-light-secondary"
+                                                       data-bs-dismiss="modal">
+                                                       <i class="bx bx-x d-block d-sm-none"></i>
+                                                       <span class="d-none d-sm-block">Close</span>
+                                                   </button>
+                                               </div>
+                                           </div>
+                                       </div>
                                    </div>
-                                   {{-- <div class="form-group">
-                                       <label for="last-name-column">KKP</label>
-                                       <ul class="list-unstyled mb-0">
-
-                                           <li class="d-inline-block me-2 mb-1">
-                                               @foreach ($kkp as $item)
-                                                   <div class="form-check">
-                                                       @if (old('kkp_id', $data['kkp_id']) == $item->id)
-                                                           <input class="form-check-input" type="radio"
-                                                               name="kkp_id" id="flexRadioDefault{{ $item->id }}"
-                                                               value="{{ $item->id }}" checked>
-                                                           <label class="form-check-label"
-                                                               for="flexRadioDefault{{ $item->id }}">
-                                                               {{ $item->name }}
-                                                           </label>
-                                                       @else
-                                                           <input class="form-check-input" type="radio"
-                                                               name="kkp_id" id="flexRadioDefault{{ $item->id }}"
-                                                               value="{{ $item->id }}">
-                                                           <label class="form-check-label"
-                                                               for="flexRadioDefault{{ $item->id }}">
-                                                               {{ $item->name }}
-                                                           </label>
-                                                       @endif
-                                                   </div>
-                                               @endforeach
-                                           </li>
-
-                                       </ul>
-                                   </div> --}}
-                               </div>
-
                                <div class="col-12 d-flex justify-content-end">
                                    <button style="display: none" id="loading" class="btn btn-primary" type="button"
                                        disabled>
@@ -80,4 +98,7 @@
        </div>
    </div>
 </section>
+@endsection
+@section('script')
+    @include('dashboard.component.filepond')
 @endsection
