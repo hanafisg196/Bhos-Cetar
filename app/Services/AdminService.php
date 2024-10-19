@@ -9,6 +9,7 @@ interface AdminService {
     public function countUpdatedData();
     public function countInboxLah();
     public function countInboxLbh();
+    public function countInboxEcor();
 
 
 }

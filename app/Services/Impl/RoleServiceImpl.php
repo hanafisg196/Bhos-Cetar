@@ -42,7 +42,7 @@ class RoleServiceImpl implements RoleService
 
     public function getRuleType()
     {
-        return Rule::latest()->get();
+        return Rule::where('nama', '!=' , 'ADMIN')->latest()->get();
     }
 
     public function setRuleEmployee(Request $request)
@@ -117,6 +117,6 @@ class RoleServiceImpl implements RoleService
     }
 
     public function getOpdEmployee(){
-      return OpdList::latest()->get();
+      return OpdList::all();
     }
 }

@@ -94,20 +94,6 @@
                                                         </div>
                                                     </div>
                                                 </a>
-                                                {{-- <div class="user-action" style="margin-left: 10px;">
-                                            <div class="checkbox-con me-3">
-                                                <div class="checkbox checkbox-shadow checkbox-sm">
-                                                    <button type="button" wire:click ="delete('{{ $item->id }}')"
-                                                        class="btn btn-icon action-icon" data-toggle="tooltip">
-                                                        <span class="fonticon-wrap">
-                                                            <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
-                                                                <use xlink:href="/dist/assets/static/images/bootstrap-icons.svg#trash" />
-                                                            </svg>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                                 </li>
                                             @endforeach
                                         @else

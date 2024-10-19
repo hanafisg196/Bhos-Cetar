@@ -7,7 +7,10 @@
          <i class="bi bi-arrow-left"></i> Kembali
      </a>
     </div>
-    <section class="section" style="max-height: 650px;  overflow-y: scroll; scrollbar-width: none;-ms-overflow-style: none;">
+    <section class="section"
+        style="max-height: 650px;
+    overflow-y: scroll; scrollbar-width: none;
+     -ms-overflow-style: none;">
         <div class="card">
             <div class="card-body">
                 <div class="row">

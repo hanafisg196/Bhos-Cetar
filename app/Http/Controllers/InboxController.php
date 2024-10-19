@@ -31,6 +31,5 @@ class InboxController extends Controller
 
     public function detailEcorrection($id){
       return view('admin.page.page-ecorrection', ['id' => $id]);
-
-    }
+  }
 }

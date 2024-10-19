@@ -7,11 +7,11 @@
                <div class="card-header">
                    <p><strong>Kode - </strong>{{$data->code}}</p>
                    <p><strong>Status - </strong>{{$data->status}}</p>
-                   <p><strong>Pesan - </strong>{{$data->pesan}}</p>
+                   <p><strong>Pesan - </strong>{{$data->message}}</p>
                </div>
                <div class="card-content">
                    <div class="card-body">
-                       <form class="form" action="{{ route('update.aksi.ham', encrypt($data->id)) }}"
+                       <form class="form" action="{{ route('ecorrection.update', encrypt($data->id)) }}"
                            method="post" id="inputForm" enctype="multipart/form-data">
                            @csrf
                            @if ($data->status === 'Disetujui')
@@ -24,13 +24,13 @@
                                    <div class="form-group">
                                        <label for="last-name-column">Judul</label>
                                        <div class="input-group mb-3">
-                                           <input type="text" class="form-control" name="link" id="link"
+                                           <input type="text" class="form-control" name="judul" id="judul"
                                                aria-label="Dollar amount (with dot and two decimal places)"
                                                value="{{ $data->title }}">
                                        </div>
                                        <label for="last-name-column">Dokumen</label>
                                           <div class="input-group mb-3">
-                                          @foreach ($data['documents'] as $item)
+                                          @foreach ($data['dokumens'] as $item)
                                                  <div class="d-flex align-items-center mb-2">
                                                      @if (str_contains($item->file, 'pdf'))
                                                          <img src="/dist/assets/compiled/png/pdf.png" height="35" alt="PDF Icon" class="me-2">
@@ -45,10 +45,10 @@
                                            @endforeach
                                         </div>
                                         <div class="form-group">
-                                          <label for="email-id-column">Upload</label>
+                                          <label for="email-id-column">Upload Ulang</label>
                                           <input type="file" class="filepond" name="file" id="file" multiple
-                                              data-allow-reorder="true" data-max-file-size="2MB" data-max-files="5"
-                                              accept="image/png, image/jpeg, application/pdf">
+                                              data-allow-reorder="true" data-max-file-size="20MB" data-max-files="1"
+                                              accept="application/pdf">
                                       </div>
                                     </div>
                                     <div class="modal fade" id="modal-{{ $item->id }}" tabindex="-1" role="dialog"
@@ -87,7 +87,7 @@
                                        Loading...
                                    </button>
                                    <button style="display: block" id="send" type="submit"
-                                       class="btn btn-primary me-1 mb-1">Kirim</button>
+                                       class="btn btn-primary me-1 mb-1">Perbarui</button>
                                </div>
                            </div>
                           </fieldset>
@@ -98,6 +98,8 @@
        </div>
    </div>
 </section>
+
+@include('dashboard.component.button-loading')
 @endsection
 @section('script')
     @include('dashboard.component.filepond')

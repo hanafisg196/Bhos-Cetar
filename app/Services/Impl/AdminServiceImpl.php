@@ -2,6 +2,7 @@
 
 namespace App\Services\Impl;
 
+use App\Models\Ecorrection;
 use App\Models\Ranham;
 use App\Models\Schedule;
 use App\Services\AdminService;
@@ -12,16 +13,16 @@ class AdminServiceImpl implements AdminService
     {
         $lbh = Schedule::whereYear('created_at', now())->count();
         $lah = Ranham::whereYear('created_at', now())->count();
-        $data = $lbh + $lah;
-        return $data;
+        return  $lbh + $lah;
+
     }
     public function countReportMonth()
     {
         $lbh = Schedule::whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])->count();
         $lah = Ranham::whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])->count();
 
-        $data = $lbh + $lah;
-        return $data;
+        return  $lbh + $lah;
+
     }
     public function countReportWeek()
     {
@@ -31,8 +32,8 @@ class AdminServiceImpl implements AdminService
         $lah = Ranham::whereBetween('created_at', [
             now()->startOfWeek(),
             now()->endOfWeek()])->count();
-        $data = $lbh + $lah;
-        return $data;
+         return  $lbh + $lah;
+
     }
 
     public function countUpdatedData()
@@ -59,6 +60,14 @@ class AdminServiceImpl implements AdminService
     public function countInboxLbh()
     {
         return Schedule::query()
+            ->whereIn('status', ['Usulan', 'Revisi'])
+            ->where('read', 0)
+            ->count();
+    }
+
+    public function countInboxEcor()
+    {
+        return Ecorrection::query()
             ->whereIn('status', ['Usulan', 'Revisi'])
             ->where('read', 0)
             ->count();

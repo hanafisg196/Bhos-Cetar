@@ -21,22 +21,29 @@
                                   <div class="email-action">
                                       <div class="action-right d-flex flex-grow-1 align-items-center justify-content-around">
                                           <div class="email-fixed-search flex-grow-1">
-
+                                             <div class="form-group position-relative  mb-0 has-icon-left">
+                                                <input wire:model.live.debounce.500ms="searchEcor" type="text" class="form-control"
+                                                    placeholder="Cari.....">
+                                                <div class="form-control-icon">
+                                                    <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
+                                                        <use xlink:href="/dist/assets/static/images/bootstrap-icons.svg#search" />
+                                                    </svg>
+                                                </div>
+                                            </div>
                                           </div>
-
                                       </div>
                                   </div>
                                   <div class="email-user-list list-group ps ps--active-y">
                                       <ul class="users-list-wrapper media-list">
-                                     @if ($data->isNotEmpty())
+                                       @if ($data->isNotEmpty())
                                        @foreach ($data as $item)
                                        @if ($item->read == 1)
-                                          <li class="media mail-read">
-                                            @else
-                                          <li class="media">
-                                           @endif
-                                     <a href="{{route('admin.detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
-                                          text-decoration-none text-dark w-100" wire:click="readInbox({{$item->id}})">
+                                       <li class="media mail-read">
+                                         @else
+                                       <li class="media">
+                                        @endif
+                                          <a href="{{route('detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
+                                          text-decoration-none text-dark w-100" wire:click="readStat({{$item->id}})">
                                              <div class="pr-50">
                                                  <div class="avatar">
                                                      <img src="/dist/assets/compiled/png/document.png" alt="avatar img holder">
@@ -83,6 +90,11 @@
                                        @endforeach
                                        @else
                                        <div class="d-flex justify-content-center mt-5">Data tidak ditemukan.</div>
+                                       @endif
+                                       @if ($data->hasMorePages())
+                                       <div class="d-flex justify-content-center mt-2">
+                                           <button wire:click="loadMore" class="btn btn-primary rounded-pill">Load More</button>
+                                       </div>
                                        @endif
                                       </ul>
                                   </div>

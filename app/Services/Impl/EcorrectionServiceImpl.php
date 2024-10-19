@@ -13,19 +13,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
-class EcorrectionServiceImpl implements EcorrectionService
-{
-    private function getUser()
-    {
-        return Auth::user();
-    }
-    private function generateCode()
-    {
-        $prefix = 'ECOR';
-        $randomNumber = mt_rand(10000, 99999);
-        return $prefix . $randomNumber;
-    }
-    private function copyFilesFromTmp($tmpFile, $idFile)
+class EcorrectionServiceImpl implements EcorrectionService {
+
+
+
+   private function getUser(){
+       return Auth::user();
+   }
+   private function generateCode(){
+      $prefix = 'ECOR';
+      $randomNumber = mt_rand(10000, 99999);
+      return $prefix . $randomNumber;
+  }
+  private function copyFilesFromTmp($tmpFile, $idFile)
     {
         foreach ($tmpFile as $tmp) {
             $sourcePath = $tmp->file;
@@ -40,66 +40,92 @@ class EcorrectionServiceImpl implements EcorrectionService
         }
     }
 
-    public function createData(Request $request)
-    {
-        $sessionId = Session::getId();
-        $user = $this->getUser();
-        $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
-        $validate = $request->validate([
-            'judul' => 'required|string|max:120',
-        ]);
-        $ecorrection = Ecorrection::create([
-            'title' => $validate['judul'],
-            'user_id' => $user->id,
-            'nip' => $user->username,
-            'nama' => $user->name,
-            'code' => $this->generateCode(),
-        ]);
-        $ecorrection_id = $ecorrection->id;
-        $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
-    }
-    public function getEcorrectionById($id)
-    {
-        return Ecorrection::with('documents')->find($id);
-    }
-
-    public function readStatus($id)
-    {
-        $ecor = Ecorrection::find($id);
-        $ecor->update([
-            'read' => 1,
-        ]);
-    }
-    public function getListEcorrection()
-    {
-        return Ecorrection::with('documents')->latest()->paginate(10);
-    }
-
-    public function updateEcorrectionStat($id, $stat, $message){
-      $update = Ecorrection::where('id', $id)->update([
-         'status' => $stat,
-         'message' => $message
+   public function createData(Request $request){
+      $sessionId = Session::getId();
+      $user = $this->getUser();
+      $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
+      $validate = $request->validate([
+         'judul' => 'required|string|max:120',
       ]);
+      $ecorrection  = Ecorrection::create([
+         'title' => $validate['judul'],
+         'user_id' => $user->id,
+         'nip' => $user->username,
+         'nama' => $user->name,
+         'code' => $this->generateCode(),
+      ]);
+      $ecorrection_id = $ecorrection->id;
+      $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
 
-      if($update){
-         $ecorrection = Ecorrection::find($id);
-         $notif = Notification::where('ecor_id', $id)->first();
-         if(!$notif){
-            Notification::create([
-               "user_id" => $ecorrection->user_id,
-               "ecor_id" =>  $id,
-               "created_at" => Carbon::now(),
-               "notif_read" => 0
-            ]);
-         } else {
-            $notif->update([
-               "user_id" => $ecorrection->user_id,
-               "ecor_id" =>  $id,
-               "created_at" => Carbon::now(),
-               "notif_read" => 0
-            ]);
-         }
-      }
+   }
+   public function getListEcorrection($perPage){
+      return Ecorrection::with('dokumens')->latest()->paginate($perPage);
+   }
+
+   public function getEcorrectionById($id){
+      return Ecorrection::with('dokumens')->find($id);
+   }
+
+   public function readStat($id){
+     $data =  $this->getEcorrectionById($id);
+     $data->update([
+      'read' => 1
+     ]);
+   }
+
+   public function updateStatEcorrection($id, $stat, $message)
+    {
+        $update = Ecorrection::where('id', $id)->update([
+            'status' => $stat,
+            'message' => $message,
+        ]);
+
+        if($update) {
+            $ecor = Ecorrection::find($id);
+            $notif = Notification::where('ecor_id', $id)->first();
+            if(!$notif){
+               Notification::create([
+                    "user_id" => $ecor->user_id,
+                    "ecor_id" =>  $id,
+                    "created_at" => Carbon::now(),
+                    "notif_read" => 0
+                ]);
+            } else{
+                $notif->update([
+                    "user_id" => $ecor->user_id,
+                    "ecor_id" =>  $id,
+                    "created_at" => Carbon::now(),
+                    "notif_read" => 0
+                ]);
+            }
+
+        }
+    }
+
+    private function deleteDocument($id){
+      $document = Document::find($id);
+      Storage::delete($document->file);
+      $document->delete();
+  }
+
+    public function update(Request $request, $id){
+      $ecor = $this->getEcorrectionById($id);
+      $sessionId = Session::getId();
+      $validated = $request->validate([
+         'judul' => 'required|string|max:120',
+      ]);
+      $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
+      $ecor->update([
+         'title' => $validated['judul'],
+         'status'=>  "Revisi",
+         'read' => 0
+      ]);
+      $ecorrection_id = $ecor->id;
+      $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
+    }
+    public function search($search, $perPage)
+    {
+       return Ecorrection::where('title', 'like', '%' . $search . '%')->paginate($perPage);
 
     }
 }
