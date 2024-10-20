@@ -20,12 +20,13 @@
           </li>
       </ul>
      </li>
-      <li class="sidebar-item {{ request()->is('admin/user/manager') ? 'active' : '' }}">
-         <a href="{{ route('admin.dashboard.user.manager') }}" class='sidebar-link'>
-            <i class="bi bi-person-check-fill"></i>
-             <span>User Manager</span>
-
-         </a>
-     </li>
-    @endif
+     @endif
+     @if ($checkAccessUserManager === true)
+     <li class="sidebar-item {{ request()->is('admin/user/manager') ? 'active' : '' }}">
+      <a href="{{ route('admin.dashboard.user.manager') }}" class='sidebar-link'>
+         <i class="bi bi-person-check-fill"></i>
+          <span>User Manager</span>
+      </a>
+  </li>
+     @endif
 </div>

@@ -49,13 +49,15 @@ Route::middleware('user')->group(function () {
         Route::get('/inbox/detail/aksi-ham/{id}', [InboxController::class, 'detailAksiHam'])->name('detail.aksi.ham');
         Route::post('/logout/admin', [LoginController::class, 'LogoutAdmin'])->name('logout.admin');
         Route::middleware('ecorrectionAdmin')->group(function () {
+            Route::get('/ecorrection/inbox/list/inbox', [EcorrectionController::class, 'inbox'])->name('admin.list.ecorrection');
+            Route::get('/ecorrection/inbox/detail/{id}', [InboxController::class, 'detailEcorrection'])->name('detail.ecorrection');
+            Route::middleware('userMananger')->group(function () {
             Route::get('/admin/user/manager', [UserManagementController::class, 'index'])->name('admin.dashboard.user.manager');
             Route::get('/admin/user/rule', [UserManagementController::class, 'formAddRole'])->name('admin.dashboard.rule.form');
             Route::post('/admin/user/rule/create', [UserManagementController::class, 'createEmployeeRule'])->name('admin.dashboard.rule.create');
             Route::post('/admin/user/rule/update/{id}', [UserManagementController::class, 'updateEmployeeRule'])->name('admin.dashboard.rule.update');
             Route::post('/admin/user/rule/delete/{id}', [UserManagementController::class, 'deleteEmployeeRule'])->name('admin.dashboard.rule.delete');
-            Route::get('/ecorrection/inbox/list/inbox', [EcorrectionController::class, 'inbox'])->name('admin.list.ecorrection');
-            Route::get('/ecorrection/inbox/detail/{id}', [InboxController::class, 'detailEcorrection'])->name('detail.ecorrection');
+         });
         });
     });
 });

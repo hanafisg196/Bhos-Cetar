@@ -114,6 +114,11 @@ class RoleServiceImpl implements RoleService
         $accesRule = ['ADMIN', 'KABAG', 'VERIFIKATOR 2'];
         return $this->getUserRole($accesRule);
     }
+    public function userManagerAdmin()
+    {
+        $accesRule = ['ADMIN', 'KABAG'];
+        return $this->getUserRole($accesRule);
+    }
 
     public function getOpdEmployee(){
       return OpdList::all();

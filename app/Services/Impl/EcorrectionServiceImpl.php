@@ -31,19 +31,27 @@ class EcorrectionServiceImpl implements EcorrectionService {
       return $prefix . $randomNumber;
   }
   private function copyFilesFromTmp($tmpFile, $idFile)
-    {
-        foreach ($tmpFile as $tmp) {
-            $sourcePath = $tmp->file;
-            $destinationPath = 'files/' . basename($sourcePath);
-            Storage::copy($sourcePath, $destinationPath);
-            Document::create([
-                'ecorrection_id' => $idFile,
-                'file' => $destinationPath,
-            ]);
-            Storage::delete($sourcePath);
-            $tmp->delete();
-        }
-    }
+  {
+      foreach ($tmpFile as $tmp) {
+          $sourcePath = $tmp->file;
+          $destinationPath = 'files/' . basename($sourcePath);
+          Storage::copy($sourcePath, $destinationPath);
+          $existingDocuments = Document::where('ecorrection_id', $idFile)->get();
+          if($existingDocuments->isNotEmpty()){
+            foreach ($existingDocuments as $document) {
+               Storage::delete($document->file);
+               $document->delete();
+           }
+          }
+          Document::create([
+              'ecorrection_id' => $idFile,
+              'file' => $destinationPath,
+          ]);
+
+          Storage::delete($sourcePath);
+          $tmp->delete();
+      }
+  }
 
    public function createData(Request $request){
       $sessionId = Session::getId();
@@ -118,12 +126,6 @@ class EcorrectionServiceImpl implements EcorrectionService {
         }
     }
 
-    private function deleteDocument($id){
-      $document = Document::where('id', $id)->first();
-      Storage::delete($document->file);
-      $document->delete();
-    }
-
     public function update(Request $request, $id){
       $ecor = $this->getEcorrectionById($id);
       $sessionId = Session::getId();
@@ -137,25 +139,27 @@ class EcorrectionServiceImpl implements EcorrectionService {
          'read' => 0
       ]);
       $ecorrection_id = $ecor->id;
-      $this->deleteDocument($ecorrection_id);
       $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
     }
     public function search($search, $perPage)
     {
-      $user = $this->getUser();
-      $kabag = $this->getUserRole('KABAG');
-       if ($kabag ){
-         return Ecorrection::where('title', 'like', '%' . $search . '%')
-         ->paginate($perPage)
-         ->where('status', 'Usulan')->latest()->paginate(perPage: $perPage);
-       } else{
-         return Ecorrection::where('title', 'like', '%' . $search . '%')
-          ->where('status', '!=' , 'Usulan')
-          ->where('dispos_id', $user->id)
-          ->latest()->paginate(perPage: $perPage);
-       }
+        $user = $this->getUser();
+        $kabag = $this->getUserRole('KABAG');
 
+        if ($kabag) {
+            return Ecorrection::where('title', 'like', '%' . $search . '%')
+                ->where('status', 'Usulan')
+                ->latest()
+                ->paginate($perPage);
+        } else {
+            return Ecorrection::where('title', 'like', '%' . $search . '%')
+                ->where('status', '!=', 'Usulan')
+                ->where('dispos_id', $user->id)
+                ->latest()
+                ->paginate($perPage);
+        }
     }
+
 
     public function sendToVerifikatorTwo($id, $verfikatorId){
       $ecor = $this->getEcorrectionById($id);

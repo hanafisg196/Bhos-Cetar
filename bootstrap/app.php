@@ -5,6 +5,7 @@ use App\Http\Middleware\AuthEcorrectionUploader;
 use App\Http\Middleware\Authenticate;
 use App\Http\Middleware\AuthenticateAdmin;
 use App\Http\Middleware\AuthKamiPeduliUploader;
+use App\Http\Middleware\AuthUserMananger;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -21,7 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => AuthenticateAdmin::class,
             'ecorrectionAdmin' => AuthEcorrectionAdmin::class,
             'ecorrectionUploader' => AuthEcorrectionUploader::class,
-            'kamiPeduliUploader' => AuthKamiPeduliUploader::class
+            'kamiPeduliUploader' => AuthKamiPeduliUploader::class,
+            'userMananger' => AuthUserMananger::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -13,7 +13,7 @@ class NotificationServiceImpl implements NotificationService {
         return Auth::user();
     }
 
-    public function getNotify(Request $request) {
+    public function getNotify() {
       $user = $this->getUser();
       return Notification::where('user_id', $user->id)
           ->whereHas('schedules', function ($query) use ($user) {

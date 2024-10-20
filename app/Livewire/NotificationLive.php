@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\NotificationService;
-use Illuminate\Http\Request;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class NotificationLive extends Component
@@ -16,15 +16,23 @@ class NotificationLive extends Component
     {
         $this->notificationService = $notificationService;
     }
-
+   //  #[On('notif-created')]
+   //  public function test(){
+   //       dd('test');
+   //  }
     public function placeholder()
     {
       return view('placeholder.icon-notif');
     }
-    public function mount(Request $request)
+    public function mount()
     {
-        $this->data = $this->notificationService->getNotify($request);
-        $this->countNotif = $this->notificationService->count($request);
+        $this->data = $this->notificationService->getNotify();
+        $this->countNotif();
+
+    }
+
+    public function countNotif(){
+      $this->countNotif = $this->notificationService->count();
     }
 
     public function readNotif($id)

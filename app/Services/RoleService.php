@@ -17,4 +17,5 @@ interface RoleService{
     public function getOpdEmployee();
     public function getVerifikatorTwo();
     public function disposisiAccess();
+    public function userManagerAdmin();
 }

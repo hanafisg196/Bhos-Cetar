@@ -41,8 +41,8 @@
                                  <div class="form-group">
                                     <label for="email-id-column">Dokumen</label>
                                     <input type="file" class="filepond" name="file" id="file" multiple
-                                        data-allow-reorder="true" data-max-file-size="2MB" data-max-files="5"
-                                        accept="image/png, image/jpeg, application/pdf" required>
+                                        data-allow-reorder="true" data-max-file-size="5MB" data-max-files="1"
+                                        accept="application/pdf" required>
                                 </div>
                              </div>
                              <div class="col-12 d-flex justify-content-end">

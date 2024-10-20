@@ -30,8 +30,11 @@
                             </div>
                         </div>
                         <div class="mb-2">
+                           <p class="text-bold-500" style="margin-top: 15px;">Nama : {{ $data->users->name }}</p>
+                           <p class="text-bold-500" style="margin-top: 15px;">Nip : {{ $data->users->nip }}</p>
                             <p class="text-bold-500" style="margin-top: 15px;">Kode dokumen : {{ $data->code }}</p>
                             <p class="text-bold-500" style="margin-top: 15px;">Judul : {{ $data->title }}</p>
+
                         </div>
 
                     </div>

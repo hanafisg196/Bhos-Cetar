@@ -9,6 +9,7 @@ use Livewire\Component;
 class CustomMenuAdmin extends Component
 { protected RoleService $roleService;
    public $checkAccess;
+   public $checkAccessUserManager;
    public function boot(RoleService $roleService)
    {
        $this->roleService = $roleService;
@@ -16,11 +17,17 @@ class CustomMenuAdmin extends Component
    public function mount()
    {
        $this->checkAdmin();
+       $this->checkUserManager();
    }
 
    public function checkAdmin()
    {
        $this->checkAccess = $this->roleService->ecorrectionAdmin();
+
+   }
+   public function checkUserManager()
+   {
+       $this->checkAccessUserManager = $this->roleService->userManagerAdmin();
 
    }
     public function render()

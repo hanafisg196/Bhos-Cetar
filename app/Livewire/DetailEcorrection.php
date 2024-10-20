@@ -36,7 +36,6 @@ class DetailEcorrection extends Component
     ];
 
     #[On('showDetailEcor')]
-
     public function render()
     {
         return view('livewire.detail-ecorrection');
@@ -84,7 +83,8 @@ class DetailEcorrection extends Component
          'status' => 'required',
          'pesan' => 'required',
      ]);
-      $this->ecorrectionService->updateStatEcorrection($id, $this->status,$this->pesan,);
+      $this->ecorrectionService->updateStatEcorrection($id, $this->status,$this->pesan);
+      $this->dispatch('notif-created');
       session()->flash('status', 'Data berhasil di update.');
       $this->redirect(route('admin.list.ecorrection'));
     }
