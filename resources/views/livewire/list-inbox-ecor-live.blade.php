@@ -62,9 +62,12 @@
                                                   @elseif ($item->status == 'Revisi')
                                                       <span class="list-group-item-text text-truncate"
                                                           style="color: #007aff">{{ $item->status }}</span>
+                                                  @elseif ($item->status == 'Disposisi')
+                                                      <span class="list-group-item-text text-truncate"
+                                                            style="color: #ea27dd">{{ $item->status }}</span>
                                                   @else
                                                       <span class="list-group-item-text text-truncate"
-                                                          style="color: burlywood">{{ $item->status }}</span>
+                                                         style="color: burlywood">{{ $item->status }}</span>
                                                   @endif
                                                      </div>
                                                      <div class="mail-meta-item">

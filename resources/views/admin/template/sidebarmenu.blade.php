@@ -48,6 +48,15 @@
                </ul>
            </li>
            <livewire:custom-menu-admin/>
+            <li class="sidebar-item">
+               <form action="{{ route('logout.dashboard') }}" method="post">
+                  @csrf
+                  <button class='sidebar-link' type="submit">
+                      <i class="icon-mid bi bi-box-arrow-left me-2"></i>
+                          Logout
+                  </button>
+                 </form>
+           </li>
          </li>
       </div>
     </ul>

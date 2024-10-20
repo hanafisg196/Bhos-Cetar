@@ -1,7 +1,6 @@
 <?php
 namespace App\Services\Impl;
 
-use App\Models\Opd;
 use App\Models\OpdList;
 use App\Models\Rule;
 use Illuminate\Support\Str;
@@ -15,7 +14,7 @@ class RoleServiceImpl implements RoleService
 {
     public function getEmployeeHasAccess()
     {
-        return User::withWhereHas('rules')->latest()->paginate(5);
+        return User::withWhereHas('rules')->latest()->paginate(10);
     }
     private function getUserRole($rule)
     {
@@ -119,4 +118,17 @@ class RoleServiceImpl implements RoleService
     public function getOpdEmployee(){
       return OpdList::all();
     }
+
+    public function getVerifikatorTwo(){
+      return User::with('rules')->whereHas('rules', function ($query) {
+          $query->where('nama', '=', 'VERIFIKATOR 2');
+      })->get();
+  }
+
+  public function disposisiAccess()
+  {
+      $accesRule = [ 'KABAG'];
+      return $this->getUserRole($accesRule);
+  }
+
 }

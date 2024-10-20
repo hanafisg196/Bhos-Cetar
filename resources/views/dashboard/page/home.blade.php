@@ -12,30 +12,14 @@
             <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
+
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="table-lbh" data-bs-toggle="tab" href="#tableLbh " role="tab" aria-controls="tableLbh" aria-selected="true">Laporan Bantuan Hukum</a>
                         </li>
-
-                        <li class="nav-item" role="presentation">
-                           <a class="nav-link" id="table-lah" data-bs-toggle="tab" href="#tableLah" role="tab" aria-controls="tableLah" aria-selected="false">Laporan Aksi Ham</a>
-                       </li>
-
-
-
+                       <livewire:custom-tab/>
                     </ul>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="tableLbh" role="tabpanel" aria-labelledby="table-tab">
-                            {{-- <div class="col-md-6 mt-3">
-                                <div class="input-group mb-2">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <i class="bi bi-search" style="margin-bottom: 8px;"></i>
-                                    </span>
-                                    <input type="text" class="form-control" placeholder="Pencarian"
-                                        aria-label="Pencarian" aria-describedby="button-addon2">
-                                    <button class="btn btn-outline-secondary" type="button"
-                                        id="button-addon2">Cari</button>
-                                </div>
-                            </div> --}}
                             <div class="table-responsive" style="overflow-y: scroll; max-height: 400px; overflow-x: hidden">
                                 <table class="table table-hover table-lg">
                                     <thead>
@@ -162,6 +146,84 @@
                                 {{$ranham->links()}}
                             </div>
                         </div>
+                        <div class="tab-pane fade" id="tableEcor" role="tabpanel" aria-labelledby="tableEcor">
+                           <div class="table-responsive" style="overflow-y: scroll; max-height: 400px; overflow-x: hidden">
+                               <table class="table table-hover table-lg">
+                                   <thead>
+                                       <tr>
+                                           <th>Waktu</th>
+                                           <th>Kode</th>
+                                           <th>Status</th>
+                                           <th>Judul</th>
+                                           <th>File</th>
+                                           <th>Lihat</th>
+                                       </tr>
+                                       @foreach ($ecor as $val)
+                                       <tbody>
+                                           <tr style="padding: 0;">
+                                               <td class="col-auto" style="padding: 5px;">
+                                                   <p class="mb-0" style="margin: 0;">{{$val->created_at->diffForHumans()}}</p>
+                                               </td>
+                                               <td class="col-auto" style="padding: 5px;">
+                                                   <p class="mb-0" style="margin: 0;">{{$val->code}}</p>
+                                               </td>
+                                               <td class="col-auto" style="padding: 5px;">
+                                                   <p class="mb-0"
+                                                   style="margin: 0;color:
+                                                   {{$val->status === 'Disetujui' ? 'green' : ($val->status === 'Ditolak' ? 'red':($val->status === 'Usulan' ? 'orange' : 'blue'))}}">
+                                                   {{$val->status}}
+                                               </p>
+                                               </td>
+                                               <td class="col-auto" style="padding: 5px;">
+                                                <p class="mb-0" style="margin: 0;">{{$val->title}}</p>
+                                               </td>
+                                               <td class="col-auto" style="padding: 5px;">
+                                                @foreach ($val['dokumens'] as $item)
+                                                <p class="mb-0" style="margin: 0;">{{ strCut($item->file) }}</p>
+                                                @endforeach
+                                               </td>
+                                               <td class="col-auto" style="padding: 5px;">
+                                                <a class="btn icon btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">
+                                                   <i class="bi bi-eye-fill"></i>
+                                               </a>
+                                               </td>
+                                           </tr>
+                                       </tbody>
+                                       <div class="modal fade" id="modal-{{ $item->id }}" tabindex="-1" role="dialog"
+                                          aria-labelledby="exampleModalScrollableTitle-{{$item->id}}" aria-hidden="true">
+                                          <div class="modal-dialog modal-dialog-scrollable " role="document">
+                                              <div class="modal-content">
+                                                  <div class="modal-header">
+                                                      <h5 class="modal-title" id="exampleModalScrollableTitle">Scrolling long
+                                                          Content</h5>
+                                                      <button type="button" class="close" data-bs-dismiss="modal"
+                                                          aria-label="Close">
+                                                          <i data-feather="x"></i>
+                                                      </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                     <div class="d-flex justify-content-center mt-3">
+                                                        <iframe src="{{asset('storage/'. $item->file)}}" style="width:718px; height:700px;"
+                                                        title="doc" name="contents"></iframe>
+                                                       </div>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                      <button type="button" class="btn btn-light-secondary"
+                                                          data-bs-dismiss="modal">
+                                                          <i class="bx bx-x d-block d-sm-none"></i>
+                                                          <span class="d-none d-sm-block">Close</span>
+                                                      </button>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                       @endforeach
+                                   </thead>
+
+                               </table>
+                               {{$ecor->links()}}
+                           </div>
+                       </div>
                     </div>
                 </div>
             </div>

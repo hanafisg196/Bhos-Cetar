@@ -17,8 +17,13 @@ class EcorrectionServiceImpl implements EcorrectionService {
 
 
 
+
    private function getUser(){
        return Auth::user();
+   }
+   private function getUserRole($rule)
+   {
+       return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
    }
    private function generateCode(){
       $prefix = 'ECOR';
@@ -59,7 +64,18 @@ class EcorrectionServiceImpl implements EcorrectionService {
 
    }
    public function getListEcorrection($perPage){
-      return Ecorrection::with('dokumens')->latest()->paginate($perPage);
+
+      $user = $this->getUser();
+      $kabag = $this->getUserRole('KABAG');
+      if ($kabag ){
+         return Ecorrection::with('dokumens')->where('status', 'Usulan')->latest()->paginate(perPage: $perPage);
+      } else{
+         return Ecorrection::with('dokumens')
+         ->where('status', '!=' , 'Usulan')
+         ->where('dispos_id', $user->id)
+         ->latest()->paginate(perPage: $perPage);
+      }
+
    }
 
    public function getEcorrectionById($id){
@@ -103,10 +119,10 @@ class EcorrectionServiceImpl implements EcorrectionService {
     }
 
     private function deleteDocument($id){
-      $document = Document::find($id);
+      $document = Document::where('id', $id)->first();
       Storage::delete($document->file);
       $document->delete();
-  }
+    }
 
     public function update(Request $request, $id){
       $ecor = $this->getEcorrectionById($id);
@@ -121,11 +137,40 @@ class EcorrectionServiceImpl implements EcorrectionService {
          'read' => 0
       ]);
       $ecorrection_id = $ecor->id;
+      $this->deleteDocument($ecorrection_id);
       $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
     }
     public function search($search, $perPage)
     {
-       return Ecorrection::where('title', 'like', '%' . $search . '%')->paginate($perPage);
+      $user = $this->getUser();
+      $kabag = $this->getUserRole('KABAG');
+       if ($kabag ){
+         return Ecorrection::where('title', 'like', '%' . $search . '%')
+         ->paginate($perPage)
+         ->where('status', 'Usulan')->latest()->paginate(perPage: $perPage);
+       } else{
+         return Ecorrection::where('title', 'like', '%' . $search . '%')
+          ->where('status', '!=' , 'Usulan')
+          ->where('dispos_id', $user->id)
+          ->latest()->paginate(perPage: $perPage);
+       }
 
+    }
+
+    public function sendToVerifikatorTwo($id, $verfikatorId){
+      $ecor = $this->getEcorrectionById($id);
+      $ecor->update([
+         'dispos_id' => $verfikatorId,
+         'status' => 'Disposisi',
+         'read' => 0
+      ]);
+    }
+
+    public function getEcorByUser()
+    {
+        $user = $this->getUser();
+        return Ecorrection::where('user_id', $user->id)
+            ->latest('updated_at')
+            ->paginate(10, ['*'], 'ecorrections-page');
     }
 }

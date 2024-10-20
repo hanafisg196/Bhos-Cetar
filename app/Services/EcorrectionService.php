@@ -12,4 +12,6 @@ interface EcorrectionService {
    public function updateStatEcorrection($id, $stat, $message);
    public function update(Request $request, $id);
    public function search($search, $perPage);
+   public function sendToVerifikatorTwo($id, $verfikatorId);
+   public function getEcorByUser();
 }

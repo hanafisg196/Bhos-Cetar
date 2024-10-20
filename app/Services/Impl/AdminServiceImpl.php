@@ -6,9 +6,18 @@ use App\Models\Ecorrection;
 use App\Models\Ranham;
 use App\Models\Schedule;
 use App\Services\AdminService;
+use Illuminate\Support\Facades\Auth;
 
 class AdminServiceImpl implements AdminService
 {
+
+   private function getUser(){
+      return Auth::user();
+  }
+  private function getUserRole($rule)
+  {
+      return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
+  }
     public function countReportYear()
     {
         $lbh = Schedule::whereYear('created_at', now())->count();
@@ -46,8 +55,8 @@ class AdminServiceImpl implements AdminService
             ->whereIn('status', ['Usulan', 'Revisi'])
             ->where('read', 0)
             ->count();
-        $data = $lah + $lbh;
-        return $data;
+         return $lah + $lbh;
+
     }
 
     public function countInboxLah()
@@ -67,9 +76,21 @@ class AdminServiceImpl implements AdminService
 
     public function countInboxEcor()
     {
-        return Ecorrection::query()
-            ->whereIn('status', ['Usulan', 'Revisi'])
-            ->where('read', 0)
-            ->count();
+
+      $user = $this->getUser();
+      $kabag = $this->getUserRole('KABAG');
+      if($kabag){
+         return Ecorrection::query()
+         ->where('status', 'Usulan')
+         ->where('read', 0)
+         ->count();
+      } else {
+         return Ecorrection::query()
+         ->whereIn('status', ['Disposisi', 'Revisi'])
+         ->where('read', 0)
+         ->where('dispos_id', $user->id)
+         ->count();
+      }
+
     }
 }

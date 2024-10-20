@@ -3,28 +3,40 @@
 namespace App\Livewire;
 
 use App\Services\EcorrectionService;
+use App\Services\RoleService;
 use Illuminate\Support\Facades\Crypt;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\Attributes\On;
 class DetailEcorrection extends Component
 {
     protected EcorrectionService $ecorrectionService;
+    protected RoleService $roleService;
 
-    public function boot(EcorrectionService $ecorrectionService)
+    public function boot(
+      EcorrectionService $ecorrectionService,
+      RoleService $roleService
+      )
     {
         $this->ecorrectionService = $ecorrectionService;
+        $this->roleService = $roleService;
     }
     public $id;
+    public $verifikatorTwo;
     public $data;
     public $string;
-
-    #[Validate('required')]
+    public $hasDispos;
+    public $verfikatorId;
     public $pesan = '';
-    #[Validate('required')]
     public $status = '';
 
+    protected $rules = [
+        'verfikatorId' => 'required',
+        'pesan' => 'required',
+        'status' => 'required'
+    ];
+
     #[On('showDetailEcor')]
+
     public function render()
     {
         return view('livewire.detail-ecorrection');
@@ -32,7 +44,11 @@ class DetailEcorrection extends Component
 
     public function mount($id)
     {
+
         $this->showDetailEcor($this->id = $id);
+        $this->getVerifikatorTwo();
+        $this->checkDisposAccess();
+
     }
     public function sliceStr($string)
     {
@@ -44,9 +60,31 @@ class DetailEcorrection extends Component
         $this->data = $this->ecorrectionService->getEcorrectionById($id);
     }
 
+    public function getVerifikatorTwo()
+    {
+      $this->verifikatorTwo = $this->roleService->getVerifikatorTwo();
+    }
+    public function checkDisposAccess()
+    {
+      $this->hasDispos = $this->roleService->disposisiAccess();
+    }
+
+    public function updateVerifikatorTwo($id){
+      $this->validate([
+         'verfikatorId' => 'required',
+     ]);
+
+      $this->ecorrectionService->sendToVerifikatorTwo($id, $this->verfikatorId);
+      session()->flash('status', 'Verifikator Berhasil Di tentukan');
+      $this->redirect(route('admin.list.ecorrection'));
+    }
+
     public function updateEcor($id){
-      $this->validate();
-      $this->ecorrectionService->updateStatEcorrection($id,  $this->status,$this->pesan,);
+      $this->validate([
+         'status' => 'required',
+         'pesan' => 'required',
+     ]);
+      $this->ecorrectionService->updateStatEcorrection($id, $this->status,$this->pesan,);
       session()->flash('status', 'Data berhasil di update.');
       $this->redirect(route('admin.list.ecorrection'));
     }

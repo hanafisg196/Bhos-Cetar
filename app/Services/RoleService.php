@@ -15,4 +15,6 @@ interface RoleService{
     public function ecorrectionAdmin();
     public function getEmployee($code);
     public function getOpdEmployee();
+    public function getVerifikatorTwo();
+    public function disposisiAccess();
 }

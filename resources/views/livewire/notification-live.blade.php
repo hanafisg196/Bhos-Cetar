@@ -38,7 +38,7 @@
                       <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                      @endif
                      <div class="toast-header">
-                         <i class="bi bi-folder-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
+                         <i class="bi bi-calendar2-check-fill me-3" style="font-size: 18px; color: #007aff;transform: translateY(-5px);"></i>
                          <strong class="me-auto">{{$item['ecorrections']->code}}</strong>
                          <small>{{$item->created_at->diffForHumans();}}</small>
                      </div>

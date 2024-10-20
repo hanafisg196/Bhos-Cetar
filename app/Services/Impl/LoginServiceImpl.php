@@ -11,9 +11,12 @@ use Illuminate\Support\Facades\Http;
 
 class LoginServiceImpl implements LoginService
 {
+    private function getUserRole($rule)
+    {
+        return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
+    }
     public function login(Request $request)
     {
-
         $username = $request->input('username');
         $password = $request->input('password');
         $token = Str::uuid();
@@ -38,19 +41,20 @@ class LoginServiceImpl implements LoginService
                     'name' => $data['jabatan']['nama_pegawai'],
                     'nip' => $data['jabatan']['nip'],
                     'jabatan' => $data['jabatan']['nama'],
-                    'token' => $token
+                    'token' => $token,
                 ]);
             } else {
                 $user->update([
-                  'username' => $data['jabatan']['nip'],
-                  'name' => $data['jabatan']['nama_pegawai'],
-                  'nip' => $data['jabatan']['nip'],
-                  'jabatan' => $data['jabatan']['nama'],
-                  'token' => $token
+                    'username' => $data['jabatan']['nip'],
+                    'name' => $data['jabatan']['nama_pegawai'],
+                    'nip' => $data['jabatan']['nip'],
+                    'jabatan' => $data['jabatan']['nama'],
+                    'token' => $token,
                 ]);
             }
             Auth::login($user);
-            $hasRule = $user->rules->contains('nama', 'ADMIN');
+            $rule = ['ADMIN', 'KABAG', 'VERIFIKATOR 1', 'VERIFIKATOR 2'];
+            $hasRule = $this->getUserRole($rule);
             if ($hasRule) {
                 return redirect()->route('admin.dashboard');
             } else {

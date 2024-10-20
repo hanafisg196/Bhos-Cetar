@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('status')->default('Usulan');
             $table->string('message')->default('-');
             $table->tinyInteger('read')->default(0);
+            $table->unsignedBigInteger('dispos_id')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

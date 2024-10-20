@@ -25,15 +25,16 @@ class ListInboxEcorLive extends Component
   }
    public function render()
    {
-      strlen($this->searchEcor) >= 1 ?
-      $data = $this->ecorrectionService
+       if(strlen($this->searchEcor) >= 1){
+         $data = $this->ecorrectionService
       ->search(
           $this->searchEcor, $this->perPage
-      ):
-      $data = $this->ecorrectionService
-      ->getListEcorrection(
-          $this->perPage
-      );
+         );
+      } else {
+         $data = $this->ecorrectionService->getListEcorrection(
+             $this->perPage
+         );
+      }
      return view('livewire.list-inbox-ecor-live')->with([
         'data' => $data
      ]);
