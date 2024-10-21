@@ -14,4 +14,6 @@ interface EcorrectionService {
    public function search($search, $perPage);
    public function sendToVerifikatorTwo($id, $verfikatorId);
    public function getEcorByUser();
+   public function getVerifikatorTwoProfile($disposId);
+
 }

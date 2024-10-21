@@ -6,6 +6,7 @@ use App\Models\Document;
 use App\Models\Ecorrection;
 use App\Models\Notification;
 use App\Models\Temporary;
+use App\Models\User;
 use App\Services\EcorrectionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,9 +15,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
 class EcorrectionServiceImpl implements EcorrectionService {
-
-
-
 
    private function getUser(){
        return Auth::user();
@@ -72,24 +70,27 @@ class EcorrectionServiceImpl implements EcorrectionService {
 
    }
    public function getListEcorrection($perPage){
-
+      $rule = ['KABAG', 'ADMIN'];
       $user = $this->getUser();
-      $kabag = $this->getUserRole('KABAG');
+      $kabag = $this->getUserRole($rule);
       if ($kabag ){
-         return Ecorrection::with('dokumens')->where('status', 'Usulan')->latest()->paginate(perPage: $perPage);
+         return Ecorrection::with('dokumens')
+         ->orderByRaw("CASE WHEN status = 'Usulan' THEN 1 ELSE 2 END")
+         ->latest()
+         ->paginate($perPage);
       } else{
          return Ecorrection::with('dokumens')
-         ->where('status', '!=' , 'Usulan')
-         ->where('dispos_id', $user->id)
-         ->latest()->paginate(perPage: $perPage);
-      }
+         ->orderByRaw("CASE WHEN dispos_id = {$user->id} THEN 1 ELSE 2 END")
+         ->orderByRaw("CASE WHEN status = 'Disposisi' THEN 1 ELSE 2 END")
+         ->latest()
+         ->paginate($perPage);
 
+      }
    }
 
    public function getEcorrectionById($id){
       return Ecorrection::with('dokumens')->find($id);
    }
-
    public function readStat($id){
      $data =  $this->getEcorrectionById($id);
      $data->update([
@@ -143,14 +144,18 @@ class EcorrectionServiceImpl implements EcorrectionService {
     }
     public function search($search, $perPage)
     {
+
+      // return Ecorrection::where('title', 'like', '%' . $search . '%')
+      // ->where('status', 'Usulan')
+      // ->latest()
+      // ->paginate($perPage);
         $user = $this->getUser();
         $kabag = $this->getUserRole('KABAG');
 
         if ($kabag) {
             return Ecorrection::where('title', 'like', '%' . $search . '%')
                 ->where('status', 'Usulan')
-                ->latest()
-                ->paginate($perPage);
+                ->latest()->paginate($perPage);
         } else {
             return Ecorrection::where('title', 'like', '%' . $search . '%')
                 ->where('status', '!=', 'Usulan')
@@ -176,5 +181,9 @@ class EcorrectionServiceImpl implements EcorrectionService {
         return Ecorrection::where('user_id', $user->id)
             ->latest('updated_at')
             ->paginate(10, ['*'], 'ecorrections-page');
+    }
+
+    public function getVerifikatorTwoProfile($disposId){
+       return User::where('id', $disposId)->first();
     }
 }

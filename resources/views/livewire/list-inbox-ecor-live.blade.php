@@ -31,9 +31,10 @@
                                                 </div>
                                             </div>
                                           </div>
+
                                       </div>
                                   </div>
-                                  <div class="email-user-list list-group ps ps--active-y">
+                                   <div class="email-user-list list-group ps ps--active-y">
                                       <ul class="users-list-wrapper media-list">
                                        @if ($data->isNotEmpty())
                                        @foreach ($data as $item)
@@ -53,7 +54,7 @@
                                                  <div class="user-details">
                                                      <div class="mail-items">
                                                       <span class="list-group-item-text text-truncate">{{ $item->nama }}</span>
-                                                      @if ($item->status == 'Ditolak')
+                                                  @if ($item->status == 'Ditolak')
                                                       <span class="list-group-item-text text-truncate"
                                                           style="color: red">{{ $item->status }}</span>
                                                   @elseif ($item->status == 'Disetujui')
@@ -72,8 +73,9 @@
                                                      </div>
                                                      <div class="mail-meta-item">
                                                       <span class="float-right">
-                                                      <span
-                                                              class="mail-date">{{ $item->created_at->diffForHumans() }}</span>
+                                                           <div>Verifikator 2 - {{$item->nama}}</div>
+                                                         <div class="mail-date">{{ $item->created_at->diffForHumans() }}</div>
+                                                     </span>
                                                       </span>
                                                   </div>
                                                  </div>

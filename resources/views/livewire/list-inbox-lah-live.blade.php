@@ -32,7 +32,6 @@
                                                </div>
                                            </div>
                                            <!-- pagination and page countß -->
-
                                            <div class="col-md-4">
                                                <div class="input-group">
                                                    <label class="input-group-text" for="inputGroupSelect01">Kategori</label>
@@ -56,7 +55,7 @@
                                                        @else
                                                        <li class="media">
                                                    @endif
-                                           <a href="{{ route('detail.aksi.ham', encrypt($item->id)) }}"
+                                                <a href="{{ route('detail.aksi.ham', encrypt($item->id)) }}"
                                                        wire:click="readInboxLah('{{ $item->id }}')"
                                                        class="d-flex align-items-center text-decoration-none text-dark w-100">
                                                        <div class="pr-50">

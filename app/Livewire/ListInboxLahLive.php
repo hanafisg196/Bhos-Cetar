@@ -9,10 +9,11 @@ use Livewire\WithPagination;
 class ListInboxLahLive extends Component
 {
     use WithPagination;
-  public $string = "";
+    public $string = "";
     public $perPage = 7;
     public $searchLah = "";
     public $option = [];
+
     public $selectedCat;
     protected ReportHamService $reportHamService;
     public function boot(
@@ -57,5 +58,7 @@ class ListInboxLahLive extends Component
     public function loadMore(){
         $this->perPage += 10;
     }
+
+
 
 }

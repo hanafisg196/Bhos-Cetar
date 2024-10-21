@@ -65,16 +65,18 @@
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <div>
-                                        <button type="button" class="btn btn-outline-primary block"
-                                            data-bs-toggle="modal" data-bs-target="#default">
-                                            Ubah Status
-                                        </button>
+
                                         @if ($hasDispos)
                                         <button type="button" class="btn btn-outline-primary block"
                                         data-bs-toggle="modal" data-bs-target="#default2">
                                         Disposisi
-                                    </button>
-                                        @endif
+                                        </button>
+                                        @else
+                                        <button type="button" class="btn btn-outline-primary block"
+                                        data-bs-toggle="modal" data-bs-target="#default">
+                                        Ubah Status
+                                       </button>
+                                         @endif
 
                                     </div>
                                 </div>
