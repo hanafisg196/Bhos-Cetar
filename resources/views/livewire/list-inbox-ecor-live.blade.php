@@ -89,7 +89,7 @@
                               <div class="email-app-list" style="margin-top: 15px;">
                                   <div class="email-action">
                                       <div class="action-right d-flex flex-grow-1 align-items-center justify-content-around">
-                                       <div class="sidebar-toggle d-block d-lg-none">
+                                       <div  class="sidebar-toggle d-block d-lg-none">
                                           <button class="btn btn-sm btn-outline-primary">
                                               <i class="bi bi-list fs-5" ></i>
                                           </button>
@@ -108,23 +108,32 @@
 
                                       </div>
                                   </div>
+
                                    <div class="email-user-list list-group ps ps--active-y">
                                       <ul class="users-list-wrapper media-list">
-                                       @if ($data->isNotEmpty())
+                                       @if (!empty($data))
                                        @foreach ($data as $item)
                                        @if ($item->read == 1)
                                        <li class="media mail-read">
                                          @else
                                        <li class="media">
                                         @endif
-                                          <a href="{{route('detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
+                                        @if ($kabag === true)
+                                              <a href="{{route('detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
                                           text-decoration-none text-dark w-100" wire:click="readStat({{$item->id}})">
-                                             <div class="pr-50">
+                                        @elseif (tetek(encrypt($item->verifikator_nip)))
+                                        <a href="{{route('detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
+                                          text-decoration-none text-dark w-100" wire:click="readStat({{$item->id}})">
+                                        @else
+                                        <a href="#" class="d-flex align-items-center text-decoration-none text-dark w-100" >
+                                        @endif
+                                          <div class="pr-50">
                                                  <div class="avatar">
                                                      <img src="/dist/assets/compiled/png/document.png" alt="avatar img holder">
                                                  </div>
-                                             </div>
+                                          </div>
                                              <div class="media-body">
+                                                <p>{{$verifikator}}</p>
                                                  <div class="user-details">
                                                      <div class="mail-items">
                                                       <span class="list-group-item-text text-truncate">{{ $item->nama }}</span>
@@ -149,7 +158,7 @@
                                                       <div class="mail-meta-item">
                                                          <span class="float-right text-right">
                                                              <div class="mail-date" style="padding-left: 120px;">{{ $item->created_at->diffForHumans() }}</div>
-                                                             <div>{{ verifikatorProfile(encrypt($item->verifikator_nip)) }}</div>
+                                                             <div class="text-right">{{ verifikatorProfile(encrypt($item->verifikator_nip))}}</div>
                                                          </span>
                                                      </div>
 
@@ -189,7 +198,8 @@
             </div>
         </section>
      </div>
-@if (session()->has('status'))
+
+  @if (session()->has('status'))
        <script>
            document.addEventListener('livewire:navigated', () => {
                Toastify({
@@ -203,3 +213,4 @@
        </script>
    @endif
 </div>
+

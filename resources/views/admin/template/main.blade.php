@@ -59,20 +59,6 @@
     <script src="/dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/dist/assets/compiled/js/app.js"></script>
     <script src="/dist/assets/static/js/pages/form-element-select.js"></script>
-    <script>
-      document.querySelector('.sidebar-toggle').addEventListener('click', () => {
-          document.querySelector('.email-app-sidebar').classList.toggle('show')
-      })
-      document.querySelector('.sidebar-close-icon').addEventListener('click', () => {
-          document.querySelector('.email-app-sidebar').classList.remove('show')
-      })
-      document.querySelector('.compose-btn').addEventListener('click', () => {
-          document.querySelector('.compose-new-mail-sidebar').classList.add('show')
-      })
-      document.querySelector('.email-compose-new-close-btn').addEventListener('click', () => {
-          document.querySelector('.compose-new-mail-sidebar').classList.remove('show')
-      })
-  </script>
     @include('dashboard.component.sweet-toast')
     @include('dashboard.component.sweet-toast-error')
     @yield('script')

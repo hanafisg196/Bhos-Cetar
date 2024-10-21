@@ -3,7 +3,7 @@
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 if (!function_exists('trimString')) {
     function trimString($string)
     {
@@ -55,3 +55,12 @@ if (!function_exists(function: 'verifikatorProfile')) {
         return $user ? 'Verifikator 2 - ' . $user->name : '';
     }
 }
+
+if (!function_exists('tetek')) {
+   function tetek($verifikator)
+   {
+       $verifikator = Crypt::decrypt($verifikator);
+       return Auth::user()->nip == $verifikator;
+   }
+}
+

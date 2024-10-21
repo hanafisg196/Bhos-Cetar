@@ -6,6 +6,7 @@ namespace App\Livewire;
 
 use App\Models\Ecorrection;
 use App\Services\EcorrectionService;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -18,6 +19,8 @@ class ListInboxEcorLive extends Component
     public $perPage = 7;
     public $searchEcor = '';
     public $filter = 'all';
+    public $kabag;
+    public $verifikator;
 
     public function boot(EcorrectionService $ecorrectionService)
     {
@@ -27,12 +30,24 @@ class ListInboxEcorLive extends Component
     public function mount()
     {
         $this->filter = 'all';
+        $this->test1();
+        $this->test2();
+
     }
 
+    public function test1(){
+       $rule = ['KABAG', 'ADMIN'];
+      $this->kabag = Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
+    }
+    public function test2() {
+      $user = Auth::user();
+      $this->verifikator = Ecorrection::where('verifikator_nip', $user->nip)->exists();
+  }
     public function filterByStatus($status)
     {
         $this->filter = $status;
     }
+
 
     public function render()
     {

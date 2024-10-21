@@ -6,7 +6,6 @@ use App\Models\Document;
 use App\Models\Ecorrection;
 use App\Models\Notification;
 use App\Models\Temporary;
-use App\Models\User;
 use App\Services\EcorrectionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
