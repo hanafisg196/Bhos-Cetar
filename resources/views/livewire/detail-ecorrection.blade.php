@@ -164,16 +164,16 @@
                              </div>
                                  <div class="modal-body">
                                    <fieldset class="form-group">
-                                    <select wire:model="verfikatorId" class="form-select" id="basicSelect">
+                                    <select wire:model="verfikator" class="form-select" id="basicSelect">
                                        <option selected>Pilih Verifikator 2...</option>
                                        @foreach ($verifikatorTwo as $verifikator)
-                                           <option value="{{ $verifikator->id }}">{{ $verifikator->name }}
+                                           <option value="{{ $verifikator->nip }}">{{ $verifikator->name }}
                                            </option>
                                        @endforeach
                                    </select>
                                    </fieldset>
                                    <div>
-                                    @error('verfikatorId')
+                                    @error('verfikator')
                                         {{ $message }}
                                     @enderror
                                 </div>

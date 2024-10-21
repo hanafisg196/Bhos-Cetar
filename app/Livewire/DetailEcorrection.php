@@ -25,12 +25,12 @@ class DetailEcorrection extends Component
     public $data;
     public $string;
     public $hasDispos;
-    public $verfikatorId;
+    public $verfikator;
     public $pesan = '';
     public $status = '';
 
     protected $rules = [
-        'verfikatorId' => 'required',
+        'verfikator' => 'required',
         'pesan' => 'required',
         'status' => 'required'
     ];
@@ -70,10 +70,9 @@ class DetailEcorrection extends Component
 
     public function updateVerifikatorTwo($id){
       $this->validate([
-         'verfikatorId' => 'required',
+         'verfikator' => 'required',
      ]);
-
-      $this->ecorrectionService->sendToVerifikatorTwo($id, $this->verfikatorId);
+      $this->ecorrectionService->sendToVerifikatorTwo($id, $this->verfikator);
       session()->flash('status', 'Verifikator Berhasil Di tentukan');
       $this->redirect(route('admin.list.ecorrection'));
     }

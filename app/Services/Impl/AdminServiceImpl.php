@@ -88,7 +88,7 @@ class AdminServiceImpl implements AdminService
          return Ecorrection::query()
          ->whereIn('status', ['Disposisi', 'Revisi'])
          ->where('read', 0)
-         ->where('dispos_id', $user->id)
+         ->where('verifikator_nip', $user->nip)
          ->count();
       }
 

@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Services\NotificationService;
-use Livewire\Attributes\On;
 use Livewire\Component;
 
 class NotificationLive extends Component
@@ -16,10 +15,6 @@ class NotificationLive extends Component
     {
         $this->notificationService = $notificationService;
     }
-   //  #[On('notif-created')]
-   //  public function test(){
-   //       dd('test');
-   //  }
     public function placeholder()
     {
       return view('placeholder.icon-notif');

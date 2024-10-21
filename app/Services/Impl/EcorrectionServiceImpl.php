@@ -69,25 +69,44 @@ class EcorrectionServiceImpl implements EcorrectionService {
       $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
 
    }
-   public function getListEcorrection($perPage){
-      $rule = ['KABAG', 'ADMIN'];
-      $user = $this->getUser();
-      $kabag = $this->getUserRole($rule);
-      if ($kabag ){
-         return Ecorrection::with('dokumens')
+
+   public function allEcorrections($perPage){
+          return Ecorrection::with('dokumens')
          ->orderByRaw("CASE WHEN status = 'Usulan' THEN 1 ELSE 2 END")
          ->latest()
          ->paginate($perPage);
-      } else{
-         return Ecorrection::with('dokumens')
-         ->orderByRaw("CASE WHEN dispos_id = {$user->id} THEN 1 ELSE 2 END")
-         ->orderByRaw("CASE WHEN status = 'Disposisi' THEN 1 ELSE 2 END")
-         ->latest()
-         ->paginate($perPage);
-
-      }
    }
+   public function ususlanEcorrections($perPage){
+      // $rule = ['KABAG', 'ADMIN'];
+      // $user = $this->getUser();
+      // $kabag = $this->getUserRole($rule);
+      // if ($kabag ){
+      //    return Ecorrection::with('dokumens')
+      //    ->orderByRaw("CASE WHEN status = 'Usulan' THEN 1 ELSE 2 END")
+      //    ->latest()
+      //    ->paginate($perPage);
+      // } else{
+      //    return Ecorrection::with('dokumens')
+      //    ->orderByRaw("CASE WHEN verifikator_nip = {$user->nip} THEN 1 ELSE 2 END")
+      //    ->orderByRaw("CASE WHEN status = 'Disposisi' THEN 1 ELSE 2 END")
+      //    ->latest()
+      //    ->paginate($perPage);
 
+      // }
+    return  Ecorrection::where('status', 'Usulan')->latest()->paginate($perPage);
+   }
+   public function disposisiEcorrections($perPage){
+      return  Ecorrection::where('status', 'Disposisi')->latest()->paginate($perPage);
+   }
+   public function disetujuiEcorrections($perPage){
+      return Ecorrection::where('status', 'Disetujui')->latest()->paginate($perPage);
+   }
+   public function ditolakEcorrections($perPage){
+      return  Ecorrection::where('status', 'Ditolak')->latest()->paginate($perPage);
+   }
+   public function revisiEcorrections($perPage){
+      return Ecorrection::where('status', 'Revisi')->latest()->paginate($perPage);
+   }
    public function getEcorrectionById($id){
       return Ecorrection::with('dokumens')->find($id);
    }
@@ -159,17 +178,17 @@ class EcorrectionServiceImpl implements EcorrectionService {
         } else {
             return Ecorrection::where('title', 'like', '%' . $search . '%')
                 ->where('status', '!=', 'Usulan')
-                ->where('dispos_id', $user->id)
+                ->where('verifikator_nip', $user->nip)
                 ->latest()
                 ->paginate($perPage);
         }
     }
 
 
-    public function sendToVerifikatorTwo($id, $verfikatorId){
+    public function sendToVerifikatorTwo($id, $verifikator){
       $ecor = $this->getEcorrectionById($id);
       $ecor->update([
-         'dispos_id' => $verfikatorId,
+         'verifikator_nip' => $verifikator,
          'status' => 'Disposisi',
          'read' => 0
       ]);
@@ -183,7 +202,5 @@ class EcorrectionServiceImpl implements EcorrectionService {
             ->paginate(10, ['*'], 'ecorrections-page');
     }
 
-    public function getVerifikatorTwoProfile($disposId){
-       return User::where('id', $disposId)->first();
-    }
+
 }
