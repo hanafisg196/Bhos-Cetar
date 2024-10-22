@@ -120,12 +120,13 @@
                                         <a href="{{route('detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
                                           text-decoration-none text-dark w-100" wire:click="readStat({{$item->id}})">
                                         @else
-                                        <a href="#" class="d-flex align-items-center text-decoration-none text-dark w-100" >
+                                        <a class="d-flex align-items-center text-decoration-none text-dark w-100"
+                                        onclick="Swal.fire('Akses ditolak!', 'Anda tidak memiliki izin untuk mengakses halaman ini.', 'warning')">
                                         @endif
-                                          <div class="pr-50">
-                                                 <div class="avatar">
-                                                     <img src="/dist/assets/compiled/png/document.png" alt="avatar img holder">
-                                                 </div>
+                                        <div class="pr-50">
+                                          <div class="avatar">
+                                             <img src="/dist/assets/compiled/png/document.png" alt="avatar img holder">
+                                          </div>
                                           </div>
                                              <div class="media-body">
                                                 <p>{{$verifikator}}</p>
@@ -156,8 +157,6 @@
                                                              <div class="text-right">{{ verifikatorProfile(encrypt($item->verifikator_nip))}}</div>
                                                          </span>
                                                      </div>
-
-
                                                       </div>
                                                  </div>
                                                  <div class="mail-message">

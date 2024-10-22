@@ -16,14 +16,14 @@ class SeedRole extends Seeder
         $user  = User::find(1);
         $user->rules()->attach(1);
 
-        $user  = User::find(2);
-        $user->rules()->attach(2);
+      //   $user  = User::find(2);
+      //   $user->rules()->attach(2);
 
-        $user  = User::find(3);
-        $user->rules()->attach(4);
+      //   $user  = User::find(3);
+      //   $user->rules()->attach(4);
 
-        $user  = User::find(4);
-        $user->rules()->attach(6);
+      //   $user  = User::find(4);
+      //   $user->rules()->attach(6);
 
     }
 }

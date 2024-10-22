@@ -30,19 +30,14 @@ class ListInboxEcorLive extends Component
     public function mount()
     {
         $this->filter = 'all';
-        $this->test1();
-        $this->test2();
+        $this->checkAccess();
+
 
     }
-
-    public function test1(){
+    public function checkAccess(){
        $rule = ['KABAG', 'ADMIN'];
       $this->kabag = Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
     }
-    public function test2() {
-      $user = Auth::user();
-      $this->verifikator = Ecorrection::where('verifikator_nip', $user->nip)->exists();
-  }
     public function filterByStatus($status)
     {
         $this->filter = $status;
@@ -81,7 +76,9 @@ class ListInboxEcorLive extends Component
     }
 
     public function alertDeny(){
-
+        $this->js(<<<JS
+            Swal.fire("SweetAlert2 is working!");
+        JS);
     }
 
     public function loadMore()
