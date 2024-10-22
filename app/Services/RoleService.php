@@ -18,4 +18,5 @@ interface RoleService{
     public function getVerifikatorTwo();
     public function disposisiAccess();
     public function userManagerAdmin();
+    public function checkVerifikatorTwo();
 }

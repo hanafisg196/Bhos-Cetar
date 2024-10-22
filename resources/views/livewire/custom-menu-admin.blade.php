@@ -6,7 +6,7 @@
          <i class="bi bi-calendar2-check-fill"></i>
           <span>Ecorrection</span>
           <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 43px; color: black;">
-            <livewire:ecor-count />
+            {{$allReadCount}}
            </span>
       </a>
       <ul class="submenu">
@@ -14,7 +14,7 @@
               <a href="{{ route('admin.list.ecorrection') }}" class="submenu-link">
                   <span>Inbox</span>
                   <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 10px; color: black;">
-                     <livewire:ecor-count />
+                  {{$allReadCount}}
                   </span>
               </a>
           </li>

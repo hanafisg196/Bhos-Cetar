@@ -19,6 +19,12 @@ interface EcorrectionService {
    public function search($search, $perPage);
    public function sendToVerifikatorTwo($id, $verifikator);
    public function getEcorByUser();
-
-
+   public function countReadEcorUsulan();
+   public function countReadEcorDisposisi();
+   public function countReadEcorDitolak();
+   public function countReadEcorDisetujui();
+   public function countReadEcorRevisi();
+   public function countReadEcorAll();
+   public function disposisiByVerifikator($perPage);
+   public function disposisiReadCountByVerifikator();
 }

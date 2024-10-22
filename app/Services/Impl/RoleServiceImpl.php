@@ -124,6 +124,11 @@ class RoleServiceImpl implements RoleService
       return OpdList::all();
     }
 
+    public function checkVerifikatorTwo(){
+      $accesRule = ['VERIFIKATOR 2'];
+      return $this->getUserRole($accesRule);
+    }
+
     public function getVerifikatorTwo(){
       return User::with('rules')->whereHas('rules', function ($query) {
           $query->where('nama', '=', 'VERIFIKATOR 2');

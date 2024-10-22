@@ -6,6 +6,7 @@ namespace App\Livewire;
 
 use App\Models\Ecorrection;
 use App\Services\EcorrectionService;
+use App\Services\RoleService;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -15,34 +16,45 @@ class ListInboxEcorLive extends Component
     use WithPagination;
 
     protected EcorrectionService $ecorrectionService;
+    protected RoleService $roleService;
 
     public $perPage = 7;
     public $searchEcor = '';
     public $filter = 'all';
-    public $kabag;
+    public $checkKabag;
+    public $checkVerifikatorTwo;
+    public $diposisiReadCount = 0;
+    public $usulanReadCount = 0;
+    public $disetujuiReadCount = 0;
+    public $revisiReadCount = 0;
+    public $ditolakReadCount = 0;
+    public $allReadCount = 0 ;
+    public $diposisiReadCountByVerifikator = 0;
     public $verifikator;
 
-    public function boot(EcorrectionService $ecorrectionService)
+    public function boot(
+      RoleService $roleService,
+      EcorrectionService $ecorrectionService
+      )
     {
+       $this->roleService = $roleService;
         $this->ecorrectionService = $ecorrectionService;
     }
 
     public function mount()
     {
         $this->filter = 'all';
-        $this->checkAccess();
-
-
+        $this->checkAccessKabag();
+        $this->countReadStatus();
+        $this->checkVerifikatorTwo();
     }
-    public function checkAccess(){
-       $rule = ['KABAG', 'ADMIN'];
-      $this->kabag = Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
+    public function checkAccessKabag(){
+      $this->checkKabag = $this->roleService->userManagerAdmin();
     }
     public function filterByStatus($status)
     {
         $this->filter = $status;
     }
-
 
     public function render()
     {
@@ -60,7 +72,11 @@ class ListInboxEcorLive extends Component
              $data = $this->ecorrectionService->disetujuiEcorrections($this->perPage);
          } elseif ($this->filter === 'revisi') {
              $data = $this->ecorrectionService->revisiEcorrections($this->perPage);
-         } else {
+         }
+         elseif ($this->filter === 'yourdispos') {
+            $data = $this->ecorrectionService->disposisiByVerifikator($this->perPage);
+         }
+         else {
              $data = $this->ecorrectionService->allEcorrections($this->perPage);
          }
      }
@@ -84,5 +100,20 @@ class ListInboxEcorLive extends Component
     public function loadMore()
     {
         $this->perPage += 10;
+    }
+
+    public function countReadStatus(){
+      $this->usulanReadCount = $this->ecorrectionService->countReadEcorUsulan();
+      $this->diposisiReadCount = $this->ecorrectionService->countReadEcorDisposisi();
+      $this->ditolakReadCount = $this->ecorrectionService->countReadEcorDitolak();
+      $this->disetujuiReadCount = $this->ecorrectionService->countReadEcorDisetujui();
+      $this->revisiReadCount = $this->ecorrectionService->countReadEcorRevisi();
+      $this->allReadCount = $this->ecorrectionService->countReadEcorAll();
+      $this->diposisiReadCountByVerifikator = $this->ecorrectionService->disposisiReadCountByVerifikator();
+
+    }
+
+    public function checkVerifikatorTwo(){
+         $this->checkVerifikatorTwo = $this->roleService->checkVerifikatorTwo();
     }
 }

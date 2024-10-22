@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Services\RoleService;
-use Illuminate\Http\Request;
 use Livewire\Component;
 
 class CustomMenuDashboard extends Component
@@ -11,7 +10,9 @@ class CustomMenuDashboard extends Component
    protected RoleService $roleService;
    public $checkUploaderOne;
    public $checkUploaderTwo;
-   public function boot(RoleService $roleService)
+   public function boot(
+      RoleService $roleService
+      )
    {
        $this->roleService = $roleService;
    }
