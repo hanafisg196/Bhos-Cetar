@@ -25,54 +25,49 @@
                             </button> --}}
                         </div>
                         <div class="sidebar-menu-list ps">
-                            <!-- sidebar menu  -->
-                            <div class="list-group list-group-messages mt-5">
-                                <a href="#" wire:click.prevent="filterByStatus('all')"
-                                class="list-group-item pt-0 {{ $filter == 'all' ? 'active' : '' }}" id="inbox-menu">
-                                    <div class="fonticon-wrap d-inline me-3">
-                                    </div>
-                                    Semua
-                                    <span class="badge bg-light-primary badge-pill badge-round float-right mt-50">5</span>
-                                </a>
-                                <a href="#" wire:click.prevent="filterByStatus('usulan')"
-                                class="list-group-item pt-0 {{ $filter == 'usulan' ? 'active' : '' }}">
-                                    <div class="fonticon-wrap d-inline me-3">
-                                    </div>
-                                    Usulan
-                                </a>
-                                <a href="#"  wire:click.prevent="filterByStatus('disposisi')"
-                                  class="list-group-item pt-0 {{ $filter == 'disposisi' ? 'active' : '' }}">
-                                    <div class="fonticon-wrap d-inline me-3">
-                                    </div>
-                                    Disposisi
-                                </a>
+                           <!-- sidebar menu  -->
+                           <div class="list-group list-group-messages mt-5">
+                               <a href="#" wire:click.prevent="filterByStatus('all')"
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'all' ? 'active' : '' }}"
+                                  id="inbox-menu">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Semua
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">5</span>
+                               </a>
+                               <a href="#" wire:click.prevent="filterByStatus('usulan')"
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'usulan' ? 'active' : '' }}">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Usulan
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">5</span>
+                               </a>
+                               <a href="#" wire:click.prevent="filterByStatus('disposisi')"
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'disposisi' ? 'active' : '' }}">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Disposisi
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">5</span>
+                               </a>
+                               <a href="#" wire:click.prevent="filterByStatus('disetujui')"
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'disetujui' ? 'active' : '' }}">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Disetujui
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">5</span>
+                               </a>
+                               <a href="#" wire:click.prevent="filterByStatus('ditolak')"
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'ditolak' ? 'active' : '' }}">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Ditolak
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">5</span>
+                               </a>
+                               <a href="#" wire:click.prevent="filterByStatus('revisi')"
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'revisi' ? 'active' : '' }}">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Revisi
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">5</span>
+                               </a>
+                           </div>
+                           <!-- sidebar menu end -->
+                       </div>
 
-                                <a href="#"  wire:click.prevent="filterByStatus('disetujui')"
-                                class="list-group-item pt-0 {{ $filter == 'disetujui' ? 'active' : '' }}">
-                                    <div class="fonticon-wrap d-inline me-3">
-                                    </div>
-                                    Disetujui
-                                    <span
-                                        class="badge bg-light-danger badge-pill badge-round float-right mt-50">3</span>
-                                </a>
-                                <a href="#"  wire:click.prevent="filterByStatus('ditolak')"
-                                class="list-group-item pt-0 {{ $filter == 'ditolak' ? 'active' : '' }}">
-                                 <div class="fonticon-wrap d-inline me-3">
-                                 </div>
-                                 Ditolak
-                                 <span
-                                     class="badge bg-light-danger badge-pill badge-round float-right mt-50">3</span>
-                                </a>
-                                 <a href="#"  wire:click.prevent="filterByStatus('revisi')"
-                                  class="list-group-item pt-0 {{ $filter == 'revisi' ? 'active' : '' }}">
-                                 <div class="fonticon-wrap d-inline me-3">
-                                 </div>
-                                 Revisi
-                                 <span class="badge bg-light-danger badge-pill badge-round float-right mt-50">3</span>
-                                </a>
-                            </div>
-                            <!-- sidebar menu  end-->
-                        </div>
                     </div>
                 </div>
             </div>
