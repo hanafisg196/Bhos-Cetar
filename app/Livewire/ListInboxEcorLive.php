@@ -36,23 +36,24 @@ class ListInboxEcorLive extends Component
 
     public function render()
     {
-        if ($this->filter === 'disposisi') {
-         $data = $this->ecorrectionService->disposisiEcorrections($this->perPage);
-        } elseif ($this->filter === 'usulan') {
-         $data = $this->ecorrectionService->ususlanEcorrections($this->perPage);
-        }
-        elseif ($this->filter === 'ditolak') {
-         $data = $this->ecorrectionService->ditolakEcorrections($this->perPage);
-        }
-        elseif ($this->filter === 'disetujui') {
-         $data = $this->ecorrectionService->disetujuiEcorrections($this->perPage);
-        }
-        elseif ($this->filter === 'revisi') {
-         $data = $this->ecorrectionService->revisiEcorrections($this->perPage);
-        }
-        else {
-            $data = $this->ecorrectionService->allEcorrections($this->perPage);
-        }
+
+      if (!empty($this->searchEcor)) {
+         $data = $this->ecorrectionService->search($this->searchEcor, $this->perPage);
+     } else {
+         if ($this->filter === 'disposisi') {
+             $data = $this->ecorrectionService->disposisiEcorrections($this->perPage);
+         } elseif ($this->filter === 'usulan') {
+             $data = $this->ecorrectionService->ususlanEcorrections($this->perPage);
+         } elseif ($this->filter === 'ditolak') {
+             $data = $this->ecorrectionService->ditolakEcorrections($this->perPage);
+         } elseif ($this->filter === 'disetujui') {
+             $data = $this->ecorrectionService->disetujuiEcorrections($this->perPage);
+         } elseif ($this->filter === 'revisi') {
+             $data = $this->ecorrectionService->revisiEcorrections($this->perPage);
+         } else {
+             $data = $this->ecorrectionService->allEcorrections($this->perPage);
+         }
+     }
 
         return view('livewire.list-inbox-ecor-live')->with([
             'data' => $data,
@@ -62,6 +63,10 @@ class ListInboxEcorLive extends Component
     public function readStat($id)
     {
         $this->ecorrectionService->readStat($id);
+    }
+
+    public function alertDeny(){
+
     }
 
     public function loadMore()

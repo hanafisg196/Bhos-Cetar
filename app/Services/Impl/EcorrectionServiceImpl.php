@@ -6,7 +6,6 @@ use App\Models\Document;
 use App\Models\Ecorrection;
 use App\Models\Notification;
 use App\Models\Temporary;
-use App\Models\User;
 use App\Services\EcorrectionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -163,25 +162,25 @@ class EcorrectionServiceImpl implements EcorrectionService {
     }
     public function search($search, $perPage)
     {
+      return Ecorrection::where('title', 'like', '%' . $search . '%')
+      ->latest()->paginate($perPage);
 
       // return Ecorrection::where('title', 'like', '%' . $search . '%')
       // ->where('status', 'Usulan')
       // ->latest()
       // ->paginate($perPage);
-        $user = $this->getUser();
-        $kabag = $this->getUserRole('KABAG');
+      //   $user = $this->getUser();
+      //   $kabag = $this->getUserRole('KABAG');
 
-        if ($kabag) {
-            return Ecorrection::where('title', 'like', '%' . $search . '%')
-                ->where('status', 'Usulan')
-                ->latest()->paginate($perPage);
-        } else {
-            return Ecorrection::where('title', 'like', '%' . $search . '%')
-                ->where('status', '!=', 'Usulan')
-                ->where('verifikator_nip', $user->nip)
-                ->latest()
-                ->paginate($perPage);
-        }
+      //   if ($kabag) {
+
+      //   } else {
+      //       return Ecorrection::where('title', 'like', '%' . $search . '%')
+      //           ->where('status', '!=', 'Usulan')
+      //           ->where('verifikator_nip', $user->nip)
+      //           ->latest()
+      //           ->paginate($perPage);
+      //   }
     }
 
 
