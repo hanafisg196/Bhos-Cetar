@@ -119,6 +119,11 @@ class ScheduleServiceImpl implements ScheduleService
         return Schedule::with('documents')->find($id);
     }
 
+    public function getScheduleById($id)
+    {
+        return Schedule::find($id);
+    }
+
     public function search($search, $perPage)
     {
        return Schedule::where('nama', 'like', '%' . $search . '%')->paginate($perPage);
@@ -186,4 +191,17 @@ class ScheduleServiceImpl implements ScheduleService
     {
         return Storage::download('files/'. $file);
     }
+    public function sendToVerifikatorTwo($id, $verifikator){
+      $ecor = $this->getScheduleById($id);
+      $ecor->update([
+         'verifikator_nip' => $verifikator,
+         'status' => 'Disposisi',
+         'read' => 0
+      ]);
+    }
+
+
+
+
+
 }

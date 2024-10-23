@@ -8,6 +8,71 @@
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
     <div class="page-heading email-application overflow-hidden" style="margin-top:-20px; ">
       <section class="section content-area-wrapper">
+         <div class="sidebar-left" style="height: 60vh;">
+            <div class="sidebar">
+                <div class="sidebar-content email-app-sidebar d-flex">
+                    <!-- sidebar close icon -->
+                    <span class="sidebar-close-icon">
+                        <i class="bi bi-x"></i>
+                    </span>
+                    <!-- sidebar close icon -->
+                    <div class="email-app-menu">
+                        <div class="form-group form-group-compose">
+                            <!-- compose button  -->
+                            {{-- <button type="button" class="btn btn-primary btn-block my-4 compose-btn">
+                                <i class="bi bi-plus"></i>
+                                Compose
+                            </button> --}}
+                        </div>
+                        <div class="sidebar-menu-list ps">
+                           <!-- sidebar menu  -->
+                           <div class="list-group list-group-messages mt-5">
+                               {{-- @if ($checkVerifikatorTwo === true) --}}
+                               <a href="#" wire:click.prevent="filterByStatus('yourdispos')"
+                               class="list-group-item position-relative pt-0">
+                                <div class="fonticon-wrap d-inline me-3"></div>
+                                Disposisi Anda
+                                <span class="badge bg-light-danger badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                               </a>
+                               {{-- @endif --}}
+                               <a href="#" wire:click.prevent="filterByStatus('usulan')"
+                                  class="list-group-item position-relative pt-0 ">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Usulan
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                               </a>
+                               <a href="#" wire:click.prevent="filterByStatus('disposisi')"
+                                  class="list-group-item position-relative pt-0 ">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Disposisi
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                               </a>
+                               <a href="#" wire:click.prevent="filterByStatus('disetujui')"
+                                  class="list-group-item position-relative pt-0 ">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Disetujui
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                               </a>
+                               <a href="#" wire:click.prevent="filterByStatus('ditolak')"
+                                  class="list-group-item position-relative pt-0">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Ditolak
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                               </a>
+                               <a href="#" wire:click.prevent="filterByStatus('revisi')"
+                                  class="list-group-item position-relative pt-0">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Revisi
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                               </a>
+                           </div>
+                           <!-- sidebar menu end -->
+                       </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
           <div class="content-right" style="width: 120%">
               <div class="content-overlay">
               </div>

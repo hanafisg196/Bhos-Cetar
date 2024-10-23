@@ -129,11 +129,22 @@ class RoleServiceImpl implements RoleService
       return $this->getUserRole($accesRule);
     }
 
+    public function checkVerifikatorOne(){
+      $accesRule = ['VERIFIKATOR 1'];
+      return $this->getUserRole($accesRule);
+    }
+
     public function getVerifikatorTwo(){
       return User::with('rules')->whereHas('rules', function ($query) {
           $query->where('nama', '=', 'VERIFIKATOR 2');
       })->get();
-  }
+    }
+
+  public function getVerifikatorOne(){
+   return User::with('rules')->whereHas('rules', function ($query) {
+       $query->where('nama', '=', 'VERIFIKATOR 1');
+   })->get();
+}
 
   public function disposisiAccess()
   {

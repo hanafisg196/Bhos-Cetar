@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Services\RoleService;
 use App\Services\ScheduleService;
 use Illuminate\Support\Facades\Crypt;
 use Livewire\Attributes\Validate;
@@ -13,24 +14,31 @@ class DetailBantuanHukum extends Component
 {
 
     protected ScheduleService $scheduleService;
+    protected RoleService $roleService;
 
     public function boot(
-        ScheduleService $scheduleService
+        ScheduleService $scheduleService,
+        RoleService $roleService
     ) {
         $this->scheduleService = $scheduleService;
+        $this->roleService = $roleService;
     }
 
     public $id;
     public $data;
     public $string;
-
-
-    #[Validate('required')]
+    public $verifikatorOne;
+    public $validVerifikator;
+    public $verfikator;
+    public $kabag;
+    public $hasDispos;
     public $pesan = '';
-    #[Validate('required')]
     public $status = '';
-
-
+    protected $rules = [
+      'verfikator' => 'required',
+      'pesan' => 'required',
+      'status' => 'required'
+    ];
     #[On('showDetail')]
     public function render()
     {
@@ -40,6 +48,8 @@ class DetailBantuanHukum extends Component
     public function mount($id)
     {
         $this->showDetail($this->id = $id);
+        $this->getVerifikatorOne();
+        $this->checkAccess();
     }
 
     public function sliceStr($string)
@@ -47,11 +57,19 @@ class DetailBantuanHukum extends Component
         return substr($string, 6);
     }
 
+    public function getVerifikatorOne()
+    {
+      $this->verifikatorOne = $this->roleService->getVerifikatorOne();
+    }
     public function download($file)
     {
         return response()->download(
             storage_path('app/public/' . $file)
         );
+    }
+    public function checkAccess(){
+      $this->kabag = $this->roleService->userManagerAdmin();
+      $this->validVerifikator = $this->roleService->checkVerifikatorOne();
     }
 
     public function showDetail($id)
@@ -62,12 +80,23 @@ class DetailBantuanHukum extends Component
 
     public function updateStatus($id)
     {
-        $this->validate();
+      $this->validate([
+         'status' => 'required',
+         'pesan' => 'required',
+       ]);
         $this->scheduleService->updateStatSchdeule($id, $this->status, $this->pesan);
         session()->flash('status', 'Data berhasil di update.');
         $this->redirect(route('admin.list.lbh'));
     }
 
+    public function updateVerifikatorTwo($id){
+      $this->validate([
+         'verfikator' => 'required',
+     ]);
+      $this->ecorrectionService->sendToVerifikatorTwo($id, $this->verfikator);
+      session()->flash('status', 'Verifikator Berhasil Di tentukan');
+      $this->redirect(route('admin.list.lbh'));
+    }
 
 
 }

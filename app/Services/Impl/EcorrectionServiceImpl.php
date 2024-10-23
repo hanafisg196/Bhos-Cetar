@@ -22,6 +22,9 @@ class EcorrectionServiceImpl implements EcorrectionService {
    {
        return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
    }
+   public function getEcorrectionById($id){
+      return Ecorrection::with('dokumens')->find($id);
+   }
    private function generateCode(){
       $prefix = 'ECOR';
       $randomNumber = mt_rand(10000, 99999);
@@ -76,22 +79,6 @@ class EcorrectionServiceImpl implements EcorrectionService {
          ->paginate($perPage);
    }
    public function ususlanEcorrections($perPage){
-      // $rule = ['KABAG', 'ADMIN'];
-      // $user = $this->getUser();
-      // $kabag = $this->getUserRole($rule);
-      // if ($kabag ){
-      //    return Ecorrection::with('dokumens')
-      //    ->orderByRaw("CASE WHEN status = 'Usulan' THEN 1 ELSE 2 END")
-      //    ->latest()
-      //    ->paginate($perPage);
-      // } else{
-      //    return Ecorrection::with('dokumens')
-      //    ->orderByRaw("CASE WHEN verifikator_nip = {$user->nip} THEN 1 ELSE 2 END")
-      //    ->orderByRaw("CASE WHEN status = 'Disposisi' THEN 1 ELSE 2 END")
-      //    ->latest()
-      //    ->paginate($perPage);
-
-      // }
     return  Ecorrection::where('status', 'Usulan')->latest()->paginate($perPage);
    }
    public function disposisiEcorrections($perPage){
@@ -106,24 +93,42 @@ class EcorrectionServiceImpl implements EcorrectionService {
    public function revisiEcorrections($perPage){
       return Ecorrection::where('status', 'Revisi')->latest()->paginate($perPage);
    }
-   public function getEcorrectionById($id){
-      return Ecorrection::with('dokumens')->find($id);
-   }
+
+
+
+   public function getrRevisiByVerfikatorTwo($perPage){
+      $user = $this->getUser();
+      return Ecorrection::where('status', 'Revisi')->where('verifikator_nip', $user->nip)
+         ->latest()->paginate($perPage);
+    }
+
+    public function getrDitolakByVerfikatorTwo($perPage){
+      $user = $this->getUser();
+      return Ecorrection::where('verifikator_nip', $user->nip)->where('status', 'Ditolak')
+         ->latest()->paginate($perPage);
+    }
+
+    public function getrDisetujuiByVerfikatorTwo($perPage){
+      $user = $this->getUser();
+      return Ecorrection::where('verifikator_nip', $user->nip)->where('status', 'Disetujui')
+         ->latest()->paginate($perPage);
+    }
+
    public function readStat($id){
-     $accessRule =['KABAG'];
-     $listStatus = ['Revisi', 'Ditolak', 'Disetujui', 'Disposisi'];
-     $getStatus = Ecorrection::whereIn('status', $listStatus)->exists();
-     $rule = $this->getUserRole($accessRule);
-     $data =  $this->getEcorrectionById($id);
-     if($rule === true && $getStatus === true){
-      $data->update([
-         'read' => 0
-        ]);
-     } else
-     $data->update([
-      'read' => 1
-     ]);
-   }
+      $accessRule = ['ADMIN', 'KABAG'];
+      $stat = ['Revisi', 'Ditolak', 'Disetujui', 'Disposisi'];
+      $rule = $this->getUserRole($accessRule);
+      $data = $this->getEcorrectionById($id);
+      $allowedStat = in_array($data->status, $stat);
+      if ($rule === true && $allowedStat === true) {
+            'baca mantra , skidipapap yehe yehe';
+      } else {
+          $data->update([
+              'read' => 1
+          ]);
+      }
+  }
+
 
    public function updateStatEcorrection($id, $stat, $message)
     {
@@ -177,9 +182,8 @@ class EcorrectionServiceImpl implements EcorrectionService {
 
     public function disposisiByVerifikator($perPage){
          $user = $this->getUser();
-             return Ecorrection::where('status', '!=', 'Usulan')
+             return Ecorrection::where('status', 'Disposisi')
                 ->where('verifikator_nip', $user->nip)
-                ->orderByRaw("CASE WHEN verifikator_nip = {$user->nip} THEN 1 ELSE 2 END")
                 ->latest()
                 ->paginate($perPage);
     }
@@ -200,41 +204,67 @@ class EcorrectionServiceImpl implements EcorrectionService {
             ->paginate(10, ['*'], 'ecorrections-page');
     }
 
-    public function disposisiReadCountByVerifikator(){
-      $user = $this->getUser();
-      return Ecorrection::where('status', 'Disposisi')
-      ->where('read', 0)
-      ->where('verifikator_nip', $user->nip)
-      ->orderByRaw("CASE WHEN verifikator_nip = {$user->nip} THEN 1 ELSE 2 END")->count();
-    }
 
+   //counter read general item
     public function countReadEcorUsulan(){
-     return  Ecorrection::where('status', 'Usulan')->where('read', 0)->count();
+     return  Ecorrection::where('status', 'Usulan')->count();
     }
-
-
     public function countReadEcorDisposisi(){
-      return Ecorrection::where('status', 'Disposisi')->where('read', 0)->count();
+      return Ecorrection::where('status', 'Disposisi')->count();
     }
-
-
     public function countReadEcorDitolak(){
-      return Ecorrection::where('status', 'Ditolak')->where('read', 0)->count();
+      return Ecorrection::where('status', 'Ditolak')->count();
     }
-
-
     public function countReadEcorDisetujui(){
-      return Ecorrection::where('status', 'Disetujui')->where('read', 0)->count();
+      return Ecorrection::where('status', 'Disetujui')->count();
     }
     public function countReadEcorRevisi(){
-      return Ecorrection::where('status', 'Revisi')->where('read', 0)->count();
+      return Ecorrection::where('status', 'Revisi')->count();
     }
 
-    public function countReadEcorAll(){
-         return Ecorrection::where('read', 0)->count();
-    }
+ //counter read item by verifikator
 
+ public function countReadEcorAll(){
+   $accesRule = ['ADMIN', 'KABAG'];
+   $user = $this->getUser();
+   $role = $this->getUserRole($accesRule);
+   if($role === true){
+      return Ecorrection::where('status', 'Usulan')
+      ->where('read', 0)->count();
 
+   }else{
+      return Ecorrection::where('verifikator_nip', $user->nip)
+      ->where('read', 0)->count();
+   }
+ }
+ public function countReadEcorDisposisiByVerfikator(){
+   $user = $this->getUser();
+   return Ecorrection::where('status', 'Disposisi')
+   ->where('verifikator_nip', $user->nip)
+   ->where('read', 0)
+   ->count();
+ }
+ public function countReadEcorDitolakByVerfikator(){
+   $user = $this->getUser();
+   return Ecorrection::where('status', 'Ditolak')
+   ->where('verifikator_nip', $user->nip)
+   ->where('read', 1)
+   ->count();
+ }
+ public function countReadEcorDisetujuiByVerfikator(){
+   $user = $this->getUser();
+   return Ecorrection::where('status', 'Disetujui')
+   ->where('verifikator_nip', $user->nip)
+   ->where('read', 1)
+   ->count();
+ }
+ public function countReadEcorRevisiByVerfikator(){
+   $user = $this->getUser();
+   return Ecorrection::where('status', 'Revisi')
+   ->where('verifikator_nip', $user->nip)
+   ->where('read', 0)
+   ->count();
+ }
 
 
 }

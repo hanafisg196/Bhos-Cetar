@@ -5,6 +5,9 @@
        .email-user-list {
            overflow-y: scroll !important;
        }
+       .nav-link {
+    margin-right: 20px;
+}
    </style>
      <div class="page-heading email-application overflow-hidden" style="margin-top:-20px; ">
         <section class="section content-area-wrapper">
@@ -27,26 +30,19 @@
                         <div class="sidebar-menu-list ps">
                            <!-- sidebar menu  -->
                            <div class="list-group list-group-messages mt-5">
-                               <a href="#" wire:click.prevent="filterByStatus('all')"
-                                  class="list-group-item position-relative pt-0 {{ $filter == 'all' ? 'active' : '' }}"
-                                  id="inbox-menu">
-                                   <div class="fonticon-wrap d-inline me-3"></div>
-                                   Semua
-                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$allReadCount}}</span>
-                               </a>
                                @if ($checkVerifikatorTwo === true)
                                <a href="#" wire:click.prevent="filterByStatus('yourdispos')"
                                class="list-group-item position-relative pt-0 {{ $filter == 'yourdispos' ? 'active' : '' }}">
                                 <div class="fonticon-wrap d-inline me-3"></div>
                                 Disposisi Anda
-                                <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$diposisiReadCountByVerifikator}}</span>
+                                <span class="badge bg-light-danger badge-pill badge-round position-absolute" style="right: 10px;">{{$allReadCount}}</span>
                                </a>
                                @endif
                                <a href="#" wire:click.prevent="filterByStatus('usulan')"
                                   class="list-group-item position-relative pt-0 {{ $filter == 'usulan' ? 'active' : '' }}">
                                    <div class="fonticon-wrap d-inline me-3"></div>
                                    Usulan
-                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$usulanReadCount}}</span>
+                                   <span class="badge bg-light-{{$checkVerifikatorTwo === true ? 'primary' : 'danger'}} badge-pill badge-round position-absolute" style="right: 10px;">{{$usulanReadCount}}</span>
                                </a>
                                <a href="#" wire:click.prevent="filterByStatus('disposisi')"
                                   class="list-group-item position-relative pt-0 {{ $filter == 'disposisi' ? 'active' : '' }}">
@@ -106,9 +102,34 @@
                                                         <use xlink:href="/dist/assets/static/images/bootstrap-icons.svg#search" />
                                                     </svg>
                                                 </div>
-                                            </div>
-                                          </div>
+                                             </div>
+                                             @if ($checkVerifikatorTwo === true && $activatedTab === true)
+                                             <div class="nav nav-tabs mt-3" id="myTab" role="tablist">
+                                                <a href="#" wire:click.prevent="filterByStatus('yourdispos')"
+                                                   class="nav-link {{ $filter == 'yourdispos' ? 'active' : '' }}">
+                                                    Diposisi
+                                                    <span class="badge bg-light-danger badge-pill badge-round position-absolute">{{$diposisiReadCountByVerifikator}}</span>
+                                                </a>
+                                                <a href="#" wire:click.prevent="filterByStatus('yourRevisi')"
+                                                class="nav-link {{ $filter == 'yourRevisi' ? 'active' : '' }}">
+                                                 Revisi
+                                                 <span class="badge bg-light-danger badge-pill badge-round position-absolute">{{$revisiReadCountByVerifikator}}</span>
+                                               </a>
+                                                <a href="#" wire:click.prevent="filterByStatus('yourDisetujui')"
+                                                   class="nav-link {{ $filter == 'yourDisetujui' ? 'active' : '' }}">
+                                                    Disetujui
+                                                    <span class="badge bg-light-primary badge-pill badge-round position-absolute">{{$disetujuiReadCountByVerifikator}}</span>
+                                                </a>
 
+                                                <a href="#" wire:click.prevent="filterByStatus('yourDitolak')"
+                                                   class="nav-link {{ $filter == 'yourDitolak' ? 'active' : '' }}">
+                                                    Ditolak
+                                                    <span class="badge bg-light-primary badge-pill badge-round position-absolute">{{$ditolakReadCountByVerfikator}}</span>
+                                                </a>
+
+                                             </div>
+                                             @endif
+                                           </div>
                                       </div>
                                   </div>
 

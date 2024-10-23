@@ -24,39 +24,72 @@ class DatabaseSeeder extends Seeder
    //  $token = Str::uuid();
         // User::factory(10)->create();
 
-         //  User::factory()->create([
-         //      'name' => 'Abdul Haris',
-         //      'username' => '199101052015031001',
-         //      'nip' => '199101052015031001',
-         //      'password' => 'rahasia',
-         //      'jabatan' => 'Pranata Komputer',
-         //      'token' => "test-1"
-         //  ]);
-         //  User::factory()->create([
-         //    'name' => 'Test 2',
-         //    'username' => '197711272007012005',
-         //    'nip' => '197711272007012005',
-         //    'password' => 'rahasia',
-         //    'jabatan' => 'Pranata Komputer',
-         //    'token' => 'test-2'
+          User::factory()->create([
+              'name' => 'Abdul Haris',
+              'username' => '199101052015031001',
+              'nip' => '199101052015031001',
+              'password' => 'rahasia',
+              'jabatan' => 'Pranata Komputer',
+              'token' => "test-1"
+          ]);
+          User::factory()->create([
+            'name' => 'Test 2',
+            'username' => '197711272007012005',
+            'nip' => '197711272007012005',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-2'
 
-         //   ]);
-         //   User::factory()->create([
-         //    'name' => 'Test 3',
-         //    'username' => '196802121997032003',
-         //    'nip' => '196802121997032003',
-         //    'password' => 'rahasia',
-         //    'jabatan' => 'Pranata Komputer',
-         //    'token' => 'test-3'
-         //   ]);
-         //   User::factory()->create([
-         //    'name' => 'Test 4',
-         //    'username' => '198011262008031001',
-         //    'nip' => '198011262008031001',
-         //    'password' => 'rahasia',
-         //    'jabatan' => 'Pranata Komputer',
-         //    'token' => 'test-4'
-         //   ]);
+           ]);
+           User::factory()->create([
+            'name' => 'Test 3',
+            'username' => '196802121997032003',
+            'nip' => '196802121997032003',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-3'
+           ]);
+           User::factory()->create([
+            'name' => 'Test 4',
+            'username' => '198011262008031010',
+            'nip' => '198011262008031010',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-4'
+           ]);
+           User::factory()->create([
+            'name' => 'Test 5',
+            'username' => '198011262008031002',
+            'nip' => '198011262008031002',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-5'
+           ]);
+           User::factory()->create([
+            'name' => 'Test 6',
+            'username' => '198011262008031005',
+            'nip' => '198011262008031005',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-6'
+           ]);
+           User::factory()->create([
+            'name' => 'Test 7',
+            'username' => '198011262008031012',
+            'nip' => '198011262008031012',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-7'
+           ]);
+           User::factory()->create([
+            'name' => 'Test 8',
+            'username' => '198011262008031015',
+            'nip' => '198011262008031015',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-8'
+           ]);
+
 
         Kkp::create([
             'name' => 'Hak Atas Informasi',
@@ -208,8 +241,6 @@ class DatabaseSeeder extends Seeder
             ]
          ]
       ];
-
-      // Menggabungkan data nama dan kode lalu menyimpannya ke database
       for ($i = 0; $i < count($data['data']['nama']); $i++) {
           OpdList::create([
               'nama' => $data['data']['nama'][$i],
@@ -218,16 +249,18 @@ class DatabaseSeeder extends Seeder
       }
       $user  = User::find(1);
       $user->rules()->attach(1);
-
-      // $user  = User::find(2);
-      // $user->rules()->attach(2);
-
-      // $user  = User::find(3);
-      // $user->rules()->attach(4);
-
-      // $user  = User::find(4);
-      // $user->rules()->attach(6);
-
+      $user  = User::find(2);
+      $user->rules()->attach(2);
+      $user  = User::find(3);
+      $user->rules()->attach(4);
+      $user  = User::find(4);
+      $user->rules()->attach(6);
+      $user  = User::find(5);
+      $user->rules()->attach(5);
+      $user  = User::find(6);
+      $user->rules()->attach(6);
+      $user  = User::find(7);
+      $user->rules()->attach(3);
 
     }
 }

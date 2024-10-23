@@ -25,7 +25,7 @@ class UserManagementController extends Controller
     }
     public function formAddRole(Request $request)
     {
-        $code = $request->input('code', '01.01.'); // Default value jika tidak ada
+        $code = $request->input('code', '01.01.');
         $rule = $this->roleService->getRuleType();
         $opd = $this->roleService->getOpdEmployee();
         $employee = $this->roleService->getEmployee($code);
