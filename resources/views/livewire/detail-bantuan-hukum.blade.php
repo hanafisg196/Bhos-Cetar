@@ -181,7 +181,7 @@
                                         <i class="bx bx-x d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Tutup</span>
                                     </button>
-                                    <button wire:click="updateVerifikatorTwo('{{ $data->id }}')" type="button"
+                                    <button wire:click="updateVerifikatorOne('{{ $data->id }}')" type="button"
                                         class="btn btn-primary ms-1">
                                         <i class="bx bx-check d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Simpan</span>

@@ -15,10 +15,14 @@ use Illuminate\Support\Facades\Storage;
 class ScheduleServiceImpl implements ScheduleService
 {
 
-    public function getUserId()
+    public function getUser()
     {
        return  Auth::user();
     }
+    private function getUserRole($rule)
+   {
+       return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
+   }
     private function copyFilesFromTmp($tmpFile, $idFile)
     {
         foreach ($tmpFile as $tmp) {
@@ -36,7 +40,7 @@ class ScheduleServiceImpl implements ScheduleService
     public function createSchedule(Request $request)
     {
         $sessionId = Session::getId();
-        $user = $this->getUserId();
+        $user = $this->getUser();
         $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
         $validated = $request->validate([
             'nama' => 'required|string|max:120',
@@ -101,17 +105,25 @@ class ScheduleServiceImpl implements ScheduleService
 
     public function getSchedulesByUser(Request $request)
     {
-        $user = $this->getUserId();
+        $user = $this->getUser();
         return Schedule::latest('updated_at')->where('user_id', $user->id)->with('documents')
         ->paginate(5, ['*'], 'bantuan-hukum-page');
     }
 
     public function readStatus($id)
     {
-        $data = Schedule::where('id', $id);
-        $data->update([
-            'read' => 1,
-        ]);
+      $accessRule = ['ADMIN', 'KABAG'];
+      $stat = ['Revisi', 'Ditolak', 'Disetujui', 'Disposisi'];
+      $rule = $this->getUserRole($accessRule);
+      $data = Schedule::find($id);
+      $allowedStat = in_array($data->status, $stat);
+      if ($rule === true && $allowedStat === true) {
+            'baca mantra , skidipapap yehe yehe';
+      } else {
+          $data->update([
+              'read' => 1
+          ]);
+      }
     }
 
     public function getDetailSchedule($id)
@@ -184,24 +196,114 @@ class ScheduleServiceImpl implements ScheduleService
                     "notif_read" => 0
                 ]);
             }
-
         }
     }
     public function download($file)
     {
         return Storage::download('files/'. $file);
     }
-    public function sendToVerifikatorTwo($id, $verifikator){
-      $ecor = $this->getScheduleById($id);
-      $ecor->update([
+    public function sendToVerifikatorOne($id, $verifikator){
+      $lbh = $this->getScheduleById($id);
+      $lbh->update([
          'verifikator_nip' => $verifikator,
          'status' => 'Disposisi',
          'read' => 0
       ]);
     }
+     public function ususlanLbh($perPage){
+      return  Schedule::where('status', 'Usulan')->latest()->paginate($perPage);
+     }
+     public function disposisiLbh($perPage){
+      return  Schedule::where('status', 'Disposisi')->latest()->paginate($perPage);
+     }
+     public function ditolakLbh($perPage){
+      return  Schedule::where('status', 'Ditolak')->latest()->paginate($perPage);
+     }
+     public function disetujuiLbh($perPage){
+      return  Schedule::where('status', 'Disetujui')->latest()->paginate($perPage);
+     }
 
+     public function revisiLbh($perPage){
+      return  Schedule::where('status', 'Revisi')->latest()->paginate($perPage);
+     }
+     public function disposisiByVerifikator($perPage){
+      $user = $this->getUser();
+      return Schedule::where('verifikator_nip', $user->nip)->where('status', 'Disposisi' )
+      ->latest()->paginate($perPage);
+     }
+     public function ditolakByVerifikator($perPage){
+      $user = $this->getUser();
+      return Schedule::where('verifikator_nip', $user->nip)->where('status', 'Ditolak' )
+      ->latest()->paginate($perPage);
+     }
+     public function disetujuiByVerifikator($perPage){
+      $user = $this->getUser();
+      return Schedule::where('verifikator_nip', $user->nip)->where('status', 'Disetujui' )
+      ->latest()->paginate($perPage);
+     }
+     public function revisiByVerifikator($perPage){
+      $user = $this->getUser();
+      return Schedule::where('verifikator_nip', $user->nip)->where('status', 'Revisi' )
+      ->latest()->paginate($perPage);
+     }
+  //counter read general item
+  public function countReadLbhUsulan(){
+   return  Schedule::where('status', 'Usulan')->where('read', 0)->count();
+  }
+  public function countLbhDisposisi(){
+    return Schedule::where('status', 'Disposisi')->count();
+  }
+  public function countLbhDitolak(){
+    return Schedule::where('status', 'Ditolak')->count();
+  }
+  public function countLbhDisetujui(){
+    return Schedule::where('status', 'Disetujui')->count();
+  }
+  public function countLbhRevisi(){
+    return Schedule::where('status', 'Revisi')->count();
+  }
 
+//counter read item by verifikator
 
+public function countReadLbhAll(){
+ $accesRule = ['ADMIN', 'KABAG'];
+ $user = $this->getUser();
+ $role = $this->getUserRole($accesRule);
+ if($role === true){
+    return Schedule::where('status', 'Usulan')
+    ->where('read', 0)->count();
+
+ }else{
+    return Schedule::where('verifikator_nip', $user->nip)
+    ->where('read', 0)->count();
+ }
+}
+public function countReadLbhDisposisiByVerfikator(){
+ $user = $this->getUser();
+ return Schedule::where('status', 'Disposisi')
+ ->where('verifikator_nip', $user->nip)
+ ->where('read', 0)
+ ->count();
+}
+public function countLbhDitolakByVerfikator(){
+ $user = $this->getUser();
+ return Schedule::where('status', 'Ditolak')
+ ->where('verifikator_nip', $user->nip)
+ ->count();
+}
+public function countLbhDisetujuiByVerfikator(){
+ $user = $this->getUser();
+ return Schedule::where('status', 'Disetujui')
+ ->where('verifikator_nip', $user->nip)
+ ->count();
+}
+public function countReadLbhRevisiByVerfikator(){
+ $user = $this->getUser();
+ return Schedule::where('status', 'Revisi')
+ ->where('verifikator_nip', $user->nip)
+ ->where('read', 0)
+ ->count();
+}
 
 
 }

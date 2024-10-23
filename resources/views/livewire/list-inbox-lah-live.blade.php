@@ -8,6 +8,72 @@
     </style>
       <div class="page-heading email-application overflow-hidden" style="margin-top:-20px; ">
          <section class="section content-area-wrapper">
+            <div class="sidebar-left" style="height: 60vh;">
+               <div class="sidebar">
+                   <div class="sidebar-content email-app-sidebar d-flex">
+                       <!-- sidebar close icon -->
+                       <span class="sidebar-close-icon">
+                           <i class="bi bi-x"></i>
+                       </span>
+                       <!-- sidebar close icon -->
+                       <div class="email-app-menu">
+                           <div class="form-group form-group-compose">
+                               <!-- compose button  -->
+                               {{-- <button type="button" class="btn btn-primary btn-block my-4 compose-btn">
+                                   <i class="bi bi-plus"></i>
+                                   Compose
+                               </button> --}}
+                           </div>
+                           <div class="sidebar-menu-list ps">
+                              <!-- sidebar menu  -->
+                              <div class="list-group list-group-messages mt-5">
+                                  @if ($checkVerifikatorOne === true)
+                                  <a href="#" wire:click.prevent="filterByStatus('disposisiVerifikator')"
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'disposisiVerifikator' ? 'active' : '' }}">
+                                   <div class="fonticon-wrap d-inline me-3"></div>
+                                   Disposisi Anda
+                                   <span class="badge bg-light-danger badge-pill badge-round position-absolute" style="right: 10px;">{{$allReadCount}}</span>
+                                  </a>
+                                  @endif
+                                  <a href="#" wire:click.prevent="filterByStatus('usulan')"
+                                     class="list-group-item position-relative pt-0 {{ $filter == 'usulan' ? 'active' : '' }}">
+                                      <div class="fonticon-wrap d-inline me-3"></div>
+                                      Usulan
+                                      <span class="badge bg-light-{{$checkKabag === true ? 'danger' : 'primary'}} badge-pill badge-round position-absolute"
+                                      style="right: 10px;">{{$usulanReadCount}}</span>
+                                  </a>
+                                  <a href="#" wire:click.prevent="filterByStatus('disposisi')"
+                                     class="list-group-item position-relative pt-0 {{ $filter == 'disposisi' ? 'active' : '' }}">
+                                      <div class="fonticon-wrap d-inline me-3"></div>
+                                      Disposisi
+                                      <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$diposisiCount}}</span>
+                                  </a>
+                                  <a href="#" wire:click.prevent="filterByStatus('disetujui')"
+                                     class="list-group-item position-relative pt-0 {{ $filter == 'disetujui' ? 'active' : '' }} ">
+                                      <div class="fonticon-wrap d-inline me-3"></div>
+                                      Disetujui
+                                      <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$disetujuiCount}}</span>
+                                  </a>
+                                  <a href="#" wire:click.prevent="filterByStatus('ditolak')"
+                                     class="list-group-item position-relative pt-0 {{ $filter == 'ditolak' ? 'active' : '' }}">
+                                      <div class="fonticon-wrap d-inline me-3"></div>
+                                      Ditolak
+                                      <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$ditolakCount}}</span>
+                                  </a>
+                                  <a href="#" wire:click.prevent="filterByStatus('revisi')"
+                                     class="list-group-item position-relative pt-0 {{ $filter == 'revisi' ? 'active' : '' }}">
+                                      <div class="fonticon-wrap d-inline me-3"></div>
+                                      Revisi
+                                      <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$revisiCount}}</span>
+                                  </a>
+                              </div>
+                              <!-- sidebar menu end -->
+                          </div>
+
+                       </div>
+                   </div>
+               </div>
+           </div>
              <div class="content-right" style="width: 120%">
                  <div class="content-overlay">
                  </div>

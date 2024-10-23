@@ -56,8 +56,8 @@ if (!function_exists(function: 'verifikatorProfile')) {
     }
 }
 
-if (!function_exists('tetek')) {
-   function tetek($verifikator)
+if (!function_exists('areYouVerifikator')) {
+   function areYouVerifikator($verifikator)
    {
        $verifikator = Crypt::decrypt($verifikator);
        return Auth::user()->nip == $verifikator;

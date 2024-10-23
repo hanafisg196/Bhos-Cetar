@@ -145,7 +145,7 @@
                                         @if ($checkKabag === true)
                                               <a href="{{route('detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
                                           text-decoration-none text-dark w-100" wire:click="readStat({{$item->id}})">
-                                        @elseif (tetek(encrypt($item->verifikator_nip)))
+                                        @elseif (areYouVerifikator(encrypt($item->verifikator_nip)))
                                         <a href="{{route('detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
                                           text-decoration-none text-dark w-100" wire:click="readStat({{$item->id}})">
                                         @else
@@ -179,14 +179,14 @@
                                                          style="color: burlywood">{{ $item->status }}</span>
                                                   @endif
                                                      </div>
-                                                     <div class="mail-meta-item">
+
                                                       <div class="mail-meta-item">
                                                          <span class="float-right text-right">
                                                              <div class="mail-date" style="padding-left: 120px;">{{ $item->created_at->diffForHumans() }}</div>
                                                              <div class="text-right">{{ verifikatorProfile(encrypt($item->verifikator_nip))}}</div>
                                                          </span>
                                                      </div>
-                                                      </div>
+
                                                  </div>
                                                  <div class="mail-message">
                                                      <p class="list-group-item-text truncate mb-0">

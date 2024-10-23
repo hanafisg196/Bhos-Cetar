@@ -4,6 +4,9 @@
         .email-user-list {
             overflow-y: scroll !important;
         }
+        .nav-link {
+         margin-right: 20px;
+        }
     </style>
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
     <div class="page-heading email-application overflow-hidden" style="margin-top:-20px; ">
@@ -27,43 +30,44 @@
                         <div class="sidebar-menu-list ps">
                            <!-- sidebar menu  -->
                            <div class="list-group list-group-messages mt-5">
-                               {{-- @if ($checkVerifikatorTwo === true) --}}
-                               <a href="#" wire:click.prevent="filterByStatus('yourdispos')"
-                               class="list-group-item position-relative pt-0">
+                               @if ($checkVerifikatorOne === true)
+                               <a href="#" wire:click.prevent="filterByStatus('disposisiVerifikator')"
+                               class="list-group-item position-relative pt-0 {{ $filter == 'disposisiVerifikator' ? 'active' : '' }}">
                                 <div class="fonticon-wrap d-inline me-3"></div>
                                 Disposisi Anda
-                                <span class="badge bg-light-danger badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                                <span class="badge bg-light-danger badge-pill badge-round position-absolute" style="right: 10px;">{{$allReadCount}}</span>
                                </a>
-                               {{-- @endif --}}
+                               @endif
                                <a href="#" wire:click.prevent="filterByStatus('usulan')"
-                                  class="list-group-item position-relative pt-0 ">
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'usulan' ? 'active' : '' }}">
                                    <div class="fonticon-wrap d-inline me-3"></div>
                                    Usulan
-                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                                   <span class="badge bg-light-{{$checkKabag === true ? 'danger' : 'primary'}} badge-pill badge-round position-absolute"
+                                   style="right: 10px;">{{$usulanReadCount}}</span>
                                </a>
                                <a href="#" wire:click.prevent="filterByStatus('disposisi')"
-                                  class="list-group-item position-relative pt-0 ">
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'disposisi' ? 'active' : '' }}">
                                    <div class="fonticon-wrap d-inline me-3"></div>
                                    Disposisi
-                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$diposisiCount}}</span>
                                </a>
                                <a href="#" wire:click.prevent="filterByStatus('disetujui')"
-                                  class="list-group-item position-relative pt-0 ">
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'disetujui' ? 'active' : '' }} ">
                                    <div class="fonticon-wrap d-inline me-3"></div>
                                    Disetujui
-                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$disetujuiCount}}</span>
                                </a>
                                <a href="#" wire:click.prevent="filterByStatus('ditolak')"
-                                  class="list-group-item position-relative pt-0">
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'ditolak' ? 'active' : '' }}">
                                    <div class="fonticon-wrap d-inline me-3"></div>
                                    Ditolak
-                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$ditolakCount}}</span>
                                </a>
                                <a href="#" wire:click.prevent="filterByStatus('revisi')"
-                                  class="list-group-item position-relative pt-0">
+                                  class="list-group-item position-relative pt-0 {{ $filter == 'revisi' ? 'active' : '' }}">
                                    <div class="fonticon-wrap d-inline me-3"></div>
                                    Revisi
-                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">0</span>
+                                   <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="right: 10px;">{{$revisiCount}}</span>
                                </a>
                            </div>
                            <!-- sidebar menu end -->
@@ -95,26 +99,55 @@
                                                     </svg>
                                                 </div>
                                             </div>
-
+                                            @if ($checkVerifikatorOne === true && $activatedTab === true)
+                                            <div class="nav nav-tabs mt-3" id="myTab" role="tablist">
+                                             <a href="#" wire:click.prevent="filterByStatus('disposisiVerifikator')"
+                                                class="nav-link {{ $filter == 'disposisiVerifikator' ? 'active' : '' }}">
+                                                 Diposisi
+                                                 <span class="badge bg-light-danger badge-pill badge-round position-absolute" style="margin-left:5px;">{{$diposisiReadCountByVerifikator}}</span>
+                                             </a>
+                                             <a href="#" wire:click.prevent="filterByStatus('revisiVerifikator')"
+                                              class="nav-link {{ $filter == 'revisiVerifikator' ? 'active' : '' }}">
+                                              Revisi
+                                              <span class="badge bg-light-danger badge-pill badge-round position-absolute" style="margin-left:5px;">{{$revisiReadCountByVerifikator}}</span>
+                                             </a>
+                                             <a href="#" wire:click.prevent="filterByStatus('disetujuiVerifikator')"
+                                                class="nav-link {{ $filter == 'disetujuiVerifikator' ? 'active' : '' }}">
+                                                 Disetujui
+                                                 <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="margin-left:5px;">{{$disetujuiCountByVerifikator}}</span>
+                                             </a>
+                                             <a href="#" wire:click.prevent="filterByStatus('ditolakVerifikator')"
+                                                class="nav-link {{ $filter == 'ditolakVerifikator' ? 'active' : '' }}">
+                                                 Ditolak
+                                                 <span class="badge bg-light-primary badge-pill badge-round position-absolute" style="margin-left:5px;">{{$ditolakCountByVerfikator}}</span>
+                                             </a>
+                                           </div>
+                                           @endif
                                         </div>
-                                        <!-- pagination and page countß -->
-                                        <span class="d-none d-sm-block">Usulan - {{ $this->counterSchedule() }}</span>
                                     </div>
                                 </div>
 
                                 <div class="email-user-list list-group ps ps--active-y">
                                     <ul class="users-list-wrapper media-list">
-                                        @if ($lbh->isNotEmpty())
+                                       @if (!empty($lbh))
                                             @foreach ($lbh as $item)
                                                 @if ($item->read == 1)
                                                     <li class="media mail-read">
                                                     @else
                                                     <li class="media">
                                                 @endif
+                                                @if ($checkKabag === true)
                                                 <a href="{{ route('detail.bantuan.hukum', encrypt($item->id)) }}" wire:navigate
-                                                    wire:click.prevent="readInboxLbh('{{ $item->id }}')"
-                                                    class="d-flex align-items-center text-decoration-none text-dark w-100">
-
+                                                   wire:click.prevent="readInboxLbh('{{ $item->id }}')"
+                                                   class="d-flex align-items-center text-decoration-none text-dark w-100">
+                                                @elseif (areYouVerifikator(encrypt($item->verifikator_nip)))
+                                                <a href="{{ route('detail.bantuan.hukum', encrypt($item->id)) }}" wire:navigate
+                                                   wire:click.prevent="readInboxLbh('{{ $item->id }}')"
+                                                   class="d-flex align-items-center text-decoration-none text-dark w-100">
+                                                @else
+                                                <a class="d-flex align-items-center text-decoration-none text-dark w-100"
+                                                onclick="Swal.fire('Akses ditolak!', 'Anda tidak memiliki izin untuk mengakses halaman ini.', 'warning')">
+                                                @endif
                                                     <div class="pr-50">
                                                         <div class="avatar">
                                                             <img src="/dist/assets/compiled/png/email.png" alt="avatar img holder">
@@ -134,6 +167,9 @@
                                                                 @elseif ($item->status == 'Revisi')
                                                                     <span class="list-group-item-text text-truncate"
                                                                         style="color: #007aff">{{ $item->status }}</span>
+                                                                @elseif ($item->status == 'Disposisi')
+                                                                    <span class="list-group-item-text text-truncate"
+                                                                        style="color: #ea27dd">{{ $item->status }}</span>
                                                                 @else
                                                                     <span class="list-group-item-text text-truncate"
                                                                         style="color: burlywood">{{ $item->status }}</span>
@@ -141,11 +177,11 @@
 
                                                             </div>
                                                             <div class="mail-meta-item">
-                                                                <span class="float-right">
-                                                                    <span
-                                                                        class="mail-date">{{ $item->created_at->diffForHumans() }}</span>
-                                                                </span>
-                                                            </div>
+                                                               <span class="float-right text-right">
+                                                                   <div class="mail-date" style="padding-left: 120px;">{{ $item->created_at->diffForHumans() }}</div>
+                                                                   <div class="text-right">{{ verifikatorProfile(encrypt($item->verifikator_nip))}}</div>
+                                                               </span>
+                                                           </div>
                                                         </div>
                                                         <div class="mail-message">
                                                             <p class="list-group-item-text truncate mb-0">

@@ -89,11 +89,11 @@ class DetailBantuanHukum extends Component
         $this->redirect(route('admin.list.lbh'));
     }
 
-    public function updateVerifikatorTwo($id){
+    public function updateVerifikatorOne($id){
       $this->validate([
          'verfikator' => 'required',
      ]);
-      $this->ecorrectionService->sendToVerifikatorTwo($id, $this->verfikator);
+      $this->scheduleService->sendToVerifikatorOne($id, $this->verfikator);
       session()->flash('status', 'Verifikator Berhasil Di tentukan');
       $this->redirect(route('admin.list.lbh'));
     }

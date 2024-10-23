@@ -13,7 +13,7 @@
                   <i class="bi bi-bank"></i>
                     <span>Bantuan Hukum</span>
                     <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 10px; color: black;">
-                     <livewire:lbh-count />
+                     <livewire:lbh-count-on-sidebar/>
                     </span>
                 </a>
                 <ul class="submenu">
@@ -21,7 +21,7 @@
                         <a href="{{ route('admin.list.lbh') }}" class="submenu-link">
                             <span>Inbox</span>
                             <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 10px; color: black;">
-                              <livewire:lbh-count />
+                              <livewire:lbh-count-on-sidebar/>
                              </span>
                         </a>
                     </li>
@@ -32,7 +32,7 @@
                   <i class="bi bi-book-fill"></i>
                    <span>Kami Peduli</span>
                    <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 43px; color: black;">
-                     <livewire:lah-count />
+                    0
                     </span>
                </a>
                <ul class="submenu">
@@ -40,7 +40,7 @@
                        <a href="{{ route('admin.list.lah') }}" class="submenu-link">
                            <span>Inbox</span>
                            <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 10px; color: black;">
-                              <livewire:lah-count />
+                           0
                            </span>
                        </a>
                    </li>
