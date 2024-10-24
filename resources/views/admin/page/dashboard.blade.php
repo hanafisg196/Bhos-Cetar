@@ -5,7 +5,7 @@
        <div class="col-12 col-xl-12">
          <div class="card">
             <div class="card-body">
-               <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
                   <li class="nav-item" role="presentation">
                       <a class="nav-link active" id="lap-satu" data-bs-toggle="tab" href="#lapSatu "
                       role="tab" aria-controls="lapSatu" aria-selected="true">Statistik Laporan</a>
@@ -14,10 +14,9 @@
                      <a class="nav-link" id="lap-dua" data-bs-toggle="tab" href="#lapDua"
                      role="tab" aria-controls="lapDua" aria-selected="false">Statistik Kinerja</a>
                   </li>
-              </ul>
+               </ul>
               <div class="tab-content" id="myTabContent">
                 @include('admin.tabs.tabs-satu')
-                @include('admin.tabs.tabs-dua')
               </div>
             </div>
          </div>
@@ -25,6 +24,6 @@
    </section>
       </div>
       @include('admin.tabs.laporan-satu-data')
-      @include('admin.tabs.laporan-dua-data')
+      {{-- @include('admin.tabs.laporan-dua-data') --}}
 @endsection
 
