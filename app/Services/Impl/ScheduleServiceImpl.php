@@ -209,7 +209,7 @@ class ScheduleServiceImpl implements ScheduleService
          'status' => 'Disposisi',
          'read' => 0
       ]);
-    }
+     }
      public function ususlanLbh($perPage){
       return  Schedule::where('status', 'Usulan')->latest()->paginate($perPage);
      }

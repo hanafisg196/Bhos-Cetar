@@ -146,7 +146,8 @@
                                                    class="d-flex align-items-center text-decoration-none text-dark w-100">
                                                 @else
                                                 <a class="d-flex align-items-center text-decoration-none text-dark w-100"
-                                                onclick="Swal.fire('Akses ditolak!', 'Anda tidak memiliki izin untuk mengakses halaman ini.', 'warning')">
+                                                onclick="Swal.fire('Akses ditolak!',
+                                                 'Anda tidak memiliki izin untuk mengakses halaman ini.', 'warning')">
                                                 @endif
                                                     <div class="pr-50">
                                                         <div class="avatar">

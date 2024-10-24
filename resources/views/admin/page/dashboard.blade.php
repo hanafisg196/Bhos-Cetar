@@ -1,60 +1,30 @@
 @extends('admin.template.main')
 @section('content')
-
-<div class="row">
-   <h5>Total Laporan</h5>
-    <div class="col-6 col-lg-3 col-md-6">
-        <div class="card" style="background:#364b98">
-            <div class="card-body px-4 py-4-5">
-                <div class="row">
-                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                        <div class="stats-icon blue mb-2">
-                            <i class="iconly-boldDocument"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                        <h6 class="text-white font-semibold">Tahun ini</h6>
-                        <h6 class="text-white font-extrabold mb-0">{{ $tahun }}</h6>
-                    </div>
-                </div>
+<div class="page-content">
+   <section class="row" style="margin-top: -30px;">
+       <div class="col-12 col-xl-12">
+         <div class="card">
+            <div class="card-body">
+               <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                      <a class="nav-link active" id="lap-satu" data-bs-toggle="tab" href="#lapSatu "
+                      role="tab" aria-controls="lapSatu" aria-selected="true">Statistik Laporan</a>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                     <a class="nav-link" id="lap-dua" data-bs-toggle="tab" href="#lapDua"
+                     role="tab" aria-controls="lapDua" aria-selected="false">Statistik Kinerja</a>
+                  </li>
+              </ul>
+              <div class="tab-content" id="myTabContent">
+                @include('admin.tabs.tabs-satu')
+                @include('admin.tabs.tabs-dua')
+              </div>
             </div>
-        </div>
-    </div>
-    <div class="col-6 col-lg-3 col-md-6">
-        <div class="card" style="background:#364b98">
-            <div class="card-body px-4 py-4-5">
-                <div class="row">
-                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                        <div class="stats-icon blue mb-2">
-                            <i class="iconly-boldDocument"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                        <h6 class="text-white font-semibold">Bulan ini</h6>
-                        <h6 class="text-white font-extrabold mb-0">{{ $bulan }}</h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-6 col-lg-3 col-md-6">
-        <div class="card" style="background:#364b98">
-            <div class="card-body px-4 py-4-5">
-                <div class="row">
-                    <div class="col-md-4 col-lg-12 col-xl-12 col-xxl-5 d-flex justify-content-start ">
-                        <div class="stats-icon blue mb-2">
-                            <i class="iconly-boldDocument"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-                        <h6 class="text-white font-semibold">Minggu ini</h6>
-                        <h6 class="text-white font-extrabold mb-0">{{ $minggu }}</h6>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
+         </div>
+       </div>
+   </section>
+      </div>
+      @include('admin.tabs.laporan-satu-data')
+      @include('admin.tabs.laporan-dua-data')
 @endsection
+

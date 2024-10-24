@@ -19,5 +19,28 @@ interface ReportHamService {
     public function inboxCount();
     public function getDataByCatRan($catRan,$perPage);
     public function lisCatRan();
+    public function sendToVerifikatorOne($id, $verifikator);
+    public function ususlanLah($perPage);
+    public function disposisiLah($perPage);
+    public function ditolakLah($perPage);
+    public function disetujuiLah($perPage);
+    public function revisiLah($perPage);
+    public function disposisiByVerifikator($perPage);
+    public function ditolakByVerifikator($perPage);
+    public function disetujuiByVerifikator($perPage);
+    public function revisiByVerifikator($perPage);
+
+    public function countReadLahAll();
+    public function countReadLahUsulan();
+    public function countLahDisposisi();
+    public function countLahDitolak();
+    public function countLahDisetujui();
+    public function countLahRevisi();
+    public function countReadLahDisposisiByVerfikator();
+    public function countLahDitolakByVerfikator();
+    public function countLahDisetujuiByVerfikator();
+    public function countReadLahRevisiByVerfikator();
+
+
 
 }

@@ -59,6 +59,8 @@
     <script src="/dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/dist/assets/compiled/js/app.js"></script>
     <script src="/dist/assets/static/js/pages/form-element-select.js"></script>
+    <script src="/dist/assets/extensions/apexcharts/apexcharts.min.js"></script>
+    <script src="/dist/assets/static/js/pages/dashboard.js"></script>
     @include('dashboard.component.sweet-toast')
     @include('dashboard.component.sweet-toast-error')
     @yield('script')

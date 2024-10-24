@@ -38,10 +38,18 @@
                     </div>
                     <div style="margin-top: 60px; margin-left:10px;">
                         <div>
+                           @if ($checkVerifikator === true)
                             <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
                                 data-bs-target="#default">
                                 Ubah Status
                             </button>
+                            @endif
+                            @if ($checkKabag === true)
+                            <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
+                            data-bs-target="#default2">
+                            Disposisi
+                            </button>
+                            @endif
                         </div>
                     </div>
                     <!--Basic Modal -->
@@ -94,6 +102,50 @@
                                             <span class="d-none d-sm-block">Tutup</span>
                                         </button>
                                         <button wire:click="updateStat('{{ $data->id }}')" type="button"
+                                            class="btn btn-primary ms-1">
+                                            <i class="bx bx-check d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block">Simpan</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div wire:ignore.self class="modal fade text-left" id="default2" tabindex="-1" role="dialog"
+                        aria-labelledby="myModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="myModalLabel1">Disposisi</h5>
+                                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </div>
+                                <form>
+                                    @csrf
+                                    <div class="modal-body">
+                                       <fieldset class="form-group">
+                                        <select wire:model="verfikator" class="form-select" id="basicSelect">
+                                           <option selected>Pilih Verifikator 1...</option>
+                                           @foreach ($verifikatorOne as $verifikator)
+                                               <option value="{{ $verifikator->nip }}">{{ $verifikator->name }}
+                                               </option>
+                                           @endforeach
+                                       </select>
+                                       </fieldset>
+                                       <div>
+                                        @error('verfikator')
+                                            {{ $message }}
+                                        @enderror
+                                    </div>
+                                     </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn" data-bs-dismiss="modal">
+                                            <i class="bx bx-x d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block">Tutup</span>
+                                        </button>
+                                        <button wire:click="updateVerifikatorOne('{{ $data->id }}')" type="button"
                                             class="btn btn-primary ms-1">
                                             <i class="bx bx-check d-block d-sm-none"></i>
                                             <span class="d-none d-sm-block">Simpan</span>

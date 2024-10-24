@@ -130,7 +130,7 @@ class ListInboxLbhLive extends Component
       $this->js(<<<JS
           Swal.fire("SweetAlert2 is working!");
       JS);
-  }
+    }
     public function counter()
     {
       $this->allReadCount = $this->scheduleService->countReadLbhAll();

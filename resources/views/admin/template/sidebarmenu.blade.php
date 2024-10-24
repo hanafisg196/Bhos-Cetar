@@ -32,7 +32,7 @@
                   <i class="bi bi-book-fill"></i>
                    <span>Kami Peduli</span>
                    <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 43px; color: black;">
-                    0
+                     <livewire:lah-count-on-sidebar/>
                     </span>
                </a>
                <ul class="submenu">
@@ -40,7 +40,7 @@
                        <a href="{{ route('admin.list.lah') }}" class="submenu-link">
                            <span>Inbox</span>
                            <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 10px; color: black;">
-                           0
+                              <livewire:lah-count-on-sidebar/>
                            </span>
                        </a>
                    </li>

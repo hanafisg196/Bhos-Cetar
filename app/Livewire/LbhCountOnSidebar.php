@@ -18,7 +18,7 @@ class LbhCountOnSidebar extends Component
     }
 
    public function mount(){
-
+         $this->counter();
    }
    public function counter(){
       $this->data = $this->scheduleService->countReadLbhAll();

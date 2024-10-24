@@ -12,7 +12,6 @@
             <div class="card">
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
-
                         <li class="nav-item" role="presentation">
                             <a class="nav-link active" id="table-lbh" data-bs-toggle="tab" href="#tableLbh " role="tab" aria-controls="tableLbh" aria-selected="true">Laporan Bantuan Hukum</a>
                         </li>
