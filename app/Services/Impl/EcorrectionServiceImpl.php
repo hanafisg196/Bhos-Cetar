@@ -94,8 +94,6 @@ class EcorrectionServiceImpl implements EcorrectionService {
       return Ecorrection::where('status', 'Revisi')->latest()->paginate($perPage);
    }
 
-
-
    public function getrRevisiByVerfikatorTwo($perPage){
       $user = $this->getUser();
       return Ecorrection::where('status', 'Revisi')->where('verifikator_nip', $user->nip)
@@ -128,7 +126,6 @@ class EcorrectionServiceImpl implements EcorrectionService {
           ]);
       }
   }
-
 
    public function updateStatEcorrection($id, $stat, $message)
     {

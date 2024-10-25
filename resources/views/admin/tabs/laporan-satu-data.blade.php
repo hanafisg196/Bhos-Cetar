@@ -1,5 +1,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+
         var report = @json($report);
 
         var lbhTotal = report.total_lbh.map(function(item) {
@@ -74,8 +75,8 @@
             }
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart2"), options);
+        var chart = new ApexCharts(document.querySelector("#chartSatu"), options);
         chart.render();
-     console.log(allBulans);
+
     });
 </script>

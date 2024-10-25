@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\AdminService;
 use App\Services\ReportGrafikService;
 
 class AdminController extends Controller
@@ -16,10 +15,13 @@ class AdminController extends Controller
     public function index()
     {
         $report = $this->reportGrafikService->getLbhReport();
+        $test = $this->reportGrafikService->getReportKinerja();
+        $tes2 = $this->reportGrafikService->getReportKinerjaByVerifikator();
 
-        return view('admin.page.dashboard')->with([
-            'report' => $report
-        ]);
-
+      //   return view('admin.page.dashboard')->with([
+      //       'report' => $report,
+      //       'test' => $test
+      //   ]);
+           return json_encode($tes2);
     }
 }

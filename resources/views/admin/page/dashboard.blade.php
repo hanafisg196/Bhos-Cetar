@@ -14,9 +14,15 @@
                      <a class="nav-link" id="lap-dua" data-bs-toggle="tab" href="#lapDua"
                      role="tab" aria-controls="lapDua" aria-selected="false">Statistik Kinerja</a>
                   </li>
+                  <li class="nav-item" role="presentation">
+                     <a class="nav-link" id="lap-tiga" data-bs-toggle="tab" href="#lapTiga"
+                     role="tab" aria-controls="lapTiga" aria-selected="false">Statistik Kinerja</a>
+                  </li>
                </ul>
               <div class="tab-content" id="myTabContent">
                 @include('admin.tabs.tabs-satu')
+                @include('admin.tabs.tabs-dua')
+                @include('admin.tabs.tabs-tiga')
               </div>
             </div>
          </div>
@@ -24,6 +30,7 @@
    </section>
       </div>
       @include('admin.tabs.laporan-satu-data')
-      {{-- @include('admin.tabs.laporan-dua-data') --}}
+      @include('admin.tabs.laporan-dua-data')
+      @include('admin.tabs.laporan-tiga-data')
 @endsection
 
