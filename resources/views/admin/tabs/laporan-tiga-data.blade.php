@@ -1,24 +1,52 @@
 <script>
    document.addEventListener("DOMContentLoaded", function() {
-      var disPos = @json($disposReport);
+      var statReport = @json($statReport);
 
-      var disPosTotal = disPos.disposTotal.map(function(item) {
+        var disPosTotal = statReport.disposTotal.map(function(item) {
             return item.total;
         });
+        var ditolakTotal = statReport.ditolakTotal.map(function(item) {
+            return item.total;
+        });
+        var disetujuiTotal = statReport.disetujuiTotal.map(function(item) {
+            return item.total;
+        });
+        var revisiTotal = statReport.revisiTotal.map(function(item) {
+            return item.total;
+        });
+
+        var disposBulan = statReport.disposTotal.map(function(item) {
+            return item.month
+        });
+        var ditolakBulan = statReport.ditolakTotal.map(function (item){
+            return item.month
+        });
+        var revisiBulan = statReport.revisiTotal.map(function (item){
+            return item.month
+        });
+        var disetujuBulan = statReport.disetujuiTotal.map(function (item){
+            return item.month
+        });
+
+         var allBulans = [...disetujuBulan, ...ditolakBulan, ...disetujuBulan, ...revisiBulan];
+         var uniqeBulans = Array.from(new Set(allBulans));
+
+
+
 
       var options = {
           series: [{
           name: 'Revisi',
-          data: [44, 55, 41, 67, 22, 43]
+          data: revisiTotal
         }, {
           name: 'Desetujui',
-          data: [13, 23, 20, 8, 13, 27]
+          data: disetujuiTotal
         }, {
           name: 'Disposisi',
           data: disPosTotal
         }, {
           name: 'Ditolak',
-          data: [21, 7, 25, 13, 22, 8]
+          data: ditolakTotal
         }],
           chart: {
           type: 'bar',
@@ -60,9 +88,7 @@
         },
         xaxis: {
           type: 'datetime',
-          categories: ['01/01/2011 GMT', '01/02/2011 GMT', '01/03/2011 GMT', '01/04/2011 GMT',
-            '01/05/2011 GMT', '01/06/2011 GMT'
-          ],
+          categories: uniqeBulans,
         },
         legend: {
           position: 'right',
@@ -75,7 +101,7 @@
 
         var chart = new ApexCharts(document.querySelector("#chartTiga"), options);
         chart.render();
-        console.log(disPosTotal);
+        console.log(uniqeBulans);
 
    });
 </script>

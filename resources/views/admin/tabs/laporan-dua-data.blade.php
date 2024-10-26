@@ -48,7 +48,5 @@
         };
         var chart = new ApexCharts(document.querySelector("#chartDua"), options);
         chart.render();
-
-        console.log(count);
    });
 </script>
