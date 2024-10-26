@@ -16,12 +16,13 @@ class AdminController extends Controller
     {
         $report = $this->reportGrafikService->getLbhReport();
         $test = $this->reportGrafikService->getReportKinerja();
-        $tes2 = $this->reportGrafikService->getReportKinerjaByVerifikator();
+        $disposReport = $this->reportGrafikService->getReportKinerjaByVerifikator();
 
       //   return view('admin.page.dashboard')->with([
       //       'report' => $report,
-      //       'test' => $test
+      //       'test' => $test,
+      //       'disposReport' => $disposReport
       //   ]);
-           return json_encode($tes2);
+           return json_encode($disposReport);
     }
 }

@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ReportGrafikServiceImpl implements ReportGrafikService
 {
-   private function getUser(){
-      return Auth::user();
-  }
+    private function getUser()
+    {
+        return Auth::user();
+    }
     private function getMonthName($monthNumber)
     {
         $months = [
@@ -66,30 +67,107 @@ class ReportGrafikServiceImpl implements ReportGrafikService
 
     public function getReportKinerja()
     {
-      $verifikators = User::whereHas('rules', function ($query) {
-         $query->where('nama', '=', 'VERIFIKATOR 1')->orWhere('nama', '=', 'VERIFIKATOR 2');
-     })->get(['nip', 'name']);
-     $scheduleCounts = $verifikators->map(function ($verifikator) {
-         $count1 = Schedule::where('verifikator_nip', $verifikator->nip)->count();
-         $count2 = Ranham::where('verifikator_nip', $verifikator->nip)->count();
-         $count3 = Ecorrection::where('verifikator_nip', $verifikator->nip)->count();
-         $count = $count1+$count2+$count3;
-         return [
-             'nama' => $verifikator->name,
-             'nip' => $verifikator->nip,
-             'count' => $count,
-         ];
-     });
-     return $scheduleCounts->values()->toArray();
+        $verifikators = User::whereHas('rules', function ($query) {
+            $query->where('nama', '=', 'VERIFIKATOR 1')->orWhere('nama', '=', 'VERIFIKATOR 2');
+        })->get(['nip', 'name']);
+        $scheduleCounts = $verifikators->map(function ($verifikator) {
+            $count1 = Schedule::where('verifikator_nip', $verifikator->nip)->count();
+            $count2 = Ranham::where('verifikator_nip', $verifikator->nip)->count();
+            $count3 = Ecorrection::where('verifikator_nip', $verifikator->nip)->count();
+            $count = $count1 + $count2 + $count3;
+            return [
+                'nama' => $verifikator->name,
+                'nip' => $verifikator->nip,
+                'count' => $count,
+            ];
+        });
+        return $scheduleCounts->values()->toArray();
     }
 
     public function getReportKinerjaByVerifikator()
     {
-      $verifikators = Auth::user();
+        $user = $this->getUser();
+        $disposLbh = Schedule::where('verifikator_nip', $user->nip)
+            ->where('status', 'Disposisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
 
-      return $verifikators;
+        $disposLah = Ranham::where('verifikator_nip', $user->nip)
+            ->where('status', 'Disposisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
 
+        $disposEcor = Ecorrection::where('verifikator_nip', $user->nip)
+            ->where('status', 'Disposisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+         ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+       $revisiLbh = Schedule::where('verifikator_nip', $user->nip)
+            ->where('status', 'Revisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        $revisiLah = Ranham::where('verifikator_nip', $user->nip)
+            ->where('status', 'Revisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        $revisiEcor = Ecorrection::where('verifikator_nip', $user->nip)
+            ->where('status', 'Revisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+         ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+
+        $allDispos = collect([$disposLbh, $disposLah, $disposEcor])->flatten();
+        $allRevisi = collect([$revisiLbh, $revisiLah, $revisiEcor])->flatten();
+
+        $disposTotal = $allDispos->groupBy('month_name')
+            ->map(function ($items, $monthName) {
+                return [
+                    'month' => $monthName,
+                    'total' => $items->sum('total'),
+                ];
+            }) ->values();
+       $revisiTotal = $allRevisi->groupBy('month_name')
+            ->map(function ($items, $monthName) {
+                return [
+                    'month' => $monthName,
+                    'total' => $items->sum('total'),
+                ];
+            }) ->values();
+
+        return [
+               'disposTotal' => $disposTotal,
+               'revisiTotal' => $revisiTotal
+        ];
     }
-
-
 }

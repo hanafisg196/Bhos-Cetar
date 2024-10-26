@@ -1,5 +1,11 @@
 <script>
    document.addEventListener("DOMContentLoaded", function() {
+      var disPos = @json($disposReport);
+
+      var disPosTotal = disPos.disposTotal.map(function(item) {
+            return item.total;
+        });
+
       var options = {
           series: [{
           name: 'Revisi',
@@ -9,7 +15,7 @@
           data: [13, 23, 20, 8, 13, 27]
         }, {
           name: 'Disposisi',
-          data: [11, 17, 15, 15, 21, 14]
+          data: disPosTotal
         }, {
           name: 'Ditolak',
           data: [21, 7, 25, 13, 22, 8]
@@ -69,6 +75,7 @@
 
         var chart = new ApexCharts(document.querySelector("#chartTiga"), options);
         chart.render();
+        console.log(disPosTotal);
 
    });
 </script>

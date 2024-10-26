@@ -3,11 +3,15 @@
 namespace Database\Seeders;
 
 use App\Models\CategoryRanhamn;
+use App\Models\Document;
+use App\Models\Ecorrection;
 use App\Models\Kkp;
 use App\Models\OpdList;
+use App\Models\Ranham;
 use App\Models\Role;
 use App\Models\Rule;
 use App\Models\RuleType;
+use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Support\Str;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -89,6 +93,51 @@ class DatabaseSeeder extends Seeder
             'jabatan' => 'Pranata Komputer',
             'token' => 'test-8'
            ]);
+           User::factory()->create([
+            'name' => 'Test 9',
+            'username' => '196706171989031007',
+            'nip' => '196706171989031007',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-9'
+           ]);
+
+           User::factory()->create([
+            'name' => 'Test 10',
+            'username' => '197004242000032006',
+            'nip' => '197004242000032006',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-10'
+           ]);
+
+           User::factory()->create([
+            'name' => 'Test 11',
+            'username' => '197208091999031005',
+            'nip' => '197208091999031005',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-11'
+           ]);
+
+           User::factory()->create([
+            'name' => 'Test 12',
+            'username' => '196809301996032002',
+            'nip' => '196809301996032002',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-12'
+           ]);
+
+           User::factory()->create([
+            'name' => 'Test 13',
+            'username' => '196903132002121005',
+            'nip' => '196903132002121005',
+            'password' => 'rahasia',
+            'jabatan' => 'Pranata Komputer',
+            'token' => 'test-13'
+           ]);
+
 
 
         Kkp::create([
@@ -247,6 +296,8 @@ class DatabaseSeeder extends Seeder
               'kode_jabatan' => $data['data']['kode'][$i]
           ]);
       }
+
+
       $user  = User::find(1);
       $user->rules()->attach(1);
       $user  = User::find(2);
@@ -261,6 +312,56 @@ class DatabaseSeeder extends Seeder
       $user->rules()->attach(6);
       $user  = User::find(7);
       $user->rules()->attach(3);
+      $user  = User::find(id: 11);
+      $user->rules()->attach(4);
+      $user  = User::find(id: 12);
+      $user->rules()->attach(3);
+      $user  = User::find(id: 13);
+      $user->rules()->attach(5);
+
+
+      for ($i = 1; $i <= 100; $i++){
+       $schedule =  Schedule::create([
+            'code' => 'LBH'.$i,
+            'nama' => 'Abdul Haris'.$i,
+            'nip' => '199101052015031001',
+            'alamat' => 'test'.$i,
+            'email' => 'test@gmail.com',
+            'wa' => '0852631111688',
+            'kronologi' => 'test'.$i,
+            'user_id' => 1
+      ]);
+      Document::create([
+         'schedule_id' => $schedule->id,
+         'file' => 'test ' . $i . '.pdf',
+     ]);
+      }
+
+      for ($i = 1; $i <= 80; $i++){
+         Ranham::create([
+            'code' => 'LAH'.$i,
+            'link' => 'https://github.com/'.$i,
+            'name' => 'Test 13',
+            'user_id' => 12,
+            'kkp_id' => 1
+         ]);
+      }
+
+
+      for ($i = 1; $i <= 100; $i++){
+        $ecor =  Ecorrection::create([
+            'code' => 'ECOR'.$i,
+            'nip' => '198011262008031010',
+            'nama' => 'Test 4',
+            'title' => 'Test'. $i,
+            'user_id' => 4
+         ]);
+
+         Document::create([
+            'ecorrection_id' => $ecor->id,
+            'file' => 'test ' . $i . '.pdf',
+        ]);
+      }
 
     }
 }
