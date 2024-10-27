@@ -46,6 +46,7 @@
             <livewire:clear-temporary />
         </div>
     </div>
+
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
@@ -55,6 +56,7 @@
     <script src="/dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/dist/assets/compiled/js/app.js"></script>
     <script src="/dist/assets/static/js/pages/form-element-select.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     @include('dashboard.component.sweet-toast')
     @include('dashboard.component.sweet-toast-error')
     @yield('script')

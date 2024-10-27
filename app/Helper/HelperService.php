@@ -47,6 +47,13 @@ if (!function_exists(function: 'strCut')) {
     }
 }
 
+if (!function_exists(function: 'strCutTwo')) {
+   function strCutTwo($string)
+   {
+       return substr($string, 12);
+   }
+}
+
 if (!function_exists(function: 'verifikatorProfile')) {
     function verifikatorProfile($verifikator)
     {

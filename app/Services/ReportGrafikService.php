@@ -5,4 +5,5 @@ interface ReportGrafikService {
    public function getLbhReport();
    public function getReportKinerja();
    public function getReportKinerjaByVerifikator();
+   public function getReportKinerjaForUser();
 }

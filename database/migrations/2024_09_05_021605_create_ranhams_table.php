@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('link');
             $table->string('name');
+            $table->string('nip');
             $table->tinyInteger('read')->default(0);
             $table->unsignedBigInteger('kkp_id');
             $table->unsignedBigInteger('user_id');

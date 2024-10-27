@@ -93,6 +93,7 @@ class ReportHamServiceImpl implements ReportHamService
             'link' => $validated['link'],
             'kkp_id' => $validated['kkp'],
             'user_id' => $user->id,
+            'nip' => $user->nip,
             'name' => $user->name,
             'code' => $this->generateCode(),
             'catran_id' => $this->getCatRanId(),
@@ -154,7 +155,10 @@ class ReportHamServiceImpl implements ReportHamService
 
     public function search($search, $perPage)
     {
-        return Ranham::where('name', 'like', '%' . $search . '%')->paginate($perPage);
+        return Ranham::where('name', 'like', '%' . $search . '%')
+        ->orWhere('code', 'like', '%' . $search . '%')
+        ->orWhere('nip', 'like', '%' . $search . '%')
+        ->paginate($perPage);
     }
 
     public function searchByUser(Request $request, $search)

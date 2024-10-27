@@ -15,6 +15,163 @@ class ReportGrafikServiceImpl implements ReportGrafikService
         return Auth::user();
     }
 
+    private function getMonthName($monthNumber)
+    {
+        $months = [
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember',
+        ];
+
+        return $months[$monthNumber] ?? '';
+    }
+
+    private function disposisiCollectionForUser($user)
+    {
+        $disposLbh = Schedule::where('user_id', $user)
+            ->where('status', 'Disposisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        $disposLah = Ranham::where('user_id', $user)
+            ->where('status', 'Disposisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        $disposEcor = Ecorrection::where('user_id', $user)
+            ->where('status', 'Disposisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        return collect([$disposLbh, $disposLah, $disposEcor])->flatten();
+    }
+    private function revisiCollectionForUser($user)
+    {
+        $revisiLbh = Schedule::where('user_id', $user)
+            ->where('status', 'Revisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        $revisiLah = Ranham::where('user_id', $user)
+            ->where('status', 'Revisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        $revisiEcor = Ecorrection::where('user_id', $user)
+            ->where('status', 'Revisi')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        return collect([$revisiLbh, $revisiLah, $revisiEcor])->flatten();
+    }
+    private function ditolakCollectionForUser($user)
+    {
+        $ditolakLbh = Schedule::where('user_id', $user)
+            ->where('status', 'Ditolak')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        $ditolakLah = Ranham::where('user_id', $user)
+            ->where('status', 'Ditolak')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        $ditolakEcor = Ecorrection::where('user_id', $user)
+            ->where('status', 'Ditolak')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        return collect([$ditolakLbh, $ditolakLah, $ditolakEcor])->flatten();
+    }
+    private function disetujuiCollectionForUser($user)
+    {
+        $disetujuiLbh = Schedule::where('user_id', $user)
+            ->where('status', 'Disetujui')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        $disetujuiLah = Ranham::where('user_id', $user)
+            ->where('status', 'Disetujui')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        $disetujuiEcor = Ecorrection::where('user_id', $user)
+            ->where('status', 'Disetujui')
+            ->selectRaw('MONTH(created_at) as month, count(code) as total')
+            ->groupByRaw('YEAR(created_at), MONTH(created_at)')
+            ->get()
+            ->map(function ($item) {
+                $item->month_name = $this->getMonthName($item->month);
+                return $item;
+            });
+
+        return collect([$disetujuiLbh, $disetujuiLah, $disetujuiEcor])->flatten();
+    }
+
     private function disposisiCollection($user)
     {
         $disposLbh = Schedule::where('verifikator_nip', $user)
@@ -82,7 +239,7 @@ class ReportGrafikServiceImpl implements ReportGrafikService
                 return $item;
             });
 
-            return collect([$revisiLbh, $revisiLah, $revisiEcor])->flatten();
+        return collect([$revisiLbh, $revisiLah, $revisiEcor])->flatten();
     }
 
     private function ditolakCollection($user)
@@ -117,7 +274,7 @@ class ReportGrafikServiceImpl implements ReportGrafikService
                 return $item;
             });
 
-            return collect([$ditolakLbh, $ditolakLah, $ditolakEcor])->flatten();
+        return collect([$ditolakLbh, $ditolakLah, $ditolakEcor])->flatten();
     }
     private function disetujuiCollection($user)
     {
@@ -151,28 +308,9 @@ class ReportGrafikServiceImpl implements ReportGrafikService
                 return $item;
             });
 
-            return collect([$disetujuiLbh, $disetujuiLah, $disetujuiEcor])->flatten();
+        return collect([$disetujuiLbh, $disetujuiLah, $disetujuiEcor])->flatten();
     }
 
-    private function getMonthName($monthNumber)
-    {
-        $months = [
-            1 => 'Januari',
-            2 => 'Februari',
-            3 => 'Maret',
-            4 => 'April',
-            5 => 'Mei',
-            6 => 'Juni',
-            7 => 'Juli',
-            8 => 'Agustus',
-            9 => 'September',
-            10 => 'Oktober',
-            11 => 'November',
-            12 => 'Desember',
-        ];
-
-        return $months[$monthNumber] ?? '';
-    }
     public function getLbhReport()
     {
         $lbh = Schedule::selectRaw('MONTH(created_at) as month, count(code) as total')
@@ -249,7 +387,7 @@ class ReportGrafikServiceImpl implements ReportGrafikService
                 ];
             })
             ->values();
-         $ditolakTotal = $allDitolak
+        $ditolakTotal = $allDitolak
             ->groupBy('month_name')
             ->map(function ($items, $monthName) {
                 return [
@@ -258,7 +396,7 @@ class ReportGrafikServiceImpl implements ReportGrafikService
                 ];
             })
             ->values();
-         $disetujuiTotal = $allDisetujui
+        $disetujuiTotal = $allDisetujui
             ->groupBy('month_name')
             ->map(function ($items, $monthName) {
                 return [
@@ -272,6 +410,60 @@ class ReportGrafikServiceImpl implements ReportGrafikService
             'revisiTotal' => $revisiTotal,
             'ditolakTotal' => $ditolakTotal,
             'disetujuiTotal' => $disetujuiTotal,
+        ];
+    }
+
+    public function getReportKinerjaForUser()
+    {
+        $user = $this->getUser();
+        $allDispos = $this->disposisiCollectionForUser($user->id);
+        $allRevisi = $this->revisiCollectionForUser($user->id);
+        $allDitolak = $this->ditolakCollectionForUser($user->id);
+        $allDisetujui = $this->disetujuiCollectionForUser($user->id);
+        $disposTotal = $allDispos
+            ->groupBy('month_name')
+            ->map(function ($items, $monthName) {
+                return [
+                    'month' => $monthName,
+                    'total' => $items->sum('total'),
+                ];
+            })
+            ->values();
+
+        $revisiTotal = $allRevisi
+            ->groupBy('month_name')
+            ->map(function ($items, $monthName) {
+                return [
+                    'month' => $monthName,
+                    'total' => $items->sum('total'),
+                ];
+            })
+            ->values();
+
+        $ditolakTotal = $allDitolak
+                ->groupBy('month_name')
+                ->map(function ($items, $monthName) {
+                    return [
+                        'month' => $monthName,
+                        'total' => $items->sum('total'),
+                    ];
+                })
+                ->values();
+
+        $disetujuiTotal = $allDisetujui
+                ->groupBy('month_name')
+                ->map(function ($items, $monthName) {
+                    return [
+                        'month' => $monthName,
+                        'total' => $items->sum('total'),
+                    ];
+                })
+                ->values();
+        return [
+         'disposTotal' => $disposTotal,
+         'revisiTotal' => $revisiTotal,
+         'ditolakTotal' => $ditolakTotal,
+         'disetujuiTotal' => $disetujuiTotal,
         ];
     }
 }

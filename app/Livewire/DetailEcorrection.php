@@ -2,20 +2,22 @@
 
 namespace App\Livewire;
 
+use App\Models\FixFile;
 use App\Services\EcorrectionService;
 use App\Services\RoleService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\WithFileUploads;
 class DetailEcorrection extends Component
 {
+    use WithFileUploads;
     protected EcorrectionService $ecorrectionService;
     protected RoleService $roleService;
 
-    public function boot(
-      EcorrectionService $ecorrectionService,
-      RoleService $roleService
-      )
+    public function boot(EcorrectionService $ecorrectionService, RoleService $roleService)
     {
         $this->ecorrectionService = $ecorrectionService;
         $this->roleService = $roleService;
@@ -28,11 +30,13 @@ class DetailEcorrection extends Component
     public $verfikator;
     public $pesan = '';
     public $status = '';
+    public $file;
 
     protected $rules = [
         'verfikator' => 'required',
         'pesan' => 'required',
-        'status' => 'required'
+        'status' => 'required',
+        'file' => 'nullable',
     ];
 
     #[On('showDetailEcor')]
@@ -43,11 +47,9 @@ class DetailEcorrection extends Component
 
     public function mount($id)
     {
-
         $this->showDetailEcor($this->id = $id);
         $this->getVerifikatorTwo();
         $this->checkDisposAccess();
-
     }
     public function sliceStr($string)
     {
@@ -61,30 +63,51 @@ class DetailEcorrection extends Component
 
     public function getVerifikatorTwo()
     {
-      $this->verifikatorTwo = $this->roleService->getVerifikatorTwo();
+        $this->verifikatorTwo = $this->roleService->getVerifikatorTwo();
     }
     public function checkDisposAccess()
     {
-      $this->hasDispos = $this->roleService->disposisiAccess();
+        $this->hasDispos = $this->roleService->disposisiAccess();
     }
 
-    public function updateVerifikatorTwo($id){
-      $this->validate([
-         'verfikator' => 'required',
-     ]);
-      $this->ecorrectionService->sendToVerifikatorTwo($id, $this->verfikator);
-      session()->flash('status', 'Verifikator Berhasil Di tentukan');
-      $this->redirect(route('admin.list.ecorrection'));
+    public function updateVerifikatorTwo($id)
+    {
+        $this->validate([
+            'verfikator' => 'required',
+        ]);
+        $this->ecorrectionService->sendToVerifikatorTwo($id, $this->verfikator);
+        session()->flash('status', 'Verifikator Berhasil Di tentukan');
+        $this->redirect(route('admin.list.ecorrection'));
     }
 
-    public function updateEcor($id){
-      $this->validate([
-         'status' => 'required',
-         'pesan' => 'required',
-     ]);
-      $this->ecorrectionService->updateStatEcorrection($id, $this->status,$this->pesan);
-      session()->flash('status', 'Data berhasil di update.');
-      $this->redirect(route('admin.list.ecorrection'));
-    }
+    public function updateEcor($id)
+    {
+        $this->validate([
+            'status' => 'required',
+            'pesan' => 'required',
+            'file' => 'nullable|file|mimes:pdf,doc,docx',
+        ]);
 
+        $this->ecorrectionService->updateStatEcorrection($id, $this->status, $this->pesan);
+
+        if ($this->file) {
+            $fileIsExsist = FixFile::where('ecor_id', $id)->first();
+            $fileName = uniqid() . '.' . $this->file->getClientOriginalExtension();
+            $filePath = 'verifikator/' . $fileName;
+
+            if($fileIsExsist){
+               Storage::delete($fileIsExsist->file);
+               $fileIsExsist->delete();
+             }
+            $this->file->storeAs('verifikator', $fileName, 'public');
+             FixFile::create([
+                 'ecor_id' => $id,
+                 'file' => $filePath,
+             ]);
+
+        }
+
+        session()->flash('status', 'Data berhasil di update.');
+        $this->redirect(route('admin.list.ecorrection'));
+    }
 }

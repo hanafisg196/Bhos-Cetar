@@ -28,6 +28,10 @@ class Ecorrection extends Model
     {
         return $this->hasMany(TrackingPoint::class, 'ecor_id', 'id');
     }
+    public function fixFiles()
+    {
+        return $this->hasMany(FixFile::class, 'ecor_id', 'id');
+    }
 
 
 }

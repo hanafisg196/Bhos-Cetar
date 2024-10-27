@@ -148,7 +148,7 @@ class RoleServiceImpl implements RoleService
 
   public function disposisiAccess()
   {
-      $accesRule = [ 'KABAG'];
+      $accesRule = [ 'KABAG','ADMIN'];
       return $this->getUserRole($accesRule);
   }
 

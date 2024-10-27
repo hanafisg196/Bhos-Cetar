@@ -100,7 +100,7 @@
                                         <i data-feather="x"></i>
                                     </button>
                                 </div>
-                                <form>
+                                <form  enctype="multipart/form-data">
                                     @csrf
                                     <div class="modal-body">
                                         <div class="col-md-6 col-12">
@@ -131,6 +131,17 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-6 col-12">
+                                          <div class="form-group">
+                                             <label for="message">Detail Pebaikan (optional)</label>
+                                             <input class="form-control form-control-sm" wire:model="file" name="file" id="file" type="file">
+                                             <div>
+                                                @error('file')
+                                                    {{ $message }}
+                                                @enderror
+                                            </div>
+                                          </div>
+                                      </div>
 
                                     </div>
                                     <div class="modal-footer">

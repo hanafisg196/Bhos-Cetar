@@ -8,7 +8,42 @@
                    <p><strong>Kode - </strong>{{$data->code}}</p>
                    <p><strong>Status - </strong>{{$data->status}}</p>
                    <p><strong>Pesan - </strong>{{$data->message}}</p>
+                   @foreach ($data->fixFiles as $file)
+                   <p><strong>Detail Perbaikan</strong> - {{ strCutTwo($file->file) }}
+                     <a class="btn icon btn-primary ms-3" data-bs-toggle="modal" data-bs-target="#modals-{{ $file->id }}">
+                        <i class="bi bi-eye-fill"></i>
+                      </a>
+                  </p>
+
+                   @endforeach
                </div>
+               <div class="modal fade" id="modals-{{ $file->id }}" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalScrollableTitle-{{$file->id}}" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-scrollable " role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalScrollableTitle">Detail File</h5>
+                              <button type="button" class="close" data-bs-dismiss="modal"
+                                  aria-label="Close">
+                                  <i data-feather="x"></i>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                             <div class="d-flex justify-content-center mt-3">
+                                <iframe src="{{asset('storage/'. $file->file)}}" style="width:718px; height:700px;"
+                                title="doc" name="contents"></iframe>
+                               </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-light-secondary"
+                                  data-bs-dismiss="modal">
+                                  <i class="bx bx-x d-block d-sm-none"></i>
+                                  <span class="d-none d-sm-block">Close</span>
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
                <div class="card-content">
                    <div class="card-body">
                        <form class="form" action="{{ route('ecorrection.update', encrypt($data->id)) }}"
@@ -56,8 +91,7 @@
                                        <div class="modal-dialog modal-dialog-scrollable " role="document">
                                            <div class="modal-content">
                                                <div class="modal-header">
-                                                   <h5 class="modal-title" id="exampleModalScrollableTitle">Scrolling long
-                                                       Content</h5>
+                                             <h5 class="modal-title" id="exampleModalScrollableTitle">Detail File</h5>
                                                    <button type="button" class="close" data-bs-dismiss="modal"
                                                        aria-label="Close">
                                                        <i data-feather="x"></i>
@@ -98,7 +132,6 @@
        </div>
    </div>
 </section>
-
 @include('dashboard.component.button-loading')
 @endsection
 @section('script')

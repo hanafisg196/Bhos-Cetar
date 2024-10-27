@@ -14,8 +14,8 @@ class EcorrectionController extends Controller
    }
 
     public function index(){
-
-      return view('dashboard.page.ecorrection');
+      $ecor = $this->ecorrectionService->getEcorByUser();
+      return view('dashboard.page.ecorrection')->with('ecor', $ecor);
     }
 
     public function inbox(){

@@ -92,7 +92,7 @@
                                         <div class="email-fixed-search flex-grow-1">
                                             <div class="form-group position-relative  mb-0 has-icon-left">
                                                 <input wire:model.live="searchLbh" type="text" class="form-control"
-                                                    placeholder="Cari Bantuan..">
+                                                placeholder="Cari berdasarakan nama, nip atau kode">
                                                 <div class="form-control-icon">
                                                     <svg class="bi" width="1.5em" height="1.5em" fill="currentColor">
                                                         <use xlink:href="/dist/assets/static/images/bootstrap-icons.svg#search" />

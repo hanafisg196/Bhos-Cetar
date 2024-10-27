@@ -12,9 +12,11 @@ class ReportHamController extends Controller
         $this->reportHamService = $reportHamService;
     }
 
-    public function index() {
+    public function index(Request $request) {
+      $ranham = $this->reportHamService->getRanhamByUser($request);
         $kkp = $this->reportHamService->getKkp();
         return view("dashboard.page.ranham")->with([
+            "ranham"=> $ranham,
             "kkp"=> $kkp
         ]);
     }

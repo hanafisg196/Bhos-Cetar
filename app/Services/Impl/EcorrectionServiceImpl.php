@@ -203,6 +203,9 @@ class EcorrectionServiceImpl implements EcorrectionService {
     public function search($search, $perPage)
     {
       return Ecorrection::where('title', 'like', '%' . $search . '%')
+      ->orWhere('nip', 'like', '%' . $search . '%')
+      ->orWhere('code', 'like', '%' . $search . '%')
+      ->orWhere('nama', 'like', '%' . $search . '%')
       ->latest()->paginate($perPage);
     }
 
@@ -297,6 +300,8 @@ class EcorrectionServiceImpl implements EcorrectionService {
    ->where('read', 0)
    ->count();
  }
+
+
 
 
 }

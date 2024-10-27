@@ -158,7 +158,10 @@ class ScheduleServiceImpl implements ScheduleService
 
     public function search($search, $perPage)
     {
-       return Schedule::where('nama', 'like', '%' . $search . '%')->paginate($perPage);
+       return Schedule::where('nama', 'like', '%' . $search . '%')
+       ->orWhere('nip', 'like', '%' . $search . '%')
+       ->orWhere('code', 'like', '%' . $search . '%')
+       ->paginate($perPage);
 
     }
     public function deleteSchedule($id)
