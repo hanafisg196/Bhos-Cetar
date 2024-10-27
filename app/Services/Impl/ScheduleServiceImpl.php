@@ -5,6 +5,7 @@ use App\Models\Document;
 use App\Models\Notification;
 use App\Models\Schedule;
 use App\Models\Temporary;
+use App\Models\TrackingPoint;
 use App\Services\ScheduleService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -20,9 +21,18 @@ class ScheduleServiceImpl implements ScheduleService
        return  Auth::user();
     }
     private function getUserRole($rule)
-   {
+    {
        return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
-   }
+    }
+
+    private function createTrackingPointLbh($id, $status,$nip){
+      TrackingPoint::create([
+         'lbh_id' => $id,
+         'status' => $status,
+         'verifikator_nip' => $nip
+      ]);
+    }
+
     private function copyFilesFromTmp($tmpFile, $idFile)
     {
         foreach ($tmpFile as $tmp) {
@@ -48,7 +58,7 @@ class ScheduleServiceImpl implements ScheduleService
             'email' => 'required|email|max:120',
             'kronologi' => 'required|string',
             'wa' => 'required|numeric|min:13',
-        ]);
+           ]);
             $schedule = Schedule::create([
                 'nip' => $user->username,
                 'nama' => $validated['nama'],
@@ -61,8 +71,13 @@ class ScheduleServiceImpl implements ScheduleService
             ]);
 
             $schedule_id = $schedule->id;
-
             $this->copyFilesFromTmp($temporaryFiles, $schedule_id);
+            $schedule->refresh();
+            $this->createTrackingPointLbh(
+               $schedule_id,
+               $schedule->status,
+               null
+            );
     }
 
     public function updateSchedule(Request $request, $id){
@@ -87,7 +102,12 @@ class ScheduleServiceImpl implements ScheduleService
         ]);
         $schedule_id = $schedule->id;
         $this->copyFilesFromTmp($temporaryFiles, $schedule_id);
-
+        $schedule->refresh();
+        $this->createTrackingPointLbh(
+           $schedule_id,
+           $schedule->status,
+           $schedule->verifikator_nip
+        );
     }
 
     public function generateCode(){
@@ -181,6 +201,7 @@ class ScheduleServiceImpl implements ScheduleService
         if($update) {
             $schedule = Schedule::find($id);
             $notif = Notification::where('lbh_id', $id)->first();
+
             if(!$notif){
                Notification::create([
                     "user_id" => $schedule->user_id,
@@ -196,6 +217,12 @@ class ScheduleServiceImpl implements ScheduleService
                     "notif_read" => 0
                 ]);
             }
+            $schedule->refresh();
+            $this->createTrackingPointLbh(
+               $schedule->id,
+               $schedule->status,
+               $schedule->verifikator_nip
+            );
         }
     }
     public function download($file)
@@ -209,6 +236,13 @@ class ScheduleServiceImpl implements ScheduleService
          'status' => 'Disposisi',
          'read' => 0
       ]);
+      $lbh->refresh();
+        $this->createTrackingPointLbh(
+           $lbh->id,
+           $lbh->status,
+           $lbh->verifikator_nip
+        );
+
      }
      public function ususlanLbh($perPage){
       return  Schedule::where('status', 'Usulan')->latest()->paginate($perPage);
@@ -303,6 +337,9 @@ public function countReadLbhRevisiByVerfikator(){
  ->where('verifikator_nip', $user->nip)
  ->where('read', 0)
  ->count();
+}
+public function tracking($postId){
+  return TrackingPoint::where('lbh_id', $postId)->get();
 }
 
 

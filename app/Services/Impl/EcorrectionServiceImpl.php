@@ -6,6 +6,7 @@ use App\Models\Document;
 use App\Models\Ecorrection;
 use App\Models\Notification;
 use App\Models\Temporary;
+use App\Models\TrackingPoint;
 use App\Services\EcorrectionService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,6 +19,15 @@ class EcorrectionServiceImpl implements EcorrectionService {
    private function getUser(){
        return Auth::user();
    }
+
+
+    private function createTrackingPointEcor($id, $status,$nip){
+      TrackingPoint::create([
+         'ecor_id' => $id,
+         'status' => $status,
+         'verifikator_nip' => $nip
+      ]);
+    }
    private function getUserRole($rule)
    {
        return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
@@ -69,6 +79,12 @@ class EcorrectionServiceImpl implements EcorrectionService {
       ]);
       $ecorrection_id = $ecorrection->id;
       $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
+      $ecorrection->refresh();
+      $this->createTrackingPointEcor(
+         $ecorrection_id,
+         $ecorrection->status,
+         null
+      );
 
    }
 
@@ -152,6 +168,13 @@ class EcorrectionServiceImpl implements EcorrectionService {
                     "notif_read" => 0
                 ]);
             }
+            $ecor->refresh();
+            $this->createTrackingPointEcor(
+               $ecor->id,
+               $ecor->status,
+               $ecor->verifikator_nip
+            );
+
 
         }
     }
@@ -170,6 +193,12 @@ class EcorrectionServiceImpl implements EcorrectionService {
       ]);
       $ecorrection_id = $ecor->id;
       $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
+      $ecor->refresh();
+      $this->createTrackingPointEcor(
+         $ecorrection_id,
+         $ecor->status,
+         $ecor->verifikator_nip
+      );
     }
     public function search($search, $perPage)
     {
@@ -191,6 +220,12 @@ class EcorrectionServiceImpl implements EcorrectionService {
          'status' => 'Disposisi',
          'read' => 0
       ]);
+      $ecor->refresh();
+      $this->createTrackingPointEcor(
+         $ecor->id,
+         $ecor->status,
+         $ecor->verifikator_nip
+      );
     }
 
     public function getEcorByUser()

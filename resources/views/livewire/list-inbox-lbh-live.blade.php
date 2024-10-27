@@ -177,12 +177,6 @@
                                                                 @endif
 
                                                             </div>
-                                                            <div class="mail-meta-item">
-                                                               <span class="float-right text-right">
-                                                                   <div class="mail-date" style="padding-left: 120px;">{{ $item->created_at->diffForHumans() }}</div>
-                                                                   <div class="text-right">{{ verifikatorProfile(encrypt($item->verifikator_nip))}}</div>
-                                                               </span>
-                                                           </div>
                                                         </div>
                                                         <div class="mail-message">
                                                             <p class="list-group-item-text truncate mb-0">
@@ -196,12 +190,52 @@
                                                         </div>
                                                     </div>
                                                 </a>
+                                                <div class="mail-meta-item">
+                                                   <span class="float-right text-right">
+                                                       <div class="mail-date">{{ $item->created_at->diffForHumans() }}</div>
+                                                       <div class="mail-date" style="color: #007aff">{{ verifikatorProfile(encrypt($item->verifikator_nip))}}</div>
+                                                       <div class="mail-date">
+                                                       <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">
+                                                         Tracking
+                                                       </button>
+                                                       </div>
+                                                   </span>
+                                               </div>
                                                 </li>
+                                          <div wire:ignore.self class="modal fade text-left"  id="modal-{{ $item->id }}" tabindex="-1" role="dialog"
+                                                   aria-labelledby="myModalLabel1" aria-hidden="true">
+                                                   <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                       <div class="modal-content">
+                                                           <div class="modal-header">
+                                                               <h5 class="modal-title" id="myModalLabel1">Tracking Point</h5>
+                                                               <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
+                                                                   <i data-feather="x"></i>
+                                                               </button>
+                                                           </div>
+                                                           <div class="modal-body">
+                                                            @foreach ($item['trackingPoints'] as $track)
+                                                            <div class="card mb-3">
+                                                                <div class="card-body">
+                                                                    <h6 class="card-title">Status: {{ $track->status }}</h6>
+                                                                    <p class="mb-1"><strong>{{ verifikatorProfile(encrypt($track->verifikator_nip))}}</strong> </p>
+                                                                    <p class="text-muted mb-0"><small>{{ $track->created_at->diffForHumans() }}</small></p>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                           </div>
+                                                           <div class="modal-footer">
+                                                               <button type="button" class="btn" data-bs-dismiss="modal">
+                                                                   <i class="bx bx-x d-block d-sm-none"></i>
+                                                                   <span class="d-none d-sm-block">Tutup</span>
+                                                               </button>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+                                               </div>
                                             @endforeach
                                         @else
                                         <div class="d-flex justify-content-center mt-5">Data tidak ditemukan.</div>
                                         @endif
-
                                         @if ($lbh->hasMorePages())
                                             <div class="d-flex justify-content-center mt-2">
                                                 <button wire:click="loadMore" class="btn btn-primary rounded-pill">Load More</button>
@@ -209,20 +243,14 @@
                                         @endif
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
-
                   </div>
               </div>
           </div>
       </section>
    </div>
-
-
-
     @if (session()->has('status'))
         <script>
             document.addEventListener('livewire:navigated', () => {

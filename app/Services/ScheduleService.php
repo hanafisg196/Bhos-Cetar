@@ -38,7 +38,7 @@ interface ScheduleService {
     public function countReadLbhRevisiByVerfikator();
     public function countLbhDitolakByVerfikator();
     public function countLbhDisetujuiByVerfikator();
-
+    public function tracking($postId);
 
 
 }

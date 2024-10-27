@@ -19,4 +19,8 @@ class Document extends Model
     {
         return $this->belongsTo(Ecorrection::class, 'ecorrection_id', 'id');
     }
+    public function trackingPoints()
+    {
+        return $this->belongsTo(TrackingPoint::class, 'track_id', 'id');
+    }
 }

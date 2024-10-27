@@ -24,6 +24,10 @@ class Ranham extends Model
     {
         return $this->belongsTo(CategoryRanhamn::class, 'catran_id', 'id');
     }
+    public function trackingPoints()
+    {
+        return $this->hasMany(TrackingPoint::class, 'lah_id', 'id');
+    }
 
     public function notifications()
     {

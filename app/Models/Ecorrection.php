@@ -24,5 +24,10 @@ class Ecorrection extends Model
         return $this->hasMany(Notification::class, 'ecor_id', 'id');
     }
 
+    public function trackingPoints()
+    {
+        return $this->hasMany(TrackingPoint::class, 'ecor_id', 'id');
+    }
+
 
 }

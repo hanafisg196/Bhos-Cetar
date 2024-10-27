@@ -52,7 +52,7 @@ if (!function_exists(function: 'verifikatorProfile')) {
     {
         $verifikator = Crypt::decrypt($verifikator);
         $user = User::where('nip', $verifikator)->first('name');
-        return $user ? 'Verifikator 2 - ' . $user->name : '';
+        return $user ? 'Verifikator - ' . $user->name : '';
     }
 }
 

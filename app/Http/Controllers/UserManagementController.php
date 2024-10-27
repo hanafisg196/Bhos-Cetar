@@ -29,8 +29,13 @@ class UserManagementController extends Controller
         $rule = $this->roleService->getRuleType();
         $opd = $this->roleService->getOpdEmployee();
         $employee = $this->roleService->getEmployee($code);
-        $data = $employee['data'];
-
+        if($code == '02.01.'){
+         $data = collect( $employee['data']['pegawai'])->filter(function ($item) {
+            return str_contains($item['nama_jabatan'], 'ASISTEN');
+        })->all();
+        } else{
+       $data = $employee['data']['pegawai'];
+        }
         return view('admin.page.user-role')->with([
             'code' => $code,
             'opd' => $opd,

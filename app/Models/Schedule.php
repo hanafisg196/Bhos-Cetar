@@ -25,4 +25,9 @@ class Schedule extends Model
     {
         return $this->hasMany(Notification::class, 'lbh_id', 'id');
     }
+
+    public function trackingPoints()
+    {
+        return $this->hasMany(TrackingPoint::class, 'lbh_id', 'id');
+    }
 }

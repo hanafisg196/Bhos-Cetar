@@ -9,6 +9,8 @@ use Livewire\WithPagination;
 class ListInboxLbhLive extends Component
 {
     use WithPagination;
+    public $posId;
+    public $track = [];
     public $string = '';
     public $perPage = 7;
     public $searchLbh = '';
@@ -44,6 +46,7 @@ class ListInboxLbhLive extends Component
       $this->checkAccessKabag();
       $this->checkAccessVerifikator();
       $this->counter();
+      // $this->trackingPoint($this->posId);
     }
     public function render()
     {
@@ -96,15 +99,12 @@ class ListInboxLbhLive extends Component
                   $this->activatedTab = false;
                   $this->filter = 'usulan';
                }
-
-
             }
         }
         return view('livewire.list-inbox-lbh-live')->with('lbh', $lbh);
     }
     public function checkAccessKabag(){
       $this->checkKabag = $this->roleService->userManagerAdmin();
-
     }
 
     public function checkAccessVerifikator(){
@@ -144,4 +144,8 @@ class ListInboxLbhLive extends Component
        $this->disetujuiCountByVerifikator = $this->scheduleService->countLbhDisetujuiByVerfikator();
        $this->ditolakCountByVerfikator = $this->scheduleService->countLbhDitolakByVerfikator();
     }
+
+   //  public function trackingPoint($postId){
+   //    $this->track = $this->scheduleService->tracking($postId);
+   //  }
 }

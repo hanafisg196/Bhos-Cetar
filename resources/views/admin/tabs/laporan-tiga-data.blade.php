@@ -87,7 +87,6 @@
           },
         },
         xaxis: {
-          type: 'datetime',
           categories: uniqeBulans,
         },
         legend: {
