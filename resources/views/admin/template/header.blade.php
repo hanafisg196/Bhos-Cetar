@@ -12,14 +12,14 @@
                <ul class="navbar-nav ms-auto mb-lg-0">
                </ul>
                <div class="dropdown">
-                     <livewire:rule-name/>
+                   <livewire:rule-name />
                    <a href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                       <livewire:profile-card/>
+                       <livewire:profile-card />
                    </a>
                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"
                        style="min-width: 11rem;">
                        <li>
-                           <livewire:profile-dropdown-name/>
+                           <livewire:profile-dropdown-name />
                        </li>
                        <li>
                            <hr class="dropdown-divider">
@@ -29,11 +29,10 @@
                                @csrf
                                <button class="dropdown-item" type="submit">
                                    <i class="icon-mid bi bi-box-arrow-left me-2"></i>
-                                       Logout
+                                   Logout
                                </button>
                            </form>
-
-                        </li>
+                       </li>
                    </ul>
                </div>
            </div>

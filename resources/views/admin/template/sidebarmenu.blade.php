@@ -47,7 +47,12 @@
                </ul>
            </li>
            <livewire:custom-menu-admin/>
+
          </li>
+         <a href="{{ route('dashboard') }}" class='sidebar-link'>
+                {{-- <i class="bi bi-house-fill"></i> --}}
+                <span>Ke Dashboard Bhos Cetar</span>
+            </a>
       </div>
     </ul>
 </div>

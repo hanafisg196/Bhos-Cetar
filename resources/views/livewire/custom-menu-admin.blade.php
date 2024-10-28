@@ -5,7 +5,7 @@
       <a href="#" class='sidebar-link'>
          <i class="bi bi-calendar2-check-fill"></i>
           <span>Ecorrection</span>
-          <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 43px; color: black;">
+          <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 48px; color: black;">
             {{$allReadCount}}
            </span>
       </a>

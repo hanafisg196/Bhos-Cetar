@@ -80,6 +80,12 @@ class RoleServiceImpl implements RoleService
          return redirect(route('admin.dashboard.user.manager'))->with('error', 'User Sudah memeiliki Rule');
         }
     }
+
+    public function adminCheck()
+    {
+        $accesRule = ['ADMIN', 'KABAG', 'VERIFIKATOR 2' ,'VERIFIKATOR 1'];
+        return $this->getUserRole($accesRule);
+    }
     public function updateRuleEmployee(Request $request, $id)
     {
         $user = User::find($id);

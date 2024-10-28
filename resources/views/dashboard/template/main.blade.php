@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="/dist/assets/compiled/css/application-email.css">
     <link rel="stylesheet" href="/dist/assets/compiled/css/iconly.css">
     <link rel="stylesheet" href="/dist/assets/extensions/sweetalert2-11.12.4/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"/>
+    <link rel="stylesheet"
+        href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" />
     <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
     @livewireStyles
 </head>
@@ -20,47 +21,48 @@
     <div id="app">
         <div id="main" class='layout-navbar navbar-fixed'>
             <header>
-               @include('dashboard.template.header')
+                @include('dashboard.template.header')
             </header>
             <div id="sidebar">
                 <div class="sidebar-wrapper active">
                     <div class="sidebar-header position-relative">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="logo">
-                                <img src="/dist/assets/compiled/jpg/logotanahdatar.png"
-                                    style="width: 50; height: 50px;" alt="Logo">
+                                <img src="/dist/assets/compiled/jpg/logotanahdatar.png" style="width: 50; height: 50px;"
+                                    alt="Logo">
                                 <span style="font-size: 20px;">Bhos-Cetar</span>
                             </div>
                             <div class="sidebar-toggler x">
                                 <a href="#" class="sidebar-hide d-xl-none d-block"><i
-                                        class="bi bi-x bi-middle"></i></a>
+                                  class="bi bi-x bi-middle"></i></a>
                             </div>
                         </div>
                     </div>
-                @include('dashboard.template.sidebarmenu')
+                    @include('dashboard.template.sidebarmenu')
+                </div>
+            </div>
+            <div id="main-content">
+                @yield('content')
+                @include('dashboard.template.footer')
+                <livewire:clear-temporary />
             </div>
         </div>
-        <div id="main-content">
-            @yield('content')
-            @include('dashboard.template.footer')
-            <livewire:clear-temporary />
-        </div>
-    </div>
 
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js"></script>
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-    <script src="/dist/assets/extensions/sweetalert2-11.12.4/dist/sweetalert2.all.min.js"></script>
-    <script src="/dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="/dist/assets/compiled/js/app.js"></script>
-    <script src="/dist/assets/static/js/pages/form-element-select.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    @include('dashboard.component.sweet-toast')
-    @include('dashboard.component.sweet-toast-error')
-    @yield('script')
-    @livewireScripts
+        <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
+        <script src="https://unpkg.com/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.js">
+        </script>
+        <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+        <script src="/dist/assets/extensions/sweetalert2-11.12.4/dist/sweetalert2.all.min.js"></script>
+        <script src="/dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+        <script src="/dist/assets/compiled/js/app.js"></script>
+        <script src="/dist/assets/static/js/pages/form-element-select.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        @include('dashboard.component.sweet-toast')
+        @include('dashboard.component.sweet-toast-error')
+        @yield('script')
+        @livewireScripts
 </body>
 
 </html>

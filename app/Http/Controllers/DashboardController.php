@@ -18,6 +18,6 @@ class DashboardController extends Controller
         return view('dashboard.page.home')->with([
          'reportGrafik' => $reportGrafik
         ]);
-      // return json_encode($report);
+      // return json_encode($reportGrafik);
     }
 }

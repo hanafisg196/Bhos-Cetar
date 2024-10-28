@@ -45,8 +45,6 @@
             @yield('content')
             <livewire:clear-temporary />
         </div>
-
-
     </div>
     <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script src="https://unpkg.com/filepond-plugin-file-validate-size/dist/filepond-plugin-file-validate-size.js"></script>

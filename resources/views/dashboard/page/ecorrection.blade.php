@@ -19,7 +19,7 @@
             <div class="col-10">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">E-correction</h4>
+                        <h4 class="card-title">E-corrections</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">

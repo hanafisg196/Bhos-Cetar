@@ -23,6 +23,5 @@ class AdminController extends Controller
             'test' => $test,
             'statReport' => $statReport
         ]);
-         //   return json_encode($disposReport);
     }
 }

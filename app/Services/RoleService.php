@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 interface RoleService{
     public function getEmployeeHasAccess();
+    public function adminCheck();
     public function getRuleType();
     public function setRuleEmployee(Request $request);
     public function updateRuleEmployee(Request $request,$id);

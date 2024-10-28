@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\RoleService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 class UserManagementController extends Controller
 {
@@ -29,12 +30,15 @@ class UserManagementController extends Controller
         $rule = $this->roleService->getRuleType();
         $opd = $this->roleService->getOpdEmployee();
         $employee = $this->roleService->getEmployee($code);
-        if($code == '02.01.'){
-         $data = collect( $employee['data']['pegawai'])->filter(function ($item) {
-            return str_contains($item['nama_jabatan'], 'ASISTEN');
-        })->all();
-        } else{
-       $data = $employee['data']['pegawai'];
+        if ($code == '02.01.') {
+            $data = collect($employee['data']['pegawai'])
+                ->filter(function ($item) {
+                    $jabatan = ['ASISTEN'];
+                    return Str::contains($item['nama_jabatan'], $jabatan);
+                })
+                ->all();
+        } else {
+            $data = $employee['data']['pegawai'];
         }
         return view('admin.page.user-role')->with([
             'code' => $code,
@@ -43,7 +47,6 @@ class UserManagementController extends Controller
             'rule' => $rule,
         ]);
     }
-
 
     public function createEmployeeRule(Request $request)
     {

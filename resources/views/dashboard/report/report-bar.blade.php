@@ -30,7 +30,7 @@
             return item.month
         });
 
-        var allBulans = [...disetujuBulan, ...ditolakBulan, ...disetujuBulan, ...revisiBulan];
+        var allBulans = [...disposBulan, ...ditolakBulan, ...revisiBulan, ...disetujuBulan];
         var uniqueBulans = Array.from(new Set(allBulans));
 
         var options = {
@@ -87,9 +87,10 @@
             },
             xaxis: {
 
-                categories: ['01/01/2011 GMT', '01/02/2011 GMT', '01/03/2011 GMT', '01/04/2011 GMT',
-                    '01/05/2011 GMT', '01/06/2011 GMT'
-                ],
+               //  categories: ['01/01/2011 GMT', '01/02/2011 GMT', '01/03/2011 GMT', '01/04/2011 GMT',
+               //      '01/05/2011 GMT', '01/06/2011 GMT'
+               //  ],
+               categories: uniqueBulans,
             },
             legend: {
                 position: 'right',
