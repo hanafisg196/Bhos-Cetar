@@ -57,6 +57,10 @@ class ListInboxEcorLive extends Component
         $this->filter = $status;
     }
 
+    public function placeholder()
+    {
+      return view('placeholder.center-loading');
+    }
     public function render()
     {
 

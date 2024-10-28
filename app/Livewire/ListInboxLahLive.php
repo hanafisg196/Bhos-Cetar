@@ -48,6 +48,10 @@ class ListInboxLahLive extends Component
         $this->counter();
       //   $this->alertDeny();
     }
+    public function placeholder()
+    {
+      return view('placeholder.center-loading');
+    }
     public function checkAccess(){
       $this->checkVerifikator = $this->roleService->checkVerifikatorOne();
       $this->checkKabag = $this->roleService->disposisiAccess();

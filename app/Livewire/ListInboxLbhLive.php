@@ -19,7 +19,7 @@ class ListInboxLbhLive extends Component
     public $status;
     public $checkVerifikatorOne;
     public $checkKabag;
-    public $allReadCount = 0 ;
+    public $allReadCount = 0;
     public $diposisiCount = 0;
     public $usulanReadCount = 0;
     public $disetujuiCount = 0;
@@ -32,21 +32,23 @@ class ListInboxLbhLive extends Component
 
     protected ScheduleService $scheduleService;
     protected RoleService $roleService;
-    public function boot(
-      ScheduleService $scheduleService,
-      RoleService $roleService
-      )
+    public function boot(ScheduleService $scheduleService, RoleService $roleService)
     {
         $this->scheduleService = $scheduleService;
         $this->roleService = $roleService;
     }
 
-    public function mount(){
-      $this->filterByStatus($this->filter);
-      $this->checkAccessKabag();
-      $this->checkAccessVerifikator();
-      $this->counter();
-      // $this->trackingPoint($this->posId);
+    public function placeholder()
+    {
+      return view('placeholder.center-loading');
+    }
+    public function mount()
+    {
+        $this->filterByStatus($this->filter);
+        $this->checkAccessKabag();
+        $this->checkAccessVerifikator();
+        $this->counter();
+        // $this->trackingPoint($this->posId);
     }
     public function render()
     {
@@ -54,61 +56,54 @@ class ListInboxLbhLive extends Component
             $lbh = $this->scheduleService->search($this->searchLbh, $this->perPage);
         } else {
             if ($this->filter === 'disposisiVerifikator') {
-               $lbh = $this->scheduleService->disposisiByVerifikator($this->perPage);
-               $this->activatedTab = true;
-            }
-            elseif ($this->filter === 'usulan') {
-               $lbh = $this->scheduleService->ususlanLbh($this->perPage);
-               $this->activatedTab = false;
-            }
-            elseif ($this->filter === 'disposisi') {
-               $lbh = $this->scheduleService->disposisiLbh($this->perPage);
-               $this->activatedTab = false;
-            }
-            elseif ($this->filter === 'ditolak') {
-               $lbh = $this->scheduleService->ditolakLbh($this->perPage);
-               $this->activatedTab = false;
-            }
-            elseif ($this->filter === 'disetujui') {
-               $lbh = $this->scheduleService->disetujuiLbh($this->perPage);
-               $this->activatedTab = false;
-            }
-            elseif ($this->filter === 'revisi') {
-               $lbh = $this->scheduleService->revisiLbh($this->perPage);
-               $this->activatedTab = false;
-            }
-            elseif ($this->filter === 'ditolakVerifikator') {
-               $lbh = $this->scheduleService->ditolakByVerifikator($this->perPage);
-               $this->activatedTab = true;
-            }
-            elseif ($this->filter === 'disetujuiVerifikator') {
-               $lbh = $this->scheduleService->disetujuiByVerifikator($this->perPage);
-               $this->activatedTab = true;
-            }
-            elseif ($this->filter === 'revisiVerifikator') {
-               $lbh = $this->scheduleService->revisiByVerifikator($this->perPage);
-               $this->activatedTab = true;
-            }
-            else {
-               if($this->checkVerifikatorOne === true){
-                  $lbh = $this->scheduleService->disposisiByVerifikator($this->perPage);
-                  $this->activatedTab = true;
-                  $this->filter = 'disposisiVerifikator';
-               }else {
-                  $lbh = $this->scheduleService->ususlanLbh($this->perPage);
-                  $this->activatedTab = false;
-                  $this->filter = 'usulan';
-               }
+                $lbh = $this->scheduleService->disposisiByVerifikator($this->perPage);
+                $this->activatedTab = true;
+            } elseif ($this->filter === 'usulan') {
+                $lbh = $this->scheduleService->ususlanLbh($this->perPage);
+                $this->activatedTab = false;
+            } elseif ($this->filter === 'disposisi') {
+                $lbh = $this->scheduleService->disposisiLbh($this->perPage);
+                $this->activatedTab = false;
+            } elseif ($this->filter === 'ditolak') {
+                $lbh = $this->scheduleService->ditolakLbh($this->perPage);
+                $this->activatedTab = false;
+            } elseif ($this->filter === 'disetujui') {
+                $lbh = $this->scheduleService->disetujuiLbh($this->perPage);
+                $this->activatedTab = false;
+            } elseif ($this->filter === 'revisi') {
+                $lbh = $this->scheduleService->revisiLbh($this->perPage);
+                $this->activatedTab = false;
+            } elseif ($this->filter === 'ditolakVerifikator') {
+                $lbh = $this->scheduleService->ditolakByVerifikator($this->perPage);
+                $this->activatedTab = true;
+            } elseif ($this->filter === 'disetujuiVerifikator') {
+                $lbh = $this->scheduleService->disetujuiByVerifikator($this->perPage);
+                $this->activatedTab = true;
+            } elseif ($this->filter === 'revisiVerifikator') {
+                $lbh = $this->scheduleService->revisiByVerifikator($this->perPage);
+                $this->activatedTab = true;
+            } else {
+                if ($this->checkVerifikatorOne === true) {
+                    $lbh = $this->scheduleService->disposisiByVerifikator($this->perPage);
+                    $this->activatedTab = true;
+                    $this->filter = 'disposisiVerifikator';
+                } else {
+                    $lbh = $this->scheduleService->ususlanLbh($this->perPage);
+                    $this->activatedTab = false;
+                    $this->filter = 'usulan';
+                }
             }
         }
         return view('livewire.list-inbox-lbh-live')->with('lbh', $lbh);
     }
-    public function checkAccessKabag(){
-      $this->checkKabag = $this->roleService->userManagerAdmin();
+    public function checkAccessKabag()
+    {
+        $this->checkKabag = $this->roleService->userManagerAdmin();
     }
 
-    public function checkAccessVerifikator(){
-      $this->checkVerifikatorOne = $this->roleService->checkVerifikatorOne();
+    public function checkAccessVerifikator()
+    {
+        $this->checkVerifikatorOne = $this->roleService->checkVerifikatorOne();
     }
     public function filterByStatus($status)
     {
@@ -126,26 +121,26 @@ class ListInboxLbhLive extends Component
     {
         $this->perPage += 10;
     }
-    public function alertDeny(){
-      $this->js(<<<JS
-          Swal.fire("SweetAlert2 is working!");
-      JS);
+    public function alertDeny()
+    {
+        $this->js(
+            <<<JS
+                Swal.fire("SweetAlert2 is working!");
+            JS
+            ,
+        );
     }
     public function counter()
     {
-      $this->allReadCount = $this->scheduleService->countReadLbhAll();
-       $this->usulanReadCount = $this->scheduleService->countReadLbhUsulan();
-       $this->diposisiCount = $this->scheduleService->countLbhDisposisi();
-       $this->ditolakCount = $this->scheduleService->countLbhDitolak();
-       $this->disetujuiCount = $this->scheduleService->countLbhDisetujui();
-       $this->revisiCount = $this->scheduleService->countLbhRevisi();
-       $this->diposisiReadCountByVerifikator = $this->scheduleService->countReadLbhDisposisiByVerfikator();
-       $this->revisiReadCountByVerifikator = $this->scheduleService->countReadLbhRevisiByVerfikator();
-       $this->disetujuiCountByVerifikator = $this->scheduleService->countLbhDisetujuiByVerfikator();
-       $this->ditolakCountByVerfikator = $this->scheduleService->countLbhDitolakByVerfikator();
+        $this->allReadCount = $this->scheduleService->countReadLbhAll();
+        $this->usulanReadCount = $this->scheduleService->countReadLbhUsulan();
+        $this->diposisiCount = $this->scheduleService->countLbhDisposisi();
+        $this->ditolakCount = $this->scheduleService->countLbhDitolak();
+        $this->disetujuiCount = $this->scheduleService->countLbhDisetujui();
+        $this->revisiCount = $this->scheduleService->countLbhRevisi();
+        $this->diposisiReadCountByVerifikator = $this->scheduleService->countReadLbhDisposisiByVerfikator();
+        $this->revisiReadCountByVerifikator = $this->scheduleService->countReadLbhRevisiByVerfikator();
+        $this->disetujuiCountByVerifikator = $this->scheduleService->countLbhDisetujuiByVerfikator();
+        $this->ditolakCountByVerfikator = $this->scheduleService->countLbhDitolakByVerfikator();
     }
-
-   //  public function trackingPoint($postId){
-   //    $this->track = $this->scheduleService->tracking($postId);
-   //  }
 }
