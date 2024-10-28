@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - BHOS Ce-Tar</title>
+    <title>Login - Bhos Cetar</title>
     <link rel="shortcut icon" href="/dist/assets/compiled/png/logotanahdatar.png" type="image/x-icon">
     <link rel="stylesheet" href="/dist/assets/compiled/css/app.css">
     <link rel="stylesheet" href="/dist/assets/compiled/css/auth.css">

@@ -33,7 +33,7 @@ class UserManagementController extends Controller
         if ($code == '02.01.') {
             $data = collect($employee['data']['pegawai'])
                 ->filter(function ($item) {
-                    $jabatan = ['ASISTEN'];
+                    $jabatan = ['ASISTEN','KEPALA BADAN'];
                     return Str::contains($item['nama_jabatan'], $jabatan);
                 })
                 ->all();

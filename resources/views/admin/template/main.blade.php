@@ -30,7 +30,7 @@
                      <div class="d-flex justify-content-center">
                          <div class="logo d-flex flex-column align-items-center">
                              <img src="/dist/assets/compiled/jpg/logotanahdatar.png" style="width: 50px; height: 50px;" alt="Logo" class="mb-2">
-                             <span style="font-size: 20px;">Bhos-Cetar</span>
+                             <span style="font-size: 20px;">Bhos Cetar</span>
                              <span style="font-size: 16px; font-weight: bold;">Admin Panel</span>
                          </div>
                          <div class="sidebar-toggler x">
