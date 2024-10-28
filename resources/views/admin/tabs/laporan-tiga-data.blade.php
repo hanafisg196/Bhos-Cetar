@@ -98,7 +98,7 @@
         }
         };
 
-        var chart = new ApexCharts(document.querySelector("#chartTiga"), options);
+        var chart = new ApexCharts(document.querySelector("#chartForUser"), options);
         chart.render();
         console.log(uniqeBulans);
 

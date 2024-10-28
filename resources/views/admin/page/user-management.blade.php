@@ -14,7 +14,7 @@
             </div>
         </div>
     @endif
-   <section class="section mt-10">
+   <section class="section mt-2">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10">
                 <div class="card">
@@ -107,9 +107,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{-- <div class="mt-3 d-flex justify-content-center">
+                        <div class="mt-3 d-flex justify-content-center">
                   {{ $data->links() }} <!-- Pagination -->
-              </div> --}}
+              </div>
                     </div>
                 </div>
             </div>

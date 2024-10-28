@@ -14,7 +14,7 @@ class RoleServiceImpl implements RoleService
 {
     public function getEmployeeHasAccess()
     {
-        return User::withWhereHas('rules')->latest()->paginate(10);
+        return User::withWhereHas('rules')->latest()->paginate(8);
     }
     private function getUserRole($rule)
     {
