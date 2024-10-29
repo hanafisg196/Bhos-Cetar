@@ -3,7 +3,7 @@
 {{timeMachine()}}
 <div class="page-content">
     <section class="row">
-      <div class="col-12">
+      <div class="col-12"  id="page" style="display: none;">
          <div class="card">
              <div class="card-header">
                  <h4 class="card-title">Grafik Laporan</h4>
@@ -16,9 +16,11 @@
             </div>
          </div>
     </section>
+    @include('placeholder.page-loader')
 </div>
 @include('dashboard.report.report-bar')
 @include('dashboard.component.tab-active-session')
+@include('dashboard.component.page-loader')
 @endsection
 
 

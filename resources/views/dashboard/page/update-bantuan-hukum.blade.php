@@ -5,9 +5,10 @@
             margin-bottom: 5px;
         }
     </style>
+     <div class="page-content">
     <section id="multiple-column-form">
         <div class="row match-height">
-            <div class="col-12">
+            <div class="col-12" id="page" style="display: none;">
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Update Bantuan Hukum</h4>
@@ -150,8 +151,11 @@
             </div>
         </div>
     </section>
+    @include('placeholder.page-loader')
+    </div>
     @include('dashboard.component.alert-delete')
     @include('dashboard.component.button-loading')
+    @include('dashboard.component.page-loader')
 @endsection
 @section('script')
     @include('dashboard.component.filepond')

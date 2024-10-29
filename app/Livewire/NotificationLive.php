@@ -23,7 +23,6 @@ class NotificationLive extends Component
     {
         $this->data = $this->notificationService->getNotify();
         $this->countNotif();
-
     }
 
     public function countNotif(){
