@@ -23,9 +23,9 @@
                 <div class="d-flex justify-content-center">
                     <h6>Sistem Informasi Layanan Hukum</h6>
                 </div>
-                <div id="auth-left">
+                <div id="auth-left" class="mb-3">
                     @if (session()->has('error'))
-                        <div class="row mb-3">
+                        <div class="row">
                             <div class="alert alert-danger col-sm-12" role="alert" style="margin-top: 15px;">
                                 {{ session('error') }}
                             </div>
