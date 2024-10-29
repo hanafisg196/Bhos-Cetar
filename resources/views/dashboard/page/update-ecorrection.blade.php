@@ -83,7 +83,8 @@
                                           <label for="email-id-column">Upload Ulang</label>
                                           <input type="file" class="filepond" name="file" id="file" multiple
                                               data-allow-reorder="true" data-max-file-size="20MB" data-max-files="1"
-                                              accept="application/pdf">
+                                              accept="application/pdf, application/msword,
+                                                  application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                                       </div>
                                     </div>
                                     <div class="modal fade" id="modal-{{ $item->id }}" tabindex="-1" role="dialog"

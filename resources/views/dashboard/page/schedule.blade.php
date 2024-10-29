@@ -180,7 +180,8 @@
                                               <label for="email-id-column">Dokumen</label>
                                               <input type="file" class="filepond" name="file" id="file" multiple
                                                   data-allow-reorder="true" data-max-file-size="2MB" data-max-files="5"
-                                                  accept="image/png, image/jpeg, application/pdf" required>
+                                                  accept="image/png, image/jpeg, application/pdf, application/msword,
+                                                  application/vnd.openxmlformats-officedocument.wordprocessingml.document" required>
                                           </div>
                                       </div>
 

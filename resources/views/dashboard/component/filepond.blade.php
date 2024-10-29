@@ -2,6 +2,8 @@
     <script>
         FilePond.registerPlugin(
             FilePondPluginImagePreview,
+            FilePondPluginFileValidateSize,
+            FilePondPluginFileValidateType
         );
         const inputElement = document.querySelector('input[type="file"]');
         const subMit = document.getElementById('send');

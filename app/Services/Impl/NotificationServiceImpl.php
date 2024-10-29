@@ -5,44 +5,43 @@ use App\Models\Notification;
 use App\Services\NotificationService;
 use Illuminate\Support\Facades\Auth;
 
-class NotificationServiceImpl implements NotificationService {
-
+class NotificationServiceImpl implements NotificationService
+{
     private function getUser()
     {
         return Auth::user();
     }
 
-    public function getNotify() {
-      $user = $this->getUser();
-      return Notification::where('user_id', $user->id)
-          ->whereHas('schedules', function ($query) use ($user) {
-              $query->where('user_id', $user->id)
-                    ->whereIn('status', ['Ditolak', 'Disetujui']);
-          })
-          ->orWhereHas('ranhams', function ($query) use ($user) {
-              $query->where('user_id', $user->id)
-                    ->whereIn('status', ['Ditolak', 'Disetujui']);
-          })
-          ->orWhereHas('ecorrections', function ($query) use ($user) {
-              $query->where('user_id', $user->id)
-                    ->whereIn('status', ['Ditolak', 'Disetujui']);
-          })
-          ->latest()->get();
-  }
-
-
-     public function updateNotifStat($id){
-        $notif = Notification::find($id);
-        $notif->update([
-            'notif_read' => 1
-        ]);
-     }
-
-    public function count(){
+    public function getNotify()
+    {
         $user = $this->getUser();
-        return Notification::where('user_id', $user->id)->where('notif_read', 0)->count();
+        return Notification::where('user_id', $user->id)
+            ->whereHas('schedules', function ($query) use ($user) {
+                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui']);
+            })
+            ->orWhereHas('ranhams', function ($query) use ($user) {
+                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui']);
+            })
+            ->orWhereHas('ecorrections', function ($query) use ($user) {
+                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui']);
+            })
+            ->latest()
+            ->get();
     }
 
+    public function updateNotifStat($id)
+    {
+        $notif = Notification::find($id);
+        $notif->update([
+            'notif_read' => 1,
+        ]);
+    }
 
+    public function count()
+    {
+        $user = $this->getUser();
+        return Notification::where('user_id', $user->id)
+            ->where('notif_read', 0)
+            ->count();
+    }
 }
-
