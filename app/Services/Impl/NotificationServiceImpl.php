@@ -12,7 +12,7 @@ class NotificationServiceImpl implements NotificationService
         return Auth::user();
     }
 
-    public function getNotify()
+    public function getNotify($perPage)
     {
         $user = $this->getUser();
         return Notification::where('user_id', $user->id)
@@ -25,8 +25,7 @@ class NotificationServiceImpl implements NotificationService
             ->orWhereHas('ecorrections', function ($query) use ($user) {
                 $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui']);
             })
-            ->latest()
-            ->get();
+            ->latest()->paginate($perPage);
     }
 
     public function updateNotifStat($id)

@@ -52,14 +52,45 @@
                                       aria-labelledby="heading-{{ $item['id_opd_jabatan'] }}"
                                       data-bs-parent="#accordion-{{ $item['id_opd_jabatan'] }}">
                                       <div class="accordion-body">
-                                          <p>Nama : {{ $item['nama_pegawai'] }}</p>
-                                          <p>Kode Jabatan : {{ $item['kode_jabatan'] }}</p>
-                                          <p>NIP : {{ $item['nip'] }}</p>
+                                          <p style="margin-bottom: -0.3%;">Nama : {{ $item['nama_pegawai'] }}</p>
+                                          <p style="margin-bottom: -0.3%;">Kode Jabatan : {{ $item['kode_jabatan'] }}</p>
+                                          <p class="mb-1">NIP : {{ $item['nip'] }}</p>
                                           <button type="button" class="btn btn-outline-primary block"
                                               data-bs-toggle="modal"
                                               data-bs-target="#modal-{{ $item['id_opd_jabatan'] }}">
                                               Tambahkan Rule
                                           </button>
+                                        
+                                          @foreach ($test as $sub)
+                                          <div class="accordion mt-3" id="innerAccordion-{{ $sub['id_opd_jabatan'] }}">
+                                             <div class="accordion-item">
+                                                 <h2 class="accordion-header" id="innerHeading-{{ $sub['id_opd_jabatan'] }}">
+                                                     <button class="accordion-button collapsed" type="button"
+                                                             data-bs-toggle="collapse"
+                                                             data-bs-target="#innerCollapse-{{ $sub['id_opd_jabatan'] }}"
+                                                             aria-expanded="false"
+                                                             aria-controls="innerCollapse-{{ $sub['id_opd_jabatan'] }}">
+                                                        {{$sub['nama_jabatan']}}
+                                                     </button>
+                                                 </h2>
+                                                 <div id="innerCollapse-{{ $sub['id_opd_jabatan'] }}"
+                                                      class="accordion-collapse collapse"
+                                                      aria-labelledby="innerHeading-{{ $sub['id_opd_jabatan'] }}"
+                                                      data-bs-parent="#innerAccordion-{{ $sub['id_opd_jabatan'] }}">
+                                                     <div class="accordion-body">
+                                                      <p style="margin-bottom: -0.3%;">Nama : {{ $sub['nama_pegawai'] }}</p>
+                                                      <p style="margin-bottom: -0.3%;">Kode Jabatan : {{ $sub['kode_jabatan'] }}</p>
+                                                      <p class="mb-1">NIP : {{ $sub['nip'] }}</p>
+                                                      <button type="button" class="btn btn-outline-primary block"
+                                                      data-bs-toggle="modal"
+                                                      data-bs-target="#modal-{{ $sub['id_opd_jabatan'] }}">
+                                                      Tambahkan Rule
+                                                      </button>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                          @endforeach
                                       </div>
                                   </div>
                               </div>

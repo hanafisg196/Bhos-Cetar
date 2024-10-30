@@ -30,22 +30,25 @@ class UserManagementController extends Controller
         $rule = $this->roleService->getRuleType();
         $opd = $this->roleService->getOpdEmployee();
         $employee = $this->roleService->getEmployee($code);
-        if ($code == '02.01.') {
-            $data = collect($employee['data']['pegawai'])
-                ->filter(function ($item) {
-                    $jabatan = ['ASISTEN','KEPALA BADAN'];
-                    return Str::contains($item['nama_jabatan'], $jabatan);
-                })
-                ->all();
+        $sek = $this->roleService->getKepalaBagian();
+        $data = $employee['data']['pegawai'];
+        $filteredData = collect($data)->filter(function ($item) {
+         return $item['kode_jabatan'] == '02.01.42.03.';
+        });
+        if ($code === '02.01.42.' && !$filteredData) {
+         $test = [];
+          
         } else {
-            $data = $employee['data']['pegawai'];
+         $test = $sek['data']['pegawai'];
         }
         return view('admin.page.user-role')->with([
             'code' => $code,
             'opd' => $opd,
             'data' => $data,
             'rule' => $rule,
+            'test' => $test,
         ]);
+        
     }
 
     public function createEmployeeRule(Request $request)

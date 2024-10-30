@@ -28,114 +28,114 @@ class DatabaseSeeder extends Seeder
         //  $token = Str::uuid();
         // User::factory(10)->create();
 
-      //   User::factory()->create([
-      //       'name' => 'Abdul Haris',
-      //       'username' => '199101052015031001',
-      //       'nip' => '199101052015031001',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-1',
-      //   ]);
-      //   User::factory()->create([
-      //       'name' => 'Test 2',
-      //       'username' => '197711272007012005',
-      //       'nip' => '197711272007012005',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-2',
-      //   ]);
-      //   User::factory()->create([
-      //       'name' => 'Test 3',
-      //       'username' => '196802121997032003',
-      //       'nip' => '196802121997032003',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-3',
-      //   ]);
-      //   User::factory()->create([
-      //       'name' => 'Test 4',
-      //       'username' => '198011262008031010',
-      //       'nip' => '198011262008031010',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-4',
-      //   ]);
-      //   User::factory()->create([
-      //       'name' => 'Test 5',
-      //       'username' => '198011262008031002',
-      //       'nip' => '198011262008031002',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-5',
-      //   ]);
-      //   User::factory()->create([
-      //       'name' => 'Test 6',
-      //       'username' => '198011262008031005',
-      //       'nip' => '198011262008031005',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-6',
-      //   ]);
-      //   User::factory()->create([
-      //       'name' => 'Test 7',
-      //       'username' => '198011262008031012',
-      //       'nip' => '198011262008031012',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-7',
-      //   ]);
-      //   User::factory()->create([
-      //       'name' => 'Test 8',
-      //       'username' => '198011262008031015',
-      //       'nip' => '198011262008031015',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-8',
-      //   ]);
-      //   User::factory()->create([
-      //       'name' => 'Test 9',
-      //       'username' => '196706171989031007',
-      //       'nip' => '196706171989031007',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-9',
-      //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Abdul Haris',
+        //       'username' => '199101052015031001',
+        //       'nip' => '199101052015031001',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-1',
+        //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 2',
+        //       'username' => '197711272007012005',
+        //       'nip' => '197711272007012005',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-2',
+        //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 3',
+        //       'username' => '196802121997032003',
+        //       'nip' => '196802121997032003',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-3',
+        //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 4',
+        //       'username' => '198011262008031010',
+        //       'nip' => '198011262008031010',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-4',
+        //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 5',
+        //       'username' => '198011262008031002',
+        //       'nip' => '198011262008031002',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-5',
+        //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 6',
+        //       'username' => '198011262008031005',
+        //       'nip' => '198011262008031005',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-6',
+        //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 7',
+        //       'username' => '198011262008031012',
+        //       'nip' => '198011262008031012',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-7',
+        //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 8',
+        //       'username' => '198011262008031015',
+        //       'nip' => '198011262008031015',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-8',
+        //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 9',
+        //       'username' => '196706171989031007',
+        //       'nip' => '196706171989031007',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-9',
+        //   ]);
 
-      //   User::factory()->create([
-      //       'name' => 'Test 10',
-      //       'username' => '197004242000032006',
-      //       'nip' => '197004242000032006',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-10',
-      //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 10',
+        //       'username' => '197004242000032006',
+        //       'nip' => '197004242000032006',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-10',
+        //   ]);
 
-      //   User::factory()->create([
-      //       'name' => 'Test 11',
-      //       'username' => '197208091999031005',
-      //       'nip' => '197208091999031005',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-11',
-      //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 11',
+        //       'username' => '197208091999031005',
+        //       'nip' => '197208091999031005',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-11',
+        //   ]);
 
-      //   User::factory()->create([
-      //       'name' => 'Test 12',
-      //       'username' => '196809301996032002',
-      //       'nip' => '196809301996032002',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-12',
-      //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 12',
+        //       'username' => '196809301996032002',
+        //       'nip' => '196809301996032002',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-12',
+        //   ]);
 
-      //   User::factory()->create([
-      //       'name' => 'Test 13',
-      //       'username' => '196903132002121005',
-      //       'nip' => '196903132002121005',
-      //       'password' => 'rahasia',
-      //       'jabatan' => 'Pranata Komputer',
-      //       'token' => 'test-13',
-      //   ]);
+        //   User::factory()->create([
+        //       'name' => 'Test 13',
+        //       'username' => '196903132002121005',
+        //       'nip' => '196903132002121005',
+        //       'password' => 'rahasia',
+        //       'jabatan' => 'Pranata Komputer',
+        //       'token' => 'test-13',
+        //   ]);
 
         Kkp::create([
             'name' => 'Hak Atas Informasi',
@@ -252,87 +252,88 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-      //   $user = User::find(1);
-      //   $user->rules()->attach(1);
-      //   $user = User::find(2);
-      //   $user->rules()->attach(2);
-      //   $user = User::find(3);
-      //   $user->rules()->attach(4);
-      //   $user = User::find(4);
-      //   $user->rules()->attach(6);
-      //   $user = User::find(5);
-      //   $user->rules()->attach(5);
-      //   $user = User::find(6);
-      //   $user->rules()->attach(6);
-      //   $user = User::find(7);
-      //   $user->rules()->attach(3);
-      //   $user = User::find(id: 11);
-      //   $user->rules()->attach(4);
-      //   $user = User::find(id: 12);
-      //   $user->rules()->attach(3);
-      //   $user = User::find(id: 13);
-      //   $user->rules()->attach(5);
+        //   $user = User::find(1);
+        //   $user->rules()->attach(1);
+        //   $user = User::find(2);
+        //   $user->rules()->attach(2);
+        //   $user = User::find(3);
+        //   $user->rules()->attach(4);
+        //   $user = User::find(4);
+        //   $user->rules()->attach(6);
+        //   $user = User::find(5);
+        //   $user->rules()->attach(5);
+        //   $user = User::find(6);
+        //   $user->rules()->attach(6);
+        //   $user = User::find(7);
+        //   $user->rules()->attach(3);
+        //   $user = User::find(id: 11);
+        //   $user->rules()->attach(4);
+        //   $user = User::find(id: 12);
+        //   $user->rules()->attach(3);
+        //   $user = User::find(id: 13);
+        //   $user->rules()->attach(5);
 
-      //   for ($i = 1; $i <= 100; $i++) {
-      //       $schedule = Schedule::create([
-      //           'code' => 'LBH' . $i,
-      //           'nama' => 'Abdul Haris' . $i,
-      //           'nip' => '199101052015031001',
-      //           'alamat' => 'test' . $i,
-      //           'email' => 'test@gmail.com',
-      //           'wa' => '0852631111688',
-      //           'kronologi' => 'test' . $i,
-      //           'user_id' => 1,
-      //       ]);
+        for ($i = 1; $i <= 100; $i++) {
+            $schedule = Schedule::create([
+                'code' => 'LBH' . $i,
+                'nama' => 'Abdul Haris' . $i,
+                'nip' => '199101052015031001',
+                'alamat' => 'test' . $i,
+                'email' => 'test@gmail.com',
+                'wa' => '0852631111688',
+                'kronologi' => 'test' . $i,
+                'user_id' => 1,
+            ]);
 
-      //       Document::create([
-      //           'schedule_id' => $schedule->id,
-      //           'file' => 'test ' . $i . '.pdf',
-      //       ]);
-      //       $schedule->refresh();
-      //       TrackingPoint::create([
-      //           'lbh_id' => $schedule->id,
-      //           'status' => $schedule->status,
-      //           'verifikator_nip' => $schedule->verifikator_nip,
-      //       ]);
-      //   }
+            //       Document::create([
+            //           'schedule_id' => $schedule->id,
+            //           'file' => 'test ' . $i . '.pdf',
+            //       ]);
+            //       $schedule->refresh();
+            //       TrackingPoint::create([
+            //           'lbh_id' => $schedule->id,
+            //           'status' => $schedule->status,
+            //           'verifikator_nip' => $schedule->verifikator_nip,
+            //       ]);
+            //   }
 
-      //   for ($i = 1; $i <= 80; $i++) {
-      //       $ranham = Ranham::create([
-      //           'code' => 'LAH' . $i,
-      //           'link' => 'https://github.com/' . $i,
-      //           'name' => 'Test 13',
-      //           'user_id' => 12,
-      //           'nip' => '196809301996032002',
-      //           'kkp_id' => 1,
-      //       ]);
-      //       $ranham->refresh();
-      //       TrackingPoint::create([
-      //           'lah_id' => $ranham->id,
-      //           'status' => $ranham->status,
-      //           'verifikator_nip' => $ranham->verifikator_nip,
-      //       ]);
-      //   }
+            //   for ($i = 1; $i <= 80; $i++) {
+            //       $ranham = Ranham::create([
+            //           'code' => 'LAH' . $i,
+            //           'link' => 'https://github.com/' . $i,
+            //           'name' => 'Test 13',
+            //           'user_id' => 12,
+            //           'nip' => '196809301996032002',
+            //           'kkp_id' => 1,
+            //       ]);
+            //       $ranham->refresh();
+            //       TrackingPoint::create([
+            //           'lah_id' => $ranham->id,
+            //           'status' => $ranham->status,
+            //           'verifikator_nip' => $ranham->verifikator_nip,
+            //       ]);
+            //   }
 
-      //   for ($i = 1; $i <= 100; $i++) {
-      //       $ecor = Ecorrection::create([
-      //           'code' => 'ECOR' . $i,
-      //           'nip' => '198011262008031010',
-      //           'nama' => 'Test 4',
-      //           'title' => 'Test' . $i,
-      //           'user_id' => 4,
-      //       ]);
+            //   for ($i = 1; $i <= 100; $i++) {
+            //       $ecor = Ecorrection::create([
+            //           'code' => 'ECOR' . $i,
+            //           'nip' => '198011262008031010',
+            //           'nama' => 'Test 4',
+            //           'title' => 'Test' . $i,
+            //           'user_id' => 4,
+            //       ]);
 
-      //       Document::create([
-      //           'ecorrection_id' => $ecor->id,
-      //           'file' => 'test ' . $i . '.pdf',
-      //       ]);
-      //       $ecor->refresh();
-      //       TrackingPoint::create([
-      //           'ecor_id' => $ecor->id,
-      //           'status' => $ecor->status,
-      //           'verifikator_nip' => $ecor->verifikator_nip,
-      //       ]);
-      //   }
+            //       Document::create([
+            //           'ecorrection_id' => $ecor->id,
+            //           'file' => 'test ' . $i . '.pdf',
+            //       ]);
+            //       $ecor->refresh();
+            //       TrackingPoint::create([
+            //           'ecor_id' => $ecor->id,
+            //           'status' => $ecor->status,
+            //           'verifikator_nip' => $ecor->verifikator_nip,
+            //       ]);
+            //   }
+        }
     }
 }

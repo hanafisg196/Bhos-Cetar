@@ -55,7 +55,6 @@
                                                      </form>
                                                  </div>
                                              </td>
-
                                          </tr>
                                          <div class="modal fade text-left" id="modal-{{ $item->id }}" tabindex="-1"
                                              role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true"

@@ -55,12 +55,12 @@
                    @endif
                @endforeach
            </li>
-
-             <li>
-                 <p class="text-center py-2 mb-0"><a href="#">Semua</a></p>
-             </li>
          </ul>
+         {{-- <div x-intersect.full="$wire.loadMore()">
+            loadmore
+           </div> --}}
      </li>
+
     {{-- </ul> --}}
 
 </div>

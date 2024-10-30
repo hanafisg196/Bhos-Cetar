@@ -22,4 +22,5 @@ interface RoleService{
     public function checkVerifikatorTwo();
     public function checkVerifikatorOne();
     public function getVerifikatorOne();
+    public function getKepalaBagian();
 }
