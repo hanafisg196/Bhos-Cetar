@@ -46,23 +46,34 @@ class RoleServiceImpl implements RoleService
     {
       return $this->fetchApiEmployee($code);
     }
-    public function getKepalaBagian(){
-      return $this->fetchApiEmployee("02.01.42.03.");
+    public function getKepBagTata(){
+      return $this->fetchApiEmployee("02.01.42.01.");
+    }
+    public function getKepBagKesra(){
+      return $this->fetchApiEmployee("02.01.42.02.");
     }
 
-    //Sub Bagian Kepala Hukum
-    public function getSubBagianPerundangan(){
+
+
+
+    //parent
+    public function getKepBagHukum(){
+      return $this->fetchApiEmployee("02.01.42.03.");
+    }
+    //child
+    public function getSubBagPerundangan(){
        return  $this->fetchApiEmployee("02.01.42.03.01.");
     }
-    public function getSubBagianBantuanHukum(){
+    public function getSubBagBantuanHukum(){
         return $this->fetchApiEmployee("02.01.42.03.02.");
     }
-    public function getSubBagianDokumentasi(){
+    public function getSubBagDokumentasi(){
       return $this->fetchApiEmployee("02.01.42.03.03.");
     }
     public function getSubBagianAnalis(){
         return $this->fetchApiEmployee("02.01.42.03.04.");
     }
+
 
 
 

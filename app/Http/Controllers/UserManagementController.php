@@ -29,26 +29,31 @@ class UserManagementController extends Controller
         $code = $request->input('code', '01.01.');
         $rule = $this->roleService->getRuleType();
         $opd = $this->roleService->getOpdEmployee();
-        $employee = $this->roleService->getEmployee($code);
-        $sek = $this->roleService->getKepalaBagian();
-        $data = $employee['data']['pegawai'];
-        $dataDua = $sek['data']['pegawai'];
 
-        $filteredArray = collect($dataDua)->filter(function ($itemKedua) use ($data) {
-    foreach ($data as $itemPertama) {
-        if (Str::contains($itemKedua['kode_jabatan'], $itemPertama['kode_jabatan'])) {
-            return true;
-        }
-    }
-    return false;
-    })->values()->all();
+        $employee = $this->roleService->getEmployee($code);
+        $getKepSubBagHukum = $this->roleService->getKepBagHukum();
+        $getSubBagHukumPerundangan = $this->roleService->getSubBagPerundangan();
+        $getSubBagBantuanHukum = $this->roleService->getSubBagBantuanHukum();
+        $getSubBagDokumentasi = $this->roleService->getSubBagDokumentasi();
+        $getSubBagianAnalis = $this->roleService->getSubBagianAnalis();
+
+        $data = $employee['data']['pegawai'];
+        $kepSubBagHukum = $getKepSubBagHukum['data']['pegawai'];
+        $subBagHukumPerundangan = $getSubBagHukumPerundangan['data']['pegawai'];
+        $subBagHukumBantuan = $getSubBagBantuanHukum['data']['pegawai'];
+        $subBagDokumentasi = $getSubBagDokumentasi['data']['pegawai'];
+        $subBagAnalis = $getSubBagianAnalis['data']['pegawai'];
 
         return view('admin.page.user-role')->with([
             'code' => $code,
             'opd' => $opd,
             'data' => $data,
             'rule' => $rule,
-            'filteredArray'=> $filteredArray
+            'kepSubBagHukum'=> $kepSubBagHukum,
+            'subBagHukumPerundangan' => $subBagHukumPerundangan,
+            'subBagHukumBantuan' => $subBagHukumBantuan,
+            'subBagDokumentasi' => $subBagDokumentasi,
+            'subBagAnalis' => $subBagAnalis
         ]);
 
 

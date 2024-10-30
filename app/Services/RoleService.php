@@ -22,5 +22,9 @@ interface RoleService{
     public function checkVerifikatorTwo();
     public function checkVerifikatorOne();
     public function getVerifikatorOne();
-    public function getKepalaBagian();
+    public function getKepBagHukum();
+    public function getSubBagPerundangan();
+    public function getSubBagBantuanHukum();
+    public function getSubBagDokumentasi();
+    public function getSubBagianAnalis();
 }
