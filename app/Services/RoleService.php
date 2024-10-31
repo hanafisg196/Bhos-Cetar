@@ -14,7 +14,6 @@ interface RoleService{
     public function kamiPeduliUploader();
     public function ecorrectionUploader();
     public function ecorrectionAdmin();
-    public function getEmployee($code);
     public function getOpdEmployee();
     public function getVerifikatorTwo();
     public function disposisiAccess();
@@ -22,9 +21,5 @@ interface RoleService{
     public function checkVerifikatorTwo();
     public function checkVerifikatorOne();
     public function getVerifikatorOne();
-    public function getKepBagHukum();
-    public function getSubBagPerundangan();
-    public function getSubBagBantuanHukum();
-    public function getSubBagDokumentasi();
-    public function getSubBagianAnalis();
+
 }

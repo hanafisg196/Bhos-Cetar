@@ -6,7 +6,11 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#innerCollapse-{{ $sbhb['id_opd_jabatan'] }}" aria-expanded="false"
                     aria-controls="innerCollapse-{{ $sbhb['id_opd_jabatan'] }}">
-                    {{ $sbhb['nama_jabatan'] }}
+                    @if (empty($sbhb['nama_pegawai']))
+                            {{ 'Kosong' . ' - ' . $sbhb['nama_jabatan'] }}
+                        @else
+                            {{ $sbhb['nama_pegawai'] . ' ' . $sbhb['gelar_belakang'] . ' - ' . $sbhb['nama_jabatan'] }}
+                        @endif
                 </button>
             </h2>
             <div id="innerCollapse-{{ $sbhb['id_opd_jabatan'] }}" class="accordion-collapse collapse"
@@ -24,6 +28,6 @@
             </div>
         </div>
     </div>
-    @include('admin.modals.modal-sekda-subBag-bantuan')
+    @include('admin.sekda.modals.modal-sekda-subBag-bantuan')
 @endif
 @endforeach
