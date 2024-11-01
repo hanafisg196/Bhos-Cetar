@@ -25,7 +25,6 @@ class EmployeeServiceImpl implements EmployeeService {
             return back()->with('error', 'Permintaan gagal: ' . $e->getMessage());
         }
     }
-
     public function getEmployee($code)
     {
       return $this->fetchApiEmployee($code);
@@ -35,61 +34,104 @@ class EmployeeServiceImpl implements EmployeeService {
       return $this->fetchApiEmployee("02.01.42.01.");
     }
     //child
-    public function getKasubagAdmPemerintah(){
+    private function getKasubagAdmPemerintah(){
       return $this->fetchApiEmployee("02.01.42.01.01.");
     }
-    public function getKasubagAdmKewilayahan(){
+    private function getKasubagAdmKewilayahan(){
       return $this->fetchApiEmployee("02.01.42.01.02.");
     }
-    public function getKasubagOtonomi(){
+    private function getKasubagOtonomi(){
       return $this->fetchApiEmployee("02.01.42.01.03.");
     }
-    public function getAnalisAhliMuda(){
+    private function getAnalisAhliMuda(){
       return $this->fetchApiEmployee("02.01.42.01.04.");
     }
-    public function getAnalisDukcapil(){
+    private function getAnalisDukcapil(){
       return $this->fetchApiEmployee("02.01.42.01.05.");
     }
-    public function getAnalisDataInformasi(){
+    private function getAnalisDataInformasi(){
       return $this->fetchApiEmployee("02.01.42.01.06.");
     }
 
 
 
     //parent
-    public function getKabagKesra(){
+    private function getKabagKesra(){
       return $this->fetchApiEmployee("02.01.42.02.");
     }
     //child
-    public function getKasubagSpritual(){
+    private function getKasubagSpritual(){
       return $this->fetchApiEmployee("02.01.42.02.01.");
     }
-    public function getKasubagSosial(){
+    private function getKasubagSosial(){
       return $this->fetchApiEmployee("02.01.42.02.02.");
     }
-    public function getKasubagMasyarakat(){
+    private function getKasubagMasyarakat(){
       return $this->fetchApiEmployee("02.01.42.02.03. ");
     }
-    public function getPegerakSwadaya(){
+    private function getPegerakSwadaya(){
       return $this->fetchApiEmployee("02.01.42.02.04.");
     }
 
 
     //parent
-    public function getKepBagHukum(){
+    private function getKepBagHukum(){
       return $this->fetchApiEmployee("02.01.42.03.");
     }
     //child
-    public function getSubBagPerundangan(){
+    private function getSubBagPerundangan(){
        return  $this->fetchApiEmployee("02.01.42.03.01.");
     }
-    public function getSubBagBantuanHukum(){
+    private function getSubBagBantuanHukum(){
         return $this->fetchApiEmployee("02.01.42.03.02.");
     }
-    public function getSubBagDokumentasi(){
+    private function getSubBagDokumentasi(){
       return $this->fetchApiEmployee("02.01.42.03.03.");
     }
-    public function getSubBagianAnalis(){
+    private function getSubBagianAnalis(){
         return $this->fetchApiEmployee("02.01.42.03.04.");
     }
+
+    public function getEmployeeDataByCode($code)
+{
+    $details = [
+        'kabagTata' => [], 'kasubagAdmKewilayahan' => [], 'kasubagAdmPemerintah' => [],
+        'kasubagOtonomi' => [], 'analisAhliMuda' => [], 'analisDukcapil' => [],
+        'analisDataInformasi' => [],
+        'kabagKesra' => [], 'kasubagSpritual' => [],
+        'kasubagSosial' => [], 'kasubagMasyarakat' => [], 'pegerakSwadaya' => [],
+        'kepSubBagHukum' => [], 'subBagHukumPerundangan' => [],
+        'subBagHukumBantuan' => [], 'subBagDokumentasi' => [], 'subBagAnalis' => []
+    ];
+
+    if ($code == '02.01.42.') {
+        $details = [
+            'kabagTata' => $this->getKabagTata()['data']['pegawai'],
+            'kasubagAdmKewilayahan' => $this->getKasubagAdmKewilayahan()['data']['pegawai'],
+            'kasubagAdmPemerintah' => $this->getKasubagAdmPemerintah()['data']['pegawai'],
+            'kasubagOtonomi' => $this->getKasubagOtonomi()['data']['pegawai'],
+            'analisAhliMuda' => $this->getAnalisAhliMuda()['data']['pegawai'],
+            'analisDukcapil' => $this->getAnalisDukcapil()['data']['pegawai'],
+            'analisDataInformasi' => $this->getAnalisDataInformasi()['data']['pegawai'],
+            'kabagKesra' => $this->getKabagKesra()['data']['pegawai'],
+            'kasubagSpritual' => $this->getKasubagSpritual()['data']['pegawai'],
+            'kasubagSosial' => $this->getKasubagSosial()['data']['pegawai'],
+            'kasubagMasyarakat' => $this->getKasubagMasyarakat()['data']['pegawai'],
+            'pegerakSwadaya' => $this->getPegerakSwadaya()['data']['pegawai'],
+            'kepSubBagHukum' => $this->getKepBagHukum()['data']['pegawai'],
+            'subBagHukumPerundangan' => $this->getSubBagPerundangan()['data']['pegawai'],
+            'subBagHukumBantuan' => $this->getSubBagBantuanHukum()['data']['pegawai'],
+            'subBagDokumentasi' => $this->getSubBagDokumentasi()['data']['pegawai'],
+            'subBagAnalis' => $this->getSubBagianAnalis()['data']['pegawai'],
+        ];
+    }
+
+    return [
+        'data' => $this->getEmployee($code)['data']['pegawai'],
+        'details' => $details
+    ];
+}
+
+
+
 }

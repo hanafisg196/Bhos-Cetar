@@ -9,11 +9,11 @@
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link active" id="lap-satu" data-bs-toggle="tab" href="#lapSatu "
-                                        role="tab" aria-controls="lapSatu" aria-selected="true">Statistik Laporan</a>
+                                        role="tab" aria-controls="lapSatu" aria-selected="true">Grafik Laporan</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link" id="lap-dua" data-bs-toggle="tab" href="#lapDua" role="tab"
-                                        aria-controls="lapDua" aria-selected="false">Statistik Kinerja</a>
+                                        aria-controls="lapDua" aria-selected="false">Grafik Kinerja</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">

@@ -1,4 +1,4 @@
-@foreach ($pegerakSwadaya as $pgs)
+@foreach ($details['pegerakSwadaya'] as $pgs)
 @if (Str::startsWith($pgs['kode_jabatan'], $kbk['kode_jabatan']))
 <div class="accordion mt-3" id="innerAccordion-{{ $pgs['id_opd_jabatan'] }}">
   <div class="accordion-item">

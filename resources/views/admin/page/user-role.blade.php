@@ -35,7 +35,7 @@
                     </div>
                   </div>
                   <div class="card-body">
-                      @foreach ($data as $item)
+                      @foreach ($data['data'] as $item)
                           <div class="accordion accordion-flush" id="accordion-{{$item['id_opd_jabatan'] }}">
                               <div class="accordion-item">
                                   <h2 class="accordion-header" id="heading-{{ $item['id_opd_jabatan'] }}">

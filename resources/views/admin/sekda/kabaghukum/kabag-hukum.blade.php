@@ -1,4 +1,4 @@
-@foreach ($kepSubBagHukum as $ksbh)
+@foreach ($details['kepSubBagHukum'] as $ksbh)
 @if (Str::startsWith($ksbh['kode_jabatan'], $item['kode_jabatan']))
 <div class="accordion mt-3" id="innerAccordion-{{ $ksbh['id_opd_jabatan'] }}">
   <div class="accordion-item">
