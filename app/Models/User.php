@@ -21,6 +21,7 @@ class User extends Authenticatable
         'username',
         'nip',
         'jabatan',
+        'kode_jabatan',
         'token'
     ];
 
@@ -66,6 +67,6 @@ class User extends Authenticatable
     }
     public function rules()
     {
-      return $this->belongsToMany(Rule::class, 'rule_user', 'nip', 'rule_id', 'nip', 'id');
+      return $this->belongsToMany(Rule::class, 'rule_user', 'kode_jabatan', 'rule_id', 'kode_jabatan', 'id');
     }
 }

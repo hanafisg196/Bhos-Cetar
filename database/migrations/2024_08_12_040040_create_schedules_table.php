@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('status')->default('Usulan');
             $table->string('message')->default('-');
             $table->string('verifikator_nip')->nullable();
+            $table->string('verifikator_name')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

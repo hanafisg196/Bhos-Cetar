@@ -17,16 +17,18 @@ name="lol">
             <div class="modal-body">
                <input type="text"class="form-control" name="username"
                     value="{{ $item['nip'] }}" hidden>
-                <label for="nama">Nama</label>
-                <label for="nip">NIP</label>
-                <input type="text"class="form-control" name="nip"
-                    value="{{ $item['nip'] }}" readonly>
-                <label for="nip">JABATAN</label>
-                <input type="text"class="form-control" name="jabatan"
-                    value="{{ $item['nama_jabatan'] }}" readonly>
+               <label for="nama">Kode Jabatan</label>
+               <input type="text" class="form-control" name="kode_jabatan"
+                     value="{{ $item['kode_jabatan'] }}" readonly>
                 <label for="nama">Nama</label>
                 <input type="text" class="form-control" name="name"
                     value="{{ $item['nama_pegawai'] }}" readonly>
+                <label for="nip">Nip</label>
+                <input type="text"class="form-control" name="nip"
+                    value="{{ $item['nip'] }}" readonly>
+                <label for="nip">Jabatan</label>
+                <input type="text"class="form-control" name="jabatan"
+                    value="{{ $item['nama_jabatan'] }}" readonly>
                 <label for="nip">Rule</label>
                 <select name="rule_id" class="form-select" id="basicSelect">
                     <option value="">Pilih Rule</option>

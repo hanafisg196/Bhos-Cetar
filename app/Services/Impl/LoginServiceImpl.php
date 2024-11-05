@@ -34,41 +34,41 @@ class LoginServiceImpl implements LoginService
 
         $credentials = $response->json();
         try {
-         if ($credentials['error'] === false) {
-            $data = $credentials['data'];
-            $user = User::where('username', $data['jabatan']['nip'])->first();
-            if (!$user) {
-                $user = User::create([
-                    'username' => $data['jabatan']['nip'],
-                    'name' => $data['jabatan']['nama_pegawai'],
-                    'nip' => $data['jabatan']['nip'],
-                    'jabatan' => $data['jabatan']['nama'],
-                    'token' => $token,
-                ]);
+            if ($credentials['error'] === false) {
+                $data = $credentials['data'];
+                $user = User::where('kode_jabatan', $data['jabatan']['kode_jabatan'])->first();
+                if (!$user) {
+                    $user = User::create([
+                        'kode_jabatan' => $data['jabatan']['kode_jabatan'],
+                        'username' => $data['jabatan']['nip'],
+                        'name' => $data['jabatan']['nama_pegawai'],
+                        'nip' => $data['jabatan']['nip'],
+                        'jabatan' => $data['jabatan']['nama'],
+                        'token' => $token,
+                    ]);
+                } else {
+                    $user->update([
+                        'username' => $data['jabatan']['nip'],
+                        'name' => $data['jabatan']['nama_pegawai'],
+                        'nip' => $data['jabatan']['nip'],
+                        'jabatan' => $data['jabatan']['nama'],
+                        'token' => $token,
+                    ]);
+                }
+                Auth::login($user);
+                $rule = ['ADMIN', 'KABAG', 'VERIFIKATOR 1', 'VERIFIKATOR 2'];
+                $hasRule = $this->getUserRole($rule);
+                if ($hasRule) {
+                    return redirect()->route('admin.dashboard');
+                } else {
+                    return redirect()->route('dashboard');
+                }
             } else {
-                $user->update([
-                    'username' => $data['jabatan']['nip'],
-                    'name' => $data['jabatan']['nama_pegawai'],
-                    'nip' => $data['jabatan']['nip'],
-                    'jabatan' => $data['jabatan']['nama'],
-                    'token' => $token,
-                ]);
+                return back()->with('error', $response->json('pesan'));
             }
-            Auth::login($user);
-            $rule = ['ADMIN', 'KABAG', 'VERIFIKATOR 1', 'VERIFIKATOR 2'];
-            $hasRule = $this->getUserRole($rule);
-            if ($hasRule) {
-                return redirect()->route('admin.dashboard');
-            } else {
-                return redirect()->route('dashboard');
-            }
-        } else {
-            return back()->with('error', $response->json('pesan'));
-        }
-        } catch (RequestException  $e) {
+        } catch (RequestException $e) {
             return back()->with('error', 'Permintaan gagal: ' . $e->getMessage());
         }
-
     }
 
     //  public function login(Request $request)
@@ -94,3 +94,4 @@ class LoginServiceImpl implements LoginService
         return redirect()->route('login');
     }
 }
+

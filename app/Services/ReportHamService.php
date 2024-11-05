@@ -19,7 +19,7 @@ interface ReportHamService {
     public function inboxCount();
     public function getDataByCatRan($catRan,$perPage);
     public function lisCatRan();
-    public function sendToVerifikatorOne($id, $verifikator);
+    public function sendToVerifikatorOne($id, $vnip, $vname, $message);
     public function ususlanLah($perPage);
     public function disposisiLah($perPage);
     public function ditolakLah($perPage);

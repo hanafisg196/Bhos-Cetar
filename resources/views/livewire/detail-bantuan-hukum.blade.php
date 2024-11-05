@@ -1,6 +1,6 @@
 <div>
     @php
-        $statusOptions = ['Disetujui', 'Ditolak'];
+        $statusOptions = ['Disetujui','Revisi','Ditolak'];
     @endphp
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
     <div  style="margin-top: -30px; margin-bottom: 30px;">
@@ -10,8 +10,8 @@
     </div>
 
     <section class="section"
-        style="max-height: 650px;
- overflow-y: scroll; scrollbar-width: none;
+     style="max-height: 650px;
+      overflow-y: scroll; scrollbar-width: none;
      -ms-overflow-style: none;">
         <div class="card">
             <div class="card-body">
@@ -27,7 +27,12 @@
                             <div class="media-body mt-25">
                                 <span class="text-primary">{{ $data->nama }}</span>
                                 <span class="d-sm-inline d-none">&lt;Status - {{ $data->status }}&gt;</span>
-                                <small class="text-muted d-block">to Bhos Ce-Tar System</small>
+                                @if ($data->status === 'Disposisi')
+                                <span class="d-sm-inline d-none">&nbsp;&nbsp;
+                                 <strong>{{ ($data->message && $data->message !== '-') ? 'Pesan - ' . $data->message : '' }}</strong>
+                                </span>
+                                @endif
+                                <small class="text-muted d-block">Kepada Sistem Bhos Cetar</small>
                             </div>
                         </div>
                         <p class="text-bold-500">Nip : {{ $data->nip }}</p>
@@ -121,17 +126,15 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12">
-                                            <div class="form-group">
-                                                <label for="message">Pesan</label>
-                                                <textarea class="form-control" id="message" name="message" rows="3" wire:model="pesan"></textarea>
-                                                <div>
-                                                    @error('pesan')
-                                                        {{ $message }}
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <div class="form-group">
+                                          <label for="message">Pesan</label>
+                                          <textarea class="form-control" id="message" name="message" rows="5" wire:model="pesan"></textarea>
+                                          <div>
+                                              @error('pesan')
+                                                  {{ $message }}
+                                              @enderror
+                                          </div>
+                                      </div>
 
                                     </div>
                                     <div class="modal-footer">
@@ -162,19 +165,28 @@
                             </div>
                                 <div class="modal-body">
                                   <fieldset class="form-group">
-                                   <select wire:model="verfikator" class="form-select" id="basicSelect">
+                                   <select wire:model="verifikator" class="form-select" id="basicSelect">
                                       <option selected>Pilih Verifikator 1...</option>
                                       @foreach ($verifikatorOne as $verifikator)
                                           <option value="{{ $verifikator->nip }}">{{ $verifikator->name }}
                                           </option>
                                       @endforeach
+                                      <input type="text" wire:model="vname" hidden>
                                   </select>
-                                  </fieldset>
                                   <div>
-                                   @error('verfikator')
-                                       {{ $message }}
-                                   @enderror
-                               </div>
+                                    @error('verifikator')
+                                    {{ $message }}
+                                     @enderror
+                                  </div>
+                                   <label for="message">Pesan</label>
+                                        <textarea class="form-control" id="message" name="message" rows="5" wire:model="pesan"></textarea>
+                                        <div>
+                                            @error('pesan')
+                                                {{ $message }}
+                                            @enderror
+                                        </div>
+                                  </fieldset>
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn" data-bs-dismiss="modal">

@@ -125,7 +125,7 @@
                                               @endif
                                            </div>
                                            <!-- pagination and page countß -->
-                                           @if ($checkVerifikator === true)
+                                           @if ($activatedTab === true)
                                            <div class="col-md-4" style="margin-top: -54px;">
                                            @else
                                            <div class="col-md-4">
@@ -207,12 +207,12 @@
                                                        </div>
                                                    </a>
                                                    <div class="mail-meta-item">
-                                                      <span class="float-right text-right">
+                                                      <div class="mail-meta-item d-flex flex-column align-items-end text-right" style="font-size: 0.3rem;white-space: nowrap;">
                                                           <div class="mail-date">{{ $item->created_at->diffForHumans() }}</div>
                                                           <div class="mail-date" style="color: #007aff">{{ verifikatorProfile(encrypt($item->verifikator_nip))}}</div>
                                                           <div class="mail-date">
-                                                            <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">
-                                                               Tracking
+                                                            <button class="btn btn-sm btn-primary" style="font-size: 0.7rem" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">
+                                                               Lacak
                                                              </button>
                                                           </div>
                                                       </span>
@@ -223,21 +223,27 @@
                                                       <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                           <div class="modal-content">
                                                               <div class="modal-header">
-                                                                  <h5 class="modal-title" id="myModalLabel1">Tracking Point</h5>
+                                                               <h5 class="modal-title" id="myModalLabel1">Pelacakan Status</h5>
                                                                   <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
                                                                       <i data-feather="x"></i>
                                                                   </button>
                                                               </div>
                                                               <div class="modal-body">
-                                                               @foreach ($item['trackingPoints'] as $track)
-                                                               <div class="card mb-3">
-                                                                   <div class="card-body">
-                                                                       <h6 class="card-title">Status: {{ $track->status }}</h6>
-                                                                       <p class="mb-1"><strong>{{ verifikatorProfile(encrypt($track->verifikator_nip))}}</strong> </p>
-                                                                       <p class="text-muted mb-0"><small>{{ $track->created_at->diffForHumans() }}</small></p>
-                                                                   </div>
-                                                               </div>
-                                                           @endforeach
+                                                               <div class="modal-body">
+                                                                  @foreach ($item['trackingPoints'] as $track)
+                                                                  <div class="card mb-3">
+                                                                      <div class="card-body">
+                                                                        @if ($track->nama_pemohon)
+                                                                        <p class="mb-1"><strong>Pemohon - {{$track->nama_pemohon}}</strong> </p>
+                                                                        @else
+                                                                        <p class="mb-1"><strong>Pemeriksa - {{$track->nama_pemeriksa}}</strong> </p>
+                                                                        @endif
+                                                                          <h6 class="card-title">Status: {{ $track->status }}</h6>
+                                                                          <p class="text-muted mb-0"><small>{{ $track->created_at->diffForHumans() }}</small></p>
+                                                                      </div>
+                                                                  </div>
+                                                                  @endforeach
+                                                                 </div>
                                                               </div>
                                                               <div class="modal-footer">
                                                                   <button type="button" class="btn" data-bs-dismiss="modal">

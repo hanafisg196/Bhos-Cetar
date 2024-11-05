@@ -27,17 +27,20 @@ class RoleServiceImpl implements RoleService
 
     public function setRuleEmployee(Request $request)
     {
+        $validString = 'required|string';
         $token = Str::uuid();
         $validated = $request->validate([
-            'username' => 'required',
-            'name' => 'required',
-            'nip' => 'required',
-            'jabatan' => 'required',
+            'username' => $validString,
+            'name' => $validString,
+            'nip' => $validString,
+            'jabatan' => $validString,
             'rule_id' => 'required',
+            'kode_jabatan' => $validString
         ]);
-        $user = User::where('nip', $validated['nip'])->first();
+        $user = User::where('kode_jabatan', $validated['kode_jabatan'])->first();
         if (!$user) {
             $user = User::create([
+                'kode_jabatan' => $validated['kode_jabatan'],
                 'username' => $validated['username'],
                 'name' => $validated['name'],
                 'nip' => $validated['nip'],
@@ -46,6 +49,7 @@ class RoleServiceImpl implements RoleService
             ]);
         } else {
             $user->update([
+                'kode_jabatan' => $validated['kode_jabatan'],
                 'username' => $validated['username'],
                 'name' => $validated['name'],
                 'nip' => $validated['nip'],

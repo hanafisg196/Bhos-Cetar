@@ -21,7 +21,7 @@
                             <form class="form" action="{{ route('update.bantuan.hukum', encrypt($data->id)) }}"
                                 method="post" id="inputForm" enctype="multipart/form-data">
                                 @csrf
-                                @if ($data->status === "Disetujui")
+                                @if ($data->status === "Disetujui" || $data->status === "Ditolak" )
                                 <fieldset disabled>
                                 @else
                                 <fieldset>

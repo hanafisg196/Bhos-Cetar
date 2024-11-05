@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use App\Services\RoleService;
 use App\Services\ScheduleService;
 use Illuminate\Support\Facades\Crypt;
@@ -29,15 +30,18 @@ class DetailBantuanHukum extends Component
     public $string;
     public $verifikatorOne;
     public $validVerifikator;
-    public $verfikator;
+    public $vname;
+    public $verifikator;
     public $kabag;
     public $hasDispos;
     public $pesan = '';
     public $status = '';
+
     protected $rules = [
-      'verfikator' => 'required',
-      'pesan' => 'required',
-      'status' => 'required'
+      'vname' => 'required|string',
+      'verifikator' => 'required|string',
+      'pesan' => 'required|string',
+      'status' => 'required|string'
     ];
     #[On('showDetail')]
     public function render()
@@ -50,6 +54,7 @@ class DetailBantuanHukum extends Component
         $this->showDetail($this->id = $id);
         $this->getVerifikatorOne();
         $this->checkAccess();
+        $this->updatedVerifikator($this->vname);
     }
 
     public function sliceStr($string)
@@ -91,12 +96,19 @@ class DetailBantuanHukum extends Component
 
     public function updateVerifikatorOne($id){
       $this->validate([
-         'verfikator' => 'required',
+         'vname' => 'required|string',
+         'verifikator' => 'required|string',
      ]);
-      $this->scheduleService->sendToVerifikatorOne($id, $this->verfikator);
+      $this->scheduleService->sendToVerifikatorOne($id, $this->verifikator, $this->vname, $this->pesan);
       session()->flash('status', 'Verifikator Berhasil Di tentukan');
       $this->redirect(route('admin.list.lbh'));
     }
+
+    public function updatedVerifikator($value)
+   {
+    $verifikator = User::where('nip', $value)->first();
+    $this->vname = $verifikator ? $verifikator->name : '';
+   }
 
 
 }

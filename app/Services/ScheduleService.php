@@ -17,7 +17,7 @@ interface ScheduleService {
     public function countUsulan();
     public function inboxCount();
     public function updateStatSchdeule($id, $stat,$message);
-    public function sendToVerifikatorOne($id, $verifikator);
+    public function sendToVerifikatorOne($id,$vnip, $vname, $message);
     public function download($file);
     public function ususlanLbh($perPage);
     public function disposisiLbh($perPage);
@@ -27,7 +27,7 @@ interface ScheduleService {
     public function disposisiByVerifikator($perPage);
     public function ditolakByVerifikator($perPage);
     public function disetujuiByVerifikator($perPage);
-    public function revisiByVerifikator($perPage);
+    public function diperbaikiToVerifikator($perPage);
     public function countReadLbhAll();
     public function countReadLbhUsulan();
     public function countLbhDisposisi();
@@ -35,7 +35,7 @@ interface ScheduleService {
     public function countLbhDitolak();
     public function countLbhDisetujui();
     public function countLbhRevisi();
-    public function countReadLbhRevisiByVerfikator();
+    public function countReadLbhDiperbaikiToVerfikator();
     public function countLbhDitolakByVerfikator();
     public function countLbhDisetujuiByVerfikator();
     public function tracking($postId);

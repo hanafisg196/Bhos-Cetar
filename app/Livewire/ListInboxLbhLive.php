@@ -27,7 +27,7 @@ class ListInboxLbhLive extends Component
     public $ditolakCount = 0;
     public $diposisiReadCountByVerifikator = 0;
     public $disetujuiCountByVerifikator = 0;
-    public $revisiReadCountByVerifikator = 0;
+    public $diperbaikiReadCountTpVerifikator = 0;
     public $ditolakCountByVerfikator = 0;
 
     protected ScheduleService $scheduleService;
@@ -79,8 +79,8 @@ class ListInboxLbhLive extends Component
             } elseif ($this->filter === 'disetujuiVerifikator') {
                 $lbh = $this->scheduleService->disetujuiByVerifikator($this->perPage);
                 $this->activatedTab = true;
-            } elseif ($this->filter === 'revisiVerifikator') {
-                $lbh = $this->scheduleService->revisiByVerifikator($this->perPage);
+            } elseif ($this->filter === 'diperbaikiToVerifikator') {
+                $lbh = $this->scheduleService->diperbaikiToVerifikator($this->perPage);
                 $this->activatedTab = true;
             } else {
                 if ($this->checkVerifikatorOne === true) {
@@ -139,7 +139,7 @@ class ListInboxLbhLive extends Component
         $this->disetujuiCount = $this->scheduleService->countLbhDisetujui();
         $this->revisiCount = $this->scheduleService->countLbhRevisi();
         $this->diposisiReadCountByVerifikator = $this->scheduleService->countReadLbhDisposisiByVerfikator();
-        $this->revisiReadCountByVerifikator = $this->scheduleService->countReadLbhRevisiByVerfikator();
+        $this->diperbaikiReadCountTpVerifikator = $this->scheduleService->countReadLbhDiperbaikiToVerfikator();
         $this->disetujuiCountByVerifikator = $this->scheduleService->countLbhDisetujuiByVerfikator();
         $this->ditolakCountByVerfikator = $this->scheduleService->countLbhDitolakByVerfikator();
     }

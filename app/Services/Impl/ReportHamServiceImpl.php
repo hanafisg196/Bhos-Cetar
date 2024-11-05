@@ -38,14 +38,15 @@ class ReportHamServiceImpl implements ReportHamService
 
         return $val;
     }
-    private function createTrackingPointLah($id, $status, $nip)
-    {
-        TrackingPoint::create([
-            'lah_id' => $id,
-            'status' => $status,
-            'verifikator_nip' => $nip,
-        ]);
+    private function createTrackingPointLah($id,$status,$naphon,$napem){
+      TrackingPoint::create([
+         'lah_id' => $id,
+         'status' => $status,
+         'nama_pemohon' => $naphon,
+         'nama_pemeriksa' => $napem
+      ]);
     }
+
     public function getUser()
     {
         return Auth::user();
@@ -99,10 +100,16 @@ class ReportHamServiceImpl implements ReportHamService
             'catran_id' => $this->getCatRanId(),
         ]);
         $ranham->refresh();
-        $this->createTrackingPointLah($ranham->id, $ranham->status, null);
+        $this->createTrackingPointLah(
+         $ranham->id,
+         $ranham->status,
+          $user->name,
+          null
+         );
     }
     public function updateStatRanham($id, $stat, $message)
     {
+
         $update = Ranham::where('id', $id)->update([
             'status' => $stat,
             'message' => $message,
@@ -130,11 +137,14 @@ class ReportHamServiceImpl implements ReportHamService
             $this->createTrackingPointLah(
                $ranham->id,
                $ranham->status,
-               $ranham->verifikator_nip);
+                null,
+                $ranham->nama
+               );
         }
     }
     public function updateRanham(Request $request, $id)
     {
+        $user = $this->getUser();
         $ranham = Ranham::find($id);
         $validated = $request->validate([
             'link' => 'required|active_url',
@@ -148,9 +158,11 @@ class ReportHamServiceImpl implements ReportHamService
         ]);
         $ranham->refresh();
         $this->createTrackingPointLah(
-           $ranham->id,
-           $ranham->status,
-           $ranham->verifikator_nip);
+         $ranham->id,
+         $ranham->status,
+          $user->name,
+          null
+         );
     }
 
     public function search($search, $perPage)
@@ -186,20 +198,24 @@ class ReportHamServiceImpl implements ReportHamService
         }
     }
 
-    public function sendToVerifikatorOne($id, $verifikator)
+    public function sendToVerifikatorOne($id, $vnip, $vname, $message)
     {
-        $lbh = $this->getRanhamByid($id);
-        $lbh->update([
-            'verifikator_nip' => $verifikator,
+        $lah = $this->getRanhamByid($id);
+        $lah->update([
+            'verifikator_nip' => $vnip,
+            'verifikator_name' => $vname,
             'status' => 'Disposisi',
+            'message' => $message,
             'read' => 0,
         ]);
 
-        $lbh->refresh();
+        $lah->refresh();
         $this->createTrackingPointLah(
-           $lbh->id,
-           $lbh->status,
-           $lbh->verifikator_nip);
+         $lah->id,
+         $lah->status,
+         null,
+         $lah->verifikator->nama
+         );
     }
 
     public function inboxCount()

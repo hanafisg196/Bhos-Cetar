@@ -42,9 +42,8 @@
                                              <td class="col-3" style="padding: 5px 0;">
                                                  <div class="d-flex align-items-center">
                                                      <p class="font-bold ms-3 mb-0" style="margin-bottom: 0;
-                                                     color: {{$item->status === 'Disetujui' ? 'green' :
-                                                      ($item->status === 'Ditolak' ? 'red':
-                                                      ($item->status === 'Usulan' ? 'orange' : 'blue'))}}">
+                                                     color: {{$item->status === 'Disetujui' ? 'green' :($item->status === 'Ditolak' ? 'red':
+                                                      ($item->status === 'Usulan' ? 'orange' : ($item->status === 'Revisi' ? 'red' : 'orange ')))}}">
                                                       {{ $item->status }}</p>
                                                  </div>
 

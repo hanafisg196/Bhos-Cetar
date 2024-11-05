@@ -17,7 +17,8 @@ return new class extends Migration
             $table->unsignedBigInteger('lah_id')->nullable();
             $table->unsignedBigInteger('ecor_id')->nullable();
             $table->string('status');
-            $table->string('verifikator_nip')->nullable();
+            $table->string('nama_pemohon')->nullable();
+            $table->string('nama_pemeriksa')->nullable();
             $table->timestamps();
         });
     }

@@ -25,11 +25,12 @@ class ScheduleServiceImpl implements ScheduleService
        return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
     }
 
-    private function createTrackingPointLbh($id, $status,$nip){
+    private function createTrackingPointLbh($id,$status,$naphon,$napem){
       TrackingPoint::create([
          'lbh_id' => $id,
          'status' => $status,
-         'verifikator_nip' => $nip
+         'nama_pemohon' => $naphon,
+         'nama_pemeriksa' => $napem
       ]);
     }
 
@@ -76,11 +77,13 @@ class ScheduleServiceImpl implements ScheduleService
             $this->createTrackingPointLbh(
                $schedule_id,
                $schedule->status,
+               $user->name,
                null
             );
     }
 
     public function updateSchedule(Request $request, $id){
+        $user = $this->getUser();
         $sessionId = Session::getId();
         $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
         $validated = $request->validate([
@@ -97,16 +100,17 @@ class ScheduleServiceImpl implements ScheduleService
             'email' => $validated['email'],
             'kronologi' => $validated['kronologi'],
             'wa' => $validated['wa'],
-            'status'=>  "Revisi",
+            'status'=>  "Diperbaiki",
             'read' => 0
         ]);
         $schedule_id = $schedule->id;
         $this->copyFilesFromTmp($temporaryFiles, $schedule_id);
         $schedule->refresh();
         $this->createTrackingPointLbh(
-           $schedule_id,
-           $schedule->status,
-           $schedule->verifikator_nip
+         $schedule_id,
+         $schedule->status,
+         $user->name,
+         null
         );
     }
 
@@ -120,8 +124,6 @@ class ScheduleServiceImpl implements ScheduleService
     {
         return Schedule::latest('updated_at')->paginate($perPage);
     }
-
-
 
     public function getSchedulesByUser(Request $request)
     {
@@ -224,26 +226,32 @@ class ScheduleServiceImpl implements ScheduleService
             $this->createTrackingPointLbh(
                $schedule->id,
                $schedule->status,
-               $schedule->verifikator_nip
-            );
+               null,
+               $schedule->verifikator_name
+              );
         }
     }
     public function download($file)
     {
         return Storage::download('files/'. $file);
     }
-    public function sendToVerifikatorOne($id, $verifikator){
+    public function sendToVerifikatorOne($id,$vnip, $vname, $message){
       $lbh = $this->getScheduleById($id);
+
       $lbh->update([
-         'verifikator_nip' => $verifikator,
+         'verifikator_nip' => $vnip,
+         'verifikator_name' => $vname,
          'status' => 'Disposisi',
+         'message' => $message,
          'read' => 0
+
       ]);
       $lbh->refresh();
         $this->createTrackingPointLbh(
-           $lbh->id,
-           $lbh->status,
-           $lbh->verifikator_nip
+         $lbh->id,
+         $lbh->status,
+         null,
+         $lbh->verifikator_name
         );
 
      }
@@ -278,9 +286,9 @@ class ScheduleServiceImpl implements ScheduleService
       return Schedule::where('verifikator_nip', $user->nip)->where('status', 'Disetujui' )
       ->latest()->paginate($perPage);
      }
-     public function revisiByVerifikator($perPage){
+     public function diperbaikiToVerifikator($perPage){
       $user = $this->getUser();
-      return Schedule::where('verifikator_nip', $user->nip)->where('status', 'Revisi' )
+      return Schedule::where('verifikator_nip', $user->nip)->where('status', 'Diperbaiki' )
       ->latest()->paginate($perPage);
      }
   //counter read general item
@@ -334,9 +342,9 @@ public function countLbhDisetujuiByVerfikator(){
  ->where('verifikator_nip', $user->nip)
  ->count();
 }
-public function countReadLbhRevisiByVerfikator(){
+public function countReadLbhDiperbaikiToVerfikator(){
  $user = $this->getUser();
- return Schedule::where('status', 'Revisi')
+ return Schedule::where('status', 'Diperbaiki')
  ->where('verifikator_nip', $user->nip)
  ->where('read', 0)
  ->count();

@@ -17,13 +17,13 @@ class NotificationServiceImpl implements NotificationService
         $user = $this->getUser();
         return Notification::where('user_id', $user->id)
             ->whereHas('schedules', function ($query) use ($user) {
-                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui']);
+                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui', 'Revisi']);
             })
             ->orWhereHas('ranhams', function ($query) use ($user) {
-                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui']);
+                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui' , 'Revisi']);
             })
             ->orWhereHas('ecorrections', function ($query) use ($user) {
-                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui']);
+                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui' , 'Revisi']);
             })
             ->latest()->paginate($perPage);
     }
