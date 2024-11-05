@@ -104,8 +104,7 @@ class DetailBantuanHukum extends Component
       $this->redirect(route('admin.list.lbh'));
     }
 
-    public function updatedVerifikator($value)
-   {
+    public function updatedVerifikator($value){
     $verifikator = User::where('nip', $value)->first();
     $this->vname = $verifikator ? $verifikator->name : '';
    }

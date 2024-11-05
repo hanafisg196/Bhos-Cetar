@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use App\Services\ReportHamService;
 use App\Services\RoleService;
 use Illuminate\Support\Facades\Crypt;
@@ -15,16 +16,18 @@ class DetailAksiHam extends Component
     public $id;
     public $data;
     public $string;
-    public $verfikator;
+    public $verifikator;
+    public $vname;
     public $verifikatorOne;
     public $checkKabag;
     public $checkVerifikator;
     public $pesan = '';
     public $status = '';
     protected $rules = [
-        'verfikator' => 'required',
-        'pesan' => 'required',
-        'status' => 'required',
+      'vname' => 'required|string',
+      'verifikator' => 'required|string',
+      'pesan' => 'required|string',
+      'status' => 'required|string'
     ];
     #[On('showDetail')]
     public function boot(
@@ -44,6 +47,7 @@ class DetailAksiHam extends Component
         $this->showDetail($this->id = $id);
         $this->getVerifikatorOne();
         $this->checkAccess();
+      //   $this->updatedVerifikator($this->vname);
     }
     public function showDetail($id)
     {
@@ -70,10 +74,18 @@ class DetailAksiHam extends Component
     }
     public function updateVerifikatorOne($id){
       $this->validate([
-         'verfikator' => 'required',
+         'vname' => 'required|string',
+         'verifikator' => 'required|string',
      ]);
-      $this->reportHamService->sendToVerifikatorOne($id, $this->verfikator);
+      $this->reportHamService->sendToVerifikatorOne(
+         $id, $this->verfikator,$this->vname,$this->pesan
+      );
       session()->flash('status', 'Verifikator Berhasil Di tentukan');
       $this->redirect(route('admin.list.lah'));
     }
+
+   //   public function updatedVerifikator($value){
+   //    $verifikator = User::where('nip', $value)->first();
+   //    $this->vname = $verifikator ? $verifikator->name : '';
+   //   }
 }

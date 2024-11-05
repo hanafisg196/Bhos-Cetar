@@ -126,19 +126,28 @@
                                     @csrf
                                     <div class="modal-body">
                                        <fieldset class="form-group">
-                                        <select wire:model="verfikator" class="form-select" id="basicSelect">
+                                        <select wire:model="verifikator" class="form-select" id="basicSelect">
                                            <option selected>Pilih Verifikator 1...</option>
                                            @foreach ($verifikatorOne as $verifikator)
                                                <option value="{{ $verifikator->nip }}">{{ $verifikator->name }}
                                                </option>
                                            @endforeach
+                                           <input type="text" wire:model="vname" hidden>
                                        </select>
-                                       </fieldset>
                                        <div>
-                                        @error('verfikator')
-                                            {{ $message }}
-                                        @enderror
-                                    </div>
+                                         @error('verifikator')
+                                         {{ $message }}
+                                          @enderror
+                                       </div>
+                                        <label for="message">Pesan</label>
+                                             <textarea class="form-control" id="message" name="message" rows="5" wire:model="pesan"></textarea>
+                                             <div>
+                                                 @error('pesan')
+                                                     {{ $message }}
+                                                 @enderror
+                                             </div>
+                                       </fieldset>
+
                                      </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-bs-dismiss="modal">
