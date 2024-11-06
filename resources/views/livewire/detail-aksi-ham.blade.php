@@ -1,9 +1,9 @@
 <div>
     @php
-        $statusOptions = ['Disetujui', 'Ditolak'];
+        $statusOptions = ['Disetujui','Revisi','Ditolak'];
     @endphp
     <div  style="margin-top: -30px; margin-bottom: 30px;">
-       <a href="{{url('/list/inbox/aksi-ham')}}" class="btn btn-primary">
+       <a href="{{route('admin.list.lah')}}" class="btn btn-primary">
          <i class="bi bi-arrow-left"></i> Kembali
      </a>
     </div>
@@ -25,7 +25,12 @@
                             <div class="media-body mt-25">
                                 <span class="text-primary">{{ $data->name }}</span>
                                 <span class="d-sm-inline d-none">&lt;Status - {{ $data->status }}&gt;</span>
-                                <small class="text-muted d-block">to Bhos Ce-Tar System</small>
+                                @if ($data->status === 'Disposisi')
+                                <span class="d-sm-inline d-none">&nbsp;&nbsp;
+                                 <strong>{{ ($data->message && $data->message !== '-') ? 'Pesan - ' . $data->message : '' }}</strong>
+                                </span>
+                                @endif
+                                <small class="text-muted d-block">Kepada Sistem Bhos Cetar</small>
                             </div>
                         </div>
                         <p class="text-bold-500" style="margin-top: 15px;">Kode File : {{ $data->code }}</p>
@@ -33,8 +38,6 @@
                         <p class="text-bold-500">Nip : {{ $data->users->nip }}</p>
                         <p class="text-bold-500">Link : <a href="{{$data->link}}">{{$data->link}}</a></p>
                         <p class="text-bold-500">KKP : {{ $data['kkps']['name'] }}</p>
-
-
                     </div>
                     <div style="margin-top: 60px; margin-left:10px;">
                         <div>
@@ -83,18 +86,15 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12">
                                             <div class="form-group">
                                                 <label for="company-column">Pesan</label>
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="3" wire:model="pesan"></textarea>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" name="message" rows="5" wire:model="pesan"></textarea>
                                                 <div>
                                                     @error('pesan')
                                                         {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
-                                        </div>
-
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn" data-bs-dismiss="modal">

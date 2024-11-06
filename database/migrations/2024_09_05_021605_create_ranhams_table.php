@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('message')->default('-');
             $table->unsignedBigInteger('catran_id')->nullable();
             $table->string('verifikator_nip')->nullable();
+            $table->string('verifikator_name')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('kkp_id')->references('id')->on('kkps');

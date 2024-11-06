@@ -51,7 +51,7 @@
                                            </p>
                                            </td>
                                            <td class="col-auto" style="padding: 5px;">
-                                               <p class="mb-0" style="margin: 0;">{{$val->link}}</p>
+                                               <p class="mb-0" style="margin: 0;">{{cutLink($val->link)}}</p>
                                            </td>
                                            <td class="col-auto" style="padding: 5px;">
                                                <a href="{{$val->link}}" class="btn icon btn-primary" style="padding: 5px 10px;">

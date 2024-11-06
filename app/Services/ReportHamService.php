@@ -28,7 +28,7 @@ interface ReportHamService {
     public function disposisiByVerifikator($perPage);
     public function ditolakByVerifikator($perPage);
     public function disetujuiByVerifikator($perPage);
-    public function revisiByVerifikator($perPage);
+    public function diperbaikiToVerifikator($perPage);
 
     public function countReadLahAll();
     public function countReadLahUsulan();
@@ -39,7 +39,7 @@ interface ReportHamService {
     public function countReadLahDisposisiByVerfikator();
     public function countLahDitolakByVerfikator();
     public function countLahDisetujuiByVerfikator();
-    public function countReadLahRevisiByVerfikator();
+    public function countReadLahDiperbaikiToVerfikator();
 
 
 

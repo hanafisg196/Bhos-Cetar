@@ -47,7 +47,7 @@ class DetailAksiHam extends Component
         $this->showDetail($this->id = $id);
         $this->getVerifikatorOne();
         $this->checkAccess();
-      //   $this->updatedVerifikator($this->vname);
+        $this->updatedVerifikator($this->vname);
     }
     public function showDetail($id)
     {
@@ -78,14 +78,13 @@ class DetailAksiHam extends Component
          'verifikator' => 'required|string',
      ]);
       $this->reportHamService->sendToVerifikatorOne(
-         $id, $this->verfikator,$this->vname,$this->pesan
+         $id, $this->verifikator,$this->vname,$this->pesan
       );
       session()->flash('status', 'Verifikator Berhasil Di tentukan');
       $this->redirect(route('admin.list.lah'));
     }
-
-   //   public function updatedVerifikator($value){
-   //    $verifikator = User::where('nip', $value)->first();
-   //    $this->vname = $verifikator ? $verifikator->name : '';
-   //   }
+     public function updatedVerifikator($value){
+      $verifikator = User::where('nip', $value)->first();
+      $this->vname = $verifikator ? $verifikator->name : '';
+     }
 }

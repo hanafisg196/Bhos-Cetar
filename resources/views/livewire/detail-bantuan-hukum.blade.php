@@ -27,7 +27,7 @@
                             <div class="media-body mt-25">
                                 <span class="text-primary">{{ $data->nama }}</span>
                                 <span class="d-sm-inline d-none">&lt;Status - {{ $data->status }}&gt;</span>
-                                @if ($data->status === 'Disposisi')
+                                 @if ($data->status === 'Disposisi')
                                 <span class="d-sm-inline d-none">&nbsp;&nbsp;
                                  <strong>{{ ($data->message && $data->message !== '-') ? 'Pesan - ' . $data->message : '' }}</strong>
                                 </span>

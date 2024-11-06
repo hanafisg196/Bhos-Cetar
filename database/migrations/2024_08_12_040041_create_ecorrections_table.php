@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('message')->default('-');
             $table->tinyInteger('read')->default(0);
             $table->string('verifikator_nip')->nullable();
+            $table->string('verifikator_name')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
         });

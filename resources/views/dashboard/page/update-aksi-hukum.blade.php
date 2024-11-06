@@ -20,7 +20,7 @@
                             <form class="form" action="{{ route('update.aksi.ham', encrypt($data->id)) }}"
                                 method="post" id="inputForm" enctype="multipart/form-data">
                                 @csrf
-                                @if ($data->status === 'Disetujui')
+                                @if ($data->status === 'Disetujui'|| $data->status === 'Ditolak')
                                 <fieldset disabled>
                                  @else
                                  <fieldset>
@@ -31,9 +31,14 @@
                                             <label for="last-name-column">Link</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text"><i class="bi bi-link-45deg"></i></span>
-                                                <input type="text" class="form-control" name="link" id="link"
+                                                <input type="text" class="form-control @error('link') is-invalid @enderror" name="link" id="link"
                                                     aria-label="Dollar amount (with dot and two decimal places)"
                                                     value="{{ $data->link }}">
+                                                    @error('link')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                   @enderror
                                             </div>
                                         </div>
                                         <div class="form-group">

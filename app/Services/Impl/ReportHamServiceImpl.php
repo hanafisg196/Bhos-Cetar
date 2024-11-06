@@ -87,7 +87,7 @@ class ReportHamServiceImpl implements ReportHamService
     {
         $user = $this->getUser();
         $validated = $request->validate([
-            'link' => 'required|url',
+            'link' => 'required|url|string|max:200',
             'kkp' => 'required',
         ]);
         $ranham = Ranham::create([
@@ -109,7 +109,6 @@ class ReportHamServiceImpl implements ReportHamService
     }
     public function updateStatRanham($id, $stat, $message)
     {
-
         $update = Ranham::where('id', $id)->update([
             'status' => $stat,
             'message' => $message,
@@ -138,7 +137,7 @@ class ReportHamServiceImpl implements ReportHamService
                $ranham->id,
                $ranham->status,
                 null,
-                $ranham->nama
+                $ranham->verifikator_name
                );
         }
     }
@@ -147,13 +146,13 @@ class ReportHamServiceImpl implements ReportHamService
         $user = $this->getUser();
         $ranham = Ranham::find($id);
         $validated = $request->validate([
-            'link' => 'required|active_url',
+            'link' => 'required|url|string|max:200',
             'kkp_id' => 'required',
         ]);
         $ranham->update([
             'link' => $validated['link'],
             'kkp_id' => $validated['kkp_id'],
-            'status' => 'Revisi',
+            'status' => 'Diperbaiki',
             'read' => 0
         ]);
         $ranham->refresh();
@@ -214,7 +213,7 @@ class ReportHamServiceImpl implements ReportHamService
          $lah->id,
          $lah->status,
          null,
-         $lah->verifikator->nama
+         $lah->verifikator_name
          );
     }
 
@@ -277,14 +276,11 @@ class ReportHamServiceImpl implements ReportHamService
             ->latest()
             ->paginate($perPage);
     }
-    public function revisiByVerifikator($perPage)
-    {
-        $user = $this->getUser();
-        return Ranham::where('verifikator_nip', $user->nip)
-            ->where('status', 'Revisi')
-            ->latest()
-            ->paginate($perPage);
-    }
+    public function diperbaikiToVerifikator($perPage){
+      $user = $this->getUser();
+      return Ranham::where('verifikator_nip', $user->nip)->where('status', 'Diperbaiki' )
+      ->latest()->paginate($perPage);
+     }
 
     //counter read general item
     public function countReadLahUsulan()
@@ -345,10 +341,10 @@ class ReportHamServiceImpl implements ReportHamService
             ->where('verifikator_nip', $user->nip)
             ->count();
     }
-    public function countReadLahRevisiByVerfikator()
+    public function countReadLahDiperbaikiToVerfikator()
     {
         $user = $this->getUser();
-        return Ranham::where('status', 'Revisi')
+        return Ranham::where('status', 'Diperbaiki')
             ->where('verifikator_nip', $user->nip)
             ->where('read', 0)
             ->count();

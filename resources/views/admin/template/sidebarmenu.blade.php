@@ -36,7 +36,7 @@
                     </span>
                </a>
                <ul class="submenu">
-                   <li class="submenu-item {{ request()->is('list/inbox/aksi-ham') ? 'active' : '' }}">
+                   <li class="submenu-item {{ request()->is('list/aksi-ham/inbox') ? 'active' : '' }}">
                        <a href="{{ route('admin.list.lah') }}" class="submenu-link">
                            <span>Inbox</span>
                            <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 10px; color: black;">

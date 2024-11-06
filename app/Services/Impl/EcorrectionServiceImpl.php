@@ -20,12 +20,12 @@ class EcorrectionServiceImpl implements EcorrectionService {
        return Auth::user();
    }
 
-
-    private function createTrackingPointEcor($id, $status,$nip){
+   private function createTrackingPointEcor($id,$status,$naphon,$napem){
       TrackingPoint::create([
          'ecor_id' => $id,
          'status' => $status,
-         'verifikator_nip' => $nip
+         'nama_pemohon' => $naphon,
+         'nama_pemeriksa' => $napem
       ]);
     }
    private function getUserRole($rule)
@@ -83,6 +83,7 @@ class EcorrectionServiceImpl implements EcorrectionService {
       $this->createTrackingPointEcor(
          $ecorrection_id,
          $ecorrection->status,
+         $user->name,
          null
       );
 
@@ -172,7 +173,8 @@ class EcorrectionServiceImpl implements EcorrectionService {
             $this->createTrackingPointEcor(
                $ecor->id,
                $ecor->status,
-               $ecor->verifikator_nip
+               null,
+               $ecor->verifikator_name
             );
 
 
@@ -180,6 +182,7 @@ class EcorrectionServiceImpl implements EcorrectionService {
     }
 
     public function update(Request $request, $id){
+      $user = $this->getUser();
       $ecor = $this->getEcorrectionById($id);
       $sessionId = Session::getId();
       $validated = $request->validate([
@@ -195,9 +198,10 @@ class EcorrectionServiceImpl implements EcorrectionService {
       $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
       $ecor->refresh();
       $this->createTrackingPointEcor(
-         $ecorrection_id,
+         $ecor->id,
          $ecor->status,
-         $ecor->verifikator_nip
+         $user->name,
+         null
       );
     }
     public function search($search, $perPage)
@@ -216,10 +220,13 @@ class EcorrectionServiceImpl implements EcorrectionService {
                 ->latest()
                 ->paginate($perPage);
     }
-    public function sendToVerifikatorTwo($id, $verifikator){
+    public function sendToVerifikatorTwo($id, $verifikator,$vname, $pesan){
+
       $ecor = $this->getEcorrectionById($id);
       $ecor->update([
          'verifikator_nip' => $verifikator,
+         'verifikator_name' => $vname,
+         'message' => $pesan,
          'status' => 'Disposisi',
          'read' => 0
       ]);
@@ -227,8 +234,9 @@ class EcorrectionServiceImpl implements EcorrectionService {
       $this->createTrackingPointEcor(
          $ecor->id,
          $ecor->status,
-         $ecor->verifikator_nip
-      );
+         null,
+         $ecor->verifikator_name
+       );
     }
 
     public function getEcorByUser()
@@ -293,9 +301,9 @@ class EcorrectionServiceImpl implements EcorrectionService {
    ->where('read', 1)
    ->count();
  }
- public function countReadEcorRevisiByVerfikator(){
+ public function countReadEcorDiperbaikiToVerfikator(){
    $user = $this->getUser();
-   return Ecorrection::where('status', 'Revisi')
+   return Ecorrection::where('status', 'Diperbaiki')
    ->where('verifikator_nip', $user->nip)
    ->where('read', 0)
    ->count();

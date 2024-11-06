@@ -106,10 +106,10 @@
                                                     Diposisi
                                                     <span class="badge bg-light-danger badge-pill badge-round position-absolute" style="margin-left:5px;">{{$diposisiReadCountByVerifikator}}</span>
                                                 </a>
-                                                <a href="#" wire:click.prevent="filterByStatus('revisiByVerifikator')"
-                                                 class="nav-link {{ $filter == 'revisiByVerifikator' ? 'active' : '' }}">
-                                                 Revisi
-                                                 <span class="badge bg-light-danger badge-pill badge-round position-absolute" style="margin-left:5px;">{{$revisiReadCountByVerifikator}}</span>
+                                                <a href="#" wire:click.prevent="filterByStatus('diperbaikiToVerifikator')"
+                                                 class="nav-link {{ $filter == 'diperbaikiToVerifikator' ? 'active' : '' }}">
+                                                   Diperbaiki
+                                                 <span class="badge bg-light-danger badge-pill badge-round position-absolute" style="margin-left:5px;">{{$diperbaikiReadCountToVerifikator}}</span>
                                                 </a>
                                                 <a href="#" wire:click.prevent="filterByStatus('disetujuiByVerifikator')"
                                                    class="nav-link {{ $filter == 'disetujuiByVerifikator' ? 'active' : '' }}">
@@ -153,12 +153,12 @@
                                                        <li class="media">
                                                    @endif
                                                    @if ($checkKabag === true)
-                                                   <a href="{{ route('detail.aksi.ham', encrypt($item->id)) }}"
-                                                      wire:click="readInboxLah('{{ $item->id }}')"
+                                                   <a href="{{ route('detail.aksi.ham', encrypt($item->id)) }}" wire:navigate
+                                                      wire:click.prevent="readInboxLah('{{ $item->id }}')"
                                                       class="d-flex align-items-center text-decoration-none text-dark w-100">
                                                    @elseif (areYouVerifikator(encrypt($item->verifikator_nip)))
                                                    <a href="{{ route('detail.aksi.ham', encrypt($item->id)) }}"
-                                                      wire:click="readInboxLah('{{ $item->id }}')"
+                                                      wire:click.prevent="readInboxLah('{{ $item->id }}')" wire:navigate
                                                       class="d-flex align-items-center text-decoration-none text-dark w-100">
                                                    @else
                                                    <a class="d-flex align-items-center text-decoration-none text-dark w-100"
@@ -196,7 +196,8 @@
                                                            </div>
                                                            <div class="mail-message">
                                                                <p class="list-group-item-text truncate mb-0">
-                                                                   {{ trimString($item->link) }}
+                                                                   {{ cutLink($item->link) }}
+
                                                                </p>
                                                                <div class="mail-meta-item">
                                                                    <span class="float-right">
@@ -213,7 +214,7 @@
                                                           <div class="mail-date">
                                                             <button class="btn btn-sm btn-primary" style="font-size: 0.7rem" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">
                                                                Lacak
-                                                             </button>
+                                                            </button>
                                                           </div>
                                                       </span>
                                                   </div>

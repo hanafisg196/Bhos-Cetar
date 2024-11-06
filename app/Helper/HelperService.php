@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+
 if (!function_exists('trimString')) {
     function trimString($string)
     {
@@ -14,6 +15,19 @@ if (!function_exists('trimString')) {
         return $string;
     }
 }
+
+if (!function_exists('cutLink')) {
+   function cutLink($word)
+   {
+     $limit = 40;
+     $replace = '....';
+
+     if (strlen($word) > $limit) {
+         return substr($word, 0, $limit) . $replace;
+     }
+   }
+}
+
 
 if (!function_exists('trimName')) {
     function trimName($string)

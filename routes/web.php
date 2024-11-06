@@ -44,9 +44,9 @@ Route::middleware('user')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
         Route::get('/inbox/list/bantuan-hukum', [InboxController::class, 'getListLbh'])->name('admin.list.lbh');
-        Route::get('/list/inbox/aksi-ham', [InboxController::class, 'getListLah'])->name('admin.list.lah');
         Route::get('/inbox/detail/bantuan-hukum/{id}', [InboxController::class, 'detailBantuanHukum'])->name('detail.bantuan.hukum');
-        Route::get('/inbox/detail/aksi-ham/{id}', [InboxController::class, 'detailAksiHam'])->name('detail.aksi.ham');
+        Route::get('/list/aksi-ham/inbox', [InboxController::class, 'getListLah'])->name('admin.list.lah');
+        Route::get('/list/aksi-ham/detail/{id}', [InboxController::class, 'detailAksiHam'])->name('detail.aksi.ham');
         Route::post('/logout/admin', [LoginController::class, 'LogoutAdmin'])->name('logout.admin');
         Route::middleware('ecorrectionAdmin')->group(function () {
             Route::get('/ecorrection/inbox/list/inbox', [EcorrectionController::class, 'inbox'])->name('admin.list.ecorrection');

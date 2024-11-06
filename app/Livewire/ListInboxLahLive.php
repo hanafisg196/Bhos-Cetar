@@ -25,7 +25,7 @@ class ListInboxLahLive extends Component
     public $ditolakCount = 0;
 
     public $diposisiReadCountByVerifikator = 0;
-    public $revisiReadCountByVerifikator = 0;
+    public $diperbaikiReadCountToVerifikator = 0;
     public $disetujuiCountByVerifikator = 0;
     public $ditolakCountByVerfikator = 0;
     public $checkKabag;
@@ -93,8 +93,8 @@ class ListInboxLahLive extends Component
                $lah = $this->reportHamService->ditolakByVerifikator($this->perPage);
                $this->activatedTab = true;
             }
-            elseif($this->filter === 'revisiByVerifikator'){
-               $lah = $this->reportHamService->revisiByVerifikator($this->perPage);
+            elseif($this->filter === 'diperbaikiToVerifikator'){
+               $lah = $this->reportHamService->diperbaikiToVerifikator($this->perPage);
                $this->activatedTab = true;
             }
             elseif($this->filter === 'disetujuiByVerifikator'){
@@ -144,7 +144,7 @@ class ListInboxLahLive extends Component
       $this->revisiCount = $this->reportHamService->countLahRevisi();
 
       $this->diposisiReadCountByVerifikator = $this->reportHamService->countReadLahDisposisiByVerfikator();
-      $this->revisiReadCountByVerifikator = $this->reportHamService->countReadLahRevisiByVerfikator();
+      $this->diperbaikiReadCountToVerifikator = $this->reportHamService->countReadLahDiperbaikiToVerfikator();
       $this->disetujuiCountByVerifikator = $this->reportHamService->countLahDisetujuiByVerfikator();
       $this->ditolakCountByVerfikator = $this->reportHamService->countLahDitolakByVerfikator();
 

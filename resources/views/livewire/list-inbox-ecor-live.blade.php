@@ -126,7 +126,6 @@
                                                     Ditolak
                                                     <span class="badge bg-light-primary badge-pill badge-round position-absolute">{{$ditolakReadCountByVerfikator}}</span>
                                                 </a>
-
                                              </div>
                                              @endif
                                            </div>
@@ -135,7 +134,7 @@
 
                                    <div class="email-user-list list-group ps ps--active-y">
                                       <ul class="users-list-wrapper media-list">
-                                       @if (!empty($data))
+                                       @if ($data->isNotEmpty())
                                        @foreach ($data as $item)
                                        @if ($item->read == 1)
                                        <li class="media mail-read">
@@ -143,10 +142,12 @@
                                        <li class="media">
                                         @endif
                                         @if ($checkKabag === true)
-                                              <a href="{{route('detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
+                                       <a href="{{route('detail.ecorrection', encrypt($item->id))}}" wire:navigate
+                                          class="d-flex align-items-center
                                           text-decoration-none text-dark w-100" wire:click="readStat({{$item->id}})">
                                         @elseif (areYouVerifikator(encrypt($item->verifikator_nip)))
-                                        <a href="{{route('detail.ecorrection', encrypt($item->id))}}" class="d-flex align-items-center
+                                        <a href="{{route('detail.ecorrection', encrypt($item->id))}}" wire:navigate
+                                           class="d-flex align-items-center
                                           text-decoration-none text-dark w-100" wire:click="readStat({{$item->id}})">
                                         @else
                                         <a class="d-flex align-items-center text-decoration-none text-dark w-100"
@@ -192,38 +193,40 @@
                                                  </div>
                                              </div>
                                          </a>
-                                         <div class="mail-meta-item">
-                                          <span class="float-right text-right">
-                                              <div class="mail-date">{{ $item->created_at->diffForHumans() }}</div>
-                                              <div class="mail-date" style="color: #007aff">{{ verifikatorProfile(encrypt($item->verifikator_nip))}}</div>
-                                              <div class="mail-date">
-                                                <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">
-                                                   Tracking
-                                                 </button>
-                                              </div>
-                                          </span>
-                                      </div>
+                                         <div class="mail-meta-item d-flex flex-column align-items-end text-right" style="font-size: 0.3rem;white-space: nowrap;">
+                                          <div class="mail-date" style="">{{ $item->created_at->diffForHumans() }}</div>
+                                          <div class="mail-date" style="color: #007aff">{{ verifikatorProfile(encrypt($item->verifikator_nip)) }}</div>
+                                          <div class="mail-date">
+                                              <button class="btn btn-sm btn-primary" style="font-size: 0.7rem" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">
+                                                  Lacak
+                                              </button>
+                                          </div>
+                                          </div>
                                        </li>
                                        <div wire:ignore.self class="modal fade text-left"  id="modal-{{ $item->id }}" tabindex="-1" role="dialog"
                                           aria-labelledby="myModalLabel1" aria-hidden="true">
                                           <div class="modal-dialog modal-dialog-scrollable" role="document">
                                               <div class="modal-content">
                                                   <div class="modal-header">
-                                                      <h5 class="modal-title" id="myModalLabel1">Tracking Point</h5>
+                                                      <h5 class="modal-title" id="myModalLabel1">Pelacakan Status</h5>
                                                       <button type="button" class="close rounded-pill" data-bs-dismiss="modal" aria-label="Close">
                                                           <i data-feather="x"></i>
                                                       </button>
                                                   </div>
                                                   <div class="modal-body">
                                                    @foreach ($item['trackingPoints'] as $track)
-                                                   <div class="card mb-1">
+                                                   <div class="card mb-3">
                                                        <div class="card-body">
+                                                         @if ($track->nama_pemohon)
+                                                         <p class="mb-1"><strong>Pemohon - {{$track->nama_pemohon}}</strong> </p>
+                                                         @else
+                                                         <p class="mb-1"><strong>Pemeriksa - {{$track->nama_pemeriksa}}</strong> </p>
+                                                         @endif
                                                            <h6 class="card-title">Status: {{ $track->status }}</h6>
-                                                           <p class="mb-1"><strong>{{ verifikatorProfile(encrypt($track->verifikator_nip))}}</strong> </p>
                                                            <p class="text-muted mb-0"><small>{{ $track->created_at->diffForHumans() }}</small></p>
                                                        </div>
                                                    </div>
-                                               @endforeach
+                                                   @endforeach
                                                   </div>
                                                   <div class="modal-footer">
                                                       <button type="button" class="btn" data-bs-dismiss="modal">
@@ -236,7 +239,7 @@
                                       </div>
                                        @endforeach
                                        @else
-                                       <div class="d-flex justify-content-center mt-5">Data tidak ditemukan.</div>
+                                       <div class="d-flex justify-content-center mt-5">Tidak Ada Data</div>
                                        @endif
                                        @if ($data->hasMorePages())
                                        <div class="d-flex justify-content-center mt-2 mb-2">
