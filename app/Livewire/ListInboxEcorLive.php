@@ -29,7 +29,7 @@ class ListInboxEcorLive extends Component
     public $allReadCount = 0 ;
     public $diposisiReadCountByVerifikator = 0;
     public $disetujuiReadCountByVerifikator = 0;
-    public $revisiReadCountByVerifikator = 0;
+    public $diperbaikiReadCountToVerifikator = 0;
     public $ditolakReadCountByVerfikator = 0;
 
     public $verifikator;
@@ -93,8 +93,8 @@ class ListInboxEcorLive extends Component
             $data = $this->ecorrectionService->getrDitolakByVerfikatorTwo($this->perPage);
             $this->activatedTab = true;
          }
-           elseif($this->filter === 'yourRevisi'){
-            $data = $this->ecorrectionService->getrRevisiByVerfikatorTwo($this->perPage);
+           elseif($this->filter === 'yourDiperbaiki'){
+            $data = $this->ecorrectionService->getDiperbaikiToVerfikatorTwo($this->perPage);
             $this->activatedTab = true;
          }
            else {
@@ -143,7 +143,7 @@ class ListInboxEcorLive extends Component
       $this->diposisiReadCountByVerifikator = $this->ecorrectionService->countReadEcorDisposisiByVerfikator();
       $this->disetujuiReadCountByVerifikator = $this->ecorrectionService->countReadEcorDisetujuiByVerfikator();
       $this->ditolakReadCountByVerfikator = $this->ecorrectionService->countReadEcorDitolakByVerfikator();
-      $this->revisiReadCountByVerifikator = $this->ecorrectionService->countReadEcorRevisiByVerfikator();
+      $this->diperbaikiReadCountToVerifikator = $this->ecorrectionService->countReadEcorDiperbaikiToVerfikator();
 
     }
 

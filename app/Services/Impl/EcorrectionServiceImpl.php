@@ -111,9 +111,9 @@ class EcorrectionServiceImpl implements EcorrectionService {
       return Ecorrection::where('status', 'Revisi')->latest()->paginate($perPage);
    }
 
-   public function getrRevisiByVerfikatorTwo($perPage){
+   public function getDiperbaikiToVerfikatorTwo($perPage){
       $user = $this->getUser();
-      return Ecorrection::where('status', 'Revisi')->where('verifikator_nip', $user->nip)
+      return Ecorrection::where('status', 'Diperbaiki')->where('verifikator_nip', $user->nip)
          ->latest()->paginate($perPage);
     }
 
@@ -220,7 +220,7 @@ class EcorrectionServiceImpl implements EcorrectionService {
                 ->latest()
                 ->paginate($perPage);
     }
-    public function sendToVerifikatorTwo($id, $verifikator,$vname, $pesan){
+    public function sendToVerifikatorTwo($id,$verifikator, $vname, $pesan){
 
       $ecor = $this->getEcorrectionById($id);
       $ecor->update([

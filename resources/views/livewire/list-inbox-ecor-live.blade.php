@@ -110,10 +110,10 @@
                                                     Diposisi
                                                     <span class="badge bg-light-danger badge-pill badge-round position-absolute">{{$diposisiReadCountByVerifikator}}</span>
                                                 </a>
-                                                <a href="#" wire:click.prevent="filterByStatus('yourRevisi')"
-                                                class="nav-link {{ $filter == 'yourRevisi' ? 'active' : '' }}">
-                                                 Revisi
-                                                 <span class="badge bg-light-danger badge-pill badge-round position-absolute">{{$revisiReadCountByVerifikator}}</span>
+                                                <a href="#" wire:click.prevent="filterByStatus('yourDiperbaiki')"
+                                                class="nav-link {{ $filter == 'yourDiperbaiki' ? 'active' : '' }}">
+                                                 Diperbaiki
+                                                 <span class="badge bg-light-danger badge-pill badge-round position-absolute">{{$diperbaikiReadCountToVerifikator}}</span>
                                                </a>
                                                 <a href="#" wire:click.prevent="filterByStatus('yourDisetujui')"
                                                    class="nav-link {{ $filter == 'yourDisetujui' ? 'active' : '' }}">

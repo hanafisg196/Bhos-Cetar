@@ -26,7 +26,7 @@ interface EcorrectionService {
    public function countReadEcorRevisi();
    public function countReadEcorAll();
    public function disposisiByVerifikator($perPage);
-   public function getrRevisiByVerfikatorTwo($perPage);
+   public function getDiperbaikiToVerfikatorTwo($perPage);
    public function getrDitolakByVerfikatorTwo($perPage);
    public function getrDisetujuiByVerfikatorTwo($perPage);
    public function countReadEcorDisposisiByVerfikator();

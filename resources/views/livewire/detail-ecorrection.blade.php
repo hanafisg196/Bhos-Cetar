@@ -23,11 +23,16 @@
                                         height="30">
                                 </div>
                             </div>
-                            <div class="media-body mt-20">
-                                <span class="text-primary">{{ $data->nama }}</span>
-                                <span class="d-sm-inline d-none">&lt;Status - {{ $data->status }}&gt;</span>
-                                <small class="text-muted d-block">to Bhos Ce-Tar System</small>
-                            </div>
+                            <div class="media-body mt-25">
+                              <span class="text-primary">{{ $data->name }}</span>
+                              <span class="d-sm-inline d-none">&lt;Status - {{ $data->status }}&gt;</span>
+                              @if ($data->status === 'Disposisi')
+                              <span class="d-sm-inline d-none">&nbsp;&nbsp;
+                               <strong>{{ ($data->message && $data->message !== '-') ? 'Pesan - ' . $data->message : '' }}</strong>
+                              </span>
+                              @endif
+                              <small class="text-muted d-block">Kepada Sistem Bhos Cetar</small>
+                          </div>
                         </div>
                         <div class="mb-2">
                            <p class="text-bold-500" style="margin-top: 15px;">Nama : {{ $data->users->name }}</p>
@@ -175,19 +180,28 @@
                              </div>
                                  <div class="modal-body">
                                    <fieldset class="form-group">
-                                    <select wire:model="verfikator" class="form-select" id="basicSelect">
+                                    <select wire:model="verifikator" class="form-select" id="basicSelect">
                                        <option selected>Pilih Verifikator 2...</option>
-                                       @foreach ($verifikatorTwo as $verifikator)
-                                           <option value="{{ $verifikator->nip }}">{{ $verifikator->name }}
+                                       @foreach ($verifikatorTwo as $ver)
+                                           <option value="{{ $ver->nip }}">{{ $ver->name }}
                                            </option>
                                        @endforeach
+                                       <input type="text" wire:model="vname" hidden>
                                    </select>
                                    </fieldset>
                                    <div>
-                                    @error('verfikator')
+                                    @error('verifikator')
                                         {{ $message }}
                                     @enderror
-                                </div>
+                                  </div>
+                                  <label for="message">Pesan</label>
+                                  <textarea class="form-control" id="message" name="message" rows="5" wire:model="pesan"></textarea>
+                                  <div>
+                                      @error('pesan')
+                                          {{ $message }}
+                                      @enderror
+                                  </div>
+                            </fieldset>
                                  </div>
                                  <div class="modal-footer">
                                      <button type="button" class="btn" data-bs-dismiss="modal">

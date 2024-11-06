@@ -24,16 +24,13 @@ class DetailAksiHam extends Component
     public $pesan = '';
     public $status = '';
     protected $rules = [
-      'vname' => 'required|string',
-      'verifikator' => 'required|string',
-      'pesan' => 'required|string',
-      'status' => 'required|string'
+        'vname' => 'required|string',
+        'verifikator' => 'required|string',
+        'pesan' => 'required|string',
+        'status' => 'required|string',
     ];
     #[On('showDetail')]
-    public function boot(
-      ReportHamService $reportHamService,
-      RoleService $roleService
-      )
+    public function boot(ReportHamService $reportHamService, RoleService $roleService)
     {
         $this->reportHamService = $reportHamService;
         $this->roleService = $roleService;
@@ -56,11 +53,12 @@ class DetailAksiHam extends Component
     }
     public function getVerifikatorOne()
     {
-      $this->verifikatorOne = $this->roleService->getVerifikatorOne();
+        $this->verifikatorOne = $this->roleService->getVerifikatorOne();
     }
-    public function checkAccess(){
-      $this->checkKabag = $this->roleService->disposisiAccess();
-      $this->checkVerifikator = $this->roleService->checkVerifikatorOne();
+    public function checkAccess()
+    {
+        $this->checkKabag = $this->roleService->disposisiAccess();
+        $this->checkVerifikator = $this->roleService->checkVerifikatorOne();
     }
     public function updateStat($id)
     {
@@ -72,19 +70,20 @@ class DetailAksiHam extends Component
         session()->flash('status', 'Data berhasil di update.');
         $this->redirect(route('admin.list.lah'));
     }
-    public function updateVerifikatorOne($id){
-      $this->validate([
-         'vname' => 'required|string',
-         'verifikator' => 'required|string',
-     ]);
-      $this->reportHamService->sendToVerifikatorOne(
-         $id, $this->verifikator,$this->vname,$this->pesan
-      );
-      session()->flash('status', 'Verifikator Berhasil Di tentukan');
-      $this->redirect(route('admin.list.lah'));
+    public function updateVerifikatorOne($id)
+    {
+        $this->validate([
+            'vname' => 'required|string',
+            'verifikator' => 'required|string',
+        ]);
+
+        $this->reportHamService->sendToVerifikatorOne($id, $this->verifikator, $this->vname, $this->pesan);
+        session()->flash('status', 'Verifikator Berhasil Di tentukan');
+        $this->redirect(route('admin.list.lah'));
     }
-     public function updatedVerifikator($value){
-      $verifikator = User::where('nip', $value)->first();
-      $this->vname = $verifikator ? $verifikator->name : '';
-     }
+    public function updatedVerifikator($value)
+    {
+        $verifikator = User::where('nip', $value)->first();
+        $this->vname = $verifikator ? $verifikator->name : '';
+    }
 }
