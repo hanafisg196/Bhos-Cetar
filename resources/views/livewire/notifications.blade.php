@@ -2,10 +2,11 @@
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
     <div class="page-content" style="margin-top: -20px;">
       <section class="row d-flex justify-content-center">
-          <div class="col-8 col-xl-8">
+          <div class="col-7 col-xl-7">
               <div class="card">
                   <div class="card-body">
                      <ul>
+                        <h4>Pemberitahuan</h4>
                         <li class="dropdown-item notification-item">
                            @foreach ($data as $item)
                                @if (isset($item['schedules']))

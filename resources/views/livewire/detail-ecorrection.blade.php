@@ -161,7 +161,7 @@
                                         </button>
                                         <div wire:loading id="loadingSpinner" class="spinner-border ms-1" style="width: 2rem; height: 2rem;" role="status">
                                           <span class="visually-hidden">Loading...</span>
-                                      </div>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -211,11 +211,14 @@
                                          <i class="bx bx-x d-block d-sm-none"></i>
                                          <span class="d-none d-sm-block">Tutup</span>
                                      </button>
-                                     <button wire:click="updateVerifikatorTwo('{{ $data->id }}')" type="button"
+                                     <button wire:loading.remove wire:click="updateVerifikatorTwo('{{ $data->id }}')" type="button"
                                          class="btn btn-primary ms-1">
                                          <i class="bx bx-check d-block d-sm-none"></i>
                                          <span class="d-none d-sm-block">Simpan</span>
                                      </button>
+                                     <div wire:loading id="loadingSpinner" class="spinner-border ms-1" style="width: 2rem; height: 2rem;" role="status">
+                                       <span class="visually-hidden">Loading...</span>
+                                     </div>
                                  </div>
                              </form>
                          </div>
