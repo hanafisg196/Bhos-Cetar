@@ -19,7 +19,7 @@
                 <ul class="submenu">
                     <li class="submenu-item {{ request()->is('inbox/list/bantuan-hukum') ? 'active' : '' }}">
                         <a href="{{ route('admin.list.lbh') }}" class="submenu-link">
-                            <span>Inbox</span>
+                            <span>Kontak Masuk</span>
                             <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 10px; color: black;">
                               <livewire:lbh-count-on-sidebar/>
                              </span>
@@ -38,7 +38,7 @@
                <ul class="submenu">
                    <li class="submenu-item {{ request()->is('list/aksi-ham/inbox') ? 'active' : '' }}">
                        <a href="{{ route('admin.list.lah') }}" class="submenu-link">
-                           <span>Inbox</span>
+                        <span>Kontak Masuk</span>
                            <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 10px; color: black;">
                               <livewire:lah-count-on-sidebar/>
                            </span>

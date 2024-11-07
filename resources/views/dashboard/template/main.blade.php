@@ -26,17 +26,16 @@
             <div id="sidebar">
                 <div class="sidebar-wrapper active">
                     <div class="sidebar-header position-relative">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="logo">
-                                <img src="/dist/assets/compiled/jpg/logotanahdatar.png" style="width: 50; height: 50px;"
-                                    alt="Logo">
-                                <span style="font-size: 20px;">Bhos Cetar</span>
-                            </div>
-                            <div class="sidebar-toggler x">
-                                <a href="#" class="sidebar-hide d-xl-none d-block"><i
-                                  class="bi bi-x bi-middle"></i></a>
-                            </div>
+                     <div class="d-flex justify-content-center">
+                        <div class="logo d-flex flex-column align-items-center">
+                            <img src="/dist/assets/compiled/jpg/logotanahdatar.png" style="width: 50px; height: 50px;" alt="Logo" class="mb-2">
+                            <span style="font-size: 20px;">Bhos Cetar</span>
+                            <span style="font-size: 16px; font-weight: bold;">Sistem Layanan Hukum</span>
                         </div>
+                        <div class="sidebar-toggler x">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
                     </div>
                     @include('dashboard.template.sidebarmenu')
                 </div>

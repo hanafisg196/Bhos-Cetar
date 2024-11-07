@@ -155,6 +155,10 @@ class ReportHamServiceImpl implements ReportHamService
             'status' => 'Diperbaiki',
             'read' => 0
         ]);
+        $notif = Notification::where('lah_id', $ranham->id);
+        $notif->update([
+           'notif_read' => 1
+        ]);
         $ranham->refresh();
         $this->createTrackingPointLah(
          $ranham->id,

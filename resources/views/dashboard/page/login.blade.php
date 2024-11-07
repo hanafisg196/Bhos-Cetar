@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     @endif
-                    <form action="{{ route('doLogin') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('doLogin') }}" method="post" id="inputForm">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">
                             <input type="text" class="form-control form-control-xl" placeholder="Nip" name="username" id="username">
@@ -45,17 +45,19 @@
                                 <i class="bi bi-shield-lock"></i>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Masuk</button>
+                        <button type="submit" id="send" class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Masuk</button>
+                        <button type="button" style="display: none;" id="loading" class="btn btn-primary btn-block btn-lg shadow-lg mt-5" disabled>
+                        <span class="spinner-border spinner-border-sm" role="status"aria-hidden="true"></span> Loading...</button>
                     </form>
                 </div>
             </div>
             <div class="col-lg-7 d-none d-lg-block">
                 <div id="auth-right" class="text-center">
-                    {{-- <img src="/dist/assets/compiled/png/back2.png" alt="login background" style="width: 65%; margin: 0 auto; display: block;"> --}}
+                    <img src="/dist/assets/compiled/png/backback.png" alt="login background" style="width: 65%; margin: 0 auto; display: block; padding-top:12%">
                 </div>
             </div>
         </div>
     </div>
 </body>
-
+@include('dashboard.component.button-loading')
 </html>

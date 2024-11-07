@@ -1,5 +1,10 @@
 @extends('dashboard.template.main')
 @section('content')
+<style>
+   p {
+      margin-bottom: 1px;
+   }
+</style>
 <div class="page-content">
     <section id="multiple-column-form">
         <div class="row match-height">
@@ -13,11 +18,11 @@
                            <ul class="nav nav-tabs" id="myTab" role="tablist">
                               <li class="nav-item" role="presentation">
                                   <a class="nav-link active" id="list-lbh" data-bs-toggle="tab" href="#listLbh"
-                                      role="tab" aria-controls="list" aria-selected="true">List Bantuan Hukum</a>
+                                      role="tab" aria-controls="list" aria-selected="true">List Data</a>
                               </li>
                               <li class="nav-item" role="presentation">
                                   <a class="nav-link " id="form-lbh" data-bs-toggle="tab" href="#formLbh" role="tab"
-                                      aria-controls="form" aria-selected="true">Buat Bantuan Hukum</a>
+                                      aria-controls="form" aria-selected="true">Buat Baru</a>
                               </li>
                           </ul>
                           <div class="tab-content" id="myTabContent">
@@ -39,15 +44,13 @@
                                              <td class="col-auto" style="padding: 5px 0;">
                                                  <p class="mb-0" style="margin-bottom: 0;">{{$item->created_at->diffForHumans()}}</p>
                                              </td>
-                                             <td class="col-3" style="padding: 5px 0;">
-                                                 <div class="d-flex align-items-center">
-                                                     <p class="font-bold ms-3 mb-0" style="margin-bottom: 0;
-                                                     color: {{$item->status === 'Disetujui' ? 'green' :($item->status === 'Ditolak' ? 'red':
-                                                      ($item->status === 'Usulan' ? 'orange' : ($item->status === 'Revisi' ? 'red' : 'orange ')))}}">
-                                                      {{ $item->status }}</p>
-                                                 </div>
-
-                                             </td>
+                                             <td class="col-auto" style="padding: 5px;">
+                                                <p class="mb-0"
+                                                    style="margin: 0;color:
+                                                {{ $item->status === 'Disetujui' ? 'green' : ($item->status === 'Ditolak' || $item->status === 'Revisi' ? 'red' : 'orange') }}">
+                                                    {{ $item->status }}
+                                                </p>
+                                            </td>
                                              <td class="col-auto" style="padding: 5px 0;">
                                                  <p class="mb-0" style="margin-bottom: 0;">{{$item->code}}</p>
                                              </td>
@@ -78,7 +81,9 @@
                                                      <p><strong>Email :  </strong>{{ $item->email }}</p>
                                                      <p><strong>WA : </strong>{{ $item->wa }}</p>
                                                      <p><strong>Alamat : </strong>{{ $item->alamat }}</p>
-                                                     <p><strong>Kronologi : </strong>{{ $item->kronologi }}</p>
+                                                     <p><strong>Kronologi : </strong>
+                                                      {{ $item->kronologi }}
+                                                     </p>
                                                      <p style="margin-bottom: -2px;"><strong>Dokument :
                                                      @foreach ($item['documents'] as $value)
                                                      <p style="margin: 0px;">

@@ -144,11 +144,11 @@
                                         @if ($checkKabag === true)
                                        <a href="{{route('detail.ecorrection', encrypt($item->id))}}" wire:navigate
                                           class="d-flex align-items-center
-                                          text-decoration-none text-dark w-100" wire:click="readStat({{$item->id}})">
+                                          text-decoration-none text-dark w-100" wire:click.prevent="readStat({{$item->id}})">
                                         @elseif (areYouVerifikator(encrypt($item->verifikator_nip)))
                                         <a href="{{route('detail.ecorrection', encrypt($item->id))}}" wire:navigate
                                            class="d-flex align-items-center
-                                          text-decoration-none text-dark w-100" wire:click="readStat({{$item->id}})">
+                                          text-decoration-none text-dark w-100" wire:click.prevent="readStat({{$item->id}})">
                                         @else
                                         <a class="d-flex align-items-center text-decoration-none text-dark w-100"
                                         onclick="Swal.fire('Akses ditolak!', 'Anda tidak memiliki izin untuk mengakses halaman ini.', 'warning')">

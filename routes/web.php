@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EcorrectionController;
 use App\Http\Controllers\InboxController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\ReportHamController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UpdateAksiHamController;
@@ -16,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'doLogin'])->name('doLogin');
-
 Route::middleware('user')->group(function () {
     Route::post('/logout', [LoginController::class, 'doLogout'])->name('logout.dashboard');
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -27,7 +27,7 @@ Route::middleware('user')->group(function () {
     Route::post('/laporan-bantuan-hukum/update/{id}', [UpdateBantuanHukumController::class, 'update'])->name('update.bantuan.hukum');
     Route::get('/laporan-bantuan-hukum/download/{file}', [ScheduleController::class, 'downloadFile'])->name('schedule.download');
     Route::post('/upload', [UploadFileController::class, 'upload'])->name('upload');
-
+    Route::get('/pemberitahuan', [NotificationsController::class, 'index'])->name('notifications');
     Route::middleware('kamiPeduliUploader')->group(function () {
         Route::get('/laporan-aksi-ham', [ReportHamController::class, 'index'])->name('ranham.home');
         Route::post('/laporan-aksi-ham/create', [ReportHamController::class, 'createRanham'])->name('ranham.create');

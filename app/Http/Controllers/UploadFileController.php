@@ -10,7 +10,10 @@ class UploadFileController extends Controller
 {
    public function upload(Request $request)
    {
-        $sessionId = Session::getId();
+        $request->validate([
+         'file' => 'mimes:png,jpg,doc,pdf|mimetypes:image/png,image/jpeg,application/msword,application/pdf'
+        ]);
+          $sessionId = Session::getId();
         if($request->hasFile('file')){
             $file = $request->file('file');
             $fileName = uniqid() . '.' . $file->getClientOriginalExtension();
@@ -20,7 +23,6 @@ class UploadFileController extends Controller
                 'file' => $file,
                 'session_id' => $sessionId,
             ]);
-
             return $file;
         }
 

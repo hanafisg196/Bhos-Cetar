@@ -12,7 +12,7 @@
       <ul class="submenu">
           <li class="submenu-item {{ request()->is('ecorrection/list/inbox') ? 'active' : '' }}">
               <a href="{{ route('admin.list.ecorrection') }}" class="submenu-link">
-                  <span>Inbox</span>
+                  <span>Kontak Masuk</span>
                   <span class="badge bg-light-danger badge-pill badge-round float-right" style="margin-left: 10px; color: black;">
                   {{$allReadCount}}
                   </span>

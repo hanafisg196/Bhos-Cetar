@@ -68,7 +68,7 @@ class EcorrectionServiceImpl implements EcorrectionService {
       $user = $this->getUser();
       $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
       $validate = $request->validate([
-         'judul' => 'required|string|max:120',
+         'judul' => 'required|string|max:200',
       ]);
       $ecorrection  = Ecorrection::create([
          'title' => $validate['judul'],
@@ -191,11 +191,16 @@ class EcorrectionServiceImpl implements EcorrectionService {
       $temporaryFiles = Temporary::where('session_id', $sessionId)->get();
       $ecor->update([
          'title' => $validated['judul'],
-         'status'=>  "Revisi",
+         'status'=>  "Diperbaiki",
          'read' => 0
       ]);
+
       $ecorrection_id = $ecor->id;
       $this->copyFilesFromTmp($temporaryFiles, $ecorrection_id);
+      $notif = Notification::where('ecor_id', $ecorrection_id);
+      $notif->update([
+         'notif_read' => 1
+      ]);
       $ecor->refresh();
       $this->createTrackingPointEcor(
          $ecor->id,

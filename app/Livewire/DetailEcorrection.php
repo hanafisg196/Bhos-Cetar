@@ -6,7 +6,6 @@ use App\Models\FixFile;
 use App\Models\User;
 use App\Services\EcorrectionService;
 use App\Services\RoleService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
@@ -82,7 +81,7 @@ class DetailEcorrection extends Component
         $this->validate([
             'status' => 'required',
             'pesan' => 'required',
-            'file' => 'required|file|mimes:pdf,doc,docx',
+            'file' => 'nullable|file|mimes:pdf,doc,docx',
         ]);
 
         $this->ecorrectionService->updateStatEcorrection($id, $this->status, $this->pesan);
@@ -101,7 +100,6 @@ class DetailEcorrection extends Component
                 'file' => $filePath,
             ]);
         }
-
         session()->flash('status', 'Data berhasil di update.');
         $this->redirect(route('admin.list.ecorrection'));
     }

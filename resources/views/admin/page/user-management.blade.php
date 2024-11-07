@@ -44,14 +44,13 @@
                                              <td class="text-bold-500">{{ $item['rules'][0]['nama'] }}</td>
                                              <td>
                                                  <div class="d-flex gap-2">
-                                                     <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
-                                                         data-bs-target="#modal-{{ $item->id }}">Edit</button>
-
+                                                     <button class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                                                         data-bs-target="#modal-{{ $item->id }}">Ubah</button>
                                                      <form
                                                          action="{{ route('admin.dashboard.rule.delete', encrypt($item->id)) }}"
                                                          method="POST" class="d-inline">
                                                          @csrf
-                                                         <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                         <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                                      </form>
                                                  </div>
                                              </td>

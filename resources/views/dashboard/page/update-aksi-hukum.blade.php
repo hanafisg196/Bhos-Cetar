@@ -11,6 +11,7 @@
             <div class="col-12" id="page" style="display: none;">
                 <div class="card">
                     <div class="card-header">
+                     <h4 class="card-title">Perbarui Kami Peduli</h4>
                         <p><strong>Kode - </strong>{{ $data->code }}</p>
                         <p><strong>Status - </strong>{{ $data->status }}</p>
                         <p><strong>Pesan - </strong>{{ $data->message }}</p>

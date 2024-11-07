@@ -1,12 +1,18 @@
 @extends('dashboard.template.main')
 @section('content')
+<style>
+   p {
+      margin-bottom: 1px;
+   }
+</style>
 <div class="page-content">
    <section id="multiple-column-form">
       <div class="row match-height">
           <div class="col-12" id="page" style="display: none;">
               <div class="card">
                   <div class="card-header">
-                      <p><strong>Kode - </strong>{{$data->code}}</p>
+                     <h5>Perbarui E-Corrections</h5>
+                      <p style="margin-bottom: 1px;"><strong>Kode - </strong>{{$data->code}}</p>
                       <p><strong>Status - </strong>{{$data->status}}</p>
                       <p><strong>Pesan - </strong>{{$data->message}}</p>
                       @foreach ($data->fixFiles as $file)
@@ -15,15 +21,15 @@
                            <i class="bi bi-eye-fill"></i>
                          </a>
                      </p>
-
                       @endforeach
                   </div>
+                  @if (!empty($file))
                   <div class="modal fade" id="modals-{{ $file->id }}" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalScrollableTitle-{{$file->id}}" aria-hidden="true">
                      <div class="modal-dialog modal-dialog-scrollable " role="document">
                          <div class="modal-content">
                              <div class="modal-header">
-                           <h5 class="modal-title" id="exampleModalScrollableTitle">Detail File</h5>
+                           <h5 class="modal-title" id="exampleModalScrollableTitle">Detail</h5>
                                  <button type="button" class="close" data-bs-dismiss="modal"
                                      aria-label="Close">
                                      <i data-feather="x"></i>
@@ -44,13 +50,14 @@
                              </div>
                          </div>
                      </div>
-                 </div>
+                  </div>
+                  @endif
                   <div class="card-content">
                       <div class="card-body">
                           <form class="form" action="{{ route('ecorrection.update', encrypt($data->id)) }}"
                               method="post" id="inputForm" enctype="multipart/form-data">
                               @csrf
-                              @if ($data->status === 'Disetujui')
+                              @if ($data->status === 'Disetujui' || $data->status === 'Ditolak')
                               <fieldset disabled>
                                @else
                                <fieldset>
@@ -93,7 +100,7 @@
                                           <div class="modal-dialog modal-dialog-scrollable " role="document">
                                               <div class="modal-content">
                                                   <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalScrollableTitle">Detail File</h5>
+                                                <h5 class="modal-title" id="exampleModalScrollableTitle">Detail</h5>
                                                       <button type="button" class="close" data-bs-dismiss="modal"
                                                           aria-label="Close">
                                                           <i data-feather="x"></i>
@@ -134,9 +141,10 @@
           </div>
       </div>
    </section>
+@include('placeholder.page-loader')
 </div>
 @include('dashboard.component.button-loading')
-@include('placeholder.page-loader')
+@include('dashboard.component.page-loader')
 @endsection
 @section('script')
     @include('dashboard.component.filepond')

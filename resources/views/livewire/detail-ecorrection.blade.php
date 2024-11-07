@@ -1,7 +1,7 @@
 <div>
     {{-- Be like water. --}}
     @php
-        $statusOptions = ['Disetujui', 'Ditolak'];
+        $statusOptions = ['Disetujui', 'Revisi', 'Ditolak'];
     @endphp
     <div style="margin-top: -30px; margin-bottom: 30px;">
         <a href="{{ route('admin.list.ecorrection') }}" class="btn btn-primary">
@@ -37,8 +37,8 @@
                         <div class="mb-2">
                            <p class="text-bold-500" style="margin-top: 15px;">Nama : {{ $data->users->name }}</p>
                            <p class="text-bold-500" style="margin-top: 15px;">Nip : {{ $data->users->nip }}</p>
-                            <p class="text-bold-500" style="margin-top: 15px;">Kode dokumen : {{ $data->code }}</p>
-                            <p class="text-bold-500" style="margin-top: 15px;">Judul : {{ $data->title }}</p>
+                           <p class="text-bold-500" style="margin-top: 15px;">Kode dokumen : {{ $data->code }}</p>
+                           <p class="text-bold-500" style="margin-top: 15px;">Judul : {{ $data->title }}</p>
 
                         </div>
 
@@ -125,20 +125,20 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12">
+
                                             <div class="form-group">
                                                 <label for="message">Pesan</label>
-                                                <textarea class="form-control" id="message" name="message" rows="3" wire:model="pesan"></textarea>
+                                                <textarea class="form-control" id="message" name="message" rows="5" wire:model="pesan"></textarea>
                                                 <div>
                                                     @error('pesan')
                                                         {{ $message }}
                                                     @enderror
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-md-6 col-12">
+
+
                                           <div class="form-group">
-                                             <label for="message">Detail Pebaikan (optional)</label>
+                                             <label for="message">Detail Pebaikan (Opsional)</label>
                                              <input class="form-control form-control-sm" wire:model="file" name="file" id="file" type="file">
                                              <div>
                                                 @error('file')
@@ -146,7 +146,7 @@
                                                 @enderror
                                             </div>
                                           </div>
-                                      </div>
+
 
                                     </div>
                                     <div class="modal-footer">

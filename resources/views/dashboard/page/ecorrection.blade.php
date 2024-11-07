@@ -27,11 +27,11 @@
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link active" id="list-ecor" data-bs-toggle="tab" href="#listEcor"
-                                            role="tab" aria-controls="list" aria-selected="true">List Ecorrections</a>
+                                            role="tab" aria-controls="list" aria-selected="true">List Data</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link " id="form-ecor" data-bs-toggle="tab" href="#formEcor"
-                                            role="tab" aria-controls="form" aria-selected="true">Buat Ecorrection</a>
+                                            role="tab" aria-controls="form" aria-selected="true">Buat Baru</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
@@ -61,7 +61,7 @@
                                                         <td class="col-auto" style="padding: 5px;">
                                                             <p class="mb-0"
                                                                 style="margin: 0;color:
-                                                            {{ $val->status === 'Disetujui' ? 'green' : ($val->status === 'Ditolak' ? 'red' : ($val->status === 'Usulan' ? 'orange' : 'blue')) }}">
+                                                            {{ $val->status === 'Disetujui' ? 'green' : ($val->status === 'Ditolak' || $val->status === 'Revisi' ? 'red' : 'orange') }}">
                                                                 {{ $val->status }}
                                                             </p>
                                                         </td>
@@ -91,8 +91,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalScrollableTitle">
-                                                                    Scrolling long
-                                                                    Content</h5>
+                                                                    Detail Data</h5>
                                                                 <button type="button" class="close"
                                                                     data-bs-dismiss="modal" aria-label="Close">
                                                                     <i data-feather="x"></i>

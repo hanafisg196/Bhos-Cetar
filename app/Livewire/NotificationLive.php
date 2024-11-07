@@ -34,9 +34,7 @@ class NotificationLive extends Component
     {
         $this->notificationService->updateNotifStat($id);
     }
-    public function loadMore(){
-      $this->perPage += 6;
-  }
+
     public function render()
     {
         $data =  $this->notificationService->getNotify($this->perPage);

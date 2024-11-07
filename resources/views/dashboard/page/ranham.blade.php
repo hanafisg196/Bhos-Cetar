@@ -6,18 +6,18 @@
           <div class="col-12" id="page" style="display: none;">
               <div class="card">
                   <div class="card-header">
-                      <h4 class="card-title">Aksi Ham</h4>
+                      <h4 class="card-title">Kami Peduli</h4>
                   </div>
                   <div class="card-content">
                       <div class="card-body">
                          <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="list-lah" data-bs-toggle="tab" href="#listLah"
-                                    role="tab" aria-controls="list" aria-selected="true">List Aksi Hukum</a>
+                                    role="tab" aria-controls="list" aria-selected="true">List Data</a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link " id="form-lah" data-bs-toggle="tab" href="#formLah" role="tab"
-                                    aria-controls="form" aria-selected="true">Buat Aksi Hukum</a>
+                                    aria-controls="form" aria-selected="true">Buat Baru</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
@@ -44,12 +44,12 @@
                                                <p class="mb-0" style="margin: 0;">{{$val->code}}</p>
                                            </td>
                                            <td class="col-auto" style="padding: 5px;">
-                                               <p class="mb-0"
-                                               style="margin: 0;color:
-                                               {{$val->status === 'Disetujui' ? 'green' : ($val->status === 'Ditolak' ? 'red':($val->status === 'Usulan' ? 'orange' : 'blue'))}}">
-                                               {{$val->status}}
-                                           </p>
-                                           </td>
+                                             <p class="mb-0"
+                                                 style="margin: 0;color:
+                                             {{ $val->status === 'Disetujui' ? 'green' : ($val->status === 'Ditolak' || $val->status === 'Revisi' ? 'red' : 'orange') }}">
+                                                 {{ $val->status }}
+                                             </p>
+                                         </td>
                                            <td class="col-auto" style="padding: 5px;">
                                                <p class="mb-0" style="margin: 0;">{{cutLink($val->link)}}</p>
                                            </td>

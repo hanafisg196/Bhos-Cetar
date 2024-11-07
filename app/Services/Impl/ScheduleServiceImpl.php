@@ -105,6 +105,10 @@ class ScheduleServiceImpl implements ScheduleService
         ]);
         $schedule_id = $schedule->id;
         $this->copyFilesFromTmp($temporaryFiles, $schedule_id);
+        $notif = Notification::where('lbh_id', $schedule_id);
+        $notif->update([
+           'notif_read' => 1
+        ]);
         $schedule->refresh();
         $this->createTrackingPointLbh(
          $schedule_id,
