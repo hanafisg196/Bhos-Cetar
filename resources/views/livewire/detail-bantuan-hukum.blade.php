@@ -137,17 +137,22 @@
                                       </div>
 
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn" data-bs-dismiss="modal">
-                                            <i class="bx bx-x d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Tutup</span>
-                                        </button>
-                                        <button wire:click="updateStatus('{{ $data->id }}')" type="button"
+
+                                       <div class="modal-footer">
+                                          <button type="button" class="btn" data-bs-dismiss="modal">
+                                              <i class="bx bx-x d-block d-sm-none"></i>
+                                              <span class="d-none d-sm-block">Tutup</span>
+                                          </button>
+                                            <button wire:loading.remove wire:click="updateStatus('{{ $data->id }}')" type="button"
                                             class="btn btn-primary ms-1">
                                             <i class="bx bx-check d-block d-sm-none"></i>
                                             <span class="d-none d-sm-block">Simpan</span>
                                         </button>
-                                    </div>
+                                          <div wire:loading id="loadingSpinner" class="spinner-border ms-1" style="width: 2rem; height: 2rem;" role="status">
+                                              <span class="visually-hidden">Loading...</span>
+                                          </div>
+                                      </div>
+
                                 </form>
                             </div>
                         </div>
@@ -193,11 +198,14 @@
                                         <i class="bx bx-x d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Tutup</span>
                                     </button>
-                                    <button wire:click="updateVerifikatorOne('{{ $data->id }}')" type="button"
+                                    <button wire:loading.remove wire:click="updateVerifikatorOne('{{ $data->id }}')" type="button"
                                         class="btn btn-primary ms-1">
                                         <i class="bx bx-check d-block d-sm-none"></i>
                                         <span class="d-none d-sm-block">Simpan</span>
                                     </button>
+                                    <div wire:loading id="loadingSpinner" class="spinner-border ms-1" style="width: 2rem; height: 2rem;" role="status">
+                                       <span class="visually-hidden">Loading...</span>
+                                   </div>
                                 </div>
                             </form>
                         </div>
