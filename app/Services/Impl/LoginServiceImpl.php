@@ -15,6 +15,19 @@ class LoginServiceImpl implements LoginService
     {
         return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
     }
+    private function specialRole($jabatan, $user){
+      if(str_contains($jabatan ,'KEPALA BAGIAN HUKUM')){
+         $user->rules()->attach(2);
+      }elseif(str_contains($jabatan , 'SEKRETARIS')){
+         $user->rules()->attach(3);
+      }
+      elseif(str_contains($jabatan , 'KEPALA BIDANG')){
+         $user->rules()->attach(4);
+      }
+      else {
+            return null;
+      }
+    }
     public function login(Request $request)
     {
         $username = $request->input('username');
@@ -46,6 +59,7 @@ class LoginServiceImpl implements LoginService
                         'jabatan' => $data['jabatan']['nama'],
                         'token' => $token,
                     ]);
+                    $this->specialRole($user->jabatan,$user);
                 } else {
                     $user->update([
                         'username' => $data['jabatan']['nip'],
@@ -71,22 +85,7 @@ class LoginServiceImpl implements LoginService
         }
     }
 
-    //  public function login(Request $request)
-    //  {
 
-    //      $credentials = $request->only('username', 'password');
-    //         if (Auth::attempt($credentials)) {
-    //          $rule = ['ADMIN', 'KABAG', 'VERIFIKATOR 1', 'VERIFIKATOR 2'];
-    //          $hasRule = $this->getUserRole($rule);
-    //          if ($hasRule) {
-    //              return redirect()->route('admin.dashboard');
-    //          } else {
-    //              return redirect()->route('dashboard');
-    //          }
-    //      } else {
-    //          return back()->with('error' ,'login gagal');
-    //      }
-    //  }
 
     public function logout()
     {

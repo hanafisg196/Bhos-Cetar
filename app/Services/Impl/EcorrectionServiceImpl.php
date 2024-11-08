@@ -20,12 +20,13 @@ class EcorrectionServiceImpl implements EcorrectionService {
        return Auth::user();
    }
 
-   private function createTrackingPointEcor($id,$status,$naphon,$napem){
+   private function createTrackingPointEcor($id,$status,$naphon,$napem,$kabag){
       TrackingPoint::create([
          'ecor_id' => $id,
          'status' => $status,
          'nama_pemohon' => $naphon,
-         'nama_pemeriksa' => $napem
+         'nama_pemeriksa' => $napem,
+         'nama_kabag' => $kabag
       ]);
     }
    private function getUserRole($rule)
@@ -84,6 +85,7 @@ class EcorrectionServiceImpl implements EcorrectionService {
          $ecorrection_id,
          $ecorrection->status,
          $user->name,
+         null,
          null
       );
 
@@ -174,7 +176,8 @@ class EcorrectionServiceImpl implements EcorrectionService {
                $ecor->id,
                $ecor->status,
                null,
-               $ecor->verifikator_name
+               $ecor->verifikator_name,
+               null
             );
 
 
@@ -206,6 +209,7 @@ class EcorrectionServiceImpl implements EcorrectionService {
          $ecor->id,
          $ecor->status,
          $user->name,
+         null,
          null
       );
     }
@@ -226,8 +230,9 @@ class EcorrectionServiceImpl implements EcorrectionService {
                 ->paginate($perPage);
     }
     public function sendToVerifikatorTwo($id,$verifikator, $vname, $pesan){
-
       $ecor = $this->getEcorrectionById($id);
+      $user = $this->getUser();
+      $kabag =  $user->rules->where('nama', 'KABAG')->isNotEmpty() ?  $user->name : null;
       $ecor->update([
          'verifikator_nip' => $verifikator,
          'verifikator_name' => $vname,
@@ -240,7 +245,8 @@ class EcorrectionServiceImpl implements EcorrectionService {
          $ecor->id,
          $ecor->status,
          null,
-         $ecor->verifikator_name
+         $ecor->verifikator_name,
+         $kabag
        );
     }
 
@@ -313,8 +319,5 @@ class EcorrectionServiceImpl implements EcorrectionService {
    ->where('read', 0)
    ->count();
  }
-
-
-
 
 }

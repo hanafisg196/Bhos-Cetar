@@ -1,4 +1,5 @@
 <div>
+
     {{-- Be like water. --}}
     @php
         $statusOptions = ['Disetujui', 'Revisi', 'Ditolak'];
@@ -34,12 +35,10 @@
                               <small class="text-muted d-block">Kepada Sistem Bhos Cetar</small>
                           </div>
                         </div>
-                        <div class="mb-2">
-                           <p class="text-bold-500" style="margin-top: 15px;">Nama : {{ $data->users->name }}</p>
-                           <p class="text-bold-500" style="margin-top: 15px;">Nip : {{ $data->users->nip }}</p>
-                           <p class="text-bold-500" style="margin-top: 15px;">Kode dokumen : {{ $data->code }}</p>
-                           <p class="text-bold-500" style="margin-top: 15px;">Judul : {{ $data->title }}</p>
-
+                        <div>
+                           <p class="text-bold-500" style="margin-top: 5px; margin-bottom: 3px;">Nama pengirim : {{ $data->users->name }}</p>
+                           <p class="text-bold-500" style="margin-top: 5px; margin-bottom: 3px;">Kode dokumen : {{ $data->code }}</p>
+                           <p class="text-bold-500" style="margin-top: 5px; margin-bottom: 3px;">Judul : {{ $data->title }}</p>
                         </div>
 
                     </div>

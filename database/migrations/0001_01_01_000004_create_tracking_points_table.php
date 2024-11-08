@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('status');
             $table->string('nama_pemohon')->nullable();
             $table->string('nama_pemeriksa')->nullable();
+            $table->string('nama_kabag')->nullable();
             $table->timestamps();
         });
     }

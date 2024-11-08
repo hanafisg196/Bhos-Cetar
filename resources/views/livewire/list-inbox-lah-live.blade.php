@@ -232,10 +232,13 @@
                                                               <div class="modal-body">
                                                                <div class="modal-body">
                                                                   @foreach ($item['trackingPoints'] as $track)
-                                                                  <div class="card mb-3">
+                                                                  <div class="card mb-1">
                                                                       <div class="card-body">
                                                                         @if ($track->nama_pemohon)
                                                                         <p class="mb-1"><strong>Pemohon - {{$track->nama_pemohon}}</strong> </p>
+                                                                        @elseif ($track->status === 'Disposisi')
+                                                                        <p style="margin-bottom: -3px;">Di dispoisikan oleh Kabag Hukum - <strong>{{$track->nama_kabag}}</strong></p>
+                                                                        <p class="mb-1">Kepada <strong>Pemeriksa - {{$track->nama_pemeriksa}}</strong> </p>
                                                                         @else
                                                                         <p class="mb-1"><strong>Pemeriksa - {{$track->nama_pemeriksa}}</strong> </p>
                                                                         @endif

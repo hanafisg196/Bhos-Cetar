@@ -13,11 +13,11 @@
                          <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link active" id="list-lah" data-bs-toggle="tab" href="#listLah"
-                                    role="tab" aria-controls="list" aria-selected="true">List Data</a>
+                                    role="tab" aria-controls="list" aria-selected="true">List data</a>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link " id="form-lah" data-bs-toggle="tab" href="#formLah" role="tab"
-                                    aria-controls="form" aria-selected="true">Buat Baru</a>
+                                    aria-controls="form" aria-selected="true">Buat baru</a>
                             </li>
                         </ul>
                         <div class="tab-content" id="myTabContent">
@@ -34,32 +34,36 @@
                                            <th>Lihat</th>
                                        </tr>
                                    </thead>
-                                   @foreach ($ranham as $val)
+                                   @foreach ($ranham as $item)
                                    <tbody>
                                        <tr style="padding: 0;">
                                            <td class="col-auto" style="padding: 5px;">
-                                               <p class="mb-0" style="margin: 0;">{{$val->created_at->diffForHumans()}}</p>
+                                               <p class="mb-0" style="margin: 0;">{{$item->created_at->diffForHumans()}}</p>
                                            </td>
                                            <td class="col-auto" style="padding: 5px;">
-                                               <p class="mb-0" style="margin: 0;">{{$val->code}}</p>
+                                               <p class="mb-0" style="margin: 0;">{{$item->code}}</p>
                                            </td>
                                            <td class="col-auto" style="padding: 5px;">
                                              <p class="mb-0"
                                                  style="margin: 0;color:
-                                             {{ $val->status === 'Disetujui' ? 'green' : ($val->status === 'Ditolak' || $val->status === 'Revisi' ? 'red' : 'orange') }}">
-                                                 {{ $val->status }}
+                                             {{ $item->status === 'Disetujui' ? 'green' : ($item->status === 'Ditolak' || $item->status === 'Revisi' ? 'red' : 'orange') }}">
+                                                 {{ $item->status }}
                                              </p>
                                          </td>
                                            <td class="col-auto" style="padding: 5px;">
-                                               <p class="mb-0" style="margin: 0;">{{cutLink($val->link)}}</p>
+                                               <p class="mb-0" style="margin: 0;">{{cutLink($item->link)}}</p>
                                            </td>
                                            <td class="col-auto" style="padding: 5px;">
-                                               <a href="{{$val->link}}" class="btn icon btn-primary" style="padding: 5px 10px;">
+                                               <a href="{{$item->link}}" class="btn icon btn-primary" style="padding: 5px 10px;">
                                                    <i class="bi bi-eye"></i>
                                                </a>
+                                               <a class="btn icon btn-primary" style="padding: 5px 10px;" data-bs-toggle="modal" data-bs-target="#modals-{{ $item->id }}">
+                                                <i class="bi bi-info-circle"></i>
+                                              </a>
                                            </td>
                                        </tr>
                                    </tbody>
+                                   @include('dashboard.component.modal-tracking-point')
                                    @endforeach
                                </table>
                                {{$ranham->links()}}

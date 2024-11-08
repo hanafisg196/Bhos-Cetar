@@ -18,11 +18,11 @@
                            <ul class="nav nav-tabs" id="myTab" role="tablist">
                               <li class="nav-item" role="presentation">
                                   <a class="nav-link active" id="list-lbh" data-bs-toggle="tab" href="#listLbh"
-                                      role="tab" aria-controls="list" aria-selected="true">List Data</a>
+                                      role="tab" aria-controls="list" aria-selected="true">List data</a>
                               </li>
                               <li class="nav-item" role="presentation">
                                   <a class="nav-link " id="form-lbh" data-bs-toggle="tab" href="#formLbh" role="tab"
-                                      aria-controls="form" aria-selected="true">Buat Baru</a>
+                                      aria-controls="form" aria-selected="true">Buat baru</a>
                               </li>
                           </ul>
                           <div class="tab-content" id="myTabContent">
@@ -57,6 +57,9 @@
                                              <td class="col-auto" style="padding: 5px 0;">
                                                  <a class="btn icon btn-primary" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">
                                                      <i class="bi bi-eye"></i>
+                                                 </a>
+                                                 <a class="btn icon btn-primary" data-bs-toggle="modal" data-bs-target="#modals-{{ $item->id }}">
+                                                   <i class="bi bi-info-circle"></i>
                                                  </a>
                                              </td>
                                          </tr>
@@ -104,7 +107,8 @@
                                                  </div>
                                              </div>
                                          </div>
-                                     </div>
+                                      </div>
+                                       @include('dashboard.component.modal-tracking-point')
                                      @endforeach
                                  </table>
                                  {{$bantuan->links()}}

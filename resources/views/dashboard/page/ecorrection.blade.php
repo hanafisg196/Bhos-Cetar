@@ -27,11 +27,11 @@
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link active" id="list-ecor" data-bs-toggle="tab" href="#listEcor"
-                                            role="tab" aria-controls="list" aria-selected="true">List Data</a>
+                                            role="tab" aria-controls="list" aria-selected="true">List data</a>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link " id="form-ecor" data-bs-toggle="tab" href="#formEcor"
-                                            role="tab" aria-controls="form" aria-selected="true">Buat Baru</a>
+                                            role="tab" aria-controls="form" aria-selected="true">Buat baru</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
@@ -48,44 +48,48 @@
                                                         <th>File</th>
                                                         <th>Lihat</th>
                                                     </tr>
-                                                    @foreach ($ecor as $val)
+                                                    @foreach ($ecor as $item)
                                                 <tbody>
                                                     <tr style="padding: 0;">
                                                         <td class="col-auto" style="padding: 5px;">
                                                             <p class="mb-0" style="margin: 0;">
-                                                                {{ $val->created_at->diffForHumans() }}</p>
+                                                                {{ $item->created_at->diffForHumans() }}</p>
                                                         </td>
                                                         <td class="col-auto" style="padding: 5px;">
-                                                            <p class="mb-0" style="margin: 0;">{{ $val->code }}</p>
+                                                            <p class="mb-0" style="margin: 0;">{{ $item->code }}</p>
                                                         </td>
                                                         <td class="col-auto" style="padding: 5px;">
                                                             <p class="mb-0"
                                                                 style="margin: 0;color:
-                                                            {{ $val->status === 'Disetujui' ? 'green' : ($val->status === 'Ditolak' || $val->status === 'Revisi' ? 'red' : 'orange') }}">
-                                                                {{ $val->status }}
+                                                            {{ $item->status === 'Disetujui' ? 'green' : ($item->status === 'Ditolak' || $item->status === 'Revisi' ? 'red' : 'orange') }}">
+                                                                {{ $item->status }}
                                                             </p>
                                                         </td>
                                                         <td class="col-auto" style="padding: 5px;">
-                                                            <p class="mb-0" style="margin: 0;">{{ $val->title }}</p>
+                                                            <p class="mb-0" style="margin: 0;">{{ $item->title }}</p>
                                                         </td>
                                                         <td class="col-auto" style="padding: 5px;">
-                                                            @foreach ($val['dokumens'] as $item)
+                                                            @foreach ($item['dokumens'] as $files)
                                                                 <p class="mb-0" style="margin: 0;">
-                                                                    {{ strCut($item->file) }}
+                                                                    {{ strCut($files->file) }}
                                                                 </p>
                                                             @endforeach
                                                         </td>
                                                         <td class="col-auto" style="padding: 5px;">
                                                             <a class="btn icon btn-primary ms-3" data-bs-toggle="modal"
-                                                                data-bs-target="#modal-{{ $item->id }}">
+                                                                data-bs-target="#modal-{{ $files->id }}">
                                                                 <i class="bi bi-eye-fill"></i>
+                                                            </a>
+                                                            <a class="btn icon btn-primary ms-3" data-bs-toggle="modal"
+                                                                data-bs-target="#modals-{{ $item->id }}">
+                                                                <i class="bi bi-info-circle"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
                                                 </tbody>
-                                                <div class="modal fade" id="modal-{{ $item->id }}" tabindex="-1"
+                                                <div class="modal fade" id="modal-{{ $files->id }}" tabindex="-1"
                                                     role="dialog"
-                                                    aria-labelledby="exampleModalScrollableTitle-{{ $item->id }}"
+                                                    aria-labelledby="exampleModalScrollableTitle-{{ $files->id }}"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-scrollable " role="document">
                                                         <div class="modal-content">
@@ -99,7 +103,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="d-flex justify-content-center mt-3">
-                                                                    <iframe src="{{ asset('storage/' . $item->file) }}"
+                                                                    <iframe src="{{ asset('storage/' . $files->file) }}"
                                                                         style="width:718px; height:700px;" title="doc"
                                                                         name="contents"></iframe>
                                                                 </div>
@@ -114,9 +118,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @include('dashboard.component.modal-tracking-point')
                                                 @endforeach
                                                 </thead>
-
                                             </table>
                                             {{ $ecor->links() }}
                                         </div>

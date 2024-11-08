@@ -1,4 +1,9 @@
 <div>
+   <style>
+      p{
+         margin-bottom: -1px;
+       }
+   </style>
     @php
         $statusOptions = ['Disetujui','Revisi','Ditolak'];
     @endphp
@@ -34,8 +39,7 @@
                             </div>
                         </div>
                         <p class="text-bold-500" style="margin-top: 15px;">Kode File : {{ $data->code }}</p>
-                        <p class="text-bold-500">Nama : {{ $data->name }}</p>
-                        <p class="text-bold-500">Nip : {{ $data->users->nip }}</p>
+                        <p class="text-bold-500">Nama pengirim : {{ $data->name }}</p>
                         <p class="text-bold-500">Link : <a href="{{$data->link}}">{{$data->link}}</a></p>
                         <p class="text-bold-500">KKP : {{ $data['kkps']['name'] }}</p>
                     </div>

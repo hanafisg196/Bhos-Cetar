@@ -38,12 +38,13 @@ class ReportHamServiceImpl implements ReportHamService
 
         return $val;
     }
-    private function createTrackingPointLah($id,$status,$naphon,$napem){
+    private function createTrackingPointLah($id,$status,$naphon,$napem, $kabag){
       TrackingPoint::create([
          'lah_id' => $id,
          'status' => $status,
          'nama_pemohon' => $naphon,
-         'nama_pemeriksa' => $napem
+         'nama_pemeriksa' => $napem,
+         'nama_kabag' => $kabag
       ]);
     }
 
@@ -104,6 +105,7 @@ class ReportHamServiceImpl implements ReportHamService
          $ranham->id,
          $ranham->status,
           $user->name,
+          null,
           null
          );
     }
@@ -137,7 +139,8 @@ class ReportHamServiceImpl implements ReportHamService
                $ranham->id,
                $ranham->status,
                 null,
-                $ranham->verifikator_name
+                $ranham->verifikator_name,
+                null
                );
         }
     }
@@ -164,6 +167,7 @@ class ReportHamServiceImpl implements ReportHamService
          $ranham->id,
          $ranham->status,
           $user->name,
+          null,
           null
          );
     }
@@ -204,6 +208,8 @@ class ReportHamServiceImpl implements ReportHamService
     public function sendToVerifikatorOne($id, $vnip, $vname, $message)
     {
         $lah = $this->getRanhamByid($id);
+        $user = $this->getUser();
+        $kabag =  $user->rules->where('nama', 'KABAG')->isNotEmpty() ?  $user->name : null;
         $lah->update([
             'verifikator_nip' => $vnip,
             'verifikator_name' => $vname,
@@ -217,7 +223,8 @@ class ReportHamServiceImpl implements ReportHamService
          $lah->id,
          $lah->status,
          null,
-         $lah->verifikator_name
+         $lah->verifikator_name,
+         $kabag
          );
     }
 

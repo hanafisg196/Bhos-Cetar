@@ -25,12 +25,13 @@ class ScheduleServiceImpl implements ScheduleService
        return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
     }
 
-    private function createTrackingPointLbh($id,$status,$naphon,$napem){
+    private function createTrackingPointLbh($id,$status,$naphon,$napem,$kabag){
       TrackingPoint::create([
          'lbh_id' => $id,
          'status' => $status,
          'nama_pemohon' => $naphon,
-         'nama_pemeriksa' => $napem
+         'nama_pemeriksa' => $napem,
+         'nama_kabag' => $kabag
       ]);
     }
 
@@ -78,6 +79,7 @@ class ScheduleServiceImpl implements ScheduleService
                $schedule_id,
                $schedule->status,
                $user->name,
+               null,
                null
             );
     }
@@ -114,6 +116,7 @@ class ScheduleServiceImpl implements ScheduleService
          $schedule_id,
          $schedule->status,
          $user->name,
+         null,
          null
         );
     }
@@ -231,7 +234,8 @@ class ScheduleServiceImpl implements ScheduleService
                $schedule->id,
                $schedule->status,
                null,
-               $schedule->verifikator_name
+               $schedule->verifikator_name,
+               null
               );
         }
     }
@@ -241,21 +245,22 @@ class ScheduleServiceImpl implements ScheduleService
     }
     public function sendToVerifikatorOne($id,$vnip, $vname, $message){
       $lbh = $this->getScheduleById($id);
-
+      $user = $this->getUser();
+      $kabag =  $user->rules->where('nama', 'KABAG')->isNotEmpty() ?  $user->name : null;
       $lbh->update([
          'verifikator_nip' => $vnip,
          'verifikator_name' => $vname,
          'status' => 'Disposisi',
          'message' => $message,
          'read' => 0
-
       ]);
       $lbh->refresh();
         $this->createTrackingPointLbh(
          $lbh->id,
          $lbh->status,
          null,
-         $lbh->verifikator_name
+         $lbh->verifikator_name,
+         $kabag
         );
 
      }
