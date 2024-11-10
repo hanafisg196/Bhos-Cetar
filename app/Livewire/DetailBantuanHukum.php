@@ -89,10 +89,9 @@ class DetailBantuanHukum extends Component
          'status' => 'required',
          'pesan' => 'required',
        ]);
-      $test =  $this->scheduleService->updateStatSchdeule($id, $this->status, $this->pesan);
+        $this->scheduleService->updateStatSchdeule($id, $this->status, $this->pesan);
         session()->flash('notify', 'anda mendapatkan notifikasi');
-        $this->dispatch('count', $test);
-      //   $this->redirect(route('admin.list.lbh'));
+        $this->redirect(route('admin.list.lbh'));
 
 
     }

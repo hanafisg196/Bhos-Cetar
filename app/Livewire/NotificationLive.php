@@ -9,7 +9,6 @@ use Livewire\Attributes\On;
 
 class NotificationLive extends Component
 {
-   //  protected $listeners = ['count' => 'updateDataCount'];
     use WithPagination;
     public $perPage = 6;
     public $countNotif = 0;
@@ -27,11 +26,9 @@ class NotificationLive extends Component
     {
         $this->countNotif();
     }
-    #[On('count')]
     public function countNotif()
     {
         $this->countNotif = $this->notificationService->count();
-      //   $this->dispatch('count', countNotif: $this->countNotif);
     }
 
     public function readNotif($id)
