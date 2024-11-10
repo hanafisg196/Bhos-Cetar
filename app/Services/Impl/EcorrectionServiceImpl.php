@@ -229,14 +229,14 @@ class EcorrectionServiceImpl implements EcorrectionService {
                 ->latest()
                 ->paginate($perPage);
     }
-    public function sendToVerifikatorTwo($id,$verifikator, $vname, $pesan){
+    public function sendToVerifikatorTwo($id,$verifikator, $vname, $message){
       $ecor = $this->getEcorrectionById($id);
       $user = $this->getUser();
       $kabag =  $user->rules->where('nama', 'KABAG')->isNotEmpty() ?  $user->name : null;
       $ecor->update([
          'verifikator_nip' => $verifikator,
          'verifikator_name' => $vname,
-         'message' => $pesan,
+         'special_message' => $message,
          'status' => 'Disposisi',
          'read' => 0
       ]);

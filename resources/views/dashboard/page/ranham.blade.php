@@ -1,5 +1,6 @@
 @extends('dashboard.template.main')
 @section('content')
+{{ timeMachine() }}
 <div class="page-content">
    <section id="multiple-column-form">
       <div class="row match-height">

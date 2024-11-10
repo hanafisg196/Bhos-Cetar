@@ -17,16 +17,18 @@ name="lol">
             <div class="modal-body">
                <input type="text"class="form-control" name="username"
                     value="{{ $ksbsp['nip'] }}" hidden>
-                <label for="nama">Nama</label>
-                <label for="nip">NIP</label>
-                <input type="text"class="form-control" name="nip"
-                    value="{{ $ksbsp['nip'] }}" readonly>
-                <label for="nip">JABATAN</label>
-                <input type="text"class="form-control" name="jabatan"
-                    value="{{ $ksbsp['nama_jabatan'] }}" readonly>
+               <label for="nama">Kode Jabatan</label>
+               <input type="text" class="form-control" name="kode_jabatan"
+                     value="{{ $ksbsp['kode_jabatan'] }}" readonly>
                 <label for="nama">Nama</label>
                 <input type="text" class="form-control" name="name"
                     value="{{ $ksbsp['nama_pegawai'] }}" readonly>
+                <label for="nip">Nip</label>
+                <input type="text"class="form-control" name="nip"
+                    value="{{ $ksbsp['nip'] }}" readonly>
+                <label for="nip">Jabatan</label>
+                <input type="text"class="form-control" name="jabatan"
+                    value="{{ $ksbsp['nama_jabatan'] }}" readonly>
                 <label for="nip">Rule</label>
                 <select name="rule_id" class="form-select" id="basicSelect">
                     <option value="">Pilih Rule</option>

@@ -69,3 +69,11 @@
       </section>
   </div>
 </div>
+
+<script>
+   document.addEventListener('livewire:init', () => {
+      Livewire.on('update-count', (event) => {
+          console.log('yes i did it')
+      });
+   });
+</script>

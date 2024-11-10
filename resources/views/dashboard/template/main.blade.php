@@ -62,6 +62,7 @@
         @include('dashboard.component.sweet-toast-error')
         @yield('script')
         @livewireScripts
+
 </body>
 
 </html>

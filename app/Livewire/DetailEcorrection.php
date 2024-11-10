@@ -30,6 +30,7 @@ class DetailEcorrection extends Component
     public $verifikator;
     public $vname;
     public $pesan = '';
+    public $pesanKhusus;
     public $status = '';
     public $file;
 
@@ -56,6 +57,12 @@ class DetailEcorrection extends Component
         $this->data = $this->ecorrectionService->getEcorrectionById($id);
     }
 
+    public function download($file)
+    {
+        return response()->download(
+            storage_path('app/public/' . $file)
+        );
+    }
     public function getVerifikatorTwo()
     {
         $this->verifikatorTwo = $this->roleService->getVerifikatorTwo();
@@ -70,8 +77,9 @@ class DetailEcorrection extends Component
         $this->validate([
             'verifikator' => 'required|string',
             'vname' => 'string',
+            'pesanKhusus' => 'nullable|string'
         ]);
-        $this->ecorrectionService->sendToVerifikatorTwo($id, $this->verifikator, $this->vname, $this->pesan);
+        $this->ecorrectionService->sendToVerifikatorTwo($id, $this->verifikator, $this->vname, $this->pesanKhusus);
         session()->flash('status', 'Verifikator Berhasil Di tentukan');
         $this->redirect(route('admin.list.ecorrection'));
     }

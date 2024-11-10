@@ -214,7 +214,7 @@ class ReportHamServiceImpl implements ReportHamService
             'verifikator_nip' => $vnip,
             'verifikator_name' => $vname,
             'status' => 'Disposisi',
-            'message' => $message,
+            'special_message' => $message,
             'read' => 0,
         ]);
 

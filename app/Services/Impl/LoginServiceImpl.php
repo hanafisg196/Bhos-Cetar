@@ -16,16 +16,16 @@ class LoginServiceImpl implements LoginService
         return Auth::user()->rules->pluck('nama')->intersect($rule)->isNotEmpty();
     }
     private function specialRole($jabatan, $user){
-      if(str_contains($jabatan ,'KEPALA BAGIAN HUKUM')){
+      if(stripos($jabatan ,'KEPALA BAGIAN HUKUM') !== false){
          $user->rules()->attach(2);
-      }elseif(str_contains($jabatan , 'SEKRETARIS')){
+      }elseif(stripos($jabatan , 'SEKRETARIS')  !== false){
          $user->rules()->attach(3);
       }
-      elseif(str_contains($jabatan , 'KEPALA BIDANG')){
+      elseif(stripos($jabatan , 'KEPALA BIDANG') !== false){
          $user->rules()->attach(4);
       }
       else {
-            return null;
+            return false;
       }
     }
     public function login(Request $request)

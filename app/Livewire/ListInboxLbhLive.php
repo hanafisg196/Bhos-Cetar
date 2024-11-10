@@ -48,7 +48,6 @@ class ListInboxLbhLive extends Component
         $this->checkAccessKabag();
         $this->checkAccessVerifikator();
         $this->counter();
-        // $this->trackingPoint($this->posId);
     }
     public function render()
     {

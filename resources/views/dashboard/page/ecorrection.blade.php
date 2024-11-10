@@ -1,5 +1,6 @@
 @extends('dashboard.template.main')
 @section('content')
+{{ timeMachine() }}
     @if ($errors->any())
         <div class="d-flex justify-content-center">
             <div class="alert alert-danger alert-dismissible show fade col-12 col-md-10">

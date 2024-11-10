@@ -35,6 +35,7 @@ class DetailBantuanHukum extends Component
     public $kabag;
     public $hasDispos;
     public $pesan = '';
+    public $pesanKhusus;
     public $status = '';
 
     protected $rules = [
@@ -82,26 +83,30 @@ class DetailBantuanHukum extends Component
         $id = Crypt::decrypt($id);
         $this->data = $this->scheduleService->getDetailSchedule($id);
     }
-
     public function updateStatus($id)
     {
       $this->validate([
          'status' => 'required',
          'pesan' => 'required',
        ]);
-        $this->scheduleService->updateStatSchdeule($id, $this->status, $this->pesan);
-        session()->flash('status', 'Data berhasil di update.');
-        $this->redirect(route('admin.list.lbh'));
+      $test =  $this->scheduleService->updateStatSchdeule($id, $this->status, $this->pesan);
+        session()->flash('notify', 'anda mendapatkan notifikasi');
+        $this->dispatch('count', $test);
+      //   $this->redirect(route('admin.list.lbh'));
+
+
     }
 
     public function updateVerifikatorOne($id){
       $this->validate([
          'vname' => 'required|string',
          'verifikator' => 'required|string',
+         'pesanKhusus' => 'nullable|string',
      ]);
-      $this->scheduleService->sendToVerifikatorOne($id, $this->verifikator, $this->vname, $this->pesan);
+      $this->scheduleService->sendToVerifikatorOne($id, $this->verifikator, $this->vname, $this->pesanKhusus);
       session()->flash('status', 'Verifikator Berhasil Di tentukan');
       $this->redirect(route('admin.list.lbh'));
+      $this->dispatch('count');
     }
 
     public function updatedVerifikator($value){

@@ -23,8 +23,11 @@ if (!function_exists('cutLink')) {
      $replace = '....';
 
      if (strlen($word) > $limit) {
-         return substr($word, 0, $limit) . $replace;
+       $limitWord =  substr($word, 0, $limit) . $replace ;
+     } else {
+      return $word;
      }
+     return $limitWord;
    }
 }
 

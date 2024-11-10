@@ -20,7 +20,7 @@ class Notifications extends Component
    }
    public function placeholder()
     {
-      return view('placeholder.icon-notif');
+      return view('placeholder.center-loading');
     }
    public function loadMore(){
       $this->perPage += 6;

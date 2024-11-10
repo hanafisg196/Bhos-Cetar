@@ -5,9 +5,11 @@ namespace App\Livewire;
 use App\Services\NotificationService;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\On;
 
 class NotificationLive extends Component
 {
+   //  protected $listeners = ['count' => 'updateDataCount'];
     use WithPagination;
     public $perPage = 6;
     public $countNotif = 0;
@@ -19,15 +21,17 @@ class NotificationLive extends Component
     }
     public function placeholder()
     {
-      return view('placeholder.icon-notif');
+        return view('placeholder.icon-notif');
     }
     public function mount()
     {
         $this->countNotif();
     }
-
-    public function countNotif(){
-      $this->countNotif = $this->notificationService->count();
+    #[On('count')]
+    public function countNotif()
+    {
+        $this->countNotif = $this->notificationService->count();
+      //   $this->dispatch('count', countNotif: $this->countNotif);
     }
 
     public function readNotif($id)
@@ -37,9 +41,9 @@ class NotificationLive extends Component
 
     public function render()
     {
-        $data =  $this->notificationService->getNotify($this->perPage);
-        return view('livewire.notification-live') -> with([
-         'data' => $data
+        $data = $this->notificationService->getNotify($this->perPage);
+        return view('livewire.notification-live')->with([
+            'data' => $data,
         ]);
     }
 }

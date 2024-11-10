@@ -22,6 +22,7 @@ class DetailAksiHam extends Component
     public $checkKabag;
     public $checkVerifikator;
     public $pesan = '';
+    public $pesanKhusus;
     public $status = '';
     protected $rules = [
         'vname' => 'required|string',
@@ -77,7 +78,7 @@ class DetailAksiHam extends Component
             'verifikator' => 'required|string',
         ]);
 
-        $this->reportHamService->sendToVerifikatorOne($id, $this->verifikator, $this->vname, $this->pesan);
+        $this->reportHamService->sendToVerifikatorOne($id, $this->verifikator, $this->vname, $this->pesanKhusus);
         session()->flash('status', 'Verifikator Berhasil Di tentukan');
         $this->redirect(route('admin.list.lah'));
     }

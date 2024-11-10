@@ -30,11 +30,6 @@
                             <div class="media-body mt-25">
                                 <span class="text-primary">{{ $data->name }}</span>
                                 <span class="d-sm-inline d-none">&lt;Status - {{ $data->status }}&gt;</span>
-                                @if ($data->status === 'Disposisi')
-                                <span class="d-sm-inline d-none">&nbsp;&nbsp;
-                                 <strong>{{ ($data->message && $data->message !== '-') ? 'Pesan - ' . $data->message : '' }}</strong>
-                                </span>
-                                @endif
                                 <small class="text-muted d-block">Kepada Sistem Bhos Cetar</small>
                             </div>
                         </div>
@@ -146,13 +141,13 @@
                                          {{ $message }}
                                           @enderror
                                        </div>
-                                        <label for="message">Pesan</label>
-                                             <textarea class="form-control" id="message" name="message" rows="5" wire:model="pesan"></textarea>
-                                             <div>
-                                                 @error('pesan')
-                                                     {{ $message }}
-                                                 @enderror
-                                             </div>
+                                       <label for="message">Pesan Khusus</label>
+                                       <textarea class="form-control" id="message" name="message" rows="5" wire:model="pesanKhusus" placeholder="Opsional"></textarea>
+                                       <div>
+                                           @error('pesanKhusus')
+                                               {{ $message }}
+                                           @enderror
+                                       </div>
                                        </fieldset>
 
                                      </div>

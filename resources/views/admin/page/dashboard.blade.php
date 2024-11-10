@@ -1,6 +1,7 @@
 @extends('admin.template.main')
 @section('content')
     <div class="page-content">
+      {{-- <livewire:counter/> --}}
         <section class="row" style="margin-top: -30px;">
             <div class="col-12 col-xl-12" id="page" style="display: none;">
                 <div class="card">

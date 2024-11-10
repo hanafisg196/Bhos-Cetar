@@ -20,6 +20,7 @@ return new class extends Migration
             $table->tinyInteger('read')->default(0);
             $table->unsignedBigInteger('kkp_id');
             $table->unsignedBigInteger('user_id');
+            $table->string('special_message')->nullable();
             $table->string('status')->default('Usulan');
             $table->string('message')->default('-');
             $table->unsignedBigInteger('catran_id')->nullable();

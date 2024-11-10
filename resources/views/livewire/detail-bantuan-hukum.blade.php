@@ -30,17 +30,13 @@
                                 </div>
                             </div>
                             <div class="media-body mt-25">
-                                <span class="text-primary">{{ $data->nama }}</span>
-                                <span class="d-sm-inline d-none">&lt;Status - {{ $data->status }}&gt;</span>
-                                 @if ($data->status === 'Disposisi')
-                                <span class="d-sm-inline d-none">&nbsp;&nbsp;
-                                 <strong>{{ ($data->message && $data->message !== '-') ? 'Pesan - ' . $data->message : '' }}</strong>
-                                </span>
-                                @endif
+                                <span class="text-primary">{{ $data->users->name }}</span>
+                                <span class="d-sm-inline d-none">&lt;Status - {{ $data->status }}&gt;</span>s
                                 <small class="text-muted d-block">Kepada Sistem Bhos Cetar</small>
                             </div>
                         </div>
-                        <p class="text-bold-500">Nama Pengirim : {{ $data->nama }}</p>
+                        <p class="text-bold-500 mb-1">Nama Pengirim : {{ $data->users->name }}</p>
+                        <p class="text-bold-500">Nama : {{ $data->nama }}</p>
                         <p class="text-bold-500">Email : {{ $data->email }}</p>
                         <p class="text-bold-500">Whatsapp : {{ $data->wa }}</p>
                         <p class="text-bold-500">Alamat : {{ $data->alamat }}</p>
@@ -187,10 +183,10 @@
                                     {{ $message }}
                                      @enderror
                                   </div>
-                                   <label for="message">Pesan</label>
-                                        <textarea class="form-control" id="message" name="message" rows="5" wire:model="pesan"></textarea>
+                                   <label for="message">Pesan Khusus</label>
+                                        <textarea class="form-control" id="message" name="message" rows="5" wire:model="pesanKhusus" placeholder="Opsional"></textarea>
                                         <div>
-                                            @error('pesan')
+                                            @error('pesanKhusus')
                                                 {{ $message }}
                                             @enderror
                                         </div>

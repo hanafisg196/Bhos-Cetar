@@ -193,6 +193,11 @@
                                                 <div class="mail-meta-item d-flex flex-column align-items-end text-right" style="font-size: 0.3rem;white-space: nowrap;">
                                                    <div class="mail-date" style="">{{ $item->created_at->diffForHumans() }}</div>
                                                    <div class="mail-date" style="color: #007aff">{{ verifikatorProfile(encrypt($item->verifikator_nip)) }}</div>
+                                                   <div class="mail-date" style="color: #000000">
+                                                      @if ($item->special_message)
+                                                      Pesan Khusus - {{$item->special_message}}
+                                                      @endif
+                                                   </div>
                                                    <div class="mail-date">
                                                        <button class="btn btn-sm btn-primary" style="font-size: 0.7rem" data-bs-toggle="modal" data-bs-target="#modal-{{ $item->id }}">
                                                            Lacak

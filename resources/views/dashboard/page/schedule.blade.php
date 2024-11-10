@@ -5,6 +5,7 @@
       margin-bottom: 1px;
    }
 </style>
+{{ timeMachine() }}
 <div class="page-content">
     <section id="multiple-column-form">
         <div class="row match-height">
@@ -87,7 +88,7 @@
                                                      <p><strong>Kronologi : </strong>
                                                       {{ $item->kronologi }}
                                                      </p>
-                                                     <p style="margin-bottom: -2px;"><strong>Dokument :
+                                                     <p style="margin-bottom: -2px;"><strong>Lampiran :
                                                      @foreach ($item['documents'] as $value)
                                                      <p style="margin: 0px;">
                                                       </strong>{{ strCut($value->file) }}
