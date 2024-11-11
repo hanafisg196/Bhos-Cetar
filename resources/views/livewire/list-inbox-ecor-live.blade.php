@@ -251,7 +251,7 @@
                                        <div class="d-flex justify-content-center mt-5">Tidak Ada Data</div>
                                        @endif
                                        @if ($data->hasMorePages())
-                                       <div class="d-flex justify-content-center mt-2 mb-2">
+                                       <div class="d-flex justify-content-center mt-2 mb-1">
                                            <button wire:click="loadMore" class="btn btn-primary rounded-pill">Load More</button>
                                        </div>
                                        @endif
@@ -266,19 +266,28 @@
             </div>
         </section>
      </div>
-
-  @if (session()->has('status'))
-       <script>
-           document.addEventListener('livewire:navigated', () => {
-               Toastify({
-                   text: "{{ session('status') }}",
-                   duration: 3000,
-                   close: true,
-               }).showToast();
-           }, {
-               once: true
-           })
-       </script>
-   @endif
 </div>
+@script
+<script>
+   document.querySelectorAll('.list-group-item').forEach(item => {
+       item.addEventListener('click', function() {
+           const filter = this.getAttribute('wire:click').split("'")[1];
+           localStorage.setItem('activeecor_filter', filter);
+       });
+   });
+
+   window.addEventListener('load', function() {
+       const activeFilter = localStorage.getItem('activeecor_filter');
+       if (activeFilter) {
+           document.querySelectorAll('.list-group-item').forEach(item => {
+               if (item.getAttribute('wire:click').includes(activeFilter)) {
+                   item.classList.add('active');
+               } else {
+                   item.classList.remove('active');
+               }
+           });
+       }
+   });
+</script>
+@endscript
 

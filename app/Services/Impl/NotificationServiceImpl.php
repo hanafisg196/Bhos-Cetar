@@ -28,6 +28,21 @@ class NotificationServiceImpl implements NotificationService
             ->latest()->paginate($perPage);
     }
 
+    public function getNotifyWithLimit()
+    {
+        $user = $this->getUser();
+        return Notification::where('user_id', $user->id)
+            ->whereHas('schedules', function ($query) use ($user) {
+                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui', 'Revisi']);
+            })
+            ->orWhereHas('ranhams', function ($query) use ($user) {
+                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui' , 'Revisi']);
+            })
+            ->orWhereHas('ecorrections', function ($query) use ($user) {
+                $query->where('user_id', $user->id)->whereIn('status', ['Ditolak', 'Disetujui' , 'Revisi']);
+            })->latest()->limit(6);
+    }
+
     public function updateNotifStat($id)
     {
         $notif = Notification::find($id);

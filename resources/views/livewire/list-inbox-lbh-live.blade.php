@@ -129,7 +129,7 @@
 
                                 <div class="email-user-list list-group ps ps--active-y">
                                     <ul class="users-list-wrapper media-list">
-                                       @if (!empty($lbh))
+                                       @if ($lbh->isNotEmpty())
                                             @foreach ($lbh as $item)
                                                 @if ($item->read == 1)
                                                     <li class="media mail-read">
@@ -244,10 +244,10 @@
                                                </div>
                                             @endforeach
                                         @else
-                                        <div class="d-flex justify-content-center mt-5">Data tidak ditemukan.</div>
+                                        <div class="d-flex justify-content-center mt-5">Tidak Ada Data</div>
                                         @endif
                                         @if ($lbh->hasMorePages())
-                                            <div class="d-flex justify-content-center mt-2">
+                                            <div class="d-flex justify-content-center mt-2 mb-1">
                                                 <button wire:click="loadMore" class="btn btn-primary rounded-pill">Load More</button>
                                             </div>
                                         @endif
@@ -262,3 +262,26 @@
       </section>
    </div>
 
+   @script
+   <script>
+      document.querySelectorAll('.list-group-item').forEach(item => {
+          item.addEventListener('click', function() {
+              const filter = this.getAttribute('wire:click').split("'")[1];
+              localStorage.setItem('activelbh_filter', filter);
+          });
+      });
+
+      window.addEventListener('load', function() {
+          const activeFilter = localStorage.getItem('activelbh_filter');
+          if (activeFilter) {
+              document.querySelectorAll('.list-group-item').forEach(item => {
+                  if (item.getAttribute('wire:click').includes(activeFilter)) {
+                      item.classList.add('active');
+                  } else {
+                      item.classList.remove('active');
+                  }
+              });
+          }
+      });
+  </script>
+  @endscript

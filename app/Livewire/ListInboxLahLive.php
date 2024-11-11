@@ -43,10 +43,10 @@ class ListInboxLahLive extends Component
     public function mount()
     {
         $this->option = $this->reportHamService->lisCatRan();
+        $this->filter = session()->get('activelah_filter', 'default_filter');
         $this->filterByStatus($this->filter);
         $this->checkAccess();
         $this->counter();
-      //   $this->alertDeny();
     }
     public function placeholder()
     {
@@ -118,6 +118,7 @@ class ListInboxLahLive extends Component
 
     public function filterByStatus($status)
     {
+      session()->put('activelah_filter', $status);
         $this->filter = $status;
     }
 

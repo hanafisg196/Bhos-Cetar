@@ -44,6 +44,7 @@ class ListInboxEcorLive extends Component
 
     public function mount()
     {
+      $this->filter = session()->get('activeecor_filter', 'default_filter');
         $this->filterByStatus($this->filter);
         $this->checkAccessKabag();
         $this->countReadStatus();
@@ -54,6 +55,7 @@ class ListInboxEcorLive extends Component
     }
     public function filterByStatus($status)
     {
+      session()->put('activeecor_filter', $status);
         $this->filter = $status;
     }
 

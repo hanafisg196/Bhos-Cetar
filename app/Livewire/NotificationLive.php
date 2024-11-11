@@ -38,7 +38,7 @@ class NotificationLive extends Component
 
     public function render()
     {
-        $data = $this->notificationService->getNotify($this->perPage);
+        $data = $this->notificationService->getNotifyWithLimit();
         return view('livewire.notification-live')->with([
             'data' => $data,
         ]);

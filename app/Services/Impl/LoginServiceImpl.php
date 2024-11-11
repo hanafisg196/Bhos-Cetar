@@ -89,6 +89,7 @@ class LoginServiceImpl implements LoginService
 
     public function logout()
     {
+        session()->flush();
         Auth::logout();
         return redirect()->route('login');
     }

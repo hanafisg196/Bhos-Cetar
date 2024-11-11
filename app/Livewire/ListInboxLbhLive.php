@@ -44,10 +44,12 @@ class ListInboxLbhLive extends Component
     }
     public function mount()
     {
+        $this->filter = session()->get('activelbh_filter', 'default_filter');
         $this->filterByStatus($this->filter);
         $this->checkAccessKabag();
         $this->checkAccessVerifikator();
         $this->counter();
+
     }
     public function render()
     {
@@ -106,6 +108,7 @@ class ListInboxLbhLive extends Component
     }
     public function filterByStatus($status)
     {
+      session()->put('activelbh_filter', $status);
         $this->filter = $status;
     }
     public function delete($id)
