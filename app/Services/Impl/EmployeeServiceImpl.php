@@ -29,6 +29,9 @@ class EmployeeServiceImpl implements EmployeeService {
     {
       return $this->fetchApiEmployee($code);
     }
+    public function getSekda(){
+      return $this->fetchApiEmployee("02.01. ");
+    }
     //parent
     public function getKabagTata(){
       return $this->fetchApiEmployee("02.01.42.01.");
@@ -95,6 +98,7 @@ class EmployeeServiceImpl implements EmployeeService {
     public function getEmployeeDataByCode($code)
 {
     $details = [
+        'sekda' => [],
         'kabagTata' => [], 'kasubagAdmKewilayahan' => [], 'kasubagAdmPemerintah' => [],
         'kasubagOtonomi' => [], 'analisAhliMuda' => [], 'analisDukcapil' => [],
         'analisDataInformasi' => [],
@@ -106,6 +110,7 @@ class EmployeeServiceImpl implements EmployeeService {
 
     if ($code == '02.01.42.') {
         $details = [
+            'sekda' => $this->getSekda()['data']['pegawai'],
             'kabagTata' => $this->getKabagTata()['data']['pegawai'],
             'kasubagAdmKewilayahan' => $this->getKasubagAdmKewilayahan()['data']['pegawai'],
             'kasubagAdmPemerintah' => $this->getKasubagAdmPemerintah()['data']['pegawai'],
@@ -124,11 +129,13 @@ class EmployeeServiceImpl implements EmployeeService {
             'subBagDokumentasi' => $this->getSubBagDokumentasi()['data']['pegawai'],
             'subBagAnalis' => $this->getSubBagianAnalis()['data']['pegawai'],
         ];
+
     }
 
     return [
         'data' => $this->getEmployee($code)['data']['pegawai'],
         'details' => $details
+
     ];
 }
 

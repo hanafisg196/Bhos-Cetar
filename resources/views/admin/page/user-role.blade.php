@@ -74,6 +74,42 @@
                           </div>
                          @include('admin.sekda.modals.modal-universal')
                       @endforeach
+                      @foreach ($details['sekda'] as $sekdas)
+                      <div class="accordion accordion-flush" id="accordion-{{$sekdas['id_opd_jabatan'] }}">
+                          <div class="accordion-sekdas">
+                              <h2 class="accordion-header" id="heading-{{ $sekdas['id_opd_jabatan'] }}">
+                                  <button class="accordion-button collapsed" type="button"
+                                      data-bs-toggle="collapse"
+                                      data-bs-target="#collapse-{{ $sekdas['id_opd_jabatan'] }}"
+                                      aria-expanded="false"
+                                      aria-controls="collapse-{{ $sekdas['id_opd_jabatan'] }}">
+                                      @if (empty($sekdas['nama_pegawai']))
+                                      {{ 'Kosong'. ' - '.$sekdas['nama_jabatan']}}
+                                      @else
+                                      {{ $sekdas['nama_pegawai']. ' ' .$sekdas['gelar_belakang'] . ' - '.$sekdas['nama_jabatan']}}
+                                      @endif
+
+                                  </button>
+                              </h2>
+                              <div id="collapse-{{ $sekdas['id_opd_jabatan'] }}"
+                                  class="accordion-collapse collapse"
+                                  aria-labelledby="heading-{{ $sekdas['id_opd_jabatan'] }}"
+                                  data-bs-parent="#accordion-{{ $sekdas['id_opd_jabatan'] }}">
+                                  <div class="accordion-body">
+                                      <p>Nama : {{ $sekdas['nama_pegawai']}}</p>
+                                      <p>Kode Jabatan : {{ $sekdas['kode_jabatan'] }}</p>
+                                      <p>NIP : {{ $sekdas['nip'] }}</p>
+                                      <button type="button" class="btn btn-outline-primary block"
+                                          data-bs-toggle="modal"
+                                          data-bs-target="#modal-{{ $sekdas['id_opd_jabatan'] }}">
+                                          Tambahkan Rule
+                                      </button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      @include('admin.sekda.modals.modal-sekda')
+                      @endforeach
                   </div>
               </div>
           </div>

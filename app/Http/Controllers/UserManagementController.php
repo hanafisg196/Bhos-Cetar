@@ -35,7 +35,6 @@ class UserManagementController extends Controller
         $code = $request->input('code', '01.01.');
         $rule = $this->roleService->getRuleType();
         $opd = $this->roleService->getOpdEmployee();
-
         $employee = $this->employeeService->getEmployeeDataByCode($code);
         return view('admin.page.user-role')->with([
             'code' => $code,

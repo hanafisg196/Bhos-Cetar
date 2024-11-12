@@ -67,7 +67,7 @@
                                                             </p>
                                                         </td>
                                                         <td class="col-auto" style="padding: 5px;">
-                                                            <p class="mb-0" style="margin: 0;">{{ $item->title }}</p>
+                                                            <p class="mb-0" style="margin: 0;">{{cutLink($item->title)}}</p>
                                                         </td>
                                                         <td class="col-auto" style="padding: 5px;">
                                                             @foreach ($item['dokumens'] as $files)
