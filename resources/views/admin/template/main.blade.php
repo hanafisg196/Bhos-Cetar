@@ -9,6 +9,7 @@
     <link rel="icon" href="/dist/assets/compiled/jpg/logotanahdatar.png" type="image/x-icon">
     <link rel="stylesheet" href="/dist/assets/extensions/choices.js/public/assets/styles/choices.css">
     <link rel="stylesheet" href="/dist/assets/compiled/css/app.css">
+    <link rel="stylesheet" href="/dist/assets/compiled/css/my-custome.css">
     <link rel="stylesheet" href="/dist/assets/compiled/css/application-email.css">
     <link rel="stylesheet" href="/dist/assets/compiled/css/iconly.css">
     <link rel="stylesheet" href="/dist/assets/extensions/sweetalert2-11.12.4/dist/sweetalert2.min.css">

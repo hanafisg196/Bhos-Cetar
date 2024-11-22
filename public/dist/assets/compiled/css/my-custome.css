@@ -1,0 +1,14 @@
+/* .sidebar-menu .menu .sidebar-item .sidebar-link span {
+    font-size: 14px;
+    color: #333;
+} */
+
+.sidebar-menu .menu .sidebar-item .sidebar-link i {
+    font-size: 16px;
+    margin-right: -10px;
+}
+/* .sidebar-menu .menu .sidebar-item .sidebar-link .badge {
+    font-size: 10px;
+    padding: 3px 5px;
+} */
+

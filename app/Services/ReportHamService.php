@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 interface ReportHamService {
 
+    public function getYear();
     public function getKkp();
     public function saveRanham(Request $request);
     public function getRanhamByUser(Request $request);
@@ -17,7 +18,7 @@ interface ReportHamService {
     public function updateRanham(Request $request, $id);
     public function searchByUser(Request $request, $search);
     public function inboxCount();
-    public function getDataByCatRan($catRan,$perPage);
+    public function getDataByCatRan($catRan,$year, $perPage);
     public function lisCatRan();
     public function sendToVerifikatorOne($id, $vnip, $vname, $message);
     public function ususlanLah($perPage);
@@ -29,7 +30,6 @@ interface ReportHamService {
     public function ditolakByVerifikator($perPage);
     public function disetujuiByVerifikator($perPage);
     public function diperbaikiToVerifikator($perPage);
-
     public function countReadLahAll();
     public function countReadLahUsulan();
     public function countLahDisposisi();

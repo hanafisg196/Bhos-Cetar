@@ -15,6 +15,7 @@ class ListInboxLahLive extends Component
     public $searchLah = "";
     public $activatedTab = false;
     public $option = [];
+    public $year = [];
     public $filter;
     public $checkVerifikator;
     public $allReadCount = 0 ;
@@ -30,6 +31,7 @@ class ListInboxLahLive extends Component
     public $ditolakCountByVerfikator = 0;
     public $checkKabag;
     public $selectedCat;
+    public $selectedYear;
     protected ReportHamService $reportHamService;
     protected RoleService $roleService;
     public function boot(
@@ -42,6 +44,7 @@ class ListInboxLahLive extends Component
     }
     public function mount()
     {
+        $this->year = $this->reportHamService->getYear();
         $this->option = $this->reportHamService->lisCatRan();
         $this->filter = session()->get('activelah_filter', 'default_filter');
         $this->filterByStatus($this->filter);
@@ -61,9 +64,11 @@ class ListInboxLahLive extends Component
          if(!empty($this->searchLah)){
             $lah = $this->reportHamService->search($this->searchLah, $this->perPage);
          }
-         elseif($this->selectedCat && $this->selectedCat !== 'Pilih...') {
-            $lah = $this->reportHamService->getDataByCatRan($this->selectedCat,$this->perPage);
+         elseif($this->selectedCat && $this->selectedYear !== 'Pilih...') {
             $this->searchLah = '';
+            $lah = $this->reportHamService->getDataByCatRan(
+               $this->selectedCat,$this->selectedYear,$this->perPage
+            );
          } else {
             if($this->filter === 'disposisiByVerifikator' ){
                $lah = $this->reportHamService->disposisiByVerifikator($this->perPage);

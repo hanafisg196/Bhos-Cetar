@@ -128,18 +128,28 @@
                                            @if ($activatedTab === true)
                                            <div class="col-md-4" style="margin-top: -54px;">
                                            @else
-                                           <div class="col-md-4">
+                                           <div class="col-md-3">
                                            @endif
-                                               <div class="input-group">
-                                                   <label class="input-group-text" for="inputGroupSelect01">Kategori</label>
-                                                   <select wire:model.live.debounce.500ms="selectedCat" class="form-select"
-                                                       id="inputGroupSelect01">
-                                                       <option selected>Pilih...</option>
-                                                       @foreach ($option as $val)
-                                                           <option value="{{ $val->id }}">{{ $val->nama }}</option>
-                                                       @endforeach
-                                                   </select>
-                                               </div>
+                                           <div class="input-group mb-1">
+                                               <label class="input-group-text" for="inputGroupSelect01">Kategori</label>
+                                               <select wire:model="selectedCat" class="form-select"
+                                                   id="inputGroupSelect01">
+                                                   <option selected>Pilih...</option>
+                                                   @foreach ($option as $val)
+                                                       <option value="{{ $val->id }}">{{ $val->nama }}</option>
+                                                   @endforeach
+                                               </select>
+                                            </div>
+                                           <div class="input-group">
+                                             <label class="input-group-text" for="inputGroupSelect01">Tahun</label>
+                                             <select wire:model.live.debounce.500ms="selectedYear" class="form-select"
+                                                 id="inputGroupSelect01">
+                                                 <option selected>Pilih...</option>
+                                                 @foreach ($year as $key)
+                                                   <option value="{{$key['year']}}">{{$key['year']}}</option>
+                                                 @endforeach
+                                               </select>
+                                           </div>
                                            </div>
                                        </div>
                                    </div>

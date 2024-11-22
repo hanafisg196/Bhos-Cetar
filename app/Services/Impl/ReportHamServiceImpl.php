@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ReportHamServiceImpl implements ReportHamService
 {
+
+   public function getYear(){
+     return Ranham::selectRaw('YEAR(created_at) as year')->groupBy('year')
+     ->get()->toArray();
+
+   }
     private function getCatRanId()
     {
         $now = Carbon::now();
@@ -81,7 +87,7 @@ class ReportHamServiceImpl implements ReportHamService
 
     public function getRanhamAll($perPage)
     {
-        return Ranham::latest('updated_at')->paginate($perPage);
+        return Ranham::latest()->paginate($perPage);
     }
 
     public function saveRanham(Request $request)
@@ -238,9 +244,11 @@ class ReportHamServiceImpl implements ReportHamService
         return CategoryRanhamn::get();
     }
 
-    public function getDataByCatRan($catRan, $perPage)
+    public function getDataByCatRan($catRan,$tahun,$perPage)
     {
-        return Ranham::where('catran_id', $catRan)->latest('updated_at')->paginate($perPage);
+        return Ranham::where('catran_id', $catRan)
+        ->whereYear('created_at',$tahun)
+        ->latest('updated_at')->paginate($perPage);
     }
 
     public function ususlanLah($perPage)
@@ -360,4 +368,5 @@ class ReportHamServiceImpl implements ReportHamService
             ->where('read', 0)
             ->count();
     }
+
 }
